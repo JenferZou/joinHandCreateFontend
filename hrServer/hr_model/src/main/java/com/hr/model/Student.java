@@ -2,15 +2,7 @@ package com.hr.model;
 import java.lang.*;
 
 
-/**
- * ClassName: Student
- * Description:
- * date: 2023/1/7 20:21
- *
- * @author: Jenf
- * @version:
- * @since JDK 17
- */
+
 public class Student {
 
     private String sName;
