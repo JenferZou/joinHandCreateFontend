@@ -1,14 +1,6 @@
 package com.hr.model;
 
-/**
- * ClassName: Resume
- * Description:
- * date: 2023/1/7 21:51
- *
- * @author: Jenf
- * @version:
- * @since JDK 17
- */
+
 public class Resume {
 
     private String resumeId;
