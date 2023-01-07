@@ -1,14 +1,6 @@
 package com.hr.model;
 
-/**
- * ClassName: Account
- * Description:
- * date: 2023/1/7 21:56
- *
- * @author: Jenf
- * @version:
- * @since JDK 17
- */
+
 public class Account {
 
     private String accountId;
