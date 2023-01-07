@@ -1,14 +1,6 @@
 package com.hr.model;
 
-/**
- * ClassName: Teacher
- * Description:
- * date: 2023/1/7 20:21
- *
- * @author: Jenf
- * @version:
- * @since JDK 17
- */
+
 public class Teacher {
 
     private String tName;
