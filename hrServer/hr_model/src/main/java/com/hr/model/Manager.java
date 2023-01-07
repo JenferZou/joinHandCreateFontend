@@ -1,14 +1,6 @@
 package com.hr.model;
 
-/**
- * ClassName: Manager
- * Description:
- * date: 2023/1/7 20:24
- *
- * @author: Jenf
- * @version:
- * @since JDK 17
- */
+
 public class Manager {
 
     private String gName;
