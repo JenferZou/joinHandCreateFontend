@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.mapper.StudentMapper">
+<select id="getAllStudent" resultType="com.hr.model.Student">
+    select sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
+           className,sDepartment,score,sno,resumeId from student
+</select>
+
+    <select id="getAllStudentByName" resultType="com.hr.model.Student">
+        select sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
+               className,sDepartment,score,sno,resumeId from student where sName=#{name}
+    </select>
+
+    <select id="getAllStudentByClass" resultType="com.hr.model.Student">
+        select sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
+               className,sDepartment,score,sno,resumeId from student where className=#{clazz}
+    </select>
+
+    <select id="getAllStudentByScore" resultType="com.hr.model.Student">
+        select sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
+               className,sDepartment,score,sno,resumeId from student where score between #{minScore} and #{maxScore};
+    </select>
+
+<insert id="addStudent">
+    insert into student(sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
+                        className,sDepartment,score,sno,resumeId)
+    values (#{sName},#{sMajor},#{sPhone},#{relatives},#{rPhone},#{mentor},#{star},#{blood},#{className}
+           ,#{sDepartment},#{score},#{sno},#{resumeId});
+</insert>
+
+
+    <delete id="deleteByName">
+        delete from student where sName=#{name}
+    </delete>
+
+    <update id="updateByPrimaryKey" parameterType="com.hr.model.Student" >
+        update student
+        <set >
+            <if test="sName != null" >
+                sName = #{sName},
+            </if>
+            <if test="sMajor != null" >
+                sMajor = #{sMajor},
+            </if>
+            <if test="sPhone != null" >
+                sPhone = #{sPhone},
+            </if>
+            <if test="relatives != null" >
+                relatives = #{relatives},
+            </if>
+            <if test="rPhone != null" >
+                rPhone = #{rPhone},
+            </if>
+            <if test="mentor != null" >
+                mentor = #{mentor},
+            </if>
+            <if test="star != null" >
+                star = #{star},
+            </if>
+            <if test="blood != null" >
+                blood = #{blood},
+            </if>
+            <if test="className != null" >
+                className = #{className},
+            </if>
+            <if test="sDepartment != null" >
+                sDepartment = #{sDepartment},
+            </if>
+            <if test="score != null" >
+                score = #{score},
+            </if>
+            <if test="sno != null" >
+                sno = #{sno},
+            </if>
+            <if test="resumeId != null" >
+                resumeId = #{resumeId},
+            </if>
+        </set>
+        where sno = #{sno}
+    </update>
+</mapper>
