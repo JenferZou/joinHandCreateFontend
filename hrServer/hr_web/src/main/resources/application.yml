@@ -2,9 +2,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource #配置德鲁伊
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hrm
+    url: jdbc:mysql://localhost:3306/students?serverTimezone=UTC
     username: root
-    password: xwf17825377805
+    password: zjf13760351788
     # 下面为连接池的补充设置，应用到上面所有数据源中
     # 初始化大小，最小，最大
     initial-size: 5
@@ -29,4 +29,4 @@ spring:
     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
     connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 server:
-  port: 8081
+  port: 8080

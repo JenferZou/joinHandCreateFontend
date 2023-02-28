@@ -31,7 +31,9 @@ public class test {
         student.setSno("2136172721");
         student.setStar("双鱼");
         student.setsPhone("122342312");
+         studentMapper.addStudent(student);
         System.out.println(studentMapper.getAllStudentByScore(100D,200D));
+
         //System.out.println(studentMapper.getAllStudentByClass("软件一班"));
         //System.out.println(studentMapper.getAllStudentByName("lihua"));
         //System.out.println(studentMapper.updateByPrimaryKey(student));
