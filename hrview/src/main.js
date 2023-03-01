@@ -2,7 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './components/router'
 import 'iview/dist/styles/iview.css'
-import { Container,Aside,Header,Main,Footer} from "element-ui";
+import 'element-ui/lib/theme-chalk/index.css';
+import httpRequest from "@/components/utils/httpRequest";
+import {Container, Aside, Header, Main, Footer, Table, TableColumn, Button, Pagination} from "element-ui";
 import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb} from 'iview'
 Vue.config.productionTip = false
 
@@ -17,11 +19,17 @@ Vue.component('i-breadcrumb-item',BreadcrumbItem)
 
 
 
+Vue.component('el-table',Table);
+Vue.component('el-button',Button);
+Vue.component('el-pagination',Pagination)
+Vue.component('el-table-column',TableColumn)
 Vue.component('el-container',Container);
 Vue.component('el-aside',Aside);
 Vue.component('el-header',Header);
 Vue.component('el-main',Main);
 Vue.component('el-footer',Footer);
+
+Vue.prototype.$http = httpRequest // Ajax 请求方法
 
 new Vue({
   router,

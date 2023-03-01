@@ -2,24 +2,22 @@
  <!-- <router-view name="adminSidebar"></router-view> -->
   <div class="layout">
     <i-row type="flex">
-      <i-col span="5" class="layout-menu-left">
-        <i-menu active-name="1-2" theme="dark" width="auto" :open-names="['1']">
-          <div class="layout-logo-left"></div>
+      <i-col span="4" class="layout-menu-left">
+        <i-menu @on-select="handleSelect" active-name="sidebarItem"  width="auto" :open-names="['1']">
+          <div class="layout-logo-left"><h1>menu</h1></div>
           <i-submenu name="1">
             <template slot="title">
               <i-icon type="ios-navigate"></i-icon>
-              导航一
+              学生资料
             </template>
-            <i-menu-item name="1-1">选项 1</i-menu-item>
-            <i-menu-item name="1-2">选项 2</i-menu-item>
-            <i-menu-item name="1-3">选项 3</i-menu-item>
+            <i-menu-item name="index">基本资料</i-menu-item>
           </i-submenu>
           <i-submenu name="2">
             <template slot="title">
               <i-icon type="ios-keypad"></i-icon>
-              导航二
+              人事管理
             </template>
-            <i-menu-item name="2-1">选项 1</i-menu-item>
+            <i-menu-item name="index1">学生资料</i-menu-item>
             <i-menu-item name="2-2">选项 2</i-menu-item>
           </i-submenu>
           <i-submenu name="3">
@@ -32,18 +30,19 @@
           </i-submenu>
         </i-menu>
       </i-col>
-      <i-col span="19">
-        <div class="layout-header"></div>
+      <i-col span="20">
+        <div class="layout-header"><h1>信息管理系统</h1></div>
         <div class="layout-breadcrumb">
           <i-breadcrumb>
             <i-breadcrumb-item href="#">首页</i-breadcrumb-item>
             <i-breadcrumb-item href="#">应用中心</i-breadcrumb-item>
-            <i-breadcrumb-item>某应用</i-breadcrumb-item>
           </i-breadcrumb>
         </div>
+        <div class="layout-search">
+          <StudentSearch></StudentSearch>
+        </div>
         <div class="layout-content">
-          <router-view name="adminContent"></router-view>
-<!--          <div class="layout-content-main">内容区域</div>-->
+          <router-view></router-view>
         </div>
         <div class="layout-copy">
           2011-2016 &copy; TalkingData
@@ -54,8 +53,26 @@
 </template>
 
 <script>
+import StudentSearch from "@/components/views/StudentSearch";
 export default {
-  name: "AdminIndex"
+  name: "AdminIndex",
+  components: {StudentSearch},
+  data() {
+    return{
+
+    }
+  },
+  mounted() {
+    this.sidebarItem = this.$route.name;
+  },
+  methods: {
+    handleSelect(path) {
+      this.sidebarItem = path;
+      this.$router.push({
+      name:path
+      })
+    }
+  }
 }
 </script>
 
@@ -68,9 +85,15 @@ export default {
 .layout-breadcrumb{
   padding: 10px 15px 0;
 }
+.layout-search{
+  min-height: 150px;
+  margin: 15px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 4px;
+}
 .layout-content{
-  height: 800px;
-  min-height: 200px;
+  min-height: 550px;
   margin: 15px;
   overflow: hidden;
   background: #fff;
@@ -82,19 +105,26 @@ export default {
   color: #9ea7b4;
 }
 .layout-menu-left{
-  background: #464c5b;
-  height: 900px;
+  background-color: white;
+  height: 820px;
 }
 .layout-header{
   height: 60px;
   background: #fff;
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
 }
+。layout-header h1{
+  text-align: center;
+}
 .layout-logo-left{
   width: 90%;
-  height: 30px;
-  background: #5b6270;
+  height: 50px;
   border-radius: 3px;
   margin: 15px auto;
+}
+.layout-logo-left h1{
+  color: white;
+  text-align: center;
+  background-color: black;
 }
 </style>

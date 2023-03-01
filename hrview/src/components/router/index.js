@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AdminContent from "@/components/views/AdminContent";
 import AdminIndex from "@/components/index/AdminIndex";
+import StudentInformation from "@/components/views/StudentInformation";
+import SystemManage from "@/components/views/SystemManage";
 
 
 Vue.use(Router)
@@ -15,11 +16,17 @@ let router = new Router({
             component: AdminIndex,
             children: [
                 {
-                    path: '/',
+                    path: '/index',
                     name: 'index',
-                    components: {
-                        adminContent:AdminContent
-                    },
+                    component: StudentInformation,
+                    meta: {
+                        title: 'admin'
+                    }
+                },
+                {
+                    path: '/index1',
+                    name: 'index1',
+                    component:SystemManage,
                     meta: {
                         title: 'admin'
                     }
@@ -29,3 +36,7 @@ let router = new Router({
     ]
 })
 export default router
+const VueRouterPush = Router.prototype.push
+Router.prototype.push = function push (to) {
+    return VueRouterPush.call(this, to).catch(err => err)
+}

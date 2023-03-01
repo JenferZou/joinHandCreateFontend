@@ -1,10 +1,10 @@
 <template>
-<H1>content</H1>
+<h1>搜索</h1>
 </template>
 
 <script>
 export default {
-  name: "AdminContent"
+  name: "StudentSearch"
 }
 </script>
 
