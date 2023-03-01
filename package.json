@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "element-ui": "^2.15.13",
+    "vue-router": "^3.6.5"
+  },
+  "devDependencies": {
+    "babel-plugin-component": "^1.1.1"
+  }
+}

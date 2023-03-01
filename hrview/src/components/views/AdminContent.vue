@@ -1,10 +1,10 @@
 <template>
-<h1></h1>
+<H1>content</H1>
 </template>
 
 <script>
 export default {
-  name: "MyHome"
+  name: "AdminContent"
 }
 </script>
 

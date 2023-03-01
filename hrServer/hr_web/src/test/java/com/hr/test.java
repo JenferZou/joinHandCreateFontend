@@ -31,7 +31,7 @@ public class test {
         student.setSno("2136172721");
         student.setStar("双鱼");
         student.setsPhone("122342312");
-         studentMapper.addStudent(student);
+        // studentMapper.addStudent(student);
         System.out.println(studentMapper.getAllStudentByScore(100D,200D));
 
         //System.out.println(studentMapper.getAllStudentByClass("软件一班"));
@@ -40,5 +40,9 @@ public class test {
         //System.out.println(studentMapper.addStudent(student));
         //System.out.println(studentMapper.deleteByName("lihua"));
         //System.out.println(studentMapper.getAllStudent());
+    }
+    @Test
+    public void test(){
+        System.out.println(111);
     }
 }
