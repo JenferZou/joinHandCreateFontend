@@ -4,7 +4,24 @@ import router from './components/router'
 import 'iview/dist/styles/iview.css'
 import 'element-ui/lib/theme-chalk/index.css';
 import httpRequest from "@/components/utils/httpRequest";
-import {Container, Aside, Header, Main, Footer, Table, TableColumn, Button, Pagination} from "element-ui";
+import {
+  Container,
+  Aside,
+  Header,
+  Main,
+  Footer,
+  Table,
+  TableColumn,
+  Button,
+  Pagination,
+  Dialog,
+  Form,
+  FormItem,
+  Input,
+  Select,
+  Option,
+  Message
+} from "element-ui";
 import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb} from 'iview'
 Vue.config.productionTip = false
 
@@ -17,8 +34,12 @@ Vue.component('i-breadcrumb',Breadcrumb)
 Vue.component('i-menu-item',MenuItem)
 Vue.component('i-breadcrumb-item',BreadcrumbItem)
 
-
-
+Vue.component('el-option',Option)
+Vue.component('el-select',Select)
+Vue.component('el-input',Input)
+Vue.component('el-form-item',FormItem)
+Vue.component('el-form',Form)
+Vue.component('el-dialog',Dialog)
 Vue.component('el-table',Table);
 Vue.component('el-button',Button);
 Vue.component('el-pagination',Pagination)
@@ -30,6 +51,7 @@ Vue.component('el-main',Main);
 Vue.component('el-footer',Footer);
 
 Vue.prototype.$http = httpRequest // Ajax 请求方法
+Vue.prototype.$message = Message
 
 new Vue({
   router,

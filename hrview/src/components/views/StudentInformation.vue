@@ -1,48 +1,68 @@
 <template>
   <div>
   <el-table class="StudentTable"
-      :data="tableData"
+      :data="studentData"
       border
       style="width: 100%">
     <el-table-column
         fixed
-        prop="date"
-        label="日期"
+        prop="sno"
+        label="学号"
         width="150">
     </el-table-column>
     <el-table-column
-        prop="name"
+        prop="sName"
         label="姓名"
         width="120">
     </el-table-column>
     <el-table-column
-        prop="province"
-        label="省份"
+        prop="className"
+        label="班级"
         width="120">
     </el-table-column>
     <el-table-column
-        prop="city"
-        label="市区"
+        prop="sMajor"
+        label="专业"
         width="120">
     </el-table-column>
     <el-table-column
-        prop="address"
-        label="地址"
-        width="300">
-    </el-table-column>
-    <el-table-column
-        prop="zip"
-        label="邮编"
+        prop="sDepartment"
+        label="所属学院"
         width="120">
     </el-table-column>
     <el-table-column
-        prop="zip"
-        label="邮编"
+        prop="blood"
+        label="血型"
+        width="50">
+    </el-table-column>
+    <el-table-column
+        prop="star"
+        label="星座"
         width="120">
     </el-table-column>
     <el-table-column
-        prop="zip"
-        label="邮编"
+        prop="mentor"
+        label="指导老师"
+        width="120">
+    </el-table-column>
+    <el-table-column
+        prop="sPhone"
+        label="电话"
+        width="120">
+    </el-table-column>
+    <el-table-column
+        prop="relatives"
+        label="联系人"
+        width="120">
+    </el-table-column>
+    <el-table-column
+        prop="rPhone"
+        label="联系人电话"
+        width="120">
+    </el-table-column>
+    <el-table-column
+        prop="score"
+        label="积分"
         width="120">
     </el-table-column>
     <el-table-column
@@ -50,40 +70,57 @@
         label="操作"
         width="100">
       <template v-slot="scope">
-        <el-button type="text" size="small">编辑</el-button>
+        <el-button type="text" size="small" @click="editForm(scope.row)">编辑</el-button>
         <el-button @click="handleClick(scope.row)" type="text" size="small" style="color:red;">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
   <el-pagination class="page"
-                 @current-change="change"
+       @current-change="change"
       background
       layout="prev, pager, next"
-      :total="1000">
+      :page-count="pageNum">
   </el-pagination>
+    <EditForm ref="editfrom">
+    </EditForm>
   </div>
 </template>
 
 <script>
+import EditForm from "@/components/views/EditForm";
 export default {
   name: "StudentInformation",
+  components: {EditForm},
   methods: {
-    change(page){
-      this.page=page;
-      console.log(page)
+    editForm(row){
+      this.$nextTick(() => {
+        // 弹框打开时初始化表单
+        this.$refs.editfrom.init(row)
+      })
     },
-    handleClick(row) {
-      console.log(row);
+    change(page){
+      this.currentPage=page;
+      this.getStudent();
+    },
+    handleClick() {
+      console.log(this.pageNum);
     },
     getStudent(){
+      let params={
+       page : this.currentPage,
+       limit : this.pageSize
+      }
       this.$http({
-        url: this.$http.adornUrl('/admin'),
+        url: this.$http.adornUrl('/admin/listStudent'),
         method: 'get',
-        params:this.$http.adornParams(this.page)
+        params:this.$http.adornParams(params)
       }).then(({data}) => {
-        if (data && data.code === 200) {
-          this.studentData = data.obj
+        if (data) {
+          this.pageNum=data.totalPages
+          this.studentData = data.content
         }
+      }).catch(() => {
+        console.log('出错啦！！！！')
       })
     }
   },
@@ -92,77 +129,10 @@ export default {
   },
   data() {
     return {
-      page:1,
-      studentData:[
-        {
-          sno:'',
-          name:'',
-          className:'',
-          department:'',
-          score:'',
-          major:'',
-          phone:'',
-          relatives:'',
-          relativesPhone:'',
-          mentor:'',
-          star:'',
-          blood:'',
-        }
-      ],
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1518 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1517 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1519 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1516 弄',
-        zip: 200333
-      },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1516 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1516 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1516 弄',
-          zip: 200333
-        }
-      ]
+      pageNum:1,
+      pageSize:8,
+      currentPage:1,
+      studentData:[],
     }
   }
 }
@@ -170,10 +140,8 @@ export default {
 
 <style scoped>
 .StudentTable{
-  margin-top: 20px;
 }
 .page{
-  margin-top: 15px;
   text-align: center;
 }
 </style>

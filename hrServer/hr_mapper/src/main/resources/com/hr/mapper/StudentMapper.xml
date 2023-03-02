@@ -35,7 +35,7 @@
         delete from student where sName=#{name}
     </delete>
 
-    <update id="updateByPrimaryKey" parameterType="com.hr.model.Student" >
+    <update id="updateStudentByPrimaryKey" parameterType="com.hr.model.Student" >
         update student
         <set >
             <if test="sName != null" >
@@ -78,6 +78,6 @@
                 resumeId = #{resumeId},
             </if>
         </set>
-        where sno = #{sno}
+        where sno = #{sno} and sName=#{sName}
     </update>
 </mapper>

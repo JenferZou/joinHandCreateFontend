@@ -3,7 +3,7 @@
   <div class="layout">
     <i-row type="flex">
       <i-col span="4" class="layout-menu-left">
-        <i-menu @on-select="handleSelect" active-name="sidebarItem"  width="auto" :open-names="['1']">
+        <i-menu @on-select="handleSelect" :active-name="sidebarItem"  width="auto">
           <div class="layout-logo-left"><h1>menu</h1></div>
           <i-submenu name="1">
             <template slot="title">
@@ -59,7 +59,7 @@ export default {
   components: {StudentSearch},
   data() {
     return{
-
+      sidebarItem:'',
     }
   },
   mounted() {
