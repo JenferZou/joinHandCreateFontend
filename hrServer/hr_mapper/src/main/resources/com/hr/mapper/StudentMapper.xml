@@ -5,29 +5,29 @@
 <mapper namespace="com.hr.mapper.StudentMapper">
 <select id="getAllStudent" resultType="com.hr.model.Student">
     select sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-           className,sDepartment,score,sno,resumeId from student
+           className,sDepartment,score,sno,resumeId,gender,isGraduate from student
 </select>
 
     <select id="getAllStudentByName" resultType="com.hr.model.Student">
         select sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-               className,sDepartment,score,sno,resumeId from student where sName=#{name}
+               className,sDepartment,score,sno,resumeId,gender,isGraduate from student where sName=#{name}
     </select>
 
     <select id="getAllStudentByClass" resultType="com.hr.model.Student">
         select sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-               className,sDepartment,score,sno,resumeId from student where className=#{clazz}
+               className,sDepartment,score,sno,resumeId,gender,isGraduate from student where className=#{clazz}
     </select>
 
     <select id="getAllStudentByScore" resultType="com.hr.model.Student">
         select sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-               className,sDepartment,score,sno,resumeId from student where score between #{minScore} and #{maxScore};
+               className,sDepartment,score,sno,resumeId,gender,isGraduate from student where score between #{minScore} and #{maxScore};
     </select>
 
 <insert id="addStudent">
     insert into student(sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-                        className,sDepartment,score,sno,resumeId)
+                        className,sDepartment,score,sno,resumeId,gender,isGraduate)
     values (#{sName},#{sMajor},#{sPhone},#{relatives},#{rPhone},#{mentor},#{star},#{blood},#{className}
-           ,#{sDepartment},#{score},#{sno},#{resumeId});
+           ,#{sDepartment},#{score},#{sno},#{resumeId}),#{gender},#{isGraduate};
 </insert>
 
 
@@ -35,6 +35,9 @@
         delete from student where sName=#{name}
     </delete>
 
+    <delete id="deleteBySno">
+        delete from student where sno=#{sno}
+    </delete>
     <update id="updateStudentByPrimaryKey" parameterType="com.hr.model.Student" >
         update student
         <set >
@@ -76,6 +79,12 @@
             </if>
             <if test="resumeId != null" >
                 resumeId = #{resumeId},
+            </if>
+            <if test="gender != null" >
+                gender = #{gender},
+            </if>
+            <if test="isGraduate != null" >
+                isGraduate = #{isGraduate},
             </if>
         </set>
         where sno = #{sno} and sName=#{sName}

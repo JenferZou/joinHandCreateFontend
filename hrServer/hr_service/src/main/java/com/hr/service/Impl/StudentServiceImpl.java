@@ -25,6 +25,11 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.updateStudentByPrimaryKey(student);
     }
 
+    @Override
+    public int deleteStudentBySno(Student student) {
+        return studentMapper.deleteBySno(student);
+    }
+
     /**
      * 调用分页插件完成分页
      * @param

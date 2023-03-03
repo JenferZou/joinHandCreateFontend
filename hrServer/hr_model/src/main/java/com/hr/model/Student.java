@@ -1,12 +1,30 @@
 package com.hr.model;
-import java.lang.*;
 
+import java.lang.*;
 
 
 public class Student {
 
     private String sName;
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getIsGraduate() {
+        return isGraduate;
+    }
+
+    public void setIsGraduate(String isGraduate) {
+        this.isGraduate = isGraduate;
+    }
+
+    private String gender;
+    private String isGraduate;
     private String sMajor;
 
     private String sPhone;
@@ -161,6 +179,8 @@ public class Student {
     public String toString() {
         return "Student{" +
                 "sName='" + sName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", isGraduate='" + isGraduate + '\'' +
                 ", sMajor='" + sMajor + '\'' +
                 ", sPhone='" + sPhone + '\'' +
                 ", relatives='" + relatives + '\'' +
@@ -175,7 +195,4 @@ public class Student {
                 ", resumeId='" + resumeId + '\'' +
                 '}';
     }
-
-
-
 }

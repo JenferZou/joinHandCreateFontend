@@ -1,5 +1,4 @@
 <template>
- <!-- <router-view name="adminSidebar"></router-view> -->
   <div class="layout">
     <i-row type="flex">
       <i-col span="4" class="layout-menu-left">
@@ -10,7 +9,7 @@
               <i-icon type="ios-navigate"></i-icon>
               学生资料
             </template>
-            <i-menu-item name="index">基本资料</i-menu-item>
+            <i-menu-item name="index" >基本资料</i-menu-item>
           </i-submenu>
           <i-submenu name="2">
             <template slot="title">
@@ -35,11 +34,11 @@
         <div class="layout-breadcrumb">
           <i-breadcrumb>
             <i-breadcrumb-item href="#">首页</i-breadcrumb-item>
-            <i-breadcrumb-item href="#">应用中心</i-breadcrumb-item>
+            <i-breadcrumb-item href="#">{{ item }}</i-breadcrumb-item>
           </i-breadcrumb>
         </div>
         <div class="layout-search">
-          <StudentSearch></StudentSearch>
+          <StudentSearch class="search"></StudentSearch>
         </div>
         <div class="layout-content">
           <router-view></router-view>
@@ -59,6 +58,7 @@ export default {
   components: {StudentSearch},
   data() {
     return{
+      item:'',
       sidebarItem:'',
     }
   },
@@ -67,6 +67,7 @@ export default {
   },
   methods: {
     handleSelect(path) {
+      this.item=path
       this.sidebarItem = path;
       this.$router.push({
       name:path
@@ -86,14 +87,18 @@ export default {
   padding: 10px 15px 0;
 }
 .layout-search{
-  min-height: 150px;
+  min-height: 80px;
   margin: 15px;
   overflow: hidden;
   background: #fff;
   border-radius: 4px;
 }
+.search{
+  padding-top: 20px;
+  text-align: center;
+}
 .layout-content{
-  min-height: 550px;
+  min-height: 620px;
   margin: 15px;
   overflow: hidden;
   background: #fff;

@@ -4,7 +4,7 @@
 <i-row>
   <i-col :span="8">
     <el-form-item label="学号" label-width="auto">
-      <el-input v-model="studentData.sno" placeholder="学号" size="small" maxlength="12" ></el-input>
+      <el-input v-model="studentData.sno" placeholder="学号" size="small" maxlength="12" :disabled="true"></el-input>
     </el-form-item>
   </i-col>
   <i-col :span="8">
@@ -18,21 +18,28 @@
     </el-form-item>
   </i-col>
 </i-row>
-
     <i-row>
       <i-col :span="6" >
         <el-form-item label="电话" label-width="auto">
           <el-input style="width: 130px" v-model="studentData.sPhone" placeholder="电话" size="small" maxlength="12"></el-input>
         </el-form-item>
       </i-col>
-      <i-col :span="10">
+      <i-col :span="8">
         <el-form-item label="所属学院" label-width="auto">
-          <el-input v-model="studentData.sDepartment" placeholder="所属学院" size="small"></el-input>
+          <el-input v-model="studentData.sDepartment" placeholder="所属学院" size="small" style="width: 130px"></el-input>
         </el-form-item>
       </i-col>
-      <i-col :span="8">
+      <i-col :span="6">
         <el-form-item label="专业" label-width="auto">
-          <el-input v-model="studentData.sMajor" placeholder="专业" size="small"></el-input>
+          <el-input v-model="studentData.sMajor" placeholder="专业" size="small" style="width: 130px"></el-input>
+        </el-form-item>
+      </i-col>
+      <i-col :span="4">
+        <el-form-item label="性别" label-width="auto">
+          <el-select size="small" v-model="studentData.gender" placeholder="性别" style="width: 70px" >
+            <el-option label="男" value="男"></el-option>
+            <el-option label="女" value="女"></el-option>
+          </el-select>
         </el-form-item>
       </i-col>
     </i-row>
@@ -54,23 +61,31 @@
       </i-col>
     </i-row>
     <i-row>
-      <i-col :span="7">
+      <i-col :span="6">
         <el-form-item label="积分" label-width="auto">
           <el-input style="width: 130px" v-model="studentData.score" placeholder="积分" size="small" ></el-input>
         </el-form-item>
       </i-col>
-      <i-col :span="7">
+      <i-col :span="5">
         <el-form-item label="星座" label-width="auto">
-          <el-input style="width: 130px" v-model="studentData.star" placeholder="星座" size="small"></el-input>
+          <el-input style="width: 100px" v-model="studentData.star" placeholder="星座" size="small"></el-input>
         </el-form-item>
       </i-col>
-      <i-col :span="10">
-        <el-form-item label="血型" size="small">
-          <el-select v-model="studentData.blood" placeholder="血型">
+      <i-col :span="6">
+        <el-form-item label="血型" >
+          <el-select size="small" v-model="studentData.blood" placeholder="血型" style="width: 70px">
             <el-option label="O" value="O"></el-option>
             <el-option label="AB" value="AB"></el-option>
             <el-option label="A" value="A"></el-option>
             <el-option label="B" value="B"></el-option>
+          </el-select>
+        </el-form-item>
+      </i-col>
+      <i-col :span="7">
+        <el-form-item label="状态" >
+          <el-select size="small" v-model="studentData.isGraduate" placeholder="状态" style="width: 100px" >
+            <el-option label="在校" value="在校"></el-option>
+            <el-option label="已毕业" value="已毕业"></el-option>
           </el-select>
         </el-form-item>
       </i-col>
@@ -125,11 +140,11 @@ export default {
       }).then(({data}) => {
         if (data&&data.status===200) {
            this.$message.success(data.msg)
+        }else{
+          this.$message.error(data.msg)
         }
-      }).catch((error) => {
-        this.$message.error('修改失败')
+      }).catch(() => {
         console.log('出错啦！！！！')
-        console.log(error)
       })
       this.dialogVisible=false
     }

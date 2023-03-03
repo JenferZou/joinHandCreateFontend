@@ -24,4 +24,13 @@ public class AdminController {
         else
             return RespBean.error("修改失败");
     }
+    @PostMapping("delete")
+    public RespBean deleteStudent(@RequestBody Student student){
+        System.out.println(student);
+        int i=studentService.deleteStudentBySno(student);
+        if(i>0)
+            return RespBean.ok("删除成功");
+        else
+            return RespBean.error("删除失败");
+    }
 }

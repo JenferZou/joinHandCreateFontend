@@ -31,12 +31,16 @@ let router = new Router({
                         title: 'admin'
                     }
                 }
-            ]
+            ],
+            meta: {
+                title: 'admin'
+            }
         }
     ]
 })
 export default router
 const VueRouterPush = Router.prototype.push
+//防止重复跳转同一路由报错
 Router.prototype.push = function push (to) {
     return VueRouterPush.call(this, to).catch(err => err)
 }

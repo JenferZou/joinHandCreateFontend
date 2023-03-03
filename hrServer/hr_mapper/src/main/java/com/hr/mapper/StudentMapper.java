@@ -12,6 +12,7 @@ public interface StudentMapper {
     public List<Student> getAllStudent();
     public int addStudent(Student student);
     public int deleteByName(String name);
+    public int deleteBySno(Student student);
 
     /**
      * 修改学生信息
