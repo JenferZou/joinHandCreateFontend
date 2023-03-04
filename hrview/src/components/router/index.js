@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import AdminIndex from "@/components/index/AdminIndex";
 import StudentInformation from "@/components/views/StudentInformation";
 import SystemManage from "@/components/views/SystemManage";
+import StudentIndex from "@/components/index/StudentIndex";
 
 
 Vue.use(Router)
@@ -35,6 +36,11 @@ let router = new Router({
             meta: {
                 title: 'admin'
             }
+        },
+        {
+            path: '/student',
+            name: 'student',
+            component: StudentIndex
         }
     ]
 })
