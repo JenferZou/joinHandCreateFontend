@@ -4,7 +4,7 @@ import java.lang.*;
 
 
 public class Student {
-
+private Integer id;
     private String sName;
 
     public String getGender() {
@@ -70,6 +70,13 @@ public class Student {
     public Student() {
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 
     public String getsName() {
         return sName;

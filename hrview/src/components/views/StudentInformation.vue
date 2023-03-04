@@ -106,7 +106,7 @@ export default {
     editForm(row){
       this.$nextTick(() => {
         // 弹框打开时初始化表单
-        this.$refs.editfrom.init(row)
+        this.$refs.editfrom.init(row,true,'编辑')
       })
     },
     change(page){

@@ -27,9 +27,10 @@
             <el-button type="success" size="small"><i-icon size="15" type="arrow-up-a"></i-icon>导出数据</el-button>
           </i-col>
           <i-col :span="5">
-            <el-button size="small" type="primary">
+            <el-button size="small" type="primary" @click="addStudent">
               <i-icon type="plus-round" size="15"></i-icon>
               添加学生</el-button>
+            <EditForm ref="addstudent"></EditForm>
           </i-col>
         </i-row>
       </i-col>
@@ -40,17 +41,41 @@
 
 <script>
 import AdvancedSearch from "@/components/views/AdvancedSearch";
+import EditForm from "@/components/views/EditForm";
 export default {
   name: "StudentSearch",
-  components: {AdvancedSearch},
+  components: {EditForm, AdvancedSearch},
   data(){
     return{
+      studentData:{
+        id:'',
+        sno:'',
+        sName:'',
+        className:'',
+        sPhone:'',
+        sDepartment:'',
+        sMajor:'',
+        gender:'',
+        mentor:'',
+        relatives:'',
+        rPhone:'',
+        score:'',
+        star:'',
+        blood:'',
+        isGraduate:''
+      },
       show:false,
       searchIcon:false,
       studentName:''
     }
   },
   methods:{
+    addStudent(){
+      this.$nextTick(() => {
+        // 弹框打开时初始化表单
+        this.$refs.addstudent.init(this.studentData,false,'添加员工')
+      })
+    },
     clicktrue(){
       this.searchIcon=!this.searchIcon
       this.show=!this.show

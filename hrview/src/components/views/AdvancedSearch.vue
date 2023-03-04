@@ -14,7 +14,7 @@
       </i-col>
       <i-col :span="3">
         <el-form-item label="性别:">
-          <el-select size="small"  placeholder="性别" style="width: 80px" >
+          <el-select size="small"  placeholder="性别" style="width: 80px" v-model="studentData.gender">
             <el-option label="男" value="男"></el-option>
             <el-option label="女" value="女"></el-option>
           </el-select>
@@ -66,7 +66,14 @@
 
 <script>
 export default {
-  name: "AdvancedSearch"
+  name: "AdvancedSearch",
+  data(){
+    return{
+      studentData:{
+        gender:'',
+      }
+    }
+  }
 }
 </script>
 
