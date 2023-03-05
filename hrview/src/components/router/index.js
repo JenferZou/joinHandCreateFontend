@@ -4,7 +4,7 @@ import AdminIndex from "@/components/index/AdminIndex";
 import StudentInformation from "@/components/views/StudentInformation";
 import SystemManage from "@/components/views/SystemManage";
 import StudentIndex from "@/components/index/StudentIndex";
-
+import StudentMessageForm from "@/components/views/StudentView/StudentMessageForm"
 
 Vue.use(Router)
 
@@ -40,7 +40,12 @@ let router = new Router({
         {
             path: '/student',
             name: 'student',
-            component: StudentIndex
+            component: StudentIndex,
+        },
+        {
+            path: '/StudentMessageForm',
+            name: 'StudentMessageForm',
+            component: StudentMessageForm
         }
     ]
 })

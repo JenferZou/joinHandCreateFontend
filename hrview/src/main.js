@@ -34,6 +34,7 @@ Vue.component('i-breadcrumb',Breadcrumb)
 Vue.component('i-menu-item',MenuItem)
 Vue.component('i-breadcrumb-item',BreadcrumbItem)
 
+
 Vue.component('el-option',Option)
 Vue.component('el-select',Select)
 Vue.component('el-input',Input)

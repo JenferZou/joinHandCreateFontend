@@ -32,7 +32,77 @@
           </i-breadcrumb>
         </div>
         <div class="layout-content">
-          <div class="layout-content-main">内容区域</div>
+
+          <i-row :gutter="16" class="headcontent">
+            <i-col span="6">
+              <div class="headmes" style="height: 100px"  >实践经历</div>
+            </i-col>
+            <i-col span="6">
+              <div class="headmes" style="height: 100px" @click="editMes">个人信息</div>
+            </i-col>
+            <i-col span="6">
+              <div class="headmes" style="height: 100px">积分</div>
+            </i-col>
+            <i-col span="6">
+              <div class="headmes" style="height: 100px">消息通知</div>
+            </i-col>
+          </i-row>
+
+          <i-row  class="centercontent">
+            <i-col span="24">
+              <div class="mes" style="height: 300px">
+                <i-col style="height: 50px">
+                  <i-col span="8">col-8</i-col>
+                  <i-col span="8">col-8</i-col>
+                  <i-col span="8">col-8</i-col>
+                </i-col>
+
+                <i-col style="height: 50px">
+                  <i-col span="8">col-8</i-col>
+                  <i-col span="8">col-8</i-col>
+                  <i-col span="8">col-8</i-col>
+                </i-col>
+
+                <i-col style="height: 50px">
+                  <i-col span="8">col-8</i-col>
+                  <i-col span="8">col-8</i-col>
+                  <i-col span="8">col-8</i-col>
+                </i-col>
+
+
+                <i-col style="height: 50px">
+                  <i-col span="8">col-8</i-col>
+                  <i-col span="8">col-8</i-col>
+                  <i-col span="8">col-8</i-col>
+                </i-col>
+
+                <i-col style="height: 50px">
+                  <i-col span="8">col-8</i-col>
+                  <i-col span="8">col-8</i-col>
+                  <i-col span="8">col-8</i-col>
+                </i-col>
+              </div>
+            </i-col>
+          </i-row>
+
+
+          <i-row  class="footcontent" :gutter="16">
+            <i-col span="12">
+              <div class="mes" style="height: 100px">col-6</div>
+            </i-col>
+            <i-col span="12">
+              <div class="pra" style="height: 100px">col-6</div>
+            </i-col>
+          </i-row>
+
+
+
+
+
+
+
+
+
         </div>
         <div class="layout-copy">
           2011-2016 &copy; TalkingData
@@ -44,11 +114,13 @@
 
 
 <script>
+
 export default {
   data () {
     return {
       spanLeft: 5,
-      spanRight: 19
+      spanRight: 19,
+
     }
   },
   computed: {
@@ -65,6 +137,12 @@ export default {
         this.spanLeft = 5;
         this.spanRight = 19;
       }
+    },
+
+    editMes(){
+      this.$router.push({
+          path: '/StudentMessageForm'
+      })
     }
   }
 }
@@ -88,9 +166,45 @@ export default {
   background: #fff;
   border-radius: 4px;
 }
-.layout-content-main{
-  padding: 10px;
+
+
+.headcontent{
+  height: 100px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
+
+.centercontent{
+  height: 300px;
+  margin-bottom: 10px;
+}
+
+.footcontent{
+  height: 100px;
+}
+
+
+.headmes{
+  background-color: #91d5ff;
+  /*border-image: linear-gradient(45deg, #90cf5b, #00afee) 1;*/
+  clip-path: inset(0 round 10px);
+}
+
+.headmes:hover{
+  background-color: #1890ff;
+}
+.mes{
+  background-color: coral;
+
+}
+.pra{
+  background-color: darkgray;
+
+}
+
+/*.layout-content-main{*/
+/*  padding: 10px;*/
+/*}*/
 .layout-copy{
   text-align: center;
   padding: 10px 0 20px;
