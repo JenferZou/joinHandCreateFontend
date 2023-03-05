@@ -33,4 +33,17 @@ public class AdminController {
         else
             return RespBean.error("删除失败");
     }
+    @PostMapping("add")
+    public RespBean addStudent(@RequestBody Student student){
+       int i= studentService.addStudent(student);
+       if(i>0)
+           return RespBean.ok("添加成功");
+       else
+        return RespBean.error("删除失败");
+    }
+    @GetMapping("search")
+    public PageResult searchStudent(@RequestParam("studentName") String studentName,
+                                  @RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+       return studentService.searchStudentByName(studentName,page,limit);
+    }
 }

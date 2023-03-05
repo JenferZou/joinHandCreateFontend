@@ -8,7 +8,7 @@
             </el-input>
           </i-col>
           <i-col :span="3">
-            <el-button type="primary" size="small"><i-icon type="search" size="small"></i-icon>搜索</el-button>
+            <el-button type="primary" size="small" @click="search"><i-icon type="search" size="small"></i-icon>搜索</el-button>
           </i-col>
           <i-col :span="5">
             <el-button @click="clicktrue" type="primary" size="small">
@@ -70,10 +70,15 @@ export default {
     }
   },
   methods:{
+    reset(data){
+      Object.keys(data).forEach(key=>(data[key]=''))
+      return data
+    },
     addStudent(){
       this.$nextTick(() => {
         // 弹框打开时初始化表单
         this.$refs.addstudent.init(this.studentData,false,'添加员工')
+        this.studentData=this.reset(this.studentData)
       })
     },
     clicktrue(){

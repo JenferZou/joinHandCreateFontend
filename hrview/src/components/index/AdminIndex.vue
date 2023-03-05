@@ -37,9 +37,7 @@
             <i-breadcrumb-item href="#">{{ item }}</i-breadcrumb-item>
           </i-breadcrumb>
         </div>
-        <div class="layout-search">
-          <StudentSearch class="search"></StudentSearch>
-        </div>
+
         <div class="layout-content">
           <router-view></router-view>
         </div>
@@ -52,10 +50,8 @@
 </template>
 
 <script>
-import StudentSearch from "@/components/views/StudentSearch";
 export default {
   name: "AdminIndex",
-  components: {StudentSearch},
   data() {
     return{
       item:'',
@@ -70,7 +66,7 @@ export default {
       this.item=path
       this.sidebarItem = path;
       this.$router.push({
-      name:path
+        name:path
       })
     }
   }
@@ -85,17 +81,6 @@ export default {
 }
 .layout-breadcrumb{
   padding: 10px 15px 0;
-}
-.layout-search{
-  min-height: 80px;
-  margin: 15px;
-  overflow: hidden;
-  background: #fff;
-  border-radius: 4px;
-}
-.search{
-  padding-top: 20px;
-  text-align: center;
 }
 .layout-content{
   min-height: 620px;

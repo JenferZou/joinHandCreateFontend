@@ -27,7 +27,7 @@
     insert into student(sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
                         className,sDepartment,score,sno,resumeId,gender,isGraduate)
     values (#{sName},#{sMajor},#{sPhone},#{relatives},#{rPhone},#{mentor},#{star},#{blood},#{className}
-           ,#{sDepartment},#{score},#{sno},#{resumeId}),#{gender},#{isGraduate};
+           ,#{sDepartment},#{score},#{sno},#{resumeId},#{gender},#{isGraduate});
 </insert>
 
 

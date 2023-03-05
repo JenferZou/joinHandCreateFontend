@@ -1,6 +1,6 @@
 <template>
   <el-dialog :title="title" :visible.sync="dialogVisible" :closeOnClickModal="false">
-    <el-form :inline="true" :model="formInline" class="demo-form-inline" label-width="100px" size="small" :rules="rules">
+    <el-form :inline="true" :model="studentData" ref="studentData" class="demo-form-inline" label-width="100px" size="small" :rules="rules">
       <i-row>
         <i-col :span="8">
           <el-form-item label="学号" label-width="auto" prop="sno">
@@ -102,7 +102,7 @@
         </i-col>
         <i-col :span="3">
           <el-form-item>
-            <el-button type="primary" @click="modify" size="small">{{ title === '添加员工' ? '保存' : '修改' }}</el-button>
+            <el-button type="primary" @click="modify('studentData')" size="small">{{ title === '添加员工' ? '保存' : '修改' }}</el-button>
           </el-form-item>
         </i-col>
 
@@ -118,15 +118,12 @@ export default {
     return {
       title: '',
       isdisabled: '',
-      studentData: {},
+      studentData: '',
       dialogVisible: false,
-      formInline: {
-        user: '',
-        region: ''
-      },
       rules:{
         sno:[
-          {required:true,message:'学号不能为空',trigger:'blur'}
+          {required:true,message:'学号不能为空',trigger:'blur'},
+          { min: 10, max: 12, message: '长度在 10 到 12 个字符', trigger: 'blur' }
         ],
         sName:[
           {required:true,message:'姓名不能为空',trigger:'blur'}
@@ -165,47 +162,51 @@ export default {
     cancel() {
       this.dialogVisible = false
     },
-    modify() {
-      if ('' === this.studentData.id) {
-        console.log(this.studentData.id)
-        this.$http({
-          url: this.$http.adornUrl('/admin/add'),
-          method: 'post',
-          data: this.$http.adornData(this.studentData),
-          headers: {
-            'Content-Type': 'application/json',
-            'charset': 'utf-8'
-          }
-        }).then(({data}) => {
-          if (data && data.status === 200) {
-            this.$message.success(data.msg)
+    modify(formName) {
+      this.$refs[formName].validate((valid)=>{
+        if (valid) {
+          if ('' === this.studentData.id) {
+            this.$http({
+              url: this.$http.adornUrl('/admin/add'),
+              method: 'post',
+              data: this.$http.adornData(this.studentData),
+              headers: {
+                'Content-Type': 'application/json',
+                'charset': 'utf-8'
+              }
+            }).then(({data}) => {
+              if (data && data.status === 200) {
+                this.$message.success(data.msg)
+              } else {
+                this.$message.error(data.msg)
+              }
+            }).catch(() => {
+              console.log('出错啦！！！！')
+            })
           } else {
-            this.$message.error(data.msg)
+            this.$http({
+              url: this.$http.adornUrl('/admin/modify'),
+              method: 'post',
+              data: this.$http.adornData(this.studentData),
+              headers: {
+                'Content-Type': 'application/json',
+                'charset': 'utf-8'
+              }
+            }).then(({data}) => {
+              if (data && data.status === 200) {
+                this.$message.success(data.msg)
+              } else {
+                this.$message.error(data.msg)
+              }
+            }).catch(() => {
+              console.log('出错啦！！！！')
+            })
           }
-        }).catch(() => {
-          console.log('出错啦！！！！')
-        })
-        this.dialogVisible = false
-      } else {
-        this.$http({
-          url: this.$http.adornUrl('/admin/modify'),
-          method: 'post',
-          data: this.$http.adornData(this.studentData),
-          headers: {
-            'Content-Type': 'application/json',
-            'charset': 'utf-8'
-          }
-        }).then(({data}) => {
-          if (data && data.status === 200) {
-            this.$message.success(data.msg)
-          } else {
-            this.$message.error(data.msg)
-          }
-        }).catch(() => {
-          console.log('出错啦！！！！')
-        })
-        this.dialogVisible = false
-      }
+          this.dialogVisible = false
+        } else {
+          return false;
+        }
+      });
     }
   }
 }
