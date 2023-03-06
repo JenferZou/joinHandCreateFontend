@@ -58,7 +58,7 @@
           </el-form-item>
         </i-col>
         <i-col :span="9">
-          <el-form-item label="联系人电话" label-width="auto" >
+          <el-form-item label="联系人电话" label-width="auto" prop="rPhone">
             <el-input style="width: 130px" v-model="studentData.rPhone" placeholder="联系人电话" size="small"
                       maxlength="12"></el-input>
           </el-form-item>
@@ -72,7 +72,20 @@
         </i-col>
         <i-col :span="5">
           <el-form-item label="星座" label-width="auto" >
-            <el-input style="width: 80px" v-model="studentData.star" placeholder="星座" size="small"></el-input>
+            <el-select size="small" v-model="studentData.star" placeholder="星座" style="width: 80px">
+              <el-option label="白羊" value="白羊"></el-option>
+              <el-option label="金牛" value="金牛"></el-option>
+              <el-option label="双子" value="双子"></el-option>
+              <el-option label="巨蟹" value="巨蟹"></el-option>
+              <el-option label="狮子" value="狮子"></el-option>
+              <el-option label="处女" value="处女"></el-option>
+              <el-option label="天秤" value="天秤"></el-option>
+              <el-option label="天蝎" value="天蝎"></el-option>
+              <el-option label="射手" value="射手"></el-option>
+              <el-option label="魔羯" value="魔羯"></el-option>
+              <el-option label="水瓶" value="水瓶"></el-option>
+              <el-option label="双鱼" value="双鱼"></el-option>
+            </el-select>
           </el-form-item>
         </i-col>
         <i-col :span="6">
@@ -123,7 +136,7 @@ export default {
       rules:{
         sno:[
           {required:true,message:'学号不能为空',trigger:'blur'},
-          { min: 10, max: 12, message: '长度在 10 到 12 个字符', trigger: 'blur' }
+          {type:'number', min: 10, max: 12, message: '长度在 10 到 12 个数字', trigger: 'blur' }
         ],
         sName:[
           {required:true,message:'姓名不能为空',trigger:'blur'}
@@ -132,7 +145,8 @@ export default {
           {required:true,message:'班级不能为空',trigger:'blur'}
         ],
         sPhone:[
-          {required:true,message:'电话不能为空',trigger:'blur'}
+          {required:true,message:'电话不能为空',trigger:'blur'},
+          { type:'number',min: 11, max: 11, message: '长度需要等于 12 个数字', trigger: 'blur' }
         ],
         sDepartment:[
           {required:true,message:'学院信息不能为空',trigger:'blur'}
@@ -148,6 +162,10 @@ export default {
         ],
         isGraduate:[
           {required:true,message:'请重新填写',trigger:'blur'}
+        ],
+        rPhone:[
+          {required:true,message:'电话不能为空',trigger:'blur'},
+          { type:'number',min: 11, max: 11, message: '长度需要等于 12 个数字', trigger: 'blur' }
         ]
       }
     }

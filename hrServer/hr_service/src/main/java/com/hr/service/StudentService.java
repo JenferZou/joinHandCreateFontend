@@ -11,4 +11,5 @@ public interface StudentService {
     public int deleteStudentBySno(Student student);
     public int addStudent(Student student);
     public PageResult searchStudentByName(String studentName,Integer page,Integer limit);
+    public PageResult searchStudentByCondition(Student student,Integer page,Integer limit);
 }

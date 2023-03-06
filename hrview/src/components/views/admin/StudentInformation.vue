@@ -36,7 +36,67 @@
             </i-row>
           </i-col>
         </i-row>
-        <advanced-search v-show="show"></advanced-search>
+      <el-form v-show="show">
+        <i-row>
+          <i-col :span="4">
+            <el-form-item label="学号:">
+              <el-input style="width: 150px" size="small" placeholder="学号" v-model="highSearchData.sno" maxlength="12"></el-input>
+            </el-form-item>
+          </i-col>
+          <i-col :span="4">
+            <el-form-item label="姓名:">
+              <el-input style="width: 150px" size="small" placeholder="姓名" v-model="highSearchData.sName"></el-input>
+            </el-form-item>
+          </i-col>
+          <i-col :span="3">
+            <el-form-item label="性别:">
+              <el-select size="small"  placeholder="性别" style="width: 80px" v-model="highSearchData.gender">
+                <el-option label="男" value="男"></el-option>
+                <el-option label="女" value="女"></el-option>
+              </el-select>
+            </el-form-item>
+          </i-col>
+          <i-col :span="5">
+            <el-form-item label="班级:">
+              <el-input style="width: 200px" size="small" placeholder="班级" v-model="highSearchData.className"></el-input>
+            </el-form-item>
+          </i-col>
+          <i-col :span="6">
+            <el-form-item label="专业:">
+              <el-input style="width: 200px" size="small" placeholder="专业" v-model="highSearchData.sMajor"></el-input>
+            </el-form-item>
+          </i-col>
+        </i-row>
+        <i-row>
+          <i-col :span="7">
+            <el-form-item label="所属学院:">
+              <el-input style="width: 230px" size="small" placeholder="所属学院" v-model="highSearchData.sDepartment"></el-input>
+            </el-form-item>
+          </i-col>
+          <i-col :span="5">
+            <el-form-item label="指导老师:">
+              <el-input style="width: 170px" size="small" placeholder="指导老师" v-model="highSearchData.mentor"></el-input>
+            </el-form-item>
+          </i-col>
+          <i-col :span="6">
+            <el-form-item label="联系人:">
+              <el-input style="width: 200px" size="small" placeholder="联系人" v-model="highSearchData.relatives"></el-input>
+            </el-form-item>
+          </i-col>
+        </i-row>
+        <i-row type="flex" justify="end">
+          <i-col :span="2">
+            <el-button size="small" type="primary" @click="betterSearch">
+              <i-icon type="search" size="8"></i-icon>
+              搜索
+            </el-button>
+          </i-col>
+          <i-col :span="2">
+            <el-button size="small" @click="cancel">取消</el-button>
+          </i-col>
+        </i-row>
+        <br>
+      </el-form>
     </div>
   <el-table class="StudentTable"
       :data="studentData"
@@ -135,13 +195,12 @@
 </template>
 
 <script>
-import EditForm from "@/components/views/EditForm";
-import {deleteOneStudent} from "@/components/utils";
-import AdvancedSearch from "@/components/views/AdvancedSearch";
+import EditForm from "@/components/views/admin/EditForm";
+import { deleteOneStudent} from "@/components/utils";
 
 export default {
   name: "StudentInformation",
-  components: {AdvancedSearch, EditForm},
+  components: { EditForm},
   data() {
     return {
       pageNum:1,
@@ -167,7 +226,17 @@ export default {
       },
       show:false,
       searchIcon:false,
-      studentName:''
+      studentName:'',
+      highSearchData:{
+        sno:'',
+        sName:'',
+        gender:'',
+        className:'',
+        sMajor:'',
+        sDepartment:'',
+        mentor:'',
+        relatives: ''
+      }
     }
   },
   methods: {
@@ -179,10 +248,16 @@ export default {
     },
     change(page){
       this.currentPage=page;
-      if(''===this.studentName)
-        this.getStudent()
-      else
+      if(this.highSearchData.sno!==''||this.highSearchData.sName!==''||
+          this.highSearchData.gender!==''||this.highSearchData.gender!==''||this.highSearchData.className!==''
+      ||this.highSearchData.sMajor!==''||this.highSearchData.sDepartment!==''||this.highSearchData.mentor!==''
+      ||this.highSearchData.relatives!==''){
+        this.betterSearch()
+      }
+      else if(this.studentName!=='') {
         this.search()
+      }else
+        this.getStudent()
     },
     deleteStudent(student) {
       this.studentData=deleteOneStudent(student,this.studentData)
@@ -239,17 +314,40 @@ export default {
     clicktrue(){
       this.searchIcon=!this.searchIcon
       this.show=!this.show
+      Object.keys(this.highSearchData).forEach((key)=> {
+            this.highSearchData[key]=''
+          }
+      )
     },
     search(){
-     let params={
-       studentName:this.studentName,
-       page : this.currentPage,
-       limit : this.pageSize
-     }
+      if(this.studentName!=='') {
+        let params = {
+          studentName: this.studentName,
+          page: this.currentPage,
+          limit: this.pageSize
+        }
+        this.$http({
+          url: this.$http.adornUrl('/admin/search'),
+          method: 'get',
+          params: this.$http.adornParams(params)
+        }).then(({data}) => {
+          if (data) {
+            this.pageNum = data.totalPages
+            this.studentData = data.content
+          }
+        }).catch((error) => {
+          console.log('出错啦！！！！')
+          console.log(error)
+        })
+      }
+    },
+    betterSearch(){
+      this.highSearchData.currentPage=this.currentPage
+      this.highSearchData.pageSize=this.pageSize
       this.$http({
-        url: this.$http.adornUrl('/admin/search'),
+        url: this.$http.adornUrl('/admin/highSearch'),
         method: 'get',
-        params:this.$http.adornParams(params)
+        params:this.$http.adornParams(this.highSearchData)
       }).then(({data}) => {
         if (data) {
           this.pageNum=data.totalPages
@@ -259,6 +357,13 @@ export default {
         console.log('出错啦！！！！')
         console.log(error)
       })
+    },
+    cancel(){
+     this.show=!this.show
+      Object.keys(this.highSearchData).forEach((key)=> {
+            this.highSearchData[key]=''
+          }
+      )
     }
   },
   created: function () {

@@ -7,7 +7,57 @@
     select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
            className,sDepartment,score,sno,resumeId,gender,isGraduate from student
 </select>
-
+<select id="getStudentByCondition" resultType="com.hr.model.Student">
+    select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
+           className,sDepartment,score,sno,resumeId,gender,isGraduate from student
+<where>
+            <if test="sName != null and sName!='' " >
+               and sName = #{sName}
+            </if>
+            <if test="sMajor != null and sMajor!='' " >
+               and sMajor = #{sMajor}
+            </if>
+            <if test="sPhone != null and sPhone !='' " >
+               and sPhone = #{sPhone}
+            </if>
+            <if test="relatives != null and relatives !='' " >
+               and relatives = #{relatives}
+            </if>
+            <if test="rPhone != null and rPhone !='' " >
+               and rPhone = #{rPhone}
+            </if>
+            <if test="mentor != null and mentor !='' " >
+               and mentor = #{mentor}
+            </if>
+            <if test="star != null and star !='' " >
+               and star = #{star}
+            </if>
+            <if test="blood != null and blood !='' " >
+               and blood = #{blood}
+            </if>
+            <if test="className != null and className !='' " >
+               and className = #{className}
+            </if>
+            <if test="sDepartment != null and sDepartment !='' " >
+               and sDepartment = #{sDepartment}
+            </if>
+            <if test="score != null and score !='' " >
+               and score = #{score}
+            </if>
+            <if test="sno != null and sno !='' " >
+               and sno = #{sno}
+            </if>
+            <if test="resumeId != null and resumeId!='' " >
+               and resumeId = #{resumeId}
+            </if>
+            <if test="gender != null and gender !='' " >
+               and gender = #{gender}
+            </if>
+            <if test="isGraduate != null and isGraduate!='' " >
+               and isGraduate = #{isGraduate}
+            </if>
+</where>
+</select>
     <select id="getAllStudentByName" resultType="com.hr.model.Student">
         select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
                className,sDepartment,score,sno,resumeId,gender,isGraduate from student where sName=#{name}

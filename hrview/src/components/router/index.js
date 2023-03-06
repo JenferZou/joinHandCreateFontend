@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import AdminIndex from "@/components/index/AdminIndex";
-import StudentInformation from "@/components/views/StudentInformation";
-import SystemManage from "@/components/views/SystemManage";
+import StudentInformation from "@/components/views/admin/StudentInformation";
 import StudentIndex from "@/components/index/StudentIndex";
 import StudentMessageForm from "@/components/views/StudentView/StudentMessageForm"
+import InformationManagement from "@/components/views/admin/InformationManagement";
+
 import StudentResume from "@/components/views/StudentView/StudentResume"
 Vue.use(Router)
 
@@ -25,9 +26,9 @@ let router = new Router({
                     }
                 },
                 {
-                    path: '/index1',
-                    name: 'index1',
-                    component:SystemManage,
+                    path: '/contest',
+                    name: 'contest',
+                    component:InformationManagement,
                     meta: {
                         title: 'admin'
                     }

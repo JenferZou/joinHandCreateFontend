@@ -56,7 +56,7 @@
         </el-button>
       </i-col>
       <i-col :span="2">
-        <el-button size="small">取消</el-button>
+        <el-button size="small" @click="cancel">取消</el-button>
       </i-col>
     </i-row>
       <br>

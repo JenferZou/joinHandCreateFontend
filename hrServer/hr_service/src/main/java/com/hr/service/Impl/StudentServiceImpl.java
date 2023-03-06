@@ -43,6 +43,14 @@ public class StudentServiceImpl implements StudentService {
         return PageUtil.getPageResult(pageInfo);
     }
 
+    @Override
+    public PageResult searchStudentByCondition(Student student,Integer page,Integer limit) {
+        PageHelper.startPage(page,limit);
+        List<Student> students=studentMapper.getStudentByCondition(student);
+        PageInfo<Student> pageInfo=new PageInfo<>(students);
+        return PageUtil.getPageResult(pageInfo);
+    }
+
     /**
      * 调用分页插件完成分页
      * @param

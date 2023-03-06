@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import AdvancedSearch from "@/components/views/AdvancedSearch";
-import EditForm from "@/components/views/EditForm";
+import AdvancedSearch from "@/components/views/admin/AdvancedSearch";
+import EditForm from "@/components/views/admin/EditForm";
 export default {
   name: "StudentSearch",
   components: {EditForm, AdvancedSearch},

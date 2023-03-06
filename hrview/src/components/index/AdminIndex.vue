@@ -14,9 +14,9 @@
           <i-submenu name="2">
             <template slot="title">
               <i-icon type="ios-keypad"></i-icon>
-              人事管理
+              信息发布
             </template>
-            <i-menu-item name="index1">学生资料</i-menu-item>
+            <i-menu-item name="contest">考试信息</i-menu-item>
             <i-menu-item name="2-2">选项 2</i-menu-item>
           </i-submenu>
           <i-submenu name="3">
