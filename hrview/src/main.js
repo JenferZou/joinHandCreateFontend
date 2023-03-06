@@ -22,6 +22,7 @@ import {
   Option,
   RadioGroup,
   Message,
+  InputNumber,
     Radio
 } from "element-ui";
 import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb,Layout,Content,Sider} from 'iview'
@@ -39,6 +40,7 @@ Vue.component('i-menu-item',MenuItem)
 Vue.component('i-breadcrumb-item',BreadcrumbItem)
 Vue.component('i-sider',Sider)
 
+Vue.component('el-input-number',InputNumber)
 Vue.component('el-radio-group',RadioGroup)
 Vue.component('el-radio',Radio)
 Vue.component('el-option',Option)
