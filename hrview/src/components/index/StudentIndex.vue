@@ -395,7 +395,25 @@
 </template>
 <script>
 export default {
+  data () {
 
+  },
+  computed: {
+
+  },
+  methods: {
+    editMes(){
+      this.$router.push({
+        path: '/StudentMessageForm'
+      })
+    },
+    ediRes(){
+      this.$router.push({
+        path:'StudentResume'
+      })
+    }
+
+  }
 }
 </script>
 
