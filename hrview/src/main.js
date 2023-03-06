@@ -20,11 +20,15 @@ import {
   Input,
   Select,
   Option,
-  Message
+  RadioGroup,
+  Message,
+    Radio
 } from "element-ui";
-import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb} from 'iview'
+import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb,Layout,Content,Sider} from 'iview'
 Vue.config.productionTip = false
 
+Vue.component("i-content",Content)
+Vue.component('i-layout',Layout)
 Vue.component('i-row',Row)
 Vue.component('i-col',Col)
 Vue.component('i-menu',Menu)
@@ -33,8 +37,10 @@ Vue.component('i-icon',Icon)
 Vue.component('i-breadcrumb',Breadcrumb)
 Vue.component('i-menu-item',MenuItem)
 Vue.component('i-breadcrumb-item',BreadcrumbItem)
+Vue.component('i-sider',Sider)
 
-
+Vue.component('el-radio-group',RadioGroup)
+Vue.component('el-radio',Radio)
 Vue.component('el-option',Option)
 Vue.component('el-select',Select)
 Vue.component('el-input',Input)

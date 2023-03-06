@@ -5,7 +5,7 @@ import StudentInformation from "@/components/views/StudentInformation";
 import SystemManage from "@/components/views/SystemManage";
 import StudentIndex from "@/components/index/StudentIndex";
 import StudentMessageForm from "@/components/views/StudentView/StudentMessageForm"
-
+import StudentResume from "@/components/views/StudentView/StudentResume"
 Vue.use(Router)
 
 let router = new Router({
@@ -46,6 +46,11 @@ let router = new Router({
             path: '/StudentMessageForm',
             name: 'StudentMessageForm',
             component: StudentMessageForm
+        },
+        {
+            path: '/StudentResume',
+            name: 'StudentResume',
+            component: StudentResume
         }
     ]
 })
