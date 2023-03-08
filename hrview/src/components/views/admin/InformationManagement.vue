@@ -61,6 +61,9 @@
           prop="content"
           label="内容"
           show-overflow-tooltip>
+<!--        <template v-slot="scope">
+          <div v-html='scope.row.content'></div>
+        </template>-->
       </el-table-column>
       <el-table-column
           fixed="right"
@@ -98,6 +101,8 @@
 
 <script>
 import InformationEdit from "@/components/views/admin/InformationEdit";
+import {deleteOneContest} from "@/components/utils";
+
 export default {
   name: "InformationManagement",
   components: {InformationEdit},
@@ -111,27 +116,78 @@ export default {
       currentPage: 1,
       pageSize: 8,
       pageNum: 1,
+      contest:{
+        title:'',
+        remark:'',
+        startTime:'',
+        endTime:'',
+        content:'',
+      },
     }
   },
   methods: {
     change(page) {
       this.currentPage=page;
+      if(this.title!=='')
+        this.search()
+      else
       this.getAllInformation()
     },
-    editForm() {
-
+    editForm(data) {
+      this.$nextTick(() => {
+        // 弹框打开时初始化表单
+        this.$refs.informationedit.init(data)
+      })
     },
-    deleteContest() {
-
+    deleteContest(contest) {
+      this.$http({
+        url: this.$http.adornUrl('/admin/deleteContest'),
+        method: 'post',
+        data:this.$http.adornData(contest),
+        headers: {
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        if (data&&data.status===200) {
+          this.$message.success(data.msg)
+          this.information=deleteOneContest(contest,this.information)
+        }else{
+          this.$message.error(data.msg)
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+    },
+    reset(data){
+      Object.keys(data).forEach(key=>(data[key]=''))
+      return data
     },
     addContest() {
       this.$nextTick(() => {
         // 弹框打开时初始化表单
-        this.$refs.informationedit.init()
+        this.$refs.informationedit.init(this.contest)
+        this.contest=this.reset(this.contest)
       })
     },
     search() {
-
+      let params = {
+        page: this.currentPage,
+        limit: this.pageSize,
+        title:this.title
+      }
+      this.$http({
+        url: this.$http.adornUrl('/admin/searchContest'),
+        method: 'get',
+        params: this.$http.adornParams(params)
+      }).then(({data}) => {
+        if (data) {
+          this.pageNum = data.totalPages
+          this.information = data.content
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
     },
     popDelete(){
     this.multiDeleteVisible=true
@@ -142,6 +198,24 @@ export default {
       this.multipleSelectionFlag = this.multipleSelection.length !== 0;
     },
     multiDelete() {
+      this.$http({
+        url: this.$http.adornUrl('/admin/deleteContestBatch'),
+        method: 'post',
+        data:this.$http.adornData(),
+        headers: {
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        if (data&&data.status===200) {
+          this.$message.success(data.msg)
+          //this.information=deleteOneContest(contest,this.information)
+        }else{
+          this.$message.error(data.msg)
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
       console.log('删除了')
     },
     getAllInformation() {

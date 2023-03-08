@@ -8,4 +8,7 @@ import java.util.List;
 public interface ContestService {
 
     public PageResult getAllContestInformation(Integer page, Integer limit);
+    public int deleteContest(Contest contest);
+    public int addContest(Contest contest);
+    public PageResult searchContest(String title,Integer page, Integer limit);
 }

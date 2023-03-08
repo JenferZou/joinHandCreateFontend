@@ -26,5 +26,23 @@ public class ContestServiceImpl implements ContestService {
         return PageUtil.getPageResult(pageInfo);
     }
 
+    @Override
+    public int deleteContest(Contest contest) {
+        return contestMapper.deleteContest(contest);
+    }
+
+    @Override
+    public int addContest(Contest contest) {
+        return contestMapper.addContest(contest);
+    }
+
+    @Override
+    public PageResult searchContest(String title, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        List<Contest> contests=contestMapper.queryContestByTitle(title);
+        PageInfo<Contest> pageInfo=new PageInfo<>(contests);
+        return PageUtil.getPageResult(pageInfo);
+    }
+
 
 }
