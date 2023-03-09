@@ -12,7 +12,7 @@
     <div class="layout-header">
       <div class="layout-logo">返回</div>
     </div>
-    <div style="height: 200px">
+    <div style="height: 1000px">
 
         <div class="page-container">
         <div class="info-table">
@@ -85,6 +85,7 @@
             </div>
 
           </el-card>
+
           <el-dialog :visible.sync="editDialogVisible" title="编辑个人信息" :before-close="beforeClose">
             <el-form :model="info" label-position="left" label-width="100px" :rules="rules" ref="infoForm">
               <el-form-item label="姓名" prop="name">

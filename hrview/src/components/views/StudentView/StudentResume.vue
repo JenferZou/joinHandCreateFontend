@@ -38,8 +38,8 @@
     </div>
     <div class="resume-preview">
       <h2 class="preview-title">{{ resume.name }} 的个人简历</h2>
-      <el-row>
-        <el-col :span="8">
+      <i-row>
+        <i-col :span="8">
           <div class="preview-item">
             <h3>个人信息</h3>
             <p>姓名：{{ resume.name }}</p>
@@ -48,8 +48,8 @@
             <p>电话：{{ resume.phone }}</p>
             <p>邮箱：{{ resume.email }}</p>
           </div>
-        </el-col>
-        <el-col :span="16">
+        </i-col>
+        <i-col :span="16">
           <div class="preview-item">
             <h3>教育经历</h3>
             <p>{{ resume.education }}</p>
@@ -62,8 +62,8 @@
             <h3>技能特长</h3>
             <p>{{ resume.skills }}</p>
           </div>
-        </el-col>
-      </el-row>
+        </i-col>
+      </i-row>
     </div>
   </div>
 </template>
@@ -135,4 +135,4 @@ export default {
 .preview-item {
   margin-bottom: 20px;
 }
-</style>tyle>
+</style>

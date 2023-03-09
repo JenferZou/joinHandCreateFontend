@@ -53,6 +53,7 @@ let router = new Router({
             name: 'StudentResume',
             component: StudentResume
         }
+
     ]
 })
 export default router
