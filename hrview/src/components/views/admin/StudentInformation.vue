@@ -298,8 +298,6 @@ export default {
         console.log('出错啦！！！！')
       })
     },
-
-
     reset(data){
       Object.keys(data).forEach(key=>(data[key]=''))
       return data

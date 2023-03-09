@@ -6,4 +6,14 @@
     <select id="queryAllContest" resultType="com.hr.model.Contest">
         select id,title,remark,startTime,endTime,content from contest
     </select>
+    <delete id="deleteContest">
+        delete from contest where id=#{id}
+    </delete>
+    <insert id="addContest">
+        insert into contest(id,title,remark,startTime,endTime,content)
+        values (#{id},#{title},#{remark},#{startTime},#{endTime},#{content});
+    </insert>
+    <select id="queryContestByTitle" resultType="com.hr.model.Contest">
+        select id,title,remark,startTime,endTime,content from contest where title like concat('%',#{title},'%')
+    </select>
 </mapper>

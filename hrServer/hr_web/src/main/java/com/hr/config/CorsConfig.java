@@ -24,7 +24,6 @@ public class CorsConfig {
         //暴露哪些头部信息
         config.addExposedHeader("*");
         //2. 添加映射路径
-        System.out.println("配置类");
         UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
         corsConfigurationSource.registerCorsConfiguration("/**",config);
         //3. 返回新的CorsFilter

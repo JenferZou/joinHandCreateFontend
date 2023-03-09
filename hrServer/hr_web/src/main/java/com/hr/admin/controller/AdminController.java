@@ -1,5 +1,6 @@
 package com.hr.admin.controller;
 
+import com.hr.model.Contest;
 import com.hr.model.PageResult;
 import com.hr.model.RespBean;
 import com.hr.model.Student;
@@ -7,6 +8,11 @@ import com.hr.service.ContestService;
 import com.hr.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 @RestController()
 @RequestMapping("/admin/")
@@ -29,7 +35,7 @@ private ContestService contestService;
             return RespBean.error("修改失败");
     }
 
-    @PostMapping("delete")
+    @PostMapping ("delete")
     public RespBean deleteStudent(@RequestBody Student student) {
         System.out.println(student);
         int i = studentService.deleteStudentBySno(student);
@@ -75,5 +81,28 @@ private ContestService contestService;
     @GetMapping("contest")
     public PageResult getAllContestInformation(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
         return contestService.getAllContestInformation(page,limit);
+    }
+    @PostMapping("publish")
+    public RespBean publishContest(@RequestBody Contest contest) throws ParseException {
+        contest.setId(UUID.randomUUID().toString().substring(0,10));
+        int i=0;
+        i+=contestService.addContest(contest);
+        if(i>0)
+            return RespBean.ok("发布成功");
+        else
+        return RespBean.error("发布失败");
+    }
+    @PostMapping("deleteContest")
+    public RespBean deleteStudent(@RequestBody Contest contest) {
+       int i=contestService.deleteContest(contest);
+        if (i > 0)
+            return RespBean.ok("删除成功");
+        else
+            return RespBean.error("删除失败");
+    }
+    @GetMapping("searchContest")
+    public PageResult searchContest(@RequestParam("title") String title,
+                                    @RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
+        return contestService.searchContest(title, page, limit);
     }
 }

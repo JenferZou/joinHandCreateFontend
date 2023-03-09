@@ -3,6 +3,11 @@ import App from './App.vue'
 import router from './components/router'
 import 'iview/dist/styles/iview.css'
 import 'element-ui/lib/theme-chalk/index.css';
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
 import httpRequest from "@/components/utils/httpRequest";
 import {
   Container,
@@ -23,8 +28,9 @@ import {
   RadioGroup,
   Message,
   InputNumber,
-    Radio,
-    Card
+  Radio,
+  Card,
+  DatePicker
 } from "element-ui";
 import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb,Layout,Content,Sider} from 'iview'
 Vue.config.productionTip = false
@@ -41,8 +47,7 @@ Vue.component('i-menu-item',MenuItem)
 Vue.component('i-breadcrumb-item',BreadcrumbItem)
 Vue.component('i-sider',Sider)
 
-
-
+Vue.component('el-date-picker',DatePicker)
 Vue.component('el-card',Card)
 Vue.component('el-input-number',InputNumber)
 Vue.component('el-radio-group',RadioGroup)
@@ -62,6 +67,8 @@ Vue.component('el-aside',Aside);
 Vue.component('el-header',Header);
 Vue.component('el-main',Main);
 Vue.component('el-footer',Footer);
+
+Vue.use(VueQuillEditor)
 
 Vue.prototype.$http = httpRequest // Ajax 请求方法
 Vue.prototype.$message = Message
