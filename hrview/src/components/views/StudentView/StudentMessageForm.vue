@@ -26,7 +26,7 @@
                 <i-col :span="12">
                   <el-form :model="info" label-position="left" label-width="100px" readonly>
                     <el-form-item label="姓名">
-                      <span>{{ info.name }}</span>
+                      <span>{{ info.sName }}</span>
                     </el-form-item>
                     <el-form-item label="性别">
                       <span>{{ info.gender }}</span>
@@ -35,20 +35,20 @@
                       <span>{{ info.sno }}</span>
                     </el-form-item>
                     <el-form-item label="联系电话">
-                      <span>{{ info.phone }}</span>
+                      <span>{{ info.sPhone }}</span>
                     </el-form-item>
                   </el-form>
                 </i-col>
                 <i-col :span="12">
                   <el-form :model="info" label-position="left" label-width="100px" readonly>
                     <el-form-item label="专业">
-                      <span>{{ info.major }}</span>
+                      <span>{{ info.sMajor }}</span>
                     </el-form-item>
                     <el-form-item label="亲属联系人">
                       <span>{{ info.relatives }}</span>
                     </el-form-item>
                     <el-form-item label="亲属电话">
-                      <span>{{ info.relativesphone }}</span>
+                      <span>{{ info.rPhone }}</span>
                     </el-form-item>
                     <el-form-item label="指导老师">
                       <span>{{ info.mentor }}</span>
@@ -64,7 +64,7 @@
                 <i-col :span="12">
                   <el-form :model="info" label-position="left" label-width="100px" readonly>
                     <el-form-item label="导师电话">
-                      <span>{{ info.mentorphone }}</span>
+                      <span>{{ info.mentorPhone }}</span>
                     </el-form-item>
                     <el-form-item label="星座">
                       <span>{{ info.star }}</span>
@@ -81,6 +81,14 @@
                   </el-form>
                 </i-col>
 
+                <i-col :span="12">
+                  <el-form :model="info" label-position="left" label-width="100px" readonly>
+                    <el-form-item label="积分">
+                      <span>{{ info.score }}</span>
+                    </el-form-item>
+
+                  </el-form>
+                </i-col>
               </i-row>
             </div>
 
@@ -88,8 +96,8 @@
 
           <el-dialog :visible.sync="editDialogVisible" title="编辑个人信息" :before-close="beforeClose">
             <el-form :model="info" label-position="left" label-width="100px" :rules="rules" ref="infoForm">
-              <el-form-item label="姓名" prop="name">
-                <el-input v-model="info.name"></el-input>
+              <el-form-item label="姓名" prop="sName">
+                <el-input v-model="info.sName"></el-input>
               </el-form-item>
               <el-form-item label="性别" prop="gender">
                 <el-radio-group v-model="info.gender">
@@ -100,23 +108,23 @@
               <el-form-item label="学号" prop="sno">
                 <el-input v-model="info.sno"></el-input>
               </el-form-item>
-              <el-form-item label="联系电话" prop="phone">
-                <el-input v-model="info.phone"></el-input>
+              <el-form-item label="联系电话" prop="sPhone">
+                <el-input v-model="info.sPhone"></el-input>
               </el-form-item>
               <el-form-item label="亲属联系人" prop="relatives">
                 <el-input v-model="info.relatives"></el-input>
               </el-form-item>
-              <el-form-item label="亲属电话" prop="relativesphone">
-                <el-input v-model="info.relativesphone"></el-input>
+              <el-form-item label="亲属电话" prop="rPhone">
+                <el-input v-model="info.rPhone"></el-input>
               </el-form-item>
-              <el-form-item label="专业" prop="major">
-                <el-input v-model="info.major"></el-input>
+              <el-form-item label="专业" prop="sMajor">
+                <el-input v-model="info.sMajor"></el-input>
               </el-form-item>
               <el-form-item label="指导教师" prop="mentor">
                 <el-input v-model="info.mentor"></el-input>
               </el-form-item>
-              <el-form-item label="导师电话" prop="mentorphone">
-                <el-input v-model="info.mentorphone"></el-input>
+              <el-form-item label="导师电话" prop="mentorPhone">
+                <el-input v-model="info.mentorPhone"></el-input>
               </el-form-item>
               <el-form-item label="星座" prop="star">
                 <el-select v-model="info.star" placeholder="请选择星座">
@@ -157,22 +165,25 @@
 
 
 <script>
+
+
 export default {
-  name: 'StudentMessageForm',
+  sName: 'StudentMessageForm',
   data() {
     return {
       info: {
-        name: '张三',
+        sName: '',
         gender: '',
-        sno: '',
-        major:'',
-        phone: '',
+        sno: '123123',
+        sMajor: '',
+        sPhone: '',
         relatives: '',
-        relativesphone:'',
-        mentor:'',
-        mentorphone:'',
+        rPhone: '',
+        mentor: '',
+        mentorPhone: '',
         blood: '',
-        star: ''
+        star: '',
+        score: 10
       },
       stars: [
         '白羊座',
@@ -191,33 +202,57 @@ export default {
       bloods: ['A', 'B', 'AB', 'O']
       ,
       rules: {
-        name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
-        gender: [{ required: true, message: '请选择性别', trigger: 'change' }],
-        sno: [{ required: true, message: '请输入学号', trigger: 'blur' }],
-        phone: [
-          { required: true, message: '请输入联系电话', trigger: 'blur' },
-          { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur' },
+        sName: [{required: true, message: '请输入姓名', trigger: 'blur'}],
+        gender: [{required: true, message: '请选择性别', trigger: 'change'}],
+        sno: [{required: true, message: '请输入学号', trigger: 'blur'}],
+        sPhone: [
+          {required: true, message: '请输入联系电话', trigger: 'blur'},
+          {pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur'},
         ],
-        major: [{ request: true, message: '请输入专业', trigger: 'blur' }],
-        relatives: [{ required: true, message: '请输入亲属姓名', trigger: 'blur' }],
-        relativesphone: [
-          { required: true, message: '请输入亲属联系电话', trigger: 'blur' },
-          { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur' },
+        sMajor: [{request: true, message: '请输入专业', trigger: 'blur'}],
+        relatives: [{required: true, message: '请输入亲属姓名', trigger: 'blur'}],
+        rPhone: [
+          {required: true, message: '请输入亲属联系电话', trigger: 'blur'},
+          {pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur'},
         ],
-        mentor: [{ required: true, message: '请输入指导教师', trigger: 'blur' }],
-        mentorphone: [
-          { required: true, message: '请输入指导教师联系电话', trigger: 'blur' },
-          { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur' },
+        mentor: [{required: true, message: '请输入指导教师', trigger: 'blur'}],
+        mentorPhone: [
+          {required: true, message: '请输入指导教师联系电话', trigger: 'blur'},
+          {pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur'},
         ],
-        star: [{ required: true, message: '请输入星座', trigger: 'change' }],
-        blood: [{ required: true, message: '请输入血型', trigger: 'change' }]
+        star: [{required: true, message: '请输入星座', trigger: 'change'}],
+        blood: [{required: true, message: '请输入血型', trigger: 'change'}]
       },
       editDialogVisible: false,
+
     }
   },
+  created() {
+    this.load()
+  },
+
   methods: {
+    load() {
+      let parms={
+        sno:'123123'
+      }
+      this.$http({
+        url: this.$http.adornUrl('/StudentMessageForm'),
+        method: 'get',
+        params:this.$http.adornParams(parms)
+      }).then(({data}) => {
+          console.log(data)
+          this.info=data
+
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+    },
+
+
     editInfo() {
       this.editDialogVisible = true
+      this.info = {}
     },
     beforeClose(done) {
       this.$refs.infoForm.validate(valid => {
@@ -238,7 +273,7 @@ export default {
         }
       })
     },
-  },
+  }
 }
 </script>
 

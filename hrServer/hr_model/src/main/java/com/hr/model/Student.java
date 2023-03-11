@@ -4,8 +4,40 @@ import java.lang.*;
 
 
 public class Student {
-private Integer id;
+
+    private Integer id;
+
     private String sName;
+
+    private String mentorPhone;
+
+    public String getMentorPhone() {
+        return mentorPhone;
+    }
+
+    public Student(Integer id, String sName, String mentorPhone, String gender, String isGraduate, String sMajor, String sPhone, String relatives, String rPhone, String mentor, String star, String blood, String className, String sDepartment, Double score, String sno, String resumeId) {
+        this.id = id;
+        this.sName = sName;
+        this.mentorPhone = mentorPhone;
+        this.gender = gender;
+        this.isGraduate = isGraduate;
+        this.sMajor = sMajor;
+        this.sPhone = sPhone;
+        this.relatives = relatives;
+        this.rPhone = rPhone;
+        this.mentor = mentor;
+        this.star = star;
+        this.blood = blood;
+        this.className = className;
+        this.sDepartment = sDepartment;
+        this.score = score;
+        this.sno = sno;
+        this.resumeId = resumeId;
+    }
+
+    public void setMentorPhone(String mentorPhone) {
+        this.mentorPhone = mentorPhone;
+    }
 
     public String getGender() {
         return gender;
@@ -24,7 +56,9 @@ private Integer id;
     }
 
     private String gender;
+
     private String isGraduate;
+
     private String sMajor;
 
     private String sPhone;
@@ -48,23 +82,6 @@ private Integer id;
     private String sno;
 
     private String resumeId;
-
-
-    public Student(String sName, String sMajor, String sPhone, String relatives, String rPhone, String mentor, String star, String blood, String className, String sDepartment, Double score, String sno, String resumeId) {
-        this.sName = sName;
-        this.sMajor = sMajor;
-        this.sPhone = sPhone;
-        this.relatives = relatives;
-        this.rPhone = rPhone;
-        this.mentor = mentor;
-        this.star = star;
-        this.blood = blood;
-        this.className = className;
-        this.sDepartment = sDepartment;
-        this.score = score;
-        this.sno = sno;
-        this.resumeId = resumeId;
-    }
 
 
     public Student() {

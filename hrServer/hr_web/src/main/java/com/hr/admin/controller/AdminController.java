@@ -21,6 +21,9 @@ public class AdminController {
     private StudentService studentService;
 @Autowired
 private ContestService contestService;
+
+
+
     @GetMapping("listStudent")
     public PageResult listStudent(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         return studentService.queryStudent(page, limit);

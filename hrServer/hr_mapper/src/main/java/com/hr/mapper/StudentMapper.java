@@ -23,5 +23,8 @@ public interface StudentMapper {
     public List<Student> getAllStudentByName(String name);
     public List<Student> getAllStudentByClass(String clazz);
     public List<Student> getAllStudentByScore(@Param("minScore") Double minScore, @Param("maxScore") Double maxScore);
-  public  List<Student> getStudentByCondition(Student student);
+    public  List<Student> getStudentByCondition(Student student);
+    public Student getStudentBySno(String sno);
+
+
 }

@@ -5,7 +5,7 @@
 <mapper namespace="com.hr.mapper.StudentMapper">
 <select id="getAllStudent" resultType="com.hr.model.Student">
     select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-           className,sDepartment,score,sno,resumeId,gender,isGraduate from student
+           className,sDepartment,score,sno,resumeId,gender,isGraduate,mentorPhone from student
 </select>
 <select id="getStudentByCondition" resultType="com.hr.model.Student">
     select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
@@ -60,24 +60,31 @@
 </select>
     <select id="getAllStudentByName" resultType="com.hr.model.Student">
         select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-               className,sDepartment,score,sno,resumeId,gender,isGraduate from student where sName=#{name}
+               className,sDepartment,score,sno,resumeId,gender,isGraduate,mentorPhone from student where sName=#{name}
     </select>
 
     <select id="getAllStudentByClass" resultType="com.hr.model.Student">
         select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-               className,sDepartment,score,sno,resumeId,gender,isGraduate from student where className=#{clazz}
+               className,sDepartment,score,sno,resumeId,gender,isGraduate,mentorPhone from student where className=#{clazz}
     </select>
 
     <select id="getAllStudentByScore" resultType="com.hr.model.Student">
         select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-               className,sDepartment,score,sno,resumeId,gender,isGraduate from student where score between #{minScore} and #{maxScore};
+               className,sDepartment,score,sno,resumeId,gender,isGraduate,mentorPhone from student where score between #{minScore} and #{maxScore};
     </select>
+
+    <select id="getStudentBySno" resultType="com.hr.model.Student">
+      select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
+            className,sDepartment,score,sno,resumeId,gender,isGraduate,mentorPhone from student where sno=#{sno} ;
+    </select>
+
+
 
 <insert id="addStudent">
     insert into student(sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-                        className,sDepartment,score,sno,resumeId,gender,isGraduate)
+                        className,sDepartment,score,sno,resumeId,gender,isGraduate,mentorPhone)
     values (#{sName},#{sMajor},#{sPhone},#{relatives},#{rPhone},#{mentor},#{star},#{blood},#{className}
-           ,#{sDepartment},#{score},#{sno},#{resumeId},#{gender},#{isGraduate});
+           ,#{sDepartment},#{score},#{sno},#{resumeId},#{gender},#{isGraduate},#{mentorPhone});
 </insert>
 
 
@@ -136,7 +143,15 @@
             <if test="isGraduate != null" >
                 isGraduate = #{isGraduate},
             </if>
+            <if test="mentorPhone != null" >
+                mentorPhone = #{mentorPhone},
+        </if>
         </set>
         where sno = #{sno} and sName=#{sName}
     </update>
+
+
+
+
+
 </mapper>

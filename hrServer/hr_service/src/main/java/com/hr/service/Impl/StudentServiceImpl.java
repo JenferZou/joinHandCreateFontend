@@ -51,6 +51,10 @@ public class StudentServiceImpl implements StudentService {
         return PageUtil.getPageResult(pageInfo);
     }
 
+    public Student getStudentBySno(String sno){
+        return studentMapper.getStudentBySno(sno);
+    }
+
     /**
      * 调用分页插件完成分页
      * @param
@@ -61,4 +65,9 @@ public class StudentServiceImpl implements StudentService {
         List<Student> students = studentMapper.getAllStudent();
         return new PageInfo<Student>(students);
     }
+
+
+
+
+
 }
