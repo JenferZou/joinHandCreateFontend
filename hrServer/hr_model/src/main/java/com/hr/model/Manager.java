@@ -12,15 +12,44 @@ public class Manager {
     private String gPhone;
 
     private String gDepartment;
+private int status;
+private String remark;
+private String role;
 
-    public Manager(String gName, String gMajor, String gNo, String gPhone, String gDepartment) {
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Manager(String gName, String gMajor, String gNo, String gPhone, String gDepartment, int status, String remark, String role) {
         this.gName = gName;
         this.gMajor = gMajor;
         this.gNo = gNo;
         this.gPhone = gPhone;
         this.gDepartment = gDepartment;
+        this.status = status;
+        this.remark = remark;
+        this.role = role;
     }
-
 
     public Manager() {
     }
@@ -73,6 +102,9 @@ public class Manager {
                 ", gNo='" + gNo + '\'' +
                 ", gPhone='" + gPhone + '\'' +
                 ", gDepartment='" + gDepartment + '\'' +
+                ", status=" + status +
+                ", remark='" + remark + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="发布" :visible.sync="dialogTableVisible" @close="close">
+  <el-dialog title="发布" :visible.sync="dialogTableVisible" @close="close" width="80%">
     <div class="el-dialog-div">
     <el-form ref="form" :model="contest" label-width="auto">
       <el-form-item label="标题">
@@ -110,7 +110,7 @@ export default {
 
 <style scoped lang="scss">
 .el-dialog-div{
-  height: 60vh;//如果高度过高，可用max-height
+  height: 80vh;//如果高度过高，可用max-height
   overflow: auto;
 }
 .item {

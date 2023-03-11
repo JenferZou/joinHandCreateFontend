@@ -299,6 +299,7 @@ export default {
   padding: 10px 0 20px;
   color: #d7dde4;
 }
+
 .layout-header{
   height: 60px;
   background: #fff;

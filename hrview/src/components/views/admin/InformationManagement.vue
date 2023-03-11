@@ -4,7 +4,7 @@
       <i-col :span="12">
         <i-row>
           <i-col :span="16">
-            <el-input size="small" v-model="title" placeholder="请输入标题" clearable prefix-icon="el-icon-search">
+            <el-input @keyup.enter.native="search" size="small" v-model="title" placeholder="请输入标题" clearable prefix-icon="el-icon-search">
             </el-input>
           </i-col>
           <i-col :span="3">
@@ -86,7 +86,13 @@
           <el-button @click="multiDeleteVisible = false" size="small">取 消</el-button>
         </span>
     </el-dialog>
-
+      <el-dialog :visible.sync="multiDeleteVisible1" title="提示" width="30%">
+        <span>确定要删除吗</span>
+        <span slot="footer">
+          <el-button type="primary" @click="multiDelete1" size="small">确 定</el-button>
+          <el-button @click="multiDeleteVisible1 = false" size="small">取 消</el-button>
+        </span>
+      </el-dialog>
     <el-pagination
         class="page"
                    @current-change="change"
@@ -108,6 +114,7 @@ export default {
   components: {InformationEdit},
   data() {
     return {
+      multiDeleteVisible1:false,
       multipleSelectionFlag: false,
       multiDeleteVisible: false,
       multipleSelection: [],
@@ -123,6 +130,8 @@ export default {
         endTime:'',
         content:'',
       },
+      idParams:[],
+      dcontest:'',
     }
   },
   methods: {
@@ -140,24 +149,8 @@ export default {
       })
     },
     deleteContest(contest) {
-      this.$http({
-        url: this.$http.adornUrl('/admin/deleteContest'),
-        method: 'post',
-        data:this.$http.adornData(contest),
-        headers: {
-          'Content-Type': 'application/json',
-          'charset': 'utf-8'
-        }
-      }).then(({data}) => {
-        if (data&&data.status===200) {
-          this.$message.success(data.msg)
-          this.information=deleteOneContest(contest,this.information)
-        }else{
-          this.$message.error(data.msg)
-        }
-      }).catch(() => {
-        console.log('出错啦！！！！')
-      })
+      this.multiDeleteVisible1=true
+      this.dcontest=contest
     },
     reset(data){
       Object.keys(data).forEach(key=>(data[key]=''))
@@ -197,11 +190,11 @@ export default {
       this.multipleSelection = val;
       this.multipleSelectionFlag = this.multipleSelection.length !== 0;
     },
-    multiDelete() {
+    multiDelete1(){
       this.$http({
-        url: this.$http.adornUrl('/admin/deleteContestBatch'),
+        url: this.$http.adornUrl('/admin/deleteContest'),
         method: 'post',
-        data:this.$http.adornData(),
+        data:this.$http.adornData(this.dcontest),
         headers: {
           'Content-Type': 'application/json',
           'charset': 'utf-8'
@@ -209,14 +202,39 @@ export default {
       }).then(({data}) => {
         if (data&&data.status===200) {
           this.$message.success(data.msg)
-          //this.information=deleteOneContest(contest,this.information)
+          this.information=deleteOneContest(this.dcontest,this.information)
         }else{
           this.$message.error(data.msg)
         }
       }).catch(() => {
         console.log('出错啦！！！！')
       })
-      console.log('删除了')
+    },
+    multiDelete() {
+      this.multipleSelection.forEach((contest)=>{
+        this.idParams.push(contest.id)
+      })
+      this.$http({
+        url: this.$http.adornUrl('/admin/deleteContestBatch'),
+        method: 'post',
+        data:this.idParams,//this.$http.adornData(this.idParams),
+        headers: {
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        if (data&&data.status===200) {
+          this.$message.success(data.msg)
+          this.multiDeleteVisible = false
+          this.multipleSelection.forEach((contest)=>{
+            this.information=deleteOneContest(contest,this.information)
+          })
+        }else{
+          this.$message.error(data.msg)
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
     },
     getAllInformation() {
       let params = {

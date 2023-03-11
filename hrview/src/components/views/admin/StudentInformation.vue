@@ -5,7 +5,7 @@
           <i-col :span="12">
             <i-row>
               <i-col :span="16" >
-                <el-input size="small" v-model="studentName" placeholder="请通过学生名字搜索学生" clearable prefix-icon="el-icon-search">
+                <el-input @keyup.enter.native="search" size="small" v-model="studentName" placeholder="请通过学生名字搜索学生" clearable prefix-icon="el-icon-search">
                 </el-input>
               </i-col>
               <i-col :span="3">
@@ -97,6 +97,7 @@
         </i-row>
         <br>
       </el-form>
+
     </div>
   <el-table class="StudentTable"
       :data="studentData"
@@ -191,6 +192,13 @@
   </el-pagination>
     <EditForm ref="editfrom">
     </EditForm>
+    <el-dialog :visible.sync="multiDeleteVisible" title="提示" width="30%">
+      <span>确定要删除吗</span>
+      <span slot="footer">
+          <el-button type="primary" @click="multiDelete" size="small">确 定</el-button>
+          <el-button @click="cancel1" size="small">取 消</el-button>
+        </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -203,6 +211,7 @@ export default {
   components: { EditForm},
   data() {
     return {
+      multiDeleteVisible:false,
       pageNum:1,
       pageSize:9,
       currentPage:1,
@@ -235,7 +244,8 @@ export default {
         sMajor:'',
         sDepartment:'',
         mentor:'',
-        relatives: ''
+        relatives: '',
+        student:'',
       }
     }
   },
@@ -259,12 +269,15 @@ export default {
       }else
         this.getStudent()
     },
-    deleteStudent(student) {
-      this.studentData=deleteOneStudent(student,this.studentData)
+    cancel1(){
+      this.multiDeleteVisible = false
+      this.student=''
+    },
+    multiDelete(){
       this.$http({
         url: this.$http.adornUrl('/admin/delete'),
         method: 'post',
-        data:this.$http.adornData(student),
+        data:this.$http.adornData(this.student),
         headers: {
           'Content-Type': 'application/json',
           'charset': 'utf-8'
@@ -272,13 +285,17 @@ export default {
       }).then(({data}) => {
         if (data&&data.status===200) {
           this.$message.success(data.msg)
-          this.studentData=deleteOneStudent(student,this.studentData)
+          this.studentData=deleteOneStudent(this.student,this.studentData)
         }else{
           this.$message.error(data.msg)
         }
       }).catch(() => {
         console.log('出错啦！！！！')
       })
+    },
+    deleteStudent(student) {
+      this.multiDeleteVisible=true
+      this.student=student
     },
     getStudent(){
       let params={

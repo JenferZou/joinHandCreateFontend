@@ -7,6 +7,8 @@ import StudentMessageForm from "@/components/views/StudentView/StudentMessageFor
 import InformationManagement from "@/components/views/admin/InformationManagement";
 
 import StudentResume from "@/components/views/StudentView/StudentResume"
+import UserManagement from "@/components/views/admin/UserManagement";
+import ActiveManagement from "@/components/views/admin/ActiveManagement";
 Vue.use(Router)
 
 let router = new Router({
@@ -32,6 +34,16 @@ let router = new Router({
                     meta: {
                         title: 'admin'
                     }
+                },
+                {
+                    path:'/userManagement',
+                    name:'userManagement',
+                    component:UserManagement,
+                },
+                {
+                    path:'/active',
+                    name:'active',
+                    component:ActiveManagement,
                 }
             ],
             meta: {
