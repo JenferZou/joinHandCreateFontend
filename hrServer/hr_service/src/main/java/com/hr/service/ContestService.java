@@ -11,4 +11,5 @@ public interface ContestService {
     public int deleteContest(Contest contest);
     public int addContest(Contest contest);
     public PageResult searchContest(String title,Integer page, Integer limit);
+    public int removeMultiple(List<String> contestsIds);
 }

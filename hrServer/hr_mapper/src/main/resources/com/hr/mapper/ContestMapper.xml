@@ -16,4 +16,10 @@
     <select id="queryContestByTitle" resultType="com.hr.model.Contest">
         select id,title,remark,startTime,endTime,content from contest where title like concat('%',#{title},'%')
     </select>
+    <delete id="removeMultiple">
+        delete from contest where id in
+        <foreach collection="list" open="(" close=")" separator="," item="id" index="index">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

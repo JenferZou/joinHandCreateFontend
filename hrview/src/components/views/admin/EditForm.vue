@@ -4,7 +4,7 @@
       <i-row>
         <i-col :span="8">
           <el-form-item label="学号" label-width="auto" prop="sno">
-            <el-input v-model="studentData.sno" placeholder="学号" maxlength="12" style="width: 150px"
+            <el-input v-model.number="studentData.sno" placeholder="学号" maxlength="12" style="width: 150px"
                       :disabled="isdisabled"></el-input>
           </el-form-item>
         </i-col>
@@ -22,7 +22,7 @@
       <i-row>
         <i-col :span="6">
           <el-form-item label="电话" label-width="auto" prop="sPhone">
-            <el-input style="width: 110px" v-model="studentData.sPhone" placeholder="电话" size="small"
+            <el-input style="width: 110px" v-model.number="studentData.sPhone" placeholder="电话" size="small"
                       maxlength="12"></el-input>
           </el-form-item>
         </i-col>
@@ -59,7 +59,7 @@
         </i-col>
         <i-col :span="9">
           <el-form-item label="联系人电话" label-width="auto" prop="rPhone">
-            <el-input style="width: 130px" v-model="studentData.rPhone" placeholder="联系人电话" size="small"
+            <el-input style="width: 130px" v-model.number="studentData.rPhone" placeholder="联系人电话" size="small"
                       maxlength="12"></el-input>
           </el-form-item>
         </i-col>
@@ -136,7 +136,7 @@ export default {
       rules:{
         sno:[
           {required:true,message:'学号不能为空',trigger:'blur'},
-          {type:'number', min: 10, max: 12, message: '长度在 10 到 12 个数字', trigger: 'blur' }
+          { pattern: /\b\d{12}\b/, message: '请输入正确的学号', trigger: 'blur' }
         ],
         sName:[
           {required:true,message:'姓名不能为空',trigger:'blur'}
@@ -146,7 +146,7 @@ export default {
         ],
         sPhone:[
           {required:true,message:'电话不能为空',trigger:'blur'},
-          { type:'number',min: 11, max: 11, message: '长度需要等于 12 个数字', trigger: 'blur' }
+          { pattern: /^1[3|5|7|8|9]\d{9}$/, message: '请输入正确的号码格式', trigger: 'blur' }
         ],
         sDepartment:[
           {required:true,message:'学院信息不能为空',trigger:'blur'}
@@ -165,7 +165,7 @@ export default {
         ],
         rPhone:[
           {required:true,message:'电话不能为空',trigger:'blur'},
-          { type:'number',min: 11, max: 11, message: '长度需要等于 12 个数字', trigger: 'blur' }
+          { pattern: /^1[3|5|7|8|9]\d{9}$/, message: '请输入正确的号码格式', trigger: 'blur' }
         ]
       }
     }

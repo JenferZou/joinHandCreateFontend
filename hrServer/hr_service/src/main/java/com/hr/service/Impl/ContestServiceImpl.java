@@ -44,5 +44,10 @@ public class ContestServiceImpl implements ContestService {
         return PageUtil.getPageResult(pageInfo);
     }
 
+    @Override
+    public int removeMultiple(List<String> contestsIds) {
+        return contestMapper.removeMultiple(contestsIds);
+    }
+
 
 }

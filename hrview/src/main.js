@@ -29,7 +29,8 @@ import {
   InputNumber,
   Radio,
   Card,
-  DatePicker
+  DatePicker,
+  Switch
 } from "element-ui";
 import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb,Layout,Content,Sider} from 'iview'
 Vue.config.productionTip = false
@@ -46,6 +47,7 @@ Vue.component('i-menu-item',MenuItem)
 Vue.component('i-breadcrumb-item',BreadcrumbItem)
 Vue.component('i-sider',Sider)
 
+Vue.component('el-switch',Switch)
 Vue.component('el-date-picker',DatePicker)
 Vue.component('el-card',Card)
 Vue.component('el-input-number',InputNumber)
