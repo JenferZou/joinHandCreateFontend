@@ -9,7 +9,7 @@
 </select>
 <select id="getStudentByCondition" resultType="com.hr.model.Student">
     select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-           className,sDepartment,score,sno,resumeId,gender,isGraduate from student
+           className,sDepartment,score,sno,resumeId,gender,isGraduate mentorPhone from student
 <where>
             <if test="sName != null and sName!='' " >
                and sName = #{sName}
