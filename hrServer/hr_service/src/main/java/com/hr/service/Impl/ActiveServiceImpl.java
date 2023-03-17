@@ -36,4 +36,9 @@ public class ActiveServiceImpl implements ActiveService {
     public List<Active> getThreeActive() {
         return activeMapper.getThreeActive();
     }
+
+    @Override
+    public int deleteOneById(Active active) {
+        return activeMapper.deleteOneById(active);
+    }
 }

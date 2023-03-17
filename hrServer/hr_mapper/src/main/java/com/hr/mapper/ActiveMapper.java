@@ -10,4 +10,5 @@ public interface ActiveMapper {
     public int saveActive(Active active);
 
     public List<Active>getThreeActive();
+    public int deleteOneById(Active active);
 }

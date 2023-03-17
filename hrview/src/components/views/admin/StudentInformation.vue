@@ -22,10 +22,30 @@
           <i-col :span="12">
             <i-row type="flex" justify="end">
               <i-col :span="5">
-                <el-button type="success" size="small"> <i-icon size="15" type="arrow-down-a"></i-icon>导入数据</el-button>
+                <el-dialog :visible.sync="upload" title="上传" width="30%">
+                <el-upload
+                    ref="upload"
+                    :auto-upload="false"
+                    :file-list="fileList"
+                    class="upload-demo"
+                    action="string"
+                    :limit="1"
+                    :http-request="upLoadHandle"
+                >
+                  <el-button size="small" type="primary">点击上传</el-button>
+                </el-upload>
+                  <span slot="footer">
+          <el-button type="primary" @click="inExcel" size="small">确 定</el-button>
+          <el-button @click="cancelUp" size="small">取 消</el-button>
+        </span>
+                </el-dialog>
+                <el-button type="success" size="small" @click="popdig">
+                  <i-icon size="15" type="arrow-down-a"></i-icon>
+                  导入数据
+                </el-button>
               </i-col>
               <i-col :span="5">
-                <el-button type="success" size="small"><i-icon size="15" type="arrow-up-a"></i-icon>导出数据</el-button>
+                <el-button type="success" size="small" @click="exportExcel"><i-icon size="15" type="arrow-up-a"></i-icon>导出数据</el-button>
               </i-col>
               <i-col :span="5">
                 <el-button size="small" type="primary" @click="addStudent">
@@ -211,6 +231,8 @@ export default {
   components: { EditForm},
   data() {
     return {
+      fileList:[],
+      upload:false,
       multiDeleteVisible:false,
       pageNum:1,
       pageSize:9,
@@ -246,10 +268,75 @@ export default {
         mentor:'',
         relatives: '',
         student:'',
-      }
+      },
+      fileData:''
     }
   },
   methods: {
+    popdig(){
+      this.upload=true
+    },
+    cancelUp(){
+      this.upload=false
+      this.fileList=[]
+    },
+    inExcel(){
+      this.$refs.upload.submit();
+    },
+    upLoadHandle(fileObject){
+      let fd = new FormData();
+      fd.append("file", fileObject.file);
+      this.$http({
+        url: this.$http.adornUrl('/excel/leadExcel'),
+        method: 'post',
+        data:this.$http.adornParams(fd)
+      }).then(({data}) => {
+        if (data&&data.status===200) {
+          this.$message.success(data.msg)
+        }else{
+          this.$message.error(data.msg)
+        }
+      }).catch((error) => {
+        console.log(error)
+        console.log('出错啦！！！！')
+      })
+      this.fileList=[]
+      this.upload=false
+    },
+    exportExcel(){
+      this.$axios({
+        method: 'get',
+        url: 'http://localhost:8081/excel/exportBankCheckInfo',
+        params:'',
+        responseType:'blob'
+      }).then(res=>{
+        const link = document.createElement('a')
+        let blob = new Blob([res.data],{type: 'application/vnd.ms-excel'});
+        link.style.display = 'none'
+        link.href = URL.createObjectURL(blob);
+        console.log("href:"+link.href)
+        let num = ''
+        for(let i=0;i < 10;i++){
+          num += Math.ceil(Math.random() * 10)
+        }
+        link.setAttribute('download', num + '.xls')
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+      },err=>{
+        console.log(err);
+      })
+      /*this.$http({
+        url: this.$http.adornUrl('/excel/exportBankCheckInfo'),
+        method: 'get',
+        params:this.$http.adornParams()
+      }).then(({data}) => {
+        console.log(data)
+      }).catch((error) => {
+        console.log(error)
+        console.log('出错啦！！！！')
+      })*/
+    },
     editForm(row){
       this.$nextTick(() => {
         // 弹框打开时初始化表单
@@ -292,6 +379,7 @@ export default {
       }).catch(() => {
         console.log('出错啦！！！！')
       })
+      this.multiDeleteVisible=false
     },
     deleteStudent(student) {
       this.multiDeleteVisible=true

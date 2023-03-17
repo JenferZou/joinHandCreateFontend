@@ -209,6 +209,7 @@ export default {
       }).catch(() => {
         console.log('出错啦！！！！')
       })
+      this.multiDeleteVisible1=false
     },
     multiDelete() {
       this.multipleSelection.forEach((contest)=>{

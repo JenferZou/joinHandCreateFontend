@@ -202,7 +202,9 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "sName='" + sName + '\'' +
+                "id=" + id +
+                ", sName='" + sName + '\'' +
+                ", mentorPhone='" + mentorPhone + '\'' +
                 ", gender='" + gender + '\'' +
                 ", isGraduate='" + isGraduate + '\'' +
                 ", sMajor='" + sMajor + '\'' +

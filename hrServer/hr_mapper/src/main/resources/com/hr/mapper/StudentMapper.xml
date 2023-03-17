@@ -3,6 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hr.mapper.StudentMapper">
+    <insert id="saveBatch">
+        INSERT INTO student(sName, sMajor, sPhone, relatives, rPhone,
+                            mentor, star, blood, className, sDepartment,
+                            score, sno, resumeId, gender, isGraduate, mentorPhone) VALUES
+        <foreach collection="list" separator="," item="item">
+            (#{item.sName},#{item.sMajor},#{item.sPhone},#{item.relatives},#{item.rPhone},#{item.mentor},#{item.star}
+            ,#{item.blood},#{item.className},#{item.sDepartment},#{item.score},#{item.sno},#{item.resumeId},#{item.gender},
+            #{item.isGraduate},#{item.mentorPhone})
+        </foreach>
+    </insert>
 <select id="getAllStudent" resultType="com.hr.model.Student">
     select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
            className,sDepartment,score,sno,resumeId,gender,isGraduate,mentorPhone from student

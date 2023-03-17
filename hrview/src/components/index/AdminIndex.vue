@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <div class="layout-header"><h1>后台管理系统</h1></div>
+    <div class="layout-header"><h1>后台管理</h1></div>
     <i-row type="flex">
       <i-col span="4" class="layout-menu-left">
         <i-menu @on-select="handleSelect" :active-name="sidebarItem"  width="auto">

@@ -15,6 +15,12 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
+
+    @Override
+    public int saveBatch(List<Student> students) {
+        return studentMapper.saveBatch(students);
+    }
+
     @Override
     public PageResult queryStudent(Integer page,Integer limit) {
         return PageUtil.getPageResult(getPageInfo(page,limit));
@@ -53,6 +59,11 @@ public class StudentServiceImpl implements StudentService {
 
     public Student getStudentBySno(String sno){
         return studentMapper.getStudentBySno(sno);
+    }
+
+    @Override
+    public List<Student> exportStudentExcel() {
+        return studentMapper.getAllStudent();
     }
 
     /**

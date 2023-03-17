@@ -25,9 +25,6 @@ public class AdminController {
     @Autowired
     private ActiveService activeService;
 
-
-
-
     @GetMapping("listStudent")
     public PageResult listStudent(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         return studentService.queryStudent(page, limit);
@@ -150,5 +147,14 @@ public class AdminController {
         return RespBean.ok("添加成功");
        else
            return RespBean.error("添加失败");
+    }
+    @PostMapping("deleteActive")
+    public RespBean deleteActive(@RequestBody Active active)
+    {
+        int i=activeService.deleteOneById(active);
+        if(i>0)
+        return RespBean.ok("删除成功");
+        else
+            return RespBean.error("删除失败");
     }
 }

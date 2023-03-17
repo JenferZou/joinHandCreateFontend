@@ -73,6 +73,14 @@
                 <div v-html='scope.row.content'></div>
               </template>-->
     </el-table-column>
+    <el-table-column
+        fixed="right"
+        label="操作"
+        width="100">
+      <template v-slot="scope">
+        <el-button @click="deleteContest(scope.row)" type="text" size="small" style="color:red;">删除</el-button>
+      </template>
+    </el-table-column>
   </el-table>
   <el-pagination
       class="page"
@@ -125,7 +133,13 @@
   </span>
     </div>
   </el-dialog>
-
+  <el-dialog :visible.sync="multiDeleteVisible" title="提示" width="30%">
+    <span>确定要删除吗</span>
+    <span slot="footer">
+          <el-button type="primary" @click="multiDelete" size="small">确 定</el-button>
+          <el-button @click="multiDeleteVisible = false" size="small">取 消</el-button>
+        </span>
+  </el-dialog>
 </div>
 </template>
 
@@ -144,11 +158,13 @@ export default {
         placeholder: '请输入正文'
         // Some Quill optiosn...
       },
+      multiDeleteVisible:false,
       currentPage: 1,
       pageSize: 8,
       pageNum: 1,
       activeData:[],
       title:'',
+      deleteData:'',
       active:{
         title:'',
         type:'',
@@ -167,6 +183,40 @@ export default {
     };
   },
   methods: {
+    deleteOne(active,activeData){
+      for(let i=0; i<activeData.length; i++){
+        if(active.id===activeData[i].id){
+          activeData.splice(i,1)
+        }
+      }
+      return activeData
+    },
+    multiDelete(){
+      this.$http({
+        url: this.$http.adornUrl('/admin/deleteActive'),
+        method: 'post',
+        data:this.$http.adornData(this.deleteData),
+        headers: {
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        if (data&&data.status===200) {
+          this.$message.success(data.msg)
+          this.activeData=this.deleteOne(this.deleteData,this.activeData)
+          this.deleteData=''
+        }else{
+          this.$message.error(data.msg)
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+      this.multiDeleteVisible=false
+    },
+    deleteContest(data){
+      this.deleteData=data
+      this.multiDeleteVisible=true
+    },
     cancle(){
       this.dialogVisible = false
       this.active=this.reset(this.active)

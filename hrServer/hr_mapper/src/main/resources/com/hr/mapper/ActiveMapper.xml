@@ -15,4 +15,7 @@
     </select>
 
 
+    <delete id="deleteOneById">
+        delete from active where id=#{id}
+    </delete>
 </mapper>
