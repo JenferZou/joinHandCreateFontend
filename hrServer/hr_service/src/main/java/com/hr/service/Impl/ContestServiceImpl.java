@@ -49,5 +49,13 @@ public class ContestServiceImpl implements ContestService {
         return contestMapper.removeMultiple(contestsIds);
     }
 
+    @Override
+    public List<Contest> getThreeContest() {
+        return contestMapper.queryThreeContest();
+    }
+
+
+
+
 
 }

@@ -31,4 +31,9 @@ public class ActiveServiceImpl implements ActiveService {
         active.setId(UUID.randomUUID().toString().substring(0,10));
         return activeMapper.saveActive(active);
     }
+
+    @Override
+    public List<Active> getThreeActive() {
+        return activeMapper.getThreeActive();
+    }
 }

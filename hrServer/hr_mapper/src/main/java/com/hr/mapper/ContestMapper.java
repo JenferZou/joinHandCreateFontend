@@ -11,4 +11,6 @@ public interface ContestMapper {
     public int addContest(Contest contest);
     public List<Contest> queryContestByTitle(String title);
     public int removeMultiple(List<String> contestsIds);
+
+    public List<Contest> queryThreeContest();
 }

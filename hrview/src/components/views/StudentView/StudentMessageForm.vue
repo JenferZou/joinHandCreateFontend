@@ -233,17 +233,16 @@ export default {
 
   methods: {
     load() {
-      let parms={
-        sno:'123123'
-      }
+      // let parms={
+      //   sno:'123123'
+      // }
       this.$http({
         url: this.$http.adornUrl('/StudentMessageForm'),
         method: 'get',
-        params:this.$http.adornParams(parms)
+        params:this.$http.adornParams(this.info)
       }).then(({data}) => {
           console.log(data)
           this.info=data
-
       }).catch(() => {
         console.log('出错啦！！！！')
       })

@@ -10,4 +10,9 @@
     insert into active(id, title, type, activeTime, activeDuration, content, points, remark) values
         (#{id},#{title},#{type},#{activeTime},#{activeDuration},#{content},#{points},#{remark})
 </insert>
+    <select id="getThreeActive" resultType="com.hr.model.Active">
+        select id, title, type, activeTime, activeDuration, content, points, remark  from active limit 0,3
+    </select>
+
+
 </mapper>

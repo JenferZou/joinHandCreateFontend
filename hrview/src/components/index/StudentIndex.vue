@@ -39,16 +39,16 @@
             <i-submenu name="1">
               <template slot="title">
                 <i-icon type="ios-navigate"></i-icon>
-                导航一
+                个人信息
               </template>
               <i-menu-item name="1-1">选项 1</i-menu-item>
-              <i-menu-item name="1-2">选项 2</i-menu-item>
-              <i-menu-item name="1-3">选项 3</i-menu-item>
+<!--              <i-menu-item name="1-2">选项 2</i-menu-item>-->
+<!--              <i-menu-item name="1-3">选项 3</i-menu-item>-->
             </i-submenu>
             <i-submenu name="2">
               <template slot="title">
                 <i-icon type="ios-keypad"></i-icon>
-                导航二
+                合作单位信息
               </template>
               <i-menu-item name="2-1">选项 1</i-menu-item>
               <i-menu-item name="2-2">选项 2</i-menu-item>
@@ -56,7 +56,7 @@
             <i-submenu name="3">
               <template slot="title">
                 <i-icon type="ios-analytics"></i-icon>
-                导航三
+                考试与实践信息
               </template>
               <i-menu-item name="3-1">选项 1</i-menu-item>
               <i-menu-item name="3-2">选项 2</i-menu-item>
@@ -92,28 +92,17 @@
 
                   <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
                     <i-col span="8">单位名称</i-col>
-                    <i-col span="8">单位信息</i-col>
-                    <i-col span="8">单位地址</i-col>
+                    <i-col span="8">招聘岗位</i-col>
+                    <i-col span="8">工作薪水</i-col>
                   </i-col>
 
-                  <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
+                  <i-col  v-for="item in company" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                    <i-col span="8">{{ item.name }}</i-col>
+                    <i-col span="8">{{ item.post }}</i-col>
+                    <i-col span="8">{{item.salary}}元</i-col>
                   </i-col>
 
 
-                  <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
-                  </i-col>
-
-                  <i-col style="height: 50px;background-color: #fff;text-align: center">
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
-                  </i-col>
                 </div>
               </i-col>
             </i-row>
@@ -123,62 +112,47 @@
               <i-col span="12">
                 <div class="mes" style="background-color: #fff">
                   <i-col style="height: 45px">
-                    <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon>    实践报名信息</i-col>
+                    <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon>    考试报名信息</i-col>
 
-                  </i-col>                  <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                    <i-col span="8">公司名称</i-col>
-                    <i-col span="8">公司信息</i-col>
-                    <i-col span="8">公司地址</i-col>
-                  </i-col>
-
-                  <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
                   </i-col>
 
 
-                  <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
+                  <i-col style="height: 50px;background-color: #fff;text-align: center; border-bottom: 1px dashed #c0c0c0">
+                    <i-col span="8" >考试类别</i-col>
+                    <i-col span="8">考试信息</i-col>
+                    <i-col span="8">考试时间</i-col>
                   </i-col>
 
-                  <i-col style="height: 50px;background-color: #fff;text-align: center">
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
-                    <i-col span="8">col-8</i-col>
+
+                  <i-col   v-for="item in contest1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                    <i-col span="8">{{ item.title }}</i-col>
+                    <i-col span="8">{{ item.content }}</i-col>
+                    <i-col span="8">{{item.startTime}}</i-col>
+
                   </i-col>
+
+
+
                 </div>
               </i-col>
               <i-col span="12">
                 <i-col style="height: 45px">
-                  <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon>    考试报名信息</i-col>
+                  <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon>    实践活动信息</i-col>
                 </i-col>
-                <i-col style="height: 50px;background-color: #fff;text-align: center; border-bottom: 1px dashed #c0c0c0">
-                <i-col span="8" >公司名称</i-col>
-                <i-col span="8">公司信息</i-col>
-                <i-col span="8">公司地址</i-col>
-                </i-col>
-
-                <i-col style="height: 50px;background-color: #fff;text-align: center;  border-bottom: 1px dashed #c0c0c0;">
-                  <i-col span="8">col-8</i-col>
-                  <i-col span="8">col-8</i-col>
-                  <i-col span="8">col-8</i-col>
+                <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0">
+                  <i-col span="8">活动名称</i-col>
+                  <i-col span="8">活动内容</i-col>
+                  <i-col span="8">活动时间</i-col>
                 </i-col>
 
+                <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                  <i-col span="8">{{ item.title }}</i-col>
+                  <i-col span="8">{{ item.content }}</i-col>
+                  <i-col span="8">{{item.activeTime}}</i-col>
 
-                <i-col style="height: 50px;background-color: #fff;text-align: center;  border-bottom: 1px dashed #c0c0c0;">
-                  <i-col span="8">col-8</i-col>
-                  <i-col span="8">col-8</i-col>
-                  <i-col span="8">col-8</i-col>
                 </i-col>
 
-                <i-col style="height: 50px;background-color: #fff;text-align: center;">
-                  <i-col span="8">col-8</i-col>
-                  <i-col span="8">col-8</i-col>
-                  <i-col span="8">col-8</i-col>
-                </i-col>
+
               </i-col>
             </i-row>
 
@@ -203,14 +177,81 @@
 
 
 export default {
-  // data () {
-  //   return
-  //   {}
-  //   },
-  // computed: {
-  //
-  // },
+  data(){
+    return{
+      contest:{
+        id:'',
+        title:'',
+        remark:'',
+        startTime:'',
+        endTime:'',
+        content:''
+      },
+      company:[],
+      contest1:[],
+      active1:[],
+      active:{
+        id:'',
+        title:'',
+        type:'',
+        activeTime:'',
+        activeDuration:'',
+        content:'',
+        points:'',
+        remark:''
+      },
+    }
+  },
+  created(){
+    this.loadContest()
+    this.loadActive()
+    this.loadCompany()
+  },
   methods: {
+
+    loadContest() {
+      this.$http({
+        url: this.$http.adornUrl('/student/contest'),
+        method: 'get',
+        params:this.$http.adornParams()
+      }).then(({data}) => {
+        console.log(data)
+        this.contest1=data
+
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+    },
+    loadActive() {
+
+      this.$http({
+        url: this.$http.adornUrl('/student/active'),
+        method: 'get',
+        params:this.$http.adornParams()
+      }).then(({data}) => {
+        console.log(data)
+        this.active1=data
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+    },
+
+    loadCompany(){
+      this.$http({
+        url: this.$http.adornUrl('/student/company'),
+        method: 'get',
+        params:this.$http.adornParams()
+      }).then(({data}) => {
+        console.log(data)
+        this.company=data
+      }).catch((error) => {
+        console.log(error)
+        console.log('出错啦！！！！')
+      })
+    },
+
+
+
     editMes(name){
       // this.$router.push({
       //   path: '/StudentMessageForm'
