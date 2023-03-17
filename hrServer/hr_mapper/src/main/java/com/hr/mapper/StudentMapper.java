@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface StudentMapper {
-
+   public int saveBatch(List<Student> students);
     public List<Student> getAllStudent();
     public int addStudent(Student student);
     public int deleteByName(String name);

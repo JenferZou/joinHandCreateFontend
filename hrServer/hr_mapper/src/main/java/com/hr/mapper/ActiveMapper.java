@@ -8,4 +8,5 @@ import java.util.List;
 public interface ActiveMapper {
     public List<Active> getAllActive();
     public int saveActive(Active active);
+    public int deleteOneById(Active active);
 }

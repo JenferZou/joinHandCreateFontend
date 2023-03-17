@@ -6,4 +6,5 @@ import com.hr.model.PageResult;
 public interface ActiveService {
     public PageResult getAllActive(Integer page,Integer limit);
     public int saveActive(Active active);
+    public int deleteOneById(Active active);
 }

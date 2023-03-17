@@ -10,4 +10,7 @@
     insert into active(id, title, type, activeTime, activeDuration, content, points, remark) values
         (#{id},#{title},#{type},#{activeTime},#{activeDuration},#{content},#{points},#{remark})
 </insert>
+    <delete id="deleteOneById">
+        delete from active where id=#{id}
+    </delete>
 </mapper>

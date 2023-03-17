@@ -6,6 +6,7 @@ import com.hr.model.Student;
 import java.util.List;
 
 public interface StudentService {
+    public int saveBatch(List<Student> students);
     public PageResult queryStudent(Integer page,Integer limit);
     public int modifyStudent(Student student);
     public int deleteStudentBySno(Student student);
@@ -14,4 +15,5 @@ public interface StudentService {
     public PageResult searchStudentByCondition(Student student,Integer page,Integer limit);
 
     public Student getStudentBySno(String sno);
+    public List<Student> exportStudentExcel();
 }

@@ -12,11 +12,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.UUID;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -52,9 +55,10 @@ public class test {
         //System.out.println(studentMapper.getAllStudent());
     }
     @Test
-    public void test() throws ParseException {
-        System.out.println(UUID.randomUUID().toString().substring(0,10));
-        System.out.println(new Timestamp((new Date().getTime())));
+    public void test() throws ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        //System.out.println(UUID.randomUUID().toString().substring(0,10));
+        //System.out.println(new Timestamp((new Date().getTime())));
         //System.out.println(studentMapper.queryStudent(1,8).getContent());
     }
 }
