@@ -9,6 +9,8 @@ import InformationManagement from "@/components/views/admin/InformationManagemen
 import StudentResume from "@/components/views/StudentView/StudentResume"
 import UserManagement from "@/components/views/admin/UserManagement";
 import ActiveManagement from "@/components/views/admin/ActiveManagement";
+import StudentResumePreview from "@/components/views/StudentView/StudentResumePreview";
+import CertificateSearch from "@/components/views/StudentView/CertificateSearch";
 Vue.use(Router)
 
 let router = new Router({
@@ -64,6 +66,16 @@ let router = new Router({
             path: '/StudentResume',
             name: 'StudentResume',
             component: StudentResume
+        },
+        {
+          path:'/StudentResumePreview',
+            name:'StudentResumePreview',
+            component:StudentResumePreview
+        },
+        {
+            path:'/CertificateSearch',
+            name:'CertificateSearch',
+            component:CertificateSearch
         }
 
     ]

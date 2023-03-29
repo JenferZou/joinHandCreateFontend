@@ -31,7 +31,8 @@ import {
   Card,
   DatePicker,
   Switch,
-  Upload
+  Upload,
+  Empty
 } from "element-ui";
 import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb,Layout,Content,Sider} from 'iview'
 import axios from "axios";
@@ -49,6 +50,7 @@ Vue.component('i-menu-item',MenuItem)
 Vue.component('i-breadcrumb-item',BreadcrumbItem)
 Vue.component('i-sider',Sider)
 
+Vue.component('el-empty',Empty)
 Vue.component('el-upload',Upload)
 Vue.component('el-switch',Switch)
 Vue.component('el-date-picker',DatePicker)
