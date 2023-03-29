@@ -85,7 +85,7 @@
 
     <select id="getStudentBySno" resultType="com.hr.model.Student">
       select id,sName,sMajor,sPhone,relatives,rPhone,mentor,star,blood,
-            className,sDepartment,score,sno,resumeId,gender,isGraduate,mentorPhone from student where sno=#{sno} ;
+            className,sDepartment,score,sno,resumeId,gender,isGraduate,mentorPhone,password from student where sno=#{sno} ;
     </select>
 
 

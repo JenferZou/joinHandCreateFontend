@@ -189,6 +189,7 @@ export default {
               method: 'post',
               data: this.$http.adornData(this.studentData),
               headers: {
+                'UserToken':window.sessionStorage.getItem('Token'),
                 'Content-Type': 'application/json',
                 'charset': 'utf-8'
               }
@@ -207,6 +208,7 @@ export default {
               method: 'post',
               data: this.$http.adornData(this.studentData),
               headers: {
+                'UserToken':window.sessionStorage.getItem('Token'),
                 'Content-Type': 'application/json',
                 'charset': 'utf-8'
               }

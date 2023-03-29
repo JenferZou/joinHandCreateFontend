@@ -213,7 +213,10 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/student/contest'),
         method: 'get',
-        params:this.$http.adornParams()
+        params:this.$http.adornParams(),
+        headers:{
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(({data}) => {
         console.log(data)
         this.contest1=data
@@ -227,7 +230,10 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/student/active'),
         method: 'get',
-        params:this.$http.adornParams()
+        params:this.$http.adornParams(),
+        headers:{
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(({data}) => {
         console.log(data)
         this.active1=data
@@ -240,7 +246,10 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/student/company'),
         method: 'get',
-        params:this.$http.adornParams()
+        params:this.$http.adornParams(),
+        headers:{
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(({data}) => {
         console.log(data)
         this.company=data

@@ -197,6 +197,7 @@ export default {
         method: 'post',
         data:this.$http.adornData(this.deleteData),
         headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
           'Content-Type': 'application/json',
           'charset': 'utf-8'
         }
@@ -233,6 +234,7 @@ export default {
         method: 'post',
         data:this.$http.adornData(this.active),
         headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
           'Content-Type': 'application/json',
           'charset': 'utf-8'
         }
@@ -285,7 +287,10 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/admin/getActive'),
         method: 'get',
-        params: this.$http.adornParams(params)
+        params: this.$http.adornParams(params),
+        headers:{
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(({data}) => {
         if (data) {
           this.pageNum = data.totalPages

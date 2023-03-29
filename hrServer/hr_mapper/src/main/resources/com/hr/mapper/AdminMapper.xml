@@ -4,9 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hr.mapper.AdminMapper">
     <select id="getAdminInformation" resultType="com.hr.model.Manager">
-        select gName, gNo, gMajor, gPhone, gDepartment, status, remark, role  from manager
+        select gName, gNo, gMajor, gPhone, gDepartment, status, remark from manager
     </select>
     <delete id="deleteAdmin">
         delete from manager where gNo=#{id}
     </delete>
+    <select id="getUserByUserName" resultType="com.hr.model.Manager">
+        select gName, gNo, gMajor, gPhone, gDepartment, status, remark, password from manager where gNo=#{userName};
+    </select>
+    <select id="getUserRolesByUserId" resultType="com.hr.model.Role">
+        select
+            ar.rid,
+            title
+        from
+            member_role aur
+                left join role ar on
+                aur.rid = ar.rid
+        where
+            aur.mid = #{no}
+    </select>
 </mapper>

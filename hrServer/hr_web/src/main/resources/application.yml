@@ -35,3 +35,14 @@ pagehelper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true
+# jwt 配置
+custom:
+  jwt:
+    # header:凭证(校验的变量名)
+    header: Authorization
+    # 有效期1天(单位:s)
+    expire: 5184000
+    # secret: 秘钥(普通字符串) 不能太短，太短可能会导致报错
+    secret: 99c2918fe19d30bce25abfac8a3733ecawiooasnkcksdls
+    # 签发者
+    issuer: panziye

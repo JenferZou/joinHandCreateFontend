@@ -3,11 +3,27 @@ import qs from 'qs' // 字符串处理
 import merge from 'lodash/merge' // 合并对象工具
 const http = axios.create({
     timeout: 1000 * 30,
-    withCredentials: true // 当前请求为跨域类型时是否在请求中协带cookie
+    withCredentials: true, // 当前请求为跨域类型时是否在请求中协带cookie
+    /*headers:{
+        'UserToken':window.sessionStorage.getItem('Token'),
+    }*/
     /* headers: {
       'Content-Type': 'application/json;charset=utf-8'
     } */
 })
+/*axios.interceptors.request.use((config) => {
+    // config 是 axios 配置对象
+    // 获取token
+    let token = window.sessionStorage.getItem('Token');
+    console.log(token)
+    // 添加token
+    //Bearer为token类型，根据自己的类型更改
+    token && (config.headers.Authorization = 'Bearer ' + JSON.parse(token));
+    return config;
+}, (error) => {
+    // 请求出错
+    return Promise.reject(error);
+});*/
 
 /**
  * 请求地址处理

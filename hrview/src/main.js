@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './components/router'
-import ElementUI from 'element-ui'
+//import ElementUI from 'element-ui'
 import 'iview/dist/styles/iview.css'
 import 'element-ui/lib/theme-chalk/index.css';
-import 'font-awesome/css/font-awesome.min.css'
+//import 'font-awesome/css/font-awesome.min.css'
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import httpRequest from "@/components/utils/httpRequest";
-import router from './router'
+
 import {
   Container,
   Aside,
@@ -85,7 +85,7 @@ new Vue({
   render: h => h(App),
 }).$mount('#app')
 
-Vue.use(ElementUI)
+//Vue.use(ElementUI)
 
 
 

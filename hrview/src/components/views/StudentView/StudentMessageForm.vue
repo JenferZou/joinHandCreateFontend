@@ -237,9 +237,12 @@ export default {
       //   sno:'123123'
       // }
       this.$http({
-        url: this.$http.adornUrl('/StudentMessageForm'),
+        url: this.$http.adornUrl('/student/StudentMessageForm'),
         method: 'get',
-        params:this.$http.adornParams(this.info)
+        params:this.$http.adornParams(this.info),
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(({data}) => {
           console.log(data)
           this.info=data

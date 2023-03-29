@@ -1,20 +1,38 @@
 package com.hr.model;
 
 
-public class Manager {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
+
+public class Manager implements UserDetails {
 
     private String gName;
 
     private String gMajor;
 
     private String gNo;
-
+    private String password; // 用户密码
     private String gPhone;
 
     private String gDepartment;
-private int status;
-private String remark;
-private String role;
+    private int status;
+    private String remark;
+    private List<Role> roles; // 保存全部的角色
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public int getStatus() {
         return status;
@@ -32,15 +50,7 @@ private String role;
         this.remark = remark;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Manager(String gName, String gMajor, String gNo, String gPhone, String gDepartment, int status, String remark, String role) {
+    public Manager(String gName, String gMajor, String gNo, String gPhone, String gDepartment, int status, String remark) {
         this.gName = gName;
         this.gMajor = gMajor;
         this.gNo = gNo;
@@ -48,7 +58,6 @@ private String role;
         this.gDepartment = gDepartment;
         this.status = status;
         this.remark = remark;
-        this.role = role;
     }
 
     public Manager() {
@@ -100,11 +109,53 @@ private String role;
                 "gName='" + gName + '\'' +
                 ", gMajor='" + gMajor + '\'' +
                 ", gNo='" + gNo + '\'' +
+                ", password='" + password + '\'' +
                 ", gPhone='" + gPhone + '\'' +
                 ", gDepartment='" + gDepartment + '\'' +
                 ", status=" + status +
                 ", remark='" + remark + '\'' +
-                ", role='" + role + '\'' +
+                ", roles=" + roles +
+                ", authorities=" + getAuthorities() +
+                ", username='" + getUsername() + '\'' +
+                ", accountNonExpired=" + isAccountNonExpired() +
+                ", accountNonLocked=" + isAccountNonLocked() +
+                ", credentialsNonExpired=" + isCredentialsNonExpired() +
+                ", enabled=" + isEnabled() +
                 '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.gNo;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

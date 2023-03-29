@@ -1,9 +1,14 @@
 package com.hr.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.lang.*;
+import java.util.Collection;
+import java.util.List;
 
 
-public class Student {
+public class Student  implements UserDetails{
 
     private Integer id;
 
@@ -82,7 +87,21 @@ public class Student {
     private String sno;
 
     private String resumeId;
+    private String password;
 
+    private List<Role> roles; // 保存全部的角色
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Student() {
     }
@@ -219,6 +238,49 @@ public class Student {
                 ", score=" + score +
                 ", sno='" + sno + '\'' +
                 ", resumeId='" + resumeId + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                ", authorities=" + getAuthorities() +
+                ", username='" + getUsername() + '\'' +
+                ", accountNonExpired=" + isAccountNonExpired() +
+                ", accountNonLocked=" + isAccountNonLocked() +
+                ", credentialsNonExpired=" + isCredentialsNonExpired() +
+                ", enabled=" + isEnabled() +
                 '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.sno;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
