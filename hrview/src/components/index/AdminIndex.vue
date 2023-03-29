@@ -79,7 +79,7 @@ export default {
       }
       else if(path==='contest') {
         this.item.firstTitle='信息发布'
-        this.item.title = '活动信息'
+        this.item.title = '考证信息管理'
       }
       else if(path==='userManagement') {
         this.item.firstTitle=' 系统管理'

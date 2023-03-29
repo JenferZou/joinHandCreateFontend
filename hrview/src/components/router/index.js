@@ -9,20 +9,25 @@ import InformationManagement from "@/components/views/admin/InformationManagemen
 import StudentResume from "@/components/views/StudentView/StudentResume"
 import UserManagement from "@/components/views/admin/UserManagement";
 import ActiveManagement from "@/components/views/admin/ActiveManagement";
-import StudentResumePreview from "@/components/views/StudentView/StudentResumePreview";
-import CertificateSearch from "@/components/views/StudentView/CertificateSearch";
+import LoginIndex from "@/components/index/LoginIndex";
+import ForbidIndex from "@/components/views/ForbidIndex";
+
 Vue.use(Router)
 
 let router = new Router({
     mode: 'history',
-    scrollBehavior: () => ({ y: 0 }),
-    routes: [
+    scrollBehavior: () => ({y: 0}),
+    routes: [{
+        path: '/',
+        component: LoginIndex,
+    },
         {
-            path: '/',
+            path: '/admin',
+            name: 'adminIndex',
             component: AdminIndex,
             children: [
                 {
-                    path: '/index',
+                    path: '/admin/index',
                     name: 'index',
                     component: StudentInformation,
                     meta: {
@@ -30,52 +35,46 @@ let router = new Router({
                     }
                 },
                 {
-                    path: '/contest',
+                    path: '/admin/contest',
                     name: 'contest',
-                    component:InformationManagement,
+                    component: InformationManagement,
                     meta: {
                         title: 'admin'
                     }
                 },
                 {
-                    path:'/userManagement',
-                    name:'userManagement',
-                    component:UserManagement,
+                    path: '/admin/userManagement',
+                    name: 'userManagement',
+                    component: UserManagement,
                 },
                 {
-                    path:'/active',
-                    name:'active',
-                    component:ActiveManagement,
-                }
-            ],
-            meta: {
-                title: 'admin'
-            }
+                    path: '/admin/active',
+                    name: 'active',
+                    component: ActiveManagement,
+                },
+            ]
         },
         {
             path: '/student',
             name: 'student',
             component: StudentIndex,
+            children: [
+                {
+                    path: '/student/StudentMessageForm',
+                    name: 'StudentMessageForm',
+                    component: StudentMessageForm
+                },
+                {
+                    path: '/student/StudentResume',
+                    name: 'StudentResume',
+                    component: StudentResume
+                }
+            ]
         },
         {
-            path: '/StudentMessageForm',
-            name: 'StudentMessageForm',
-            component: StudentMessageForm
-        },
-        {
-            path: '/StudentResume',
-            name: 'StudentResume',
-            component: StudentResume
-        },
-        {
-          path:'/StudentResumePreview',
-            name:'StudentResumePreview',
-            component:StudentResumePreview
-        },
-        {
-            path:'/CertificateSearch',
-            name:'CertificateSearch',
-            component:CertificateSearch
+            path: '/adsac',
+            name: 'forbid',
+            component: ForbidIndex,
         }
 
     ]
@@ -83,6 +82,42 @@ let router = new Router({
 export default router
 const VueRouterPush = Router.prototype.push
 //防止重复跳转同一路由报错
-Router.prototype.push = function push (to) {
+Router.prototype.push = function push(to) {
     return VueRouterPush.call(this, to).catch(err => err)
 }
+// 挂载路由导航守卫
+// to 将要访问的路径
+// from 代表从哪个路径跳转而来
+// next 是个函数，表示放行 next() 放行  next('/login') 强制跳转
+router.beforeEach((to, from, next) => {
+    let role=window.sessionStorage.getItem("role")
+    let i=to.path.indexOf('/')+1
+    let j=to.path.substring(1).indexOf('/')===-1?to.path.substring(1).length:to.path.substring(1).indexOf('/')
+    j+=1
+    if (to.path==='/') {
+        window.sessionStorage.removeItem('Token')
+        window.sessionStorage.removeItem('role')
+        next()
+    } else {
+        let user = window.sessionStorage.getItem('Token')
+        if (!user) {
+            next({
+                path: '/'
+            })
+        } else if(to.path==='/adsac') {
+            next()
+        }else {
+            if(role==='管理员'&&to.path.substring(i,j)!=='admin'){
+                next({
+                    path:'/adsac'
+                })
+            }else if(role==='用户'&&to.path.substring(i,j)!=='student') {
+                next({
+                    path: '/adsac'
+                })
+            }else {
+                next()
+            }
+        }
+    }
+});

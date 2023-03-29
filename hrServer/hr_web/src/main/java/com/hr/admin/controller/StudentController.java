@@ -2,14 +2,11 @@ package com.hr.admin.controller;
 
 import com.hr.model.*;
 import com.hr.service.ActiveService;
-import com.hr.service.CompanyService;
 import com.hr.service.ContestService;
 import com.hr.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -22,6 +19,7 @@ import java.util.List;
  * @since JDK 17
  */
 @RestController()
+@RequestMapping("/student/")
 public class StudentController {
 
     @Autowired
@@ -31,33 +29,23 @@ public class StudentController {
     private ContestService contestService;
 
     @Autowired
-    private CompanyService companyService;
-
-    @Autowired
     private ActiveService activeService;
 
-    @GetMapping("/StudentMessageForm")
+    @GetMapping("StudentMessageForm")
     public Student getStudentBySno(@RequestParam("sno") String sno){
         return studentService.getStudentBySno(sno);
     }
 
 
-    @GetMapping("/student/contest")
+    @GetMapping("contest")
     public List<Contest> getThreeContest(){
         return  contestService.getThreeContest();
     }
 
 
-    @GetMapping("/student/active")
+    @GetMapping("active")
     public List<Active> getThreeActive(){
         return  activeService.getThreeActive();
-    }
-
-
-
-    @GetMapping("/student/company")
-    public List<Company> getFourCompany(){
-        return  companyService.QueryFourCompany();
     }
 
 

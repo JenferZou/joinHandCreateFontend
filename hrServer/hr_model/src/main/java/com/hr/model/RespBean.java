@@ -1,6 +1,9 @@
 package com.hr.model;
 
+import java.io.Serializable;
+
 public class RespBean {
+
         private Integer status;
         private String msg;
         private Object obj;

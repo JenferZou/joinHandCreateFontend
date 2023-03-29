@@ -93,8 +93,4 @@ public class ExcelController {
         else
             return RespBean.error("上传失败");
     }
-    // 接收Handler回传的数据
-    public void importData2(List<Student> list) {
-        System.out.println("解析数量：" + list.size());
-    }
 }

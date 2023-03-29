@@ -1,14 +1,14 @@
 package com.hr;
 
-import com.alibaba.druid.sql.PagerUtils;
-import com.github.pagehelper.util.PageObjectUtil;
-import com.hr.mapper.StudentMapper;
+
 import com.hr.model.Student;
 import com.hr.service.StudentService;
+import com.hr.utils.JWTConfigProperties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -28,9 +28,14 @@ import java.util.UUID;
 public class test {
     @Autowired
     private StudentService studentMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JWTConfigProperties properties;
+
     @Test
-    public void testGetStudent(){
-        Student student=new Student();
+    public void testGetStudent() {
+        Student student = new Student();
         student.setsName("lihua");
         student.setBlood("ab");
         student.setClassName("软件一班");
@@ -54,9 +59,11 @@ public class test {
         //System.out.println(studentMapper.deleteByName("lihua"));
         //System.out.println(studentMapper.getAllStudent());
     }
+
     @Test
     public void test() throws ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-
+        System.out.println(properties.getExpire());
+        //System.out.println(passwordEncoder.encode("@Xwf123"));
         //System.out.println(UUID.randomUUID().toString().substring(0,10));
         //System.out.println(new Timestamp((new Date().getTime())));
         //System.out.println(studentMapper.queryStudent(1,8).getContent());

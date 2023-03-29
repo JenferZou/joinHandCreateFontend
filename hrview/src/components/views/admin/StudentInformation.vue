@@ -289,7 +289,10 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/excel/leadExcel'),
         method: 'post',
-        data:this.$http.adornParams(fd)
+        data:this.$http.adornParams(fd),
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(({data}) => {
         if (data&&data.status===200) {
           this.$message.success(data.msg)
@@ -308,7 +311,10 @@ export default {
         method: 'get',
         url: 'http://localhost:8081/excel/exportBankCheckInfo',
         params:'',
-        responseType:'blob'
+        responseType:'blob',
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(res=>{
         const link = document.createElement('a')
         let blob = new Blob([res.data],{type: 'application/vnd.ms-excel'});
@@ -366,6 +372,7 @@ export default {
         method: 'post',
         data:this.$http.adornData(this.student),
         headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
           'Content-Type': 'application/json',
           'charset': 'utf-8'
         }
@@ -393,7 +400,10 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/admin/listStudent'),
         method: 'get',
-        params:this.$http.adornParams(params)
+        params:this.$http.adornParams(params),
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(({data}) => {
         if (data) {
           this.pageNum=data.totalPages
@@ -432,7 +442,10 @@ export default {
         this.$http({
           url: this.$http.adornUrl('/admin/search'),
           method: 'get',
-          params: this.$http.adornParams(params)
+          params: this.$http.adornParams(params),
+          headers: {
+            'UserToken':window.sessionStorage.getItem('Token'),
+          }
         }).then(({data}) => {
           if (data) {
             this.pageNum = data.totalPages
@@ -450,7 +463,10 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/admin/highSearch'),
         method: 'get',
-        params:this.$http.adornParams(this.highSearchData)
+        params:this.$http.adornParams(this.highSearchData),
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(({data}) => {
         if (data) {
           this.pageNum=data.totalPages

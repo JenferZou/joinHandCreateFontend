@@ -27,6 +27,7 @@
       <div class="layout-assistant">
         <i-menu-item name="1">主页</i-menu-item>
         <i-menu-item name="StudentMessageForm">个人信息</i-menu-item>
+        <i-menu-item name="3" >实践经历</i-menu-item>
         <i-menu-item name="StudentResume">个人简历</i-menu-item>
         <i-menu-item name="5">消息通知</i-menu-item>
       </div>
@@ -40,14 +41,14 @@
                 <i-icon type="ios-navigate"></i-icon>
                 个人信息
               </template>
-              <i-menu-item name="1-1">修改个人信息</i-menu-item>
-              <i-menu-item name="1-1">填充个人简历</i-menu-item>
-
+              <i-menu-item name="1-1">选项 1</i-menu-item>
+<!--              <i-menu-item name="1-2">选项 2</i-menu-item>-->
+<!--              <i-menu-item name="1-3">选项 3</i-menu-item>-->
             </i-submenu>
             <i-submenu name="2">
               <template slot="title">
                 <i-icon type="ios-keypad"></i-icon>
-                项目管理
+                合作单位信息
               </template>
               <i-menu-item name="2-1">项目大厅</i-menu-item>
               <i-menu-item name="2-2">项目申请</i-menu-item>
@@ -55,7 +56,7 @@
             <i-submenu name="3">
               <template slot="title">
                 <i-icon type="ios-analytics"></i-icon>
-                考证与实践活动信息
+                考试与实践信息
               </template>
               <i-menu-item name="3-1">考证俱乐部</i-menu-item>
               <i-menu-item name="3-2">实践活动查询</i-menu-item>
@@ -126,7 +127,7 @@
 
 
 
-              <i-row  class="centercontent">
+            <i-row  class="centercontent">
               <i-col span="24">
                 <div class="mes" >
                   <i-col style="height: 45px">
@@ -135,12 +136,10 @@
                   </i-col>
 
                   <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                    <i-col span="8">项目名称</i-col>
-                    <i-col span="8">项目指导老师</i-col>
-                    <i-col span="8">报名时间</i-col>
+                    <i-col span="8">单位名称</i-col>
+                    <i-col span="8">招聘岗位</i-col>
+                    <i-col span="8">工作薪水</i-col>
                   </i-col>
-
-                  <el-empty  v-if="project" description="暂无信息"  style="size: 10px"></el-empty>
 
                   <i-col  v-for="item in company" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
                     <i-col span="8">{{ item.name }}</i-col>
@@ -198,8 +197,6 @@
                   <i-col span="8">活动内容</i-col>
                   <i-col span="8">活动时间</i-col>
                 </i-col>
-
-                <el-empty v-if="active1" description="暂无信息" ></el-empty>
 
                 <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
                   <i-col span="8">{{ item.title }}</i-col>
@@ -278,7 +275,10 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/student/contest'),
         method: 'get',
-        params:this.$http.adornParams()
+        params:this.$http.adornParams(),
+        headers:{
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(({data}) => {
         console.log(data)
         this.contest1=data
@@ -292,7 +292,10 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/student/active'),
         method: 'get',
-        params:this.$http.adornParams()
+        params:this.$http.adornParams(),
+        headers:{
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(({data}) => {
         console.log(data)
         this.active1=data
@@ -305,7 +308,10 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/student/company'),
         method: 'get',
-        params:this.$http.adornParams()
+        params:this.$http.adornParams(),
+        headers:{
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
       }).then(({data}) => {
         console.log(data)
         this.company=data
@@ -387,6 +393,7 @@ export default {
 
 
 .centercontent{
+  height: 300px;
   margin-bottom: 10px;
   background-color: #fff;
   border-bottom: 1px dashed #c0c0c0;
@@ -412,8 +419,8 @@ export default {
 .footcontent{
   background-color: #f5f7f9;
   line-height: 50px;
-}
 
+}
 .pra{
   background-color: darkgray;
 
