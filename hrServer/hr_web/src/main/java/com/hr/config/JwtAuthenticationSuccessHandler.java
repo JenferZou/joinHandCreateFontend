@@ -32,7 +32,7 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
         UserDetails userDetails= (UserDetails) authentication.getPrincipal();
         //将生成的authentication放入容器中，生成安全的上下文
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println(userDetails);
+        //System.out.println(userDetails);
         //生成token
         final String realToken = jwtTokenUtil.createToken(userDetails.getUsername());
         HashMap<String, Object> map = new HashMap<>();

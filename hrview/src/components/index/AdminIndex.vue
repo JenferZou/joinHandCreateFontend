@@ -1,6 +1,24 @@
 <template>
   <div class="layout">
-    <div class="layout-header"><h1>后台管理</h1></div>
+    <div class="layout-header">
+      <i-row>
+        <i-col span="23">
+      <h1>后台管理</h1>
+        </i-col>
+        <i-col span="1">
+          <div style="padding-top: 10px;">
+            <MyAvatar/>
+<!--            <el-dropdown  size="small">
+        <el-avatar  icon="el-icon-user-solid"></el-avatar>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>个人主页</el-dropdown-item>
+                <el-dropdown-item>退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>-->
+          </div>
+        </i-col>
+      </i-row>
+    </div>
     <i-row type="flex">
       <i-col span="4" class="layout-menu-left">
         <i-menu @on-select="handleSelect" :active-name="sidebarItem"  width="auto">
@@ -15,10 +33,11 @@
           <i-submenu name="2">
             <template slot="title">
               <i-icon type="ios-keypad"></i-icon>
-              信息发布
+              信息管理
             </template>
             <i-menu-item name="contest">考证信息管理</i-menu-item>
             <i-menu-item name="active">活动信息发布</i-menu-item>
+            <i-menu-item name="project">项目管理</i-menu-item>
           </i-submenu>
           <i-submenu name="3">
             <template slot="title">
@@ -26,7 +45,6 @@
               系统管理
             </template>
             <i-menu-item name="userManagement">用户管理</i-menu-item>
-            <i-menu-item name="3-2">选项 2</i-menu-item>
           </i-submenu>
         </i-menu>
       </i-col>
@@ -52,8 +70,10 @@
 </template>
 
 <script>
+import MyAvatar from "@/components/views/admin/MyAvatar";
 export default {
   name: "AdminIndex",
+  components: {MyAvatar},
   data() {
     return{
       item:{
@@ -78,8 +98,16 @@ export default {
         this.item.title = '基本资料'
       }
       else if(path==='contest') {
-        this.item.firstTitle='信息发布'
+        this.item.firstTitle='信息管理'
         this.item.title = '考证信息管理'
+      }
+      else if(path==='active') {
+        this.item.firstTitle='信息管理'
+        this.item.title = '活动信息发布'
+      }
+      else if(path==='project') {
+        this.item.firstTitle='信息管理'
+        this.item.title = '项目管理'
       }
       else if(path==='userManagement') {
         this.item.firstTitle=' 系统管理'

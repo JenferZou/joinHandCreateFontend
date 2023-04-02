@@ -20,6 +20,9 @@ public class AdminServiceImpl implements AdminService {
     public PageResult getAdminInformation(Integer page, Integer limit) {
         PageHelper.startPage(page,limit);
         List<Manager> managers=adminMapper.getAdminInformation();
+        managers.forEach(manager -> {
+            manager.setRoles(adminMapper.getUserRolesByUserId(manager.getgNo()));
+        });
         PageInfo<Manager> pageInfo=new PageInfo<>(managers);
         return PageUtil.getPageResult(pageInfo);
     }

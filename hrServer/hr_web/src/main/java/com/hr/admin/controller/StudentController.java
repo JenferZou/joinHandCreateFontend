@@ -40,16 +40,17 @@ public class StudentController {
 
 
     @Autowired
-    private JWTConfigProperties jwtConfigProperties;
+    private JWTUtil jwtUtil;
 
 
     @GetMapping("StudentMessageForm")
     public Student getStudentBySno(HttpServletRequest request){
-        System.out.println(jwtConfigProperties);
         String token = request.getHeader("UserToken");
-        JWTUtil jwtUtil = new JWTUtil();
-        String sno = jwtUtil.getMemberIdByJwtToken(token);
-        return studentService.getStudentBySno(sno);
+        System.out.println(token);
+        System.out.println(jwtUtil.generalKey());
+        //String sno = jwtUtil.getMemberIdByJwtToken(token);
+       // return studentService.getStudentBySno(sno);
+        return null;
     }
 
 

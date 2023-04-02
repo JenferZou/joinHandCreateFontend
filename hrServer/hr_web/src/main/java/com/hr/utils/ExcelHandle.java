@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.NumberFormat;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -23,7 +24,8 @@ public class ExcelHandle<T> {
         //this.constructor = entity.getDeclaredConstructor(new Class[]{List.class});
         List<Object> objects=new ArrayList<>();
         // 创建表格对象
-        XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+        //XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+        Workbook workbook=WorkbookFactory.create(inputStream);
         //有多少个sheet
         int sheets = workbook.getNumberOfSheets();
         for (int i = 0; i < sheets; i++) {
@@ -126,6 +128,8 @@ public class ExcelHandle<T> {
     private Object getCellValue(Cell cell) {
         //1.获取到单元格的属性类型
         CellType cellType = cell.getCellType();
+        //科学记数法转换
+        NumberFormat nf = NumberFormat.getInstance();
         //2.根据单元格数据类型获取数据
         Object value = null;
         switch (cellType) {
@@ -141,7 +145,8 @@ public class ExcelHandle<T> {
                     value = cell.getDateCellValue();
                 } else {
                     //数字,poi解析的数值都是double类型
-                    value = cell.getNumericCellValue();
+                    value = String.valueOf(nf.format(cell.getNumericCellValue()));
+                    value = ((String) value).replace(",","");
                 }
                 break;
             case FORMULA:

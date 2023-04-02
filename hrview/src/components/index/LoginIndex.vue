@@ -90,7 +90,7 @@ export default{
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: #409EFF;
+    //background-color: #409EFF;
     .box-card{
         width: 450px;
         margin: 200px auto;

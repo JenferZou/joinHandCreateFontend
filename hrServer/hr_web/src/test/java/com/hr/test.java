@@ -4,6 +4,7 @@ package com.hr;
 import com.hr.model.Student;
 import com.hr.service.StudentService;
 import com.hr.utils.JWTConfigProperties;
+import com.hr.utils.JWTUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

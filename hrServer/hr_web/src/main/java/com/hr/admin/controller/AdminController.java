@@ -1,10 +1,7 @@
 package com.hr.admin.controller;
 
 import com.hr.model.*;
-import com.hr.service.ActiveService;
-import com.hr.service.AdminService;
-import com.hr.service.ContestService;
-import com.hr.service.StudentService;
+import com.hr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +21,8 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private ActiveService activeService;
+    @Autowired
+    private ProjectService projectService;
 
     @GetMapping("listStudent")
     public PageResult listStudent(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
@@ -41,7 +40,6 @@ public class AdminController {
 
     @PostMapping("delete")
     public RespBean deleteStudent(@RequestBody Student student) {
-        System.out.println(student);
         int i = studentService.deleteStudentBySno(student);
         if (i > 0)
             return RespBean.ok("删除成功");
@@ -140,21 +138,41 @@ public class AdminController {
     public PageResult queryAllActive(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         return activeService.getAllActive(page, limit);
     }
+
     @PostMapping("saveActive")
-    public RespBean saveActive(@RequestBody Active active){
-       int i= activeService.saveActive(active);
-       if(i>0)
-        return RespBean.ok("添加成功");
-       else
-           return RespBean.error("添加失败");
+    public RespBean saveActive(@RequestBody Active active) {
+        int i = activeService.saveActive(active);
+        if (i > 0)
+            return RespBean.ok("添加成功");
+        else
+            return RespBean.error("添加失败");
     }
+
     @PostMapping("deleteActive")
-    public RespBean deleteActive(@RequestBody Active active)
-    {
-        int i=activeService.deleteOneById(active);
-        if(i>0)
-        return RespBean.ok("删除成功");
+    public RespBean deleteActive(@RequestBody Active active) {
+        int i = activeService.deleteOneById(active);
+        if (i > 0)
+            return RespBean.ok("删除成功");
         else
             return RespBean.error("删除失败");
     }
+
+    @GetMapping("project")
+    public PageResult queryAllProject(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
+        return projectService.getAllProject(page, limit);
+    }
+    @PostMapping("deleteProject")
+    public RespBean deleteProject(@RequestBody Project project) {
+        int i = projectService.deleteOneById(project);
+        if (i > 0)
+            return RespBean.ok("删除成功");
+        else
+            return RespBean.error("删除失败");
+    }
+    @GetMapping("searchProject")
+    public PageResult searchProject(@RequestParam("title") String title,
+                                    @RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
+        return projectService.searchProject(title, page, limit);
+    }
+
 }

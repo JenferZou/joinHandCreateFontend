@@ -11,6 +11,7 @@ import UserManagement from "@/components/views/admin/UserManagement";
 import ActiveManagement from "@/components/views/admin/ActiveManagement";
 import LoginIndex from "@/components/index/LoginIndex";
 import ForbidIndex from "@/components/views/ForbidIndex";
+import ProjectManger from "@/components/views/admin/projectManger";
 
 Vue.use(Router)
 
@@ -52,26 +53,18 @@ let router = new Router({
                     name: 'active',
                     component: ActiveManagement,
                 },
+                {
+                    path: '/admin/project',
+                    name: 'project',
+                    component: ProjectManger,
+                }
             ]
         },
         {
             path: '/student',
             name: 'student',
             component: StudentIndex,
-            children: [
-                {
-                    path: '/student/StudentMessageForm',
-                    name: 'StudentMessageForm',
-                    component: StudentMessageForm
-                },
-                {
-                    path: '/student/StudentResume',
-                    name: 'StudentResume',
-                    component: StudentResume
-                }
-            ]
         },
-
         {
             path: '/student/StudentMessageForm',
             name: 'StudentMessageForm',
@@ -82,7 +75,6 @@ let router = new Router({
             name: 'StudentResume',
             component: StudentResume
         },
-
 
         {
             path: '/adsac',
@@ -103,13 +95,13 @@ Router.prototype.push = function push(to) {
 // from 代表从哪个路径跳转而来
 // next 是个函数，表示放行 next() 放行  next('/login') 强制跳转
 router.beforeEach((to, from, next) => {
-    let role=window.sessionStorage.getItem("role")
-    let i=to.path.indexOf('/')+1
-    let j=to.path.substring(1).indexOf('/')===-1?to.path.substring(1).length:to.path.substring(1).indexOf('/')
-    j+=1
-    if (to.path==='/') {
-        window.sessionStorage.removeItem('Token')
-        window.sessionStorage.removeItem('role')
+    let role = window.sessionStorage.getItem("role")
+    let i = to.path.indexOf('/') + 1
+    let j = to.path.substring(1).indexOf('/') === -1 ? to.path.substring(1).length : to.path.substring(1).indexOf('/')
+    j += 1
+    if (to.path === '/') {
+        //window.sessionStorage.removeItem('Token')
+        //window.sessionStorage.removeItem('role')
         next()
     } else {
         let user = window.sessionStorage.getItem('Token')
@@ -117,18 +109,18 @@ router.beforeEach((to, from, next) => {
             next({
                 path: '/'
             })
-        } else if(to.path==='/adsac') {
+        } else if (to.path === '/adsac') {
             next()
-        }else {
-            if(role==='管理员'&&to.path.substring(i,j)!=='admin'){
-                next({
-                    path:'/adsac'
-                })
-            }else if(role==='用户'&&to.path.substring(i,j)!=='student') {
+        } else {
+            if (role === '管理员' && to.path.substring(i, j) !== 'admin') {
                 next({
                     path: '/adsac'
                 })
-            }else {
+            } else if (role === '用户' && to.path.substring(i, j) !== 'student') {
+                next({
+                    path: '/adsac'
+                })
+            } else {
                 next()
             }
         }

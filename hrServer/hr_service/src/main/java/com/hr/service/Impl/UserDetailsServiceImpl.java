@@ -36,6 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         List<Role> list =adminMapper.getUserRolesByUserId(student.getSno());
         student.setRoles(list);
+
         return student;
     }
 }
