@@ -1,7 +1,9 @@
 package com.hr.config;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hr.interceptor.JwtAuthenticationTokenFilter;
+import com.hr.model.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -95,28 +97,21 @@ public class SecurityConfig {
                 .failureHandler(loginFailureHandler)
                 .and()
                 .logout().logoutUrl("/logout")
+                .clearAuthentication(true) // 清除掉所有的认证信息
+                .invalidateHttpSession(true) // 注销当前的Session
                 .logoutSuccessHandler(new LogoutSuccessHandler() {// 注销成功之后返回的数据内容
                     @Override
                     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                        // Object principal = authentication.getPrincipal(); // 认证以及授权的内容
                         response.setContentType("application/json;charset=UTF-8"); // 响应的类型为JSON
                         response.setStatus(HttpServletResponse.SC_OK); // 响应200的状态码
-                        Map<String, Object> result = new HashMap<>(); // 登录成功之后响应数据
-                        result.put("status", HttpServletResponse.SC_OK); // 当前的登录状态
-                        result.put("message", "用户注销成功");
-                        result.put("principal", null); // 实际的开发中对于认证数据肯定要筛选
-                        result.put("sessionId", request.getSession().getId()); // 所有的认证路径检测都通过SessionID进行
-                        // 此时需要将Map集合转为JSON结构，按照Spring默认的转换建议使用Jackson工具
-                        ObjectMapper mapper = new ObjectMapper();
-                        response.getWriter().println(mapper.writeValueAsString(result)); // Map集合转为JSON数据
+                        response.getWriter().write(JSONObject.toJSONString(RespBean.ok("注销成功")));
                     }
                 })
                 .and()
                 // 下面开始设置权限
                 .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN") // ADMIN角色可以访问
                 .antMatchers("/student/**").hasRole("USER")
-                //.antMatchers("/message/**").access(
-                //   "hasAnyRole('ADMIN') and hasRole('USER')")
                 .anyRequest().authenticated() // 请求认证访问
                 .and().addFilterBefore(this.authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class)
                 // 认证用户时用户信息加载配置，注入springAuthUserService
@@ -124,80 +119,4 @@ public class SecurityConfig {
                 .build();
     }
 
-
-   /* @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.authorizeRequests()    // 进行授权访问请求的配置（那些路径与那些角色进行匹配）
-                .antMatchers("/admin/**").hasRole("ADMIN") // ADMIN角色可以访问
-                .antMatchers("/student/**").access("hasAnyRole('USER') and hasAnyRole('ADMIN')") // ADMIN+USER角色可以访问
-                //.antMatchers("/message/**").access(
-                     //   "hasAnyRole('ADMIN') and hasRole('USER')")
-                .anyRequest().authenticated() // 请求认证访问
-                .and() // 继续连接后续的其他配置项
-                .formLogin().loginProcessingUrl("/login") // 登录的处理路径
-                .usernameParameter("username").passwordParameter("password") // 认证的参数名称
-                .permitAll()
-                .successHandler(new AuthenticationSuccessHandler() { // 实现认证成功之后的配置处理
-                    @Override
-                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                        Object principal = authentication.getPrincipal(); // 认证以及授权的内容
-                        response.setContentType("application/json;charset=UTF-8"); // 响应的类型为JSON
-                        response.setStatus(HttpServletResponse.SC_OK); // 响应200的状态码
-                        Map<String, Object> result = new HashMap<>(); // 登录成功之后响应数据
-                        result.put("status", HttpServletResponse.SC_OK); // 当前的登录状态
-                        result.put("message", "用户登录成功");
-                        result.put("principal", principal); // 实际的开发中对于认证数据肯定要筛选
-                        result.put("sessionId", request.getSession().getId()); // 所有的认证路径检测都通过SessionID进行
-                        // 此时需要将Map集合转为JSON结构，按照Spring默认的转换建议使用Jackson工具
-                        ObjectMapper mapper = new ObjectMapper();
-                        response.getWriter().println(mapper.writeValueAsString(result)); // Map集合转为JSON数据
-                    }
-                }).failureHandler(new AuthenticationFailureHandler() {
-                    @Override
-                    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException, IOException {
-                        response.setContentType("application/json;charset=UTF-8"); // 响应的类型为JSON
-                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 响应401的状态码
-                        Map<String, Object> result = new HashMap<>(); // 登录成功之后响应数据
-                        result.put("status", HttpServletResponse.SC_UNAUTHORIZED); // 当前的登录状态
-                        result.put("principal", null); // 返回一个空的认证数据
-                        result.put("sessionId", request.getSession().getId()); // 所有的认证路径检测都通过SessionID进行
-                        if (exception instanceof LockedException) {
-                            result.put("message", "账户被锁定，登录失败！");
-                        } else if (exception instanceof BadCredentialsException) {
-                            result.put("message", "账户名或密码输入错误，登录失败！");
-                        } else if (exception instanceof DisabledException) {
-                            result.put("message", "账户被禁用，登录失败！");
-                        } else if (exception instanceof AccountExpiredException) {
-                            result.put("message", "账户已过期，登录失败！");
-                        } else if (exception instanceof CredentialsExpiredException) {
-                            result.put("message", "密码已过期，登录失败！");
-                        } else {
-                            result.put("message", "未知原因，导致登录失败！");
-                        }
-                        // 此时需要将Map集合转为JSON结构，按照Spring默认的转换建议使用Jackson工具
-                        ObjectMapper mapper = new ObjectMapper();
-                        response.getWriter().println(mapper.writeValueAsString(result)); // Map集合转为JSON数据
-                    }
-                }).and().logout().logoutUrl("/logout") // 注销处理
-                .clearAuthentication(true) // 清除掉所有的认证信息
-                .invalidateHttpSession(true) // 注销当前的Session
-                .logoutSuccessHandler(new LogoutSuccessHandler() {// 注销成功之后返回的数据内容
-                    @Override
-                    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                        Object principal = authentication.getPrincipal(); // 认证以及授权的内容
-                        response.setContentType("application/json;charset=UTF-8"); // 响应的类型为JSON
-                        response.setStatus(HttpServletResponse.SC_OK); // 响应200的状态码
-                        Map<String, Object> result = new HashMap<>(); // 登录成功之后响应数据
-                        result.put("status", HttpServletResponse.SC_OK); // 当前的登录状态
-                        result.put("message", "用户注销成功");
-                        result.put("principal", null); // 实际的开发中对于认证数据肯定要筛选
-                        result.put("sessionId", request.getSession().getId()); // 所有的认证路径检测都通过SessionID进行
-                        // 此时需要将Map集合转为JSON结构，按照Spring默认的转换建议使用Jackson工具
-                        ObjectMapper mapper = new ObjectMapper();
-                        response.getWriter().println(mapper.writeValueAsString(result)); // Map集合转为JSON数据
-                    }
-                })
-                .and().csrf().disable().userDetailsService(userDetailsService).cors(Customizer.withDefaults()).build();
-    }
-*/
 }

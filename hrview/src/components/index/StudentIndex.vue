@@ -307,20 +307,6 @@ export default {
         console.log('出错啦！！！！')
       })
     },
-
-    // loadCompany(){
-    //   this.$http({
-    //     url: this.$http.adornUrl('/student/project'),
-    //     method: 'get',
-    //     params:this.$http.adornParams()
-    //   }).then(({data}) => {
-    //     console.log(data)
-    //     this.company=data
-    //   }).catch((error) => {
-    //     console.log(error)
-    //     console.log('出错啦！！！！')
-    //   })
-    // },
     loadStudent() {
       this.$http({
         url: this.$http.adornUrl('/student/StudentMessageForm'),

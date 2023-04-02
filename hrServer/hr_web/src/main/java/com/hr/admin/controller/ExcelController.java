@@ -35,7 +35,7 @@ public class ExcelController {
         String excelName = "学生表";
         //获取需要转出的excel表头的map字段
         LinkedHashMap<String, String> fieldMap = new LinkedHashMap<>();
-        //fieldMap.put("编号","id");
+        fieldMap.put("id","编号");
         fieldMap.put("sName","姓名");
         fieldMap.put("sno","学号");
         fieldMap.put("gender","性别");

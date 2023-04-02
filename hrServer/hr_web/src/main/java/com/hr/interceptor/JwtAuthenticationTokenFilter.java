@@ -30,7 +30,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         // 获取到当前用户的account
         String account = jwtUtil.getMemberIdByJwtToken(authToken);
 
-        System.out.println("自定义JWT过滤器获得用户名为"+account);
+        //System.out.println("自定义JWT过滤器获得用户名为"+account);
 
         // 当token中的username不为空时进行验证token是否是有效的token
         if (!account.equals("") && SecurityContextHolder.getContext().getAuthentication() == null) {

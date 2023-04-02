@@ -41,7 +41,7 @@
           启用
         </div>
         <div  class="text item">
-          用户角色:{{item.role.slice(5)}}
+          用户角色:{{item.roles[0].title}}
         </div>
         <div  class="text item">
           备注:{{item.remark}}
@@ -78,7 +78,7 @@
             启用
           </div>
           <div  class="text item">
-            用户角色:{{item.role.slice(5)}}
+            用户角色:{{item.roles[0].title}}
           </div>
           <div  class="text item">
             备注:{{item.remark}}

@@ -6,6 +6,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -18,15 +19,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class JWTUtil {
+public class  JWTUtil {
     private static final Logger logger = LoggerFactory.getLogger(JWTUtil.class);
     @Autowired
     private JWTConfigProperties jwtConfigProperties;
 
     private SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256; // 签名算法
 
-    public SecretKey generalKey() { // 获取加密KEY
-        System.out.println(this.jwtConfigProperties);
+    public  SecretKey generalKey() { // 获取加密KEY
         byte[] encodedKey = Base64.decodeBase64(Base64.encodeBase64(this.jwtConfigProperties.getSecret().getBytes()));
         SecretKey key = new SecretKeySpec(encodedKey, 0, encodedKey.length, "HmacSHA256");
         return key;
@@ -72,10 +72,10 @@ public class JWTUtil {
         Claims claims = null;
         try {
             //创建Signature SecretKey
-            final SecretKey key = Keys.hmacShaKeyFor(jwtConfigProperties.getSecret().getBytes(StandardCharsets.UTF_8));
+            //final SecretKey key = Keys.hmacShaKeyFor(jwtConfigProperties.getSecret().getBytes(StandardCharsets.UTF_8));
 
             claims = Jwts.parserBuilder()
-                    .setSigningKey(key)
+                    .setSigningKey(this.generalKey())
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
@@ -95,7 +95,7 @@ public class JWTUtil {
         if (StringUtils.isEmpty(token)) return "";
         try {
             // 这里解析可能会抛异常，所以try catch来捕捉
-            //Jws<Claims> claimsJws = Jwts.parser().setSigningKey(this.generalKey()).parseClaimsJws(token);
+           // Jws<Claims> claimsJws = Jwts.parser().setSigningKey(this.generalKey()).parseClaimsJws(token);
             Claims claims = Jwts.parserBuilder()
                     .setSigningKey(this.generalKey())
                     .build()
