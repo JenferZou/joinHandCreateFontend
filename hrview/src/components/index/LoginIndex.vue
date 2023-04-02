@@ -52,26 +52,26 @@ export default{
                       'UserToken':window.sessionStorage.getItem('Token'),
                     }
                   }).then(({data}) => {
-                    if (data) {
-                     /* console.log(data)*/
+                    if (data&&data.status===200) {
+                      /* console.log(data)*/
                       sessionStorage.setItem("Token",data.obj.token)
+                      this.$message.success(data.msg)
                       data.obj.Role.forEach((item)=>{
                         if(item.title==='管理员')
                         {
-                          this.$message.success(data.msg)
                           sessionStorage.setItem("role",item.title)
                           this.$router.push({
                             name:'adminIndex'
                           })
                         }else if(item.title==='用户'){
-                          this.$message.success(data.msg)
                           sessionStorage.setItem("role",item.title)
                           this.$router.push({
                             name:'student'
                           })
                         }
                       })
-
+                    }else{
+                      this.$message.error(data.msg)
                     }
                   }).catch((res) => {
                     this.$message.error(res.response.data.message)

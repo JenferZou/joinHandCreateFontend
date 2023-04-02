@@ -71,6 +71,19 @@ let router = new Router({
                 }
             ]
         },
+
+        {
+            path: '/student/StudentMessageForm',
+            name: 'StudentMessageForm',
+            component: StudentMessageForm
+        },
+        {
+            path: '/student/StudentResume',
+            name: 'StudentResume',
+            component: StudentResume
+        },
+
+
         {
             path: '/adsac',
             name: 'forbid',

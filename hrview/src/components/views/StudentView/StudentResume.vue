@@ -105,9 +105,19 @@
                       <span  class="desc">(必填)</span>
                       </div>
                       <div class="right">
-                        <button class="preview">编辑</button>
+                        <span class="editspan" @click="editadvantage">编辑</span>
                       </div>
-
+                      <el-dialog :visible.sync="advantagedialog" width="70%">
+                        <el-form :model="resume" >
+                          <el-form-item label="个人优势" prop="strength">
+                            <el-input type="textarea" :rows="10" v-model="resume.personalAdvantage"></el-input>
+                          </el-form-item>
+                        </el-form>
+                        <div slot="footer">
+                          <el-button @click="advantagedialog = false">取 消</el-button>
+                          <el-button type="primary" @click="submitadvantage">确 定</el-button>
+                        </div>
+                      </el-dialog>
                     </div>
                     <div  class="advantage-con" v-if="resume.personalAdvantage"><p  class="edit-show-content" style="max-width: 718px;">
                       {{ resume.personalAdvantage }}
@@ -116,25 +126,6 @@
                   </li>
 
 
-                  <li>
-                    <div  class="project-title">
-                      <div  class="left">
-                      <span  class="line">
-                      </span>
-                        <h5  class="title">申请原因</h5>
-                        <span  class="desc">(必填)</span>
-                      </div>
-
-                      <div class="right">
-                        <button class="preview">编辑</button>
-                      </div>
-
-                    </div>
-                    <div  class="advantage-con" v-if="resume.expectedPosition"><p  class="edit-show-content" style="max-width: 718px;">
-                      {{ resume.expectedPosition }}
-                    </p>
-                    </div>
-                  </li>
 
 
 
@@ -148,8 +139,20 @@
                       </div>
 
                       <div class="right">
-                        <button class="preview">编辑</button>
+                        <span class="editspan" @click="editprojectExp">编辑</span>
                       </div>
+                      <el-dialog :visible.sync="projectExperiencedialog" width="70%">
+                        <el-form :model="resume" >
+                          <el-form-item label="项目经历" prop="strength">
+                            <el-input type="textarea" :rows="10" v-model="resume.projectExperience"></el-input>
+                          </el-form-item>
+                        </el-form>
+                        <div slot="footer">
+                          <el-button @click="projectExperiencedialog = false">取 消</el-button>
+                          <el-button type="primary" @click="submitForm">确 定</el-button>
+                        </div>
+                      </el-dialog>
+
                     </div>
                     <div  class="advantage-con" v-if="resume.projectExperience"><p  class="edit-show-content" style="max-width: 718px;">
                       {{ resume.projectExperience }}
@@ -169,11 +172,23 @@
                       </div>
 
                       <div class="right">
-                        <button class="preview">编辑</button>
+                        <span class="editspan" @click="editinnternshipExpe">编辑</span>
                       </div>
+                      <el-dialog :visible.sync="internshipExperiencedialog" width="70%">
+                        <el-form :model="resume" >
+                          <el-form-item label="实践经历" prop="strength">
+                            <el-input type="textarea" :rows="10" v-model="resume.internshipExperience"></el-input>
+                          </el-form-item>
+                        </el-form>
+                        <div slot="footer">
+                          <el-button @click="internshipExperiencedialog = false">取 消</el-button>
+                          <el-button type="primary" @click="submitForm">确 定</el-button>
+                        </div>
+                      </el-dialog>
+
                     </div>
-                    <div  class="advantage-con" v-if="resume.educationExperience"><p  class="edit-show-content" style="max-width: 718px;">
-                      {{ resume.educationExperience }}
+                    <div  class="advantage-con" v-if="resume.internshipExperience"><p  class="edit-show-content" style="max-width: 718px;">
+                      {{ resume.internshipExperience }}
                     </p>
                     </div>
                   </li>
@@ -191,11 +206,24 @@
                       </div>
 
                       <div class="right">
-                        <button class="preview">编辑</button>
+                        <span class="editspan" @click="editcertificate">编辑</span>
                       </div>
+
+                      <el-dialog :visible.sync="certificatedialog" width="70%">
+                        <el-form :model="resume" >
+                          <el-form-item label="资格证书" prop="strength">
+                            <el-input type="textarea" :rows="4" v-model="resume.certificate"></el-input>
+                          </el-form-item>
+                        </el-form>
+                        <div slot="footer">
+                          <el-button @click="certificatedialog = false">取 消</el-button>
+                          <el-button type="primary" @click="submitForm">确 定</el-button>
+                        </div>
+                      </el-dialog>
+
                     </div>
-                    <div  class="advantage-con" v-if="resume.educationExperience"><p  class="edit-show-content" style="max-width: 718px;">
-                      {{ resume.educationExperience }}
+                    <div  class="advantage-con" v-if="resume.certificate"><p  class="edit-show-content" style="max-width: 718px;">
+                      {{ resume.certificate }}
                     </p>
                     </div>
                   </li>
@@ -211,8 +239,21 @@
                       </div>
 
                       <div class="right">
-                        <button class="preview">编辑</button>
+                        <span class="editspan" @click="editaward">编辑</span>
                       </div>
+
+                      <el-dialog :visible.sync="awardExperiencedialog" width="70%">
+                        <el-form :model="resume" >
+                          <el-form-item label="获奖经历" prop="strength">
+                            <el-input type="textarea" :rows="10" v-model="resume.awardExperience"></el-input>
+                          </el-form-item>
+                        </el-form>
+                        <div slot="footer">
+                          <el-button @click="awardExperiencedialog = false">取 消</el-button>
+                          <el-button type="primary" @click="submitForm">确 定</el-button>
+                        </div>
+                      </el-dialog>
+
                     </div>
                     <div  class="advantage-con" v-if="resume.awardExperience"><p  class="edit-show-content" style="max-width: 718px;">
                       {{ resume.awardExperience }}
@@ -235,26 +276,21 @@
   </div>
 </template>
 <script>
-import ResumeEdit from "@/components/views/StudentView/ResumeEdit";
 
 export default {
   name: "StudentResume",
-  components:{ResumeEdit},
   data() {
     return {
       data: 0,
       resume:{
         resumeId:'',
-        expectedPosition:'....',
-        expectedCity:'',
-        expectedSalary:'',
         wechatId:'',
         politicsStatus:'',
         personalAdvantage:'...',
-        educationExperience:'',
         internshipExperience:'',
         projectExperience:'',
-        awardExperience:''
+        awardExperience:'',
+        certificate:''
       },
       studentInfo:{
         sName: '张三',
@@ -264,14 +300,52 @@ export default {
         sPhone: '11011100',
         sDepartment:'计算机与智能教育学院',
         className:'软件2班'
-      }
+      },
+
+      advantagedialog:false,
+      projectExperiencedialog:false,
+      internshipExperiencedialog:false,
+      certificatedialog:false,
+      awardExperiencedialog:false,
 
     };
   },
   methods:{
-    edit(){
-      this.$refs.ResumeEdit.init()
+    editadvantage(){
+      this.advantagedialog=true
+    },
+
+    editprojectExp(){
+      this.projectExperiencedialog=true
+    },
+    editinnternshipExpe(){
+      this.internshipExperiencedialog=true
+    },
+    editcertificate(){
+      this.certificatedialog=true
+    },
+    editaward(){
+      this.awardExperiencedialog=true
+    },
+
+    submitadvantage(){
+
+    },
+    submitproject(){
+
+    },
+    submitinternship(){
+
+    },
+    sumbitaward(){
+
+    },
+    sumbitcertificate(){
+
     }
+
+
+
   }
 }
 </script>
@@ -420,7 +494,12 @@ li{
   margin-bottom: 20px;
 }
 
-
+.editspan{
+  font-size: 12px;
+  color: #02B28B;
+  margin: -2px 0 0 8px;
+  cursor: pointer;
+}
 
 </style>
 

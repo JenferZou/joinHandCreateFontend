@@ -49,6 +49,7 @@ public class test {
         student.setSno("2136172721");
         student.setStar("双鱼");
         student.setsPhone("17378781");
+        System.out.println(passwordEncoder.encode("@Zz123456"));
         // studentMapper.addStudent(student);
         //System.out.println(studentMapper.getAllStudentByScore(100D,200D));
 
@@ -62,7 +63,7 @@ public class test {
 
     @Test
     public void test() throws ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        System.out.println(properties.getExpire());
+        System.out.println(properties);
         //System.out.println(passwordEncoder.encode("@Xwf123"));
         //System.out.println(UUID.randomUUID().toString().substring(0,10));
         //System.out.println(new Timestamp((new Date().getTime())));

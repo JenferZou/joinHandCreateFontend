@@ -15,4 +15,6 @@ public class JWTConfigProperties {
     private String header;
     // 签发者
     private String issuer;
+
+
 }

@@ -27,7 +27,6 @@
       <div class="layout-assistant">
         <i-menu-item name="1">主页</i-menu-item>
         <i-menu-item name="StudentMessageForm">个人信息</i-menu-item>
-        <i-menu-item name="3" >实践经历</i-menu-item>
         <i-menu-item name="StudentResume">个人简历</i-menu-item>
         <i-menu-item name="5">消息通知</i-menu-item>
       </div>
@@ -41,14 +40,14 @@
                 <i-icon type="ios-navigate"></i-icon>
                 个人信息
               </template>
-              <i-menu-item name="1-1">选项 1</i-menu-item>
-<!--              <i-menu-item name="1-2">选项 2</i-menu-item>-->
-<!--              <i-menu-item name="1-3">选项 3</i-menu-item>-->
+              <i-menu-item name="1-1">修改个人信息</i-menu-item>
+              <i-menu-item name="1-1">填充个人简历</i-menu-item>
+
             </i-submenu>
             <i-submenu name="2">
               <template slot="title">
                 <i-icon type="ios-keypad"></i-icon>
-                合作单位信息
+                项目管理
               </template>
               <i-menu-item name="2-1">项目大厅</i-menu-item>
               <i-menu-item name="2-2">项目申请</i-menu-item>
@@ -56,7 +55,7 @@
             <i-submenu name="3">
               <template slot="title">
                 <i-icon type="ios-analytics"></i-icon>
-                考试与实践信息
+                考证与实践活动信息
               </template>
               <i-menu-item name="3-1">考证俱乐部</i-menu-item>
               <i-menu-item name="3-2">实践活动查询</i-menu-item>
@@ -104,20 +103,20 @@
 
                 <i-col span="10">
                   <div class="mes" style="background-color: #fff">
-                  <i-col style="height: 45px">
-                    <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon> 消息通知</i-col>
-                  </i-col>
+                    <i-col style="height: 45px">
+                      <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon> 消息通知</i-col>
+                    </i-col>
 
 
 
                     <el-empty description="暂无信息" style="size: 10px"></el-empty>
 
-                  <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                    <i-col span="8">{{ item.title }}</i-col>
-                    <i-col span="8">{{ item.content }}</i-col>
-                    <i-col span="8">{{item.activeTime}}</i-col>
+                    <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                      <i-col span="8">{{ item.title }}</i-col>
+                      <i-col span="8">{{ item.content }}</i-col>
+                      <i-col span="8">{{item.activeTime}}</i-col>
 
-                  </i-col>
+                    </i-col>
                   </div>
 
 
@@ -127,86 +126,90 @@
 
 
 
-            <i-row  class="centercontent">
-              <i-col span="24">
-                <div class="mes" >
-                  <i-col style="height: 45px">
-                    <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread">
-                    </i-icon>   最新项目发布通知</i-col>
-                  </i-col>
+              <i-row  class="centercontent">
+                <i-col span="24">
+                  <div class="mes" >
+                    <i-col style="height: 45px">
+                      <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread">
+                      </i-icon>   最新项目发布通知</i-col>
+                    </i-col>
 
-                  <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                    <i-col span="8">单位名称</i-col>
-                    <i-col span="8">招聘岗位</i-col>
-                    <i-col span="8">工作薪水</i-col>
-                  </i-col>
+                    <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                      <i-col span="8">项目名称</i-col>
+                      <i-col span="8">项目指导老师</i-col>
+                      <i-col span="8">报名时间</i-col>
+                    </i-col>
 
-                  <i-col  v-for="item in company" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                    <i-col span="8">{{ item.name }}</i-col>
-                    <i-col span="8">{{ item.post }}</i-col>
-                    <i-col span="8">{{item.salary}}元</i-col>
-                  </i-col>
+                    <el-empty  v-if="project" description="暂无信息"  style="size: 10px"></el-empty>
 
-
-                </div>
-              </i-col>
-            </i-row>
+                    <i-col  v-for="item in company" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                      <i-col span="8">{{ item.name }}</i-col>
+                      <i-col span="8">{{ item.post }}</i-col>
+                      <i-col span="8">{{item.salary}}元</i-col>
+                    </i-col>
 
 
-            <i-row  class="footcontent" :gutter="16">
-              <i-col span="12">
-                <div class="mes" style="background-color: #fff">
-                  <i-col style="height: 45px">
-                    <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread">
-
-                    </i-icon>    最新考试报名信息</i-col>
-
-                  </i-col>
-
-
-                  <i-col style="height: 50px;background-color: #fff;text-align: center; border-bottom: 1px dashed #c0c0c0">
-                    <i-col span="8" >考试类别</i-col>
-                    <i-col span="8">考试信息</i-col>
-                    <i-col span="8">考试时间</i-col>
-                  </i-col>
-
-
-                  <el-empty  v-if="contest1" description="暂无信息" style="size: 10px"></el-empty>
-
-
-                  <i-col   v-for="item in contest1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                    <i-col span="8">{{ item.title }}</i-col>
-                    <i-col span="8">{{ item.content }}</i-col>
-                    <i-col span="8">{{item.startTime}}</i-col>
-
-                  </i-col>
-
-
-
-                </div>
-              </i-col>
-
-
-              <i-col span="12">
-                <div class="mes" style="background-color: #fff">
-                <i-col style="height: 45px">
-                  <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon>    最新实践活动信息</i-col>
+                  </div>
                 </i-col>
-                <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0">
-                  <i-col span="8">活动名称</i-col>
-                  <i-col span="8">活动内容</i-col>
-                  <i-col span="8">活动时间</i-col>
+              </i-row>
+
+
+              <i-row  class="footcontent" :gutter="16">
+                <i-col span="12">
+                  <div class="mes" style="background-color: #fff">
+                    <i-col style="height: 45px">
+                      <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread">
+
+                      </i-icon>    最新考试报名信息</i-col>
+
+                    </i-col>
+
+
+                    <i-col style="height: 50px;background-color: #fff;text-align: center; border-bottom: 1px dashed #c0c0c0">
+                      <i-col span="8" >考试类别</i-col>
+                      <i-col span="8">考试信息</i-col>
+                      <i-col span="8">考试时间</i-col>
+                    </i-col>
+
+
+                    <el-empty  v-if="contest1" description="暂无信息" style="size: 10px"></el-empty>
+
+
+                    <i-col   v-for="item in contest1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                      <i-col span="8">{{ item.title }}</i-col>
+                      <i-col span="8">{{ item.content }}</i-col>
+                      <i-col span="8">{{item.startTime}}</i-col>
+
+                    </i-col>
+
+
+
+                  </div>
                 </i-col>
 
-                <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                  <i-col span="8">{{ item.title }}</i-col>
-                  <i-col span="8">{{ item.content }}</i-col>
-                  <i-col span="8">{{item.activeTime}}</i-col>
 
+                <i-col span="12">
+                  <div class="mes" style="background-color: #fff">
+                    <i-col style="height: 45px">
+                      <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon>    最新实践活动信息</i-col>
+                    </i-col>
+                    <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0">
+                      <i-col span="8">活动名称</i-col>
+                      <i-col span="8">活动内容</i-col>
+                      <i-col span="8">活动时间</i-col>
+                    </i-col>
+
+                    <el-empty v-if="active1" description="暂无信息" ></el-empty>
+
+                    <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                      <i-col span="8">{{ item.title }}</i-col>
+                      <i-col span="8">{{ item.content }}</i-col>
+                      <i-col span="8">{{item.activeTime}}</i-col>
+
+                    </i-col>
+                  </div>
                 </i-col>
-                </div>
-              </i-col>
-            </i-row>
+              </i-row>
 
 
 
@@ -216,7 +219,7 @@
 
 
 
-          </div></div>
+            </div></div>
         </i-col>
       </i-row>
     </div>
@@ -267,7 +270,7 @@ export default {
   created(){
     this.loadContest()
     this.loadActive()
-    this.loadCompany()
+    this.loadStudent()
   },
   methods: {
 
@@ -276,8 +279,10 @@ export default {
         url: this.$http.adornUrl('/student/contest'),
         method: 'get',
         params:this.$http.adornParams(),
-        headers:{
+        headers: {
           'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
         }
       }).then(({data}) => {
         console.log(data)
@@ -293,8 +298,10 @@ export default {
         url: this.$http.adornUrl('/student/active'),
         method: 'get',
         params:this.$http.adornParams(),
-        headers:{
+        headers: {
           'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
         }
       }).then(({data}) => {
         console.log(data)
@@ -304,19 +311,33 @@ export default {
       })
     },
 
-    loadCompany(){
+    // loadCompany(){
+    //   this.$http({
+    //     url: this.$http.adornUrl('/student/project'),
+    //     method: 'get',
+    //     params:this.$http.adornParams()
+    //   }).then(({data}) => {
+    //     console.log(data)
+    //     this.company=data
+    //   }).catch((error) => {
+    //     console.log(error)
+    //     console.log('出错啦！！！！')
+    //   })
+    // },
+    loadStudent() {
       this.$http({
-        url: this.$http.adornUrl('/student/company'),
+        url: this.$http.adornUrl('/student/StudentMessageForm'),
         method: 'get',
-        params:this.$http.adornParams(),
-        headers:{
+        headers: {
           'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
         }
       }).then(({data}) => {
-        console.log(data)
-        this.company=data
-      }).catch((error) => {
-        console.log(error)
+        if (data && data.status === 200) {
+          this.studentInfo=data
+        }
+      }).catch(() => {
         console.log('出错啦！！！！')
       })
     },
@@ -393,7 +414,6 @@ export default {
 
 
 .centercontent{
-  height: 300px;
   margin-bottom: 10px;
   background-color: #fff;
   border-bottom: 1px dashed #c0c0c0;
@@ -419,8 +439,8 @@ export default {
 .footcontent{
   background-color: #f5f7f9;
   line-height: 50px;
-
 }
+
 .pra{
   background-color: darkgray;
 

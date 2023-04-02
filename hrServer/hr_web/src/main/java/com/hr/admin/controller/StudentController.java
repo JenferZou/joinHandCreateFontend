@@ -3,10 +3,14 @@ package com.hr.admin.controller;
 import com.hr.model.*;
 import com.hr.service.ActiveService;
 import com.hr.service.ContestService;
+import com.hr.service.ResumeService;
 import com.hr.service.StudentService;
+import com.hr.utils.JWTConfigProperties;
+import com.hr.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -31,8 +35,20 @@ public class StudentController {
     @Autowired
     private ActiveService activeService;
 
+    @Autowired
+    private ResumeService resumeService;
+
+
+    @Autowired
+    private JWTConfigProperties jwtConfigProperties;
+
+
     @GetMapping("StudentMessageForm")
-    public Student getStudentBySno(@RequestParam("sno") String sno){
+    public Student getStudentBySno(HttpServletRequest request){
+        System.out.println(jwtConfigProperties);
+        String token = request.getHeader("UserToken");
+        JWTUtil jwtUtil = new JWTUtil();
+        String sno = jwtUtil.getMemberIdByJwtToken(token);
         return studentService.getStudentBySno(sno);
     }
 
@@ -47,6 +63,21 @@ public class StudentController {
     public List<Active> getThreeActive(){
         return  activeService.getThreeActive();
     }
+
+    @PostMapping("StudentResume")
+    public Resume getResumeByid( HttpServletRequest request){
+        String token = request.getHeader("UserToken");
+        JWTUtil jwtUtil = new JWTUtil();
+        String sno = jwtUtil.getMemberIdByJwtToken(token);
+        Student studentBySno = studentService.getStudentBySno(sno);
+        Resume resumeByid = resumeService.getResumeByid(studentBySno.getResumeId());
+        return resumeByid;
+    }
+
+
+
+
+
 
 
 }

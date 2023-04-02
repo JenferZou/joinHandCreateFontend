@@ -50,20 +50,6 @@
                   </li>
 
 
-                  <li>
-                    <div  class="project-title">
-                      <div  class="left">
-                        <i-icon type="email" style="color: #02B28B" ></i-icon>
-                        <h5  class="title">申请原因</h5>
-                      </div>
-                      <div  class="right">
-                      </div>
-                    </div>
-                    <div  class="advantage-con" v-if="resume.expectedPosition"><p  class="edit-show-content" style="max-width: 718px;">
-                      {{ resume.expectedPosition }}
-                    </p> <div class="fixed-edit"><div class="edit-show-action-wrap">
-                      </div></div></div>
-                  </li>
 
 
                   <li>
@@ -156,19 +142,24 @@ export default {
     return {
       data: 0,
       resume:{
-        name:'',
         resumeId:'',
-        expectedPosition:'....',
-        expectedCity:'',
-        expectedSalary:'',
         wechatId:'',
         politicsStatus:'',
         personalAdvantage:'...',
-        educationExperience:'',
         internshipExperience:'',
         projectExperience:'',
-        awardExperience:''
-      }
+        awardExperience:'',
+        certificate:''
+      },
+      studentInfo:{
+        sName: '张三',
+        gender: '男',
+        sno: '123123',
+        sMajor: '软件工程',
+        sPhone: '11011100',
+        sDepartment:'计算机与智能教育学院',
+        className:'软件2班'
+      },
 
     };
   },

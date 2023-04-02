@@ -5,19 +5,11 @@ public class Resume {
 
     private String resumeId;
 
-    private String expectedPosition;
-
-    private String expectedCity;
-
-    private Double expectedSalary;
-
     private String wechatId;
 
     private String politicsStatus;
 
     private String personalAdvantage;
-
-    private String educationExperience;
 
     private String internshipExperience;
 
@@ -25,22 +17,22 @@ public class Resume {
 
     private String awardExperience;
 
-    public Resume(String resumeId, String expectedPosition, String expectedCity, Double expectedSalary, String wechatId, String politicsStatus, String personalAdvantage, String educationExperience, String internshipExperience, String projectExperience, String awardExperience) {
-        this.resumeId = resumeId;
-        this.expectedPosition = expectedPosition;
-        this.expectedCity = expectedCity;
-        this.expectedSalary = expectedSalary;
-        this.wechatId = wechatId;
-        this.politicsStatus = politicsStatus;
-        this.personalAdvantage = personalAdvantage;
-        this.educationExperience = educationExperience;
-        this.internshipExperience = internshipExperience;
-        this.projectExperience = projectExperience;
-        this.awardExperience = awardExperience;
-    }
+    private String certificate;
 
     public Resume() {
     }
+
+    public Resume(String resumeId, String wechatId, String politicsStatus, String personalAdvantage, String internshipExperience, String projectExperience, String awardExperience, String certificate) {
+        this.resumeId = resumeId;
+        this.wechatId = wechatId;
+        this.politicsStatus = politicsStatus;
+        this.personalAdvantage = personalAdvantage;
+        this.internshipExperience = internshipExperience;
+        this.projectExperience = projectExperience;
+        this.awardExperience = awardExperience;
+        this.certificate = certificate;
+    }
+
 
     public String getResumeId() {
         return resumeId;
@@ -48,30 +40,6 @@ public class Resume {
 
     public void setResumeId(String resumeId) {
         this.resumeId = resumeId;
-    }
-
-    public String getExpectedPosition() {
-        return expectedPosition;
-    }
-
-    public void setExpectedPosition(String expectedPosition) {
-        this.expectedPosition = expectedPosition;
-    }
-
-    public String getExpectedCity() {
-        return expectedCity;
-    }
-
-    public void setExpectedCity(String expectedCity) {
-        this.expectedCity = expectedCity;
-    }
-
-    public Double getExpectedSalary() {
-        return expectedSalary;
-    }
-
-    public void setExpectedSalary(Double expectedSalary) {
-        this.expectedSalary = expectedSalary;
     }
 
     public String getWechatId() {
@@ -98,14 +66,6 @@ public class Resume {
         this.personalAdvantage = personalAdvantage;
     }
 
-    public String getEducationExperience() {
-        return educationExperience;
-    }
-
-    public void setEducationExperience(String educationExperience) {
-        this.educationExperience = educationExperience;
-    }
-
     public String getInternshipExperience() {
         return internshipExperience;
     }
@@ -130,20 +90,26 @@ public class Resume {
         this.awardExperience = awardExperience;
     }
 
+    public String getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(String certificate) {
+        this.certificate = certificate;
+    }
+
+
     @Override
     public String toString() {
         return "Resume{" +
                 "resumeId='" + resumeId + '\'' +
-                ", expectedPosition='" + expectedPosition + '\'' +
-                ", expectedCity='" + expectedCity + '\'' +
-                ", expectedSalary=" + expectedSalary +
                 ", wechatId='" + wechatId + '\'' +
                 ", politicsStatus='" + politicsStatus + '\'' +
                 ", personalAdvantage='" + personalAdvantage + '\'' +
-                ", educationExperience='" + educationExperience + '\'' +
                 ", internshipExperience='" + internshipExperience + '\'' +
                 ", projectExperience='" + projectExperience + '\'' +
                 ", awardExperience='" + awardExperience + '\'' +
+                ", certificate='" + certificate + '\'' +
                 '}';
     }
 }
