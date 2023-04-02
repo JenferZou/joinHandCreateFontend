@@ -25,23 +25,23 @@
     </i-menu>
     <i-menu mode="horizontal" active-name="1" @on-select="editMes">
       <div class="layout-assistant">
-        <i-menu-item name="1">主页</i-menu-item>
-        <i-menu-item name="StudentMessageForm">个人信息</i-menu-item>
-        <i-menu-item name="StudentResume">个人简历</i-menu-item>
+        <i-menu-item name="StudentIndex">主页</i-menu-item>
+        <i-menu-item name="StudentMessage">个人信息</i-menu-item>
+        <i-menu-item name="StudentResumePreview">个人简历</i-menu-item>
         <i-menu-item name="5">消息通知</i-menu-item>
       </div>
     </i-menu>
     <div class="layout-content">
       <i-row>
         <i-col span="5">
-          <i-menu active-name="1-2" width="auto" :open-names="['1']">
+          <i-menu active-name="1-2" width="auto" :open-names="['1']" @on-select="goWhere">
             <i-submenu name="1">
               <template slot="title">
                 <i-icon type="ios-navigate"></i-icon>
                 个人信息
               </template>
-              <i-menu-item name="1-1">修改个人信息</i-menu-item>
-              <i-menu-item name="1-1">填充个人简历</i-menu-item>
+              <i-menu-item name="StudentMessageForm">修改个人信息</i-menu-item>
+              <i-menu-item name="StudentResume">填充个人简历</i-menu-item>
 
             </i-submenu>
             <i-submenu name="2">
@@ -49,16 +49,16 @@
                 <i-icon type="ios-keypad"></i-icon>
                 项目管理
               </template>
-              <i-menu-item name="2-1">项目大厅</i-menu-item>
-              <i-menu-item name="2-2">项目申请</i-menu-item>
+              <i-menu-item name="projectSearch">项目大厅</i-menu-item>
+              <i-menu-item name="myProjectSearch">项目申请</i-menu-item>
             </i-submenu>
             <i-submenu name="3">
               <template slot="title">
                 <i-icon type="ios-analytics"></i-icon>
                 考证与实践活动信息
               </template>
-              <i-menu-item name="3-1">考证俱乐部</i-menu-item>
-              <i-menu-item name="3-2">实践活动查询</i-menu-item>
+              <i-menu-item name="CertificateSearch">考证俱乐部</i-menu-item>
+              <i-menu-item name="ActiveSearch">实践活动查询</i-menu-item>
             </i-submenu>
           </i-menu>
         </i-col>
@@ -102,14 +102,14 @@
                 </i-col>
 
                 <i-col span="10">
-                  <div class="mes" style="background-color: #fff">
+                  <div class="mes" style="background-color: #fff;height: 295px">
                     <i-col style="height: 45px">
                       <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon> 消息通知</i-col>
                     </i-col>
 
 
 
-                    <el-empty description="暂无信息" style="size: 10px"></el-empty>
+                    <el-empty v-if="active1 == undefined ||active1 == null || active1.length <= 0 " description="暂无信息" style="size: 10px"></el-empty>
 
                     <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
                       <i-col span="8">{{ item.title }}</i-col>
@@ -140,7 +140,7 @@
                       <i-col span="8">报名时间</i-col>
                     </i-col>
 
-                    <el-empty  v-if="project" description="暂无信息"  style="size: 10px"></el-empty>
+                    <el-empty  v-if="project == undefined ||project == null || project.length <= 0" description="暂无信息"  style="size: 10px"></el-empty>
 
                     <i-col  v-for="item in company" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
                       <i-col span="8">{{ item.name }}</i-col>
@@ -172,7 +172,7 @@
                     </i-col>
 
 
-                    <el-empty  v-if="contest1" description="暂无信息" style="size: 10px"></el-empty>
+                    <el-empty  v-if="contest1 == undefined ||contest1 == null || contest1.length <= 0" description="暂无信息" style="size: 10px"></el-empty>
 
 
                     <i-col   v-for="item in contest1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
@@ -199,7 +199,7 @@
                       <i-col span="8">活动时间</i-col>
                     </i-col>
 
-                    <el-empty v-if="active1" description="暂无信息" ></el-empty>
+                    <el-empty v-if="active1 == undefined ||active1 == null || active1.length <= 0 " description="暂无信息" ></el-empty>
 
                     <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
                       <i-col span="8">{{ item.title }}</i-col>
@@ -210,9 +210,6 @@
                   </div>
                 </i-col>
               </i-row>
-
-
-
 
 
 
@@ -334,15 +331,15 @@ export default {
           'charset': 'utf-8'
         }
       }).then(({data}) => {
-        if (data && data.status === 200) {
           this.studentInfo=data
-        }
       }).catch(() => {
         console.log('出错啦！！！！')
       })
     },
 
-
+    goWhere(name){
+      this.$router.push({name})
+    },
 
     editMes(name){
       // this.$router.push({

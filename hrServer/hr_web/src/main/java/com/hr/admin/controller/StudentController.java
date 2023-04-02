@@ -43,12 +43,15 @@ public class StudentController {
     private JWTConfigProperties jwtConfigProperties;
 
 
+    @Autowired
+    private JWTUtil jwtUtil;
+
     @GetMapping("StudentMessageForm")
     public Student getStudentBySno(HttpServletRequest request){
         System.out.println(jwtConfigProperties);
         String token = request.getHeader("UserToken");
-        JWTUtil jwtUtil = new JWTUtil();
         String sno = jwtUtil.getMemberIdByJwtToken(token);
+        System.out.println(studentService.getStudentBySno(sno));
         return studentService.getStudentBySno(sno);
     }
 
@@ -67,7 +70,6 @@ public class StudentController {
     @PostMapping("StudentResume")
     public Resume getResumeByid( HttpServletRequest request){
         String token = request.getHeader("UserToken");
-        JWTUtil jwtUtil = new JWTUtil();
         String sno = jwtUtil.getMemberIdByJwtToken(token);
         Student studentBySno = studentService.getStudentBySno(sno);
         Resume resumeByid = resumeService.getResumeByid(studentBySno.getResumeId());
