@@ -13,6 +13,13 @@ import LoginIndex from "@/components/index/LoginIndex";
 import ForbidIndex from "@/components/views/ForbidIndex";
 import ProjectManger from "@/components/views/admin/projectManger";
 
+import TeacherIndex from "@/components/index/TeacherIndex.vue";
+import tStudentInformation from "@/components/views/teacher/tStudentInformation";
+import tActiveManagement from "@/components/views/teacher/tActiveManagement";
+// import tStudentSearch from "@/components/views/teacher/tStudentSearch"
+import tUserManagement from "@/components/views/teacher/tUserManagement"
+import tInformationManagement from "@/components/views/teacher/tInformationManagement";
+import tProjectManager from "@/components/views/teacher/tProjectManger"
 Vue.use(Router)
 
 let router = new Router({
@@ -80,6 +87,45 @@ let router = new Router({
             path: '/adsac',
             name: 'forbid',
             component: ForbidIndex,
+        },
+
+        {
+            path: '/teacher',
+            name: 'teacherIndex',
+            component: TeacherIndex,
+            children: [
+                {
+                    path: '/teacher/index',
+                    name: 'index',
+                    component: tStudentInformation,
+                    meta: {
+                        title: 'teacher'
+                    }
+                },
+                {
+                    path: '/teacher/contest',
+                    name: 'contest',
+                    component: tInformationManagement,
+                    meta: {
+                        title: 'teacher'
+                    }
+                },
+                {
+                    path: '/teacher/userManagement',
+                    name: 'userManagement',
+                    component: tUserManagement,
+                },
+                {
+                    path: '/teacher/active',
+                    name: 'active',
+                    component: tActiveManagement,
+                },
+                {
+                    path: '/teacher/project',
+                    name: 'project',
+                    component: tProjectManager,
+                }
+            ]
         }
 
     ]
