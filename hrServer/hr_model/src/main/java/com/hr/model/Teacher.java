@@ -1,7 +1,13 @@
 package com.hr.model;
 
 
-public class Teacher {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
+
+public class Teacher implements UserDetails {
 
     private String tName;
 
@@ -12,6 +18,21 @@ public class Teacher {
     private String tPhone;
 
     private String tDepartment;
+
+    private List<Role> roles; // 保存全部的角色
+    private String password;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public Teacher(String tName, String tNo, String tMajor, String tPhone, String tDepartment) {
         this.tName = tName;
@@ -76,6 +97,39 @@ public class Teacher {
                 '}';
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles;
+    }
 
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.tNo;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }

@@ -11,4 +11,5 @@ public interface ActiveMapper {
 
     public List<Active>getThreeActive();
     public int deleteOneById(Active active);
+    public List<Active>queryActiveByTitle(String title);
 }

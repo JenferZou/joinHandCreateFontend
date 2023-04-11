@@ -257,7 +257,26 @@ export default {
 
     },
     search(){
-
+      let params = {
+        page: this.currentPage,
+        limit: this.pageSize,
+        title:this.title
+      }
+      this.$http({
+        url: this.$http.adornUrl('/admin/searchActive'),
+        method: 'get',
+        params: this.$http.adornParams(params),
+        headers:{
+          'UserToken':window.sessionStorage.getItem('Token'),
+        }
+      }).then(({data}) => {
+        if (data) {
+          this.pageNum = data.totalPages
+          this.activeData = data.content
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
     },
     display(){
       this.dialogVisible=true

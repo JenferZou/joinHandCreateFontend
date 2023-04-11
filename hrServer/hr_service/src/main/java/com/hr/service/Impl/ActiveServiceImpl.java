@@ -6,6 +6,7 @@ import com.hr.mapper.ActiveMapper;
 import com.hr.model.Active;
 import com.hr.model.Manager;
 import com.hr.model.PageResult;
+import com.hr.model.Project;
 import com.hr.service.ActiveService;
 import com.hr.utils.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,13 @@ public class ActiveServiceImpl implements ActiveService {
     @Override
     public int deleteOneById(Active active) {
         return activeMapper.deleteOneById(active);
+    }
+
+    @Override
+    public PageResult searchActive(String title, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        List<Active> actives=activeMapper.queryActiveByTitle(title);
+        PageInfo<Active> pageInfo=new PageInfo<>(actives);
+        return PageUtil.getPageResult(pageInfo);
     }
 }

@@ -13,9 +13,12 @@
     <select id="getThreeActive" resultType="com.hr.model.Active">
         select id, title, type, activeTime, activeDuration, content, points, remark  from active order by activeTime desc limit 0,3
     </select>
-
-
     <delete id="deleteOneById">
         delete from active where id=#{id}
     </delete>
+
+    <select id="queryActiveByTitle" resultType="com.hr.model.Active">
+        select id, title, type, activeTime, activeDuration, content, points, remark from active
+        where title=#{title}
+    </select>
 </mapper>

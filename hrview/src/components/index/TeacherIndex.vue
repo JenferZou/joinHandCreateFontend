@@ -8,13 +8,7 @@
                 <i-col span="1">
                     <div style="padding-top: 10px;">
                         <MyAvatar/>
-                        <!--            <el-dropdown  size="small">
-                                <el-avatar  icon="el-icon-user-solid"></el-avatar>
-                                      <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item>个人主页</el-dropdown-item>
-                                        <el-dropdown-item>退出登录</el-dropdown-item>
-                                      </el-dropdown-menu>
-                                    </el-dropdown>-->
+
                     </div>
                 </i-col>
             </i-row>

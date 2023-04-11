@@ -132,7 +132,7 @@ let router = new Router({
             children: [
                 {
                     path: '/teacher/index',
-                    name: 'index',
+                    name: 'tindex',
                     component: tStudentInformation,
                     meta: {
                         title: 'teacher'
@@ -140,7 +140,7 @@ let router = new Router({
                 },
                 {
                     path: '/teacher/contest',
-                    name: 'contest',
+                    name: 'tcontest',
                     component: tInformationManagement,
                     meta: {
                         title: 'teacher'
@@ -148,17 +148,17 @@ let router = new Router({
                 },
                 {
                     path: '/teacher/userManagement',
-                    name: 'userManagement',
+                    name: 'tuserManagement',
                     component: tUserManagement,
                 },
                 {
                     path: '/teacher/active',
-                    name: 'active',
+                    name: 'tactive',
                     component: tActiveManagement,
                 },
                 {
                     path: '/teacher/project',
-                    name: 'project',
+                    name: 'tproject',
                     component: tProjectManager,
                 }
             ]
@@ -176,6 +176,38 @@ Router.prototype.push = function push(to) {
 // to 将要访问的路径
 // from 代表从哪个路径跳转而来
 // next 是个函数，表示放行 next() 放行  next('/login') 强制跳转
+/*router.beforeEach((to, from, next) => {
+    let role = window.sessionStorage.getItem("role")
+    let i = to.path.indexOf('/') + 1
+    let j = to.path.substring(1).indexOf('/') === -1 ? to.path.substring(1).length : to.path.substring(1).indexOf('/')
+    j += 1
+    if (to.path === '/') {
+        //window.sessionStorage.removeItem('Token')
+        //window.sessionStorage.removeItem('role')
+        next()
+    } else {
+        let user = window.sessionStorage.getItem('Token')
+        if (!user) {
+            next({
+                path: '/'
+            })
+        } else if (to.path === '/adsac') {
+            next()
+        } else {
+            if (role === '管理员' && to.path.substring(i, j) !== 'admin') {
+                next({
+                    path: '/adsac'
+                })
+            } else if (role === '用户' && to.path.substring(i, j) !== 'student') {
+                next({
+                    path: '/adsac'
+                })
+            } else {
+                next()
+            }
+        }
+    }
+});*/
 router.beforeEach((to, from, next) => {
     let role = window.sessionStorage.getItem("role")
     let i = to.path.indexOf('/') + 1
@@ -199,6 +231,10 @@ router.beforeEach((to, from, next) => {
                     path: '/adsac'
                 })
             } else if (role === '用户' && to.path.substring(i, j) !== 'student') {
+                next({
+                    path: '/adsac'
+                })
+            }else if(role === '教师' && to.path.substring(i, j) !== 'teacher'){
                 next({
                     path: '/adsac'
                 })

@@ -156,7 +156,11 @@ public class AdminController {
         else
             return RespBean.error("删除失败");
     }
-
+    @GetMapping("searchActive")
+    public PageResult searchActive(@RequestParam("title") String title,
+                                    @RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
+        return activeService.searchActive(title, page, limit);
+    }
     @GetMapping("project")
     public PageResult queryAllProject(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         return projectService.getAllProject(page, limit);

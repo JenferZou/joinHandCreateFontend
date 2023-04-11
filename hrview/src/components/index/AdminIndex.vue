@@ -41,7 +41,7 @@
           </i-submenu>
           <i-submenu name="3">
             <template slot="title">
-              <i-icon type="ios-analytics"></i-icon>
+              <i-icon type="ios-person-outline"></i-icon>
               系统管理
             </template>
             <i-menu-item name="userManagement">用户管理</i-menu-item>

@@ -57,8 +57,7 @@ export default{
                       sessionStorage.setItem("Token",data.obj.token)
                       this.$message.success(data.msg)
                       data.obj.Role.forEach((item)=>{
-                        if(item.title==='管理员')
-                        {
+                        if(item.title==='管理员'){
                           sessionStorage.setItem("role",item.title)
                           this.$router.push({
                             name:'adminIndex'
@@ -67,6 +66,11 @@ export default{
                           sessionStorage.setItem("role",item.title)
                           this.$router.push({
                             name:'StudentIndex'
+                          })
+                        }else if(item.title==='教师'){
+                          sessionStorage.setItem("role",item.title)
+                          this.$router.push({
+                            name:'teacher'
                           })
                         }
                       })

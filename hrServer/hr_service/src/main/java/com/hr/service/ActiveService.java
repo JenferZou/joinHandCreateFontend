@@ -11,4 +11,5 @@ public interface ActiveService {
 
     public List<Active> getThreeActive();
     public int deleteOneById(Active active);
+    public PageResult searchActive(String title,Integer page,Integer limit);
 }

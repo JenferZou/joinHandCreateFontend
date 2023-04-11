@@ -2,9 +2,11 @@ package com.hr.service.Impl;
 
 import com.hr.mapper.AdminMapper;
 import com.hr.mapper.StudentMapper;
+import com.hr.mapper.TeacherMapper;
 import com.hr.model.Manager;
 import com.hr.model.Role;
 import com.hr.model.Student;
+import com.hr.model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,10 +22,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private AdminMapper adminMapper;
     @Autowired
     private StudentMapper studentMapper;
+    @Autowired
+    private TeacherMapper teacherMapper;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Manager manager = adminMapper.getUserByUserName(username);
         Student student=studentMapper.getStudentBySno(username);
+        Teacher teacher=teacherMapper.getTeacherBySno(username);
         if (ObjectUtils.isEmpty(manager)&&ObjectUtils.isEmpty(student)) {
             //抛异常
             throw  new UsernameNotFoundException("根据用户名找不到该用户的信息！");
@@ -33,6 +38,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             List<Role> list = adminMapper.getUserRolesByUserId(manager.getgNo());
             manager.setRoles(list);
             return manager;
+        }
+        if(!ObjectUtils.isEmpty(teacher)) {
+            //获取角色权限
+            List<Role> list = adminMapper.getUserRolesByUserId(teacher.gettNo());
+            teacher.setRoles(list);
+            return teacher;
         }
         List<Role> list =adminMapper.getUserRolesByUserId(student.getSno());
         student.setRoles(list);

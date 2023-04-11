@@ -112,6 +112,7 @@ public class SecurityConfig {
                 // 下面开始设置权限
                 .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN") // ADMIN角色可以访问
                 .antMatchers("/student/**").hasRole("USER")
+                .antMatchers("/teacher/**").hasRole("TEACHER")
                 .anyRequest().authenticated() // 请求认证访问
                 .and().addFilterBefore(this.authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class)
                 // 认证用户时用户信息加载配置，注入springAuthUserService
