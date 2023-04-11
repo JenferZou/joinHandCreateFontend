@@ -20,6 +20,13 @@ import myProjectSearch from "@/components/views/StudentView/myProjectSearch";
 
 import ProjectManger from "@/components/views/admin/projectManger";
 
+import TeacherIndex from "@/components/index/TeacherIndex.vue";
+import tStudentInformation from "@/components/views/teacher/tStudentInformation";
+import tActiveManagement from "@/components/views/teacher/tActiveManagement";
+// import tStudentSearch from "@/components/views/teacher/tStudentSearch"
+import tUserManagement from "@/components/views/teacher/tUserManagement"
+import tInformationManagement from "@/components/views/teacher/tInformationManagement";
+import tProjectManager from "@/components/views/teacher/tProjectManger"
 Vue.use(Router)
 
 let router = new Router({
@@ -116,6 +123,45 @@ let router = new Router({
             path: '/adsac',
             name: 'forbid',
             component: ForbidIndex,
+        },
+
+        {
+            path: '/teacher',
+            name: 'teacherIndex',
+            component: TeacherIndex,
+            children: [
+                {
+                    path: '/teacher/index',
+                    name: 'index',
+                    component: tStudentInformation,
+                    meta: {
+                        title: 'teacher'
+                    }
+                },
+                {
+                    path: '/teacher/contest',
+                    name: 'contest',
+                    component: tInformationManagement,
+                    meta: {
+                        title: 'teacher'
+                    }
+                },
+                {
+                    path: '/teacher/userManagement',
+                    name: 'userManagement',
+                    component: tUserManagement,
+                },
+                {
+                    path: '/teacher/active',
+                    name: 'active',
+                    component: tActiveManagement,
+                },
+                {
+                    path: '/teacher/project',
+                    name: 'project',
+                    component: tProjectManager,
+                }
+            ]
         }
 
     ]
@@ -130,35 +176,35 @@ Router.prototype.push = function push(to) {
 // to 将要访问的路径
 // from 代表从哪个路径跳转而来
 // next 是个函数，表示放行 next() 放行  next('/login') 强制跳转
-// router.beforeEach((to, from, next) => {
-//     let role = window.sessionStorage.getItem("role")
-//     let i = to.path.indexOf('/') + 1
-//     let j = to.path.substring(1).indexOf('/') === -1 ? to.path.substring(1).length : to.path.substring(1).indexOf('/')
-//     j += 1
-//     if (to.path === '/') {
-//         //window.sessionStorage.removeItem('Token')
-//         //window.sessionStorage.removeItem('role')
-//         next()
-//     } else {
-//         let user = window.sessionStorage.getItem('Token')
-//         if (!user) {
-//             next({
-//                 path: '/'
-//             })
-//         } else if (to.path === '/adsac') {
-//             next()
-//         } else {
-//             if (role === '管理员' && to.path.substring(i, j) !== 'admin') {
-//                 next({
-//                     path: '/adsac'
-//                 })
-//             } else if (role === '用户' && to.path.substring(i, j) !== 'student') {
-//                 next({
-//                     path: '/adsac'
-//                 })
-//             } else {
-//                 next()
-//             }
-//         }
-//     }
-// });
+router.beforeEach((to, from, next) => {
+    let role = window.sessionStorage.getItem("role")
+    let i = to.path.indexOf('/') + 1
+    let j = to.path.substring(1).indexOf('/') === -1 ? to.path.substring(1).length : to.path.substring(1).indexOf('/')
+    j += 1
+    if (to.path === '/') {
+        //window.sessionStorage.removeItem('Token')
+        //window.sessionStorage.removeItem('role')
+        next()
+    } else {
+        let user = window.sessionStorage.getItem('Token')
+        if (!user) {
+            next({
+                path: '/'
+            })
+        } else if (to.path === '/adsac') {
+            next()
+        } else {
+            if (role === '管理员' && to.path.substring(i, j) !== 'admin') {
+                next({
+                    path: '/adsac'
+                })
+            } else if (role === '用户' && to.path.substring(i, j) !== 'student') {
+                next({
+                    path: '/adsac'
+                })
+            } else {
+                next()
+            }
+        }
+    }
+});
