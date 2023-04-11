@@ -103,6 +103,8 @@
 
                 <i-col span="10">
                   <div class="mes" style="background-color: #fff;height: 295px">
+                    <i-col style="height: 295px;background-color: #fff;text-align: center; border-bottom: 1px dashed #c0c0c0">
+
                     <i-col style="height: 45px">
                       <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon> 消息通知</i-col>
                     </i-col>
@@ -117,6 +119,7 @@
                       <i-col span="8">{{item.activeTime}}</i-col>
 
                     </i-col>
+                    </i-col>
                   </div>
 
 
@@ -127,6 +130,8 @@
 
 
               <i-row  class="centercontent">
+                <i-col style="height: 295px;background-color: #fff;text-align: center; border-bottom: 1px dashed #c0c0c0">
+
                 <i-col span="24">
                   <div class="mes" >
                     <i-col style="height: 45px">
@@ -135,28 +140,32 @@
                     </i-col>
 
                     <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                      <i-col span="8">项目名称</i-col>
-                      <i-col span="8">项目指导老师</i-col>
-                      <i-col span="8">报名时间</i-col>
+                      <i-col span="6">项目名称</i-col>
+                      <i-col span="6">专业需求</i-col>
+                      <i-col span="6">项目指导老师</i-col>
+                      <i-col span="6">报名时间</i-col>
                     </i-col>
 
                     <el-empty  v-if="project == undefined ||project == null || project.length <= 0" description="暂无信息"  style="size: 10px"></el-empty>
 
-                    <i-col  v-for="item in company" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                      <i-col span="8">{{ item.name }}</i-col>
-                      <i-col span="8">{{ item.post }}</i-col>
-                      <i-col span="8">{{item.salary}}元</i-col>
+                    <i-col  v-for="item in project" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                      <i-col span="6">{{ item.name }}</i-col>
+                      <i-col span="6">{{item.needMajor}}</i-col>
+                      <i-col span="6">{{ item.mentor }}</i-col>
+                      <i-col span="6">{{item.startTime}}</i-col>
                     </i-col>
 
 
                   </div>
                 </i-col>
+                </i-col>
               </i-row>
 
 
-              <i-row  class="footcontent" :gutter="16">
+              <i-row  class="footcontent" :gutter="16" >
+
                 <i-col span="12">
-                  <div class="mes" style="background-color: #fff">
+                  <div class="mes" style="background-color: #fff;min-height: 295px">
                     <i-col style="height: 45px">
                       <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread">
 
@@ -167,8 +176,8 @@
 
                     <i-col style="height: 50px;background-color: #fff;text-align: center; border-bottom: 1px dashed #c0c0c0">
                       <i-col span="8" >考试类别</i-col>
-                      <i-col span="8">考试信息</i-col>
-                      <i-col span="8">考试时间</i-col>
+                      <i-col span="8">报名时间</i-col>
+                      <i-col span="8">截止时间</i-col>
                     </i-col>
 
 
@@ -177,8 +186,8 @@
 
                     <i-col   v-for="item in contest1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
                       <i-col span="8">{{ item.title }}</i-col>
-                      <i-col span="8">{{ item.content }}</i-col>
-                      <i-col span="8">{{item.startTime}}</i-col>
+                      <i-col span="8">{{ item.startTime }}</i-col>
+                      <i-col span="8">{{item.endTime}}</i-col>
 
                     </i-col>
 
@@ -189,26 +198,28 @@
 
 
                 <i-col span="12">
-                  <div class="mes" style="background-color: #fff">
+                  <div class="mes" style="background-color: #fff;min-height: 295px">
                     <i-col style="height: 45px">
                       <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon>    最新实践活动信息</i-col>
                     </i-col>
                     <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0">
                       <i-col span="8">活动名称</i-col>
-                      <i-col span="8">活动内容</i-col>
-                      <i-col span="8">活动时间</i-col>
+                      <i-col span="8">活动报名时间</i-col>
+                      <i-col span="8">活动时长</i-col>
                     </i-col>
+
 
                     <el-empty v-if="active1 == undefined ||active1 == null || active1.length <= 0 " description="暂无信息" ></el-empty>
 
                     <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
                       <i-col span="8">{{ item.title }}</i-col>
-                      <i-col span="8">{{ item.content }}</i-col>
-                      <i-col span="8">{{item.activeTime}}</i-col>
+                      <i-col span="8">{{ item.activeTime }}</i-col>
+                      <i-col span="8">{{item.activeDuration}}</i-col>
 
                     </i-col>
                   </div>
                 </i-col>
+
               </i-row>
 
 
@@ -261,16 +272,34 @@ export default {
         sPhone: '11011100',
         sDepartment:'计算机与智能教育学院',
         className:'软件2班'
-      }
+      },
     }
   },
   created(){
     this.loadContest()
     this.loadActive()
     this.loadStudent()
+    this.loadProject()
   },
   methods: {
+    loadProject() {
+      this.$http({
+        url: this.$http.adornUrl('/student/project'),
+        method: 'get',
+        params:this.$http.adornParams(),
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        console.log(data)
+        this.project=data
 
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+    },
     loadContest() {
       this.$http({
         url: this.$http.adornUrl('/student/contest'),

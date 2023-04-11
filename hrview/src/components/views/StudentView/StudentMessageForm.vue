@@ -97,16 +97,16 @@
           <el-dialog :visible.sync="editDialogVisible" title="编辑个人信息" :before-close="beforeClose">
             <el-form :model="info" label-position="left" label-width="100px" :rules="rules" ref="infoForm">
               <el-form-item label="姓名" prop="sName">
-                <el-input v-model="info.sName"></el-input>
+                <el-input v-model="info.sName" :disabled="true"></el-input>
               </el-form-item>
               <el-form-item label="性别" prop="gender">
                 <el-radio-group v-model="info.gender">
-                  <el-radio label="男">男</el-radio>
-                  <el-radio label="女">女</el-radio>
+                  <el-radio label="男" :disabled="true">男</el-radio>
+                  <el-radio label="女" :disabled="true">女</el-radio>
                 </el-radio-group>
               </el-form-item>
               <el-form-item label="学号" prop="sno">
-                <el-input v-model="info.sno"></el-input>
+                <el-input v-model="info.sno" :disabled="true"></el-input>
               </el-form-item>
               <el-form-item label="联系电话" prop="sPhone">
                 <el-input v-model="info.sPhone"></el-input>
@@ -118,7 +118,7 @@
                 <el-input v-model="info.rPhone"></el-input>
               </el-form-item>
               <el-form-item label="专业" prop="sMajor">
-                <el-input v-model="info.sMajor"></el-input>
+                <el-input v-model="info.sMajor" :disabled="true"></el-input>
               </el-form-item>
               <el-form-item label="指导教师" prop="mentor">
                 <el-input v-model="info.mentor"></el-input>
@@ -150,7 +150,7 @@
 
             </el-form>
             <div slot="footer" class="dialog-footer">
-              <el-button @click="editDialogVisible = false">取消</el-button>
+              <el-button @click="cancle">取消</el-button>
               <el-button type="primary" @click="saveInfo">保存</el-button>
             </div>
           </el-dialog>
@@ -251,23 +251,51 @@ export default {
       })
     },
 
+    cancle(){
+      this.editDialogVisible = false
+      this.load()
+
+    },
 
     editInfo() {
       this.editDialogVisible = true
-      this.info = {}
     },
     beforeClose(done) {
       this.$refs.infoForm.validate(valid => {
         if (valid) {
           done()
         } else {
-          this.$message.error('表单验证不通过，请检查输入项')
+          this.editDialogVisible = false
+          this.load()
+
+          // this.$message.error('表单验证不通过，请检查输入项')
         }
       })
     },
     saveInfo() {
       this.$refs.infoForm.validate(valid => {
         if (valid) {
+          this.$http({
+            url: this.$http.adornUrl('/student/editMessage'),
+            method: 'post',
+            data:this.$http.adornData(this.info),
+            headers: {
+              'UserToken':window.sessionStorage.getItem('Token'),
+              'Content-Type': 'application/json',
+              'charset': 'utf-8'
+            }
+          }).then(({data}) => {
+            if (data&&data.status===200) {
+              this.$message.success(data.msg)
+              this.awardExperiencedialog=false
+
+            }else{
+              this.$message.error(data.msg)
+            }
+          }).catch(() => {
+            console.log('出错啦！！！！')
+          })
+
           this.editDialogVisible = false
           this.$message.success('个人信息已保存')
         } else {
@@ -275,6 +303,9 @@ export default {
         }
       })
     },
+
+
+
   }
 }
 </script>

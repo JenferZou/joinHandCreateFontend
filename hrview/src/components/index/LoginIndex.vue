@@ -66,7 +66,7 @@ export default{
                         }else if(item.title==='用户'){
                           sessionStorage.setItem("role",item.title)
                           this.$router.push({
-                            name:'student'
+                            name:'StudentIndex'
                           })
                         }
                       })

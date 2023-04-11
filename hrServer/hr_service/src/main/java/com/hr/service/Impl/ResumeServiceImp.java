@@ -16,4 +16,15 @@ public class ResumeServiceImp implements ResumeService {
     public Resume getResumeByid(String resumeId) {
         return resumeMapper.getResumeByid(resumeId);
     }
+
+
+    @Override
+    public int updateAll(Resume resume) {
+        return resumeMapper.updateAll(resume);
+    }
+
+    @Override
+    public int insertResume(String resumeId, String sno) {
+         return resumeMapper.insertResume(resumeId,sno);
+    }
 }

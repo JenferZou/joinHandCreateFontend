@@ -17,18 +17,19 @@
                     <img data-v-b8fe8cbc="" src="https://zcplan.oss-cn-shenzhen.aliyuncs.com/man.png" alt="" class="avatar">
                     <div class="baseMes">
                       <h5  class="name" style="font-size: 20px;color: #2a303c">
-                        邹景峰
+                        {{ studentInfo.sName }}
                         <span class="student"
                               style="color: #dcb93c;
                               border: 1px solid #fed305;
                              background: -webkit-linear-gradient(left, #fcfff0, #fcfec4);
                              background: linear-gradient(90deg, #fcfff0, #fcfec4);margin-left: 10px">学生</span>
                       </h5>
-                      <div  class="personal-mes">本科<span style="margin: 0 14px;color: #e6e6e6">|</span>
-                        湛江<span style="margin: 0 14px;color: #e6e6e6">|</span> 19岁
-                        <span style="margin: 0 14px;color: #e6e6e6">|</span> 暂无工作经验</div>
+                      <div  class="personal-mes">{{ studentInfo.gender }}<span style="margin: 0 14px;color: #e6e6e6">|</span>
+                        {{ studentInfo.sDepartment }}<span style="margin: 0 14px;color: #e6e6e6">|</span>{{studentInfo.sMajor }}
+                        <span style="margin: 0 14px;color: #e6e6e6">|</span> {{studentInfo.className}}</div>
                       <div  class="contact-mes">
-                        +8613043491174 1634114623@qq.com</div>
+                        <i-icon type="ios-telephone"></i-icon> +86{{ studentInfo.sPhone }} <i-icon type="android-chat"></i-icon>
+                        微信：{{ resume.wechatId }}</div>
                     </div>
                     <div  class="edit-mes" style="color: #02B28B;display: flex;margin-left: auto;font-size: 12px; cursor: pointer">
                     </div>
@@ -78,8 +79,8 @@
                       <div  class="right">
                       </div>
                     </div>
-                    <div  class="advantage-con" v-if="resume.educationExperience"><p  class="edit-show-content" style="max-width: 718px;">
-                      {{ resume.educationExperience }}
+                    <div  class="advantage-con" v-if="resume.internshipExperience"><p  class="edit-show-content" style="max-width: 718px;">
+                      {{ resume.internshipExperience }}
                     </p> <div class="fixed-edit"><div class="edit-show-action-wrap">
                       </div></div></div>
                   </li>
@@ -97,8 +98,8 @@
                       <div  class="right">
                       </div>
                     </div>
-                    <div  class="advantage-con" v-if="resume.educationExperience"><p  class="edit-show-content" style="max-width: 718px;">
-                      {{ resume.educationExperience }}
+                    <div  class="advantage-con" v-if="resume.certificate"><p  class="edit-show-content" style="max-width: 718px;">
+                      {{ resume.certificate }}
                     </p> <div class="fixed-edit"><div class="edit-show-action-wrap">
                       </div></div></div>
                   </li>
@@ -141,28 +142,66 @@ export default {
   data() {
     return {
       data: 0,
-      resume:{
-        resumeId:'',
-        wechatId:'',
-        politicsStatus:'',
-        personalAdvantage:'...',
-        internshipExperience:'',
-        projectExperience:'',
-        awardExperience:'',
-        certificate:''
+      resume: {
+        resumeId: '',
+        wechatId: '',
+        politicsStatus: '',
+        personalAdvantage: '...',
+        internshipExperience: '',
+        projectExperience: '',
+        awardExperience: '',
+        certificate: ''
       },
-      studentInfo:{
+      studentInfo: {
         sName: '张三',
         gender: '男',
         sno: '123123',
         sMajor: '软件工程',
         sPhone: '11011100',
-        sDepartment:'计算机与智能教育学院',
-        className:'软件2班'
+        sDepartment: '计算机与智能教育学院',
+        className: '软件2班'
       },
 
     };
   },
+  created() {
+
+    this.loadResume()
+    this.loadStudent()
+  },
+  methods: {
+    loadStudent() {
+      this.$http({
+        url: this.$http.adornUrl('/student/StudentMessageForm'),
+        method: 'get',
+        headers: {
+          'UserToken': window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        this.studentInfo = data
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+    },
+    loadResume() {
+      this.$http({
+        url: this.$http.adornUrl('/student/StudentResume'),
+        method: 'get',
+        headers: {
+          'UserToken': window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        this.resume = data
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+
+    },
+  }
 }
 </script>
 

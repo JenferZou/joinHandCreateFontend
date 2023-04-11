@@ -9,4 +9,5 @@ public interface ProjectMapper {
     public List<Project> getAllProject();
     public int deleteOneById(Project project);
     public List<Project> queryProjectByTitle(String title);
+    public List<Project> getThreeProject();
 }

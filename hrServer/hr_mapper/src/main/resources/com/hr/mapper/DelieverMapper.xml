@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.mapper.DelieverMapper">
+
+    <insert id="addDelievet">
+        insert into delieverresume (id, sno, projectName, sName, sMajor, pid, tno, content, mark,mentor) values
+(#{id},#{sno},#{projectName},#{sName},#{sMajor},#{pid},#{tno},#{content},#{mark},#{mentor});
+    </insert>
+
+    <select id="queryAllDeliever" resultType="com.hr.model.Deliever">
+select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where tno=#{tno};
+    </select>
+    <select id="queryaccessDeliever" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and mark = 1;
+
+    </select>
+
+    <select id="querynoaccessDeliever" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and mark = -1;
+
+    </select>
+
+    <select id="querywaitDeliever" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and mark = 0;
+
+    </select>
+    <select id="queryOneStudentAllDeliever" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} ;
+
+    </select>
+
+    <select id="querySameaccessDeliever" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and pid=#{pid} and mark = 1;
+
+    </select>
+
+    <select id="querySamenoaccessDeliever" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and pid=#{pid} and mark = -1;
+
+    </select>
+
+    <select id="querySamewaitDeliever" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and pid=#{pid} and mark = 0;
+
+    </select>
+    <select id="searchDelieverByPname" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where projectName=#{title};
+    </select>
+
+    <select id="getAllDeliever" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume
+    </select>
+
+
+</mapper>

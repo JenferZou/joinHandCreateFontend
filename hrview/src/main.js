@@ -39,7 +39,11 @@ import {
   DropdownMenu,
   DropdownItem,
   Dropdown,
-  Empty
+  Empty,
+    Collapse,
+  CollapseItem,
+    Tag,
+
 } from "element-ui";
 import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb,Layout,Content,Sider} from 'iview'
 import axios from "axios";
@@ -84,6 +88,10 @@ Vue.component('el-aside',Aside);
 Vue.component('el-header',Header);
 Vue.component('el-main',Main);
 Vue.component('el-footer',Footer);
+Vue.component('el-collapse',Collapse);
+Vue.component('el-collapse-item',CollapseItem)
+Vue.component('el-tag',Tag)
+
 
 Vue.use(VueQuillEditor)
 

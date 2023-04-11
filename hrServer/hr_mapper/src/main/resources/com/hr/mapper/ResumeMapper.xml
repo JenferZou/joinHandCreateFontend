@@ -3,11 +3,76 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hr.mapper.ResumeMapper">
+<!--    <update id="updateResumeadvantage" parameterType="com.hr.model.Resume">-->
+<!--        update resume set personalAdvantage = #{advantage}-->
+<!--    </update>-->
+<!--    <update id="updateWechat " parameterType="com.hr.model.Resume">-->
+<!--        update resume set wechatId = #{Wechat}-->
+
+<!--    </update>-->
+<!--    <update id="updatepoliticsStatus" parameterType="com.hr.model.Resume">-->
+<!--        update resume set politicsStatus = #{politicsStatus}-->
+
+<!--    </update>-->
+
+<!--    <update id="updateinternshipExperience" parameterType="com.hr.model.Resume">-->
+<!--        update resume set internshipExperience = #{internshipExperience}-->
+
+<!--    </update>-->
+<!--    <update id="updateawardExperience" parameterType="com.hr.model.Resume">-->
+<!--        update resume set awardExperience = #{awardExperience}-->
+
+<!--    </update>-->
+<!--    <update id="updateprojectExperience" parameterType="com.hr.model.Resume">-->
+<!--        update resume set projectExperience = #{projectExperience}-->
+
+<!--    </update>-->
+<!--    <update id="updatecertificate" parameterType="com.hr.model.Resume">-->
+<!--        update resume set certificate = #{certificate}-->
+
+<!--    </update>-->
+<!--    <update id="updateWechat">-->
+<!--        update resume set wechatId = #{Wechat}-->
+<!--    </update>-->
+    <update id="updateAll" parameterType="com.hr.model.Resume">
+        update resume  <set >
+        <if test="wechatId != null" >
+            wechatId = #{wechatId},
+        </if>
+        <if test="politicsStatus != null" >
+            politicsStatus = #{politicsStatus},
+        </if>
+        <if test="personalAdvantage != null" >
+            personalAdvantage = #{personalAdvantage},
+        </if>
+        <if test="internshipExperience != null" >
+            internshipExperience = #{internshipExperience},
+        </if>
+
+        <if test="awardExperience != null" >
+            awardExperience = #{awardExperience},
+        </if>
+        <if test="projectExperience != null" >
+            projectExperience = #{projectExperience},
+        </if>
+        <if test="certificate != null" >
+            certificate = #{certificate},
+        </if>
+
+    </set>
+where resumeId = #{resumeId}
+
+
+    </update>
 
     <select id="getResumeByid" resultType="com.hr.model.Resume">
         select resumeId,wechatId,politicsStatus,personalAdvantage,internshipExperience,awardExperience,projectExperience,certificate
-from resume_table where resumeId =#{ResumeId}
+from resume where resumeId =#{ResumeId}
     </select>
 
+
+    <insert id="insertResume" >
+        insert into resume (resumeId,sno) values (#{resumeId},#{sno})
+    </insert>
 
 </mapper>

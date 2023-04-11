@@ -17,7 +17,7 @@
         select id,title,remark,startTime,endTime,content from contest where title like concat('%',#{title},'%')
     </select>
     <select id="queryThreeContest" resultType="com.hr.model.Contest">
-        select id,title,remark,startTime,endTime,content from contest limit 0,3
+        select id,title,remark,startTime,endTime,content from contest order by startTime desc limit 0,3
     </select>
 
     <delete id="removeMultiple">

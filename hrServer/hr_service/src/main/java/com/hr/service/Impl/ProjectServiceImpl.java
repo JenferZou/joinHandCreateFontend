@@ -38,4 +38,9 @@ public class ProjectServiceImpl implements ProjectService {
         PageInfo<Project> pageInfo=new PageInfo<>(projects);
         return PageUtil.getPageResult(pageInfo);
     }
+
+    @Override
+    public List<Project> getThreeProject() {
+        return projectMapper.getThreeProject();
+    }
 }

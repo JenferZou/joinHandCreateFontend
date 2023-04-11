@@ -2,6 +2,8 @@ package com.hr.model;
 
 public class Project {
 
+    private String expectedCompetition;
+
     private String id;
 
     private String name;
@@ -12,28 +14,30 @@ public class Project {
 
     private String content;
 
-    private int needCount;
-
-    private int resNumber;
-
-    private int nowNumber;
+    private String tno;
 
     private String needMajor;
 
     public Project() {
     }
 
-
-    public Project(String id, String name, String mentor, String startTime, String content, int needCount, int resNumber, int nowNumber, String needMajor) {
+    public Project(String expectedCompetition, String id, String name, String mentor, String startTime, String content, String tno, String needMajor) {
+        this.expectedCompetition = expectedCompetition;
         this.id = id;
         this.name = name;
         this.mentor = mentor;
         this.startTime = startTime;
         this.content = content;
-        this.needCount = needCount;
-        this.resNumber = resNumber;
-        this.nowNumber = nowNumber;
+        this.tno = tno;
         this.needMajor = needMajor;
+    }
+
+    public String getExpectedCompetition() {
+        return expectedCompetition;
+    }
+
+    public void setExpectedCompetition(String expectedCompetition) {
+        this.expectedCompetition = expectedCompetition;
     }
 
     public String getId() {
@@ -76,28 +80,12 @@ public class Project {
         this.content = content;
     }
 
-    public int getNeedCount() {
-        return needCount;
+    public String getTno() {
+        return tno;
     }
 
-    public void setNeedCount(int needCount) {
-        this.needCount = needCount;
-    }
-
-    public int getResNumber() {
-        return resNumber;
-    }
-
-    public void setResNumber(int resNumber) {
-        this.resNumber = resNumber;
-    }
-
-    public int getNowNumber() {
-        return nowNumber;
-    }
-
-    public void setNowNumber(int nowNumber) {
-        this.nowNumber = nowNumber;
+    public void setTno(String tno) {
+        this.tno = tno;
     }
 
     public String getNeedMajor() {
@@ -107,7 +95,4 @@ public class Project {
     public void setNeedMajor(String needMajor) {
         this.needMajor = needMajor;
     }
-
-
-
 }

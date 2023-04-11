@@ -21,43 +21,42 @@
         </i-menu-item>
       </div>
     </i-menu>
-    <i-menu mode="horizontal" active-name="1">
+    <i-menu mode="horizontal" active-name="1" @on-select="editMes">
       <div class="layout-assistant">
-        <i-menu-item name="1">主页</i-menu-item>
-        <i-menu-item name="StudentMessageForm">个人信息</i-menu-item>
-        <i-menu-item name="3" >实践经历</i-menu-item>
-        <i-menu-item name="StudentResume">个人简历</i-menu-item>
+        <i-menu-item name="StudentIndex">主页</i-menu-item>
+        <i-menu-item name="StudentMessage">个人信息</i-menu-item>
+        <i-menu-item name="StudentResumePreview">个人简历</i-menu-item>
         <i-menu-item name="5">消息通知</i-menu-item>
       </div>
     </i-menu>
     <div class="layout-content">
       <i-row>
         <i-col span="5">
-          <i-menu active-name="1-2" width="auto" :open-names="['1']">
+          <i-menu active-name="1-2" width="auto" :open-names="['1']" @on-select="goWhere">
             <i-submenu name="1">
               <template slot="title">
                 <i-icon type="ios-navigate"></i-icon>
-                导航一
+                个人信息
               </template>
-              <i-menu-item name="1-1">选项 1</i-menu-item>
-              <i-menu-item name="1-2">选项 2</i-menu-item>
-              <i-menu-item name="1-3">选项 3</i-menu-item>
+              <i-menu-item name="StudentMessageForm">修改个人信息</i-menu-item>
+              <i-menu-item name="StudentResume">填充个人简历</i-menu-item>
+
             </i-submenu>
             <i-submenu name="2">
               <template slot="title">
                 <i-icon type="ios-keypad"></i-icon>
-                导航二
+                项目管理
               </template>
-              <i-menu-item name="2-1">选项 1</i-menu-item>
-              <i-menu-item name="2-2">选项 2</i-menu-item>
+              <i-menu-item name="projectSearch">项目大厅</i-menu-item>
+              <i-menu-item name="myProjectSearch">项目申请</i-menu-item>
             </i-submenu>
             <i-submenu name="3">
               <template slot="title">
                 <i-icon type="ios-analytics"></i-icon>
-                导航三
+                考证与实践活动信息
               </template>
-              <i-menu-item name="3-1">选项 1</i-menu-item>
-              <i-menu-item name="3-2">选项 2</i-menu-item>
+              <i-menu-item name="CertificateSearch">考证俱乐部</i-menu-item>
+              <i-menu-item name="ActiveSearch">实践活动查询</i-menu-item>
             </i-submenu>
           </i-menu>
         </i-col>
@@ -70,7 +69,6 @@
                   <h5>我的在线简历</h5>
                   <button class="preview">预览&下载</button>
                 </div>
-                <ResumeEdit ref="ResumeEdit"></ResumeEdit>
 
                 <!--                简历内容-->
                 <div class="resumecontent">
@@ -89,7 +87,7 @@
                       {{ studentInfo.sDepartment }}<span style="margin: 0 14px;color: #e6e6e6">|</span>{{studentInfo.sMajor }}
                       <span style="margin: 0 14px;color: #e6e6e6">|</span> {{studentInfo.className}}</div>
                       <div  class="contact-mes">
-                        <i-icon type="ios-telephone"></i-icon> +8613043491174 <i-icon type="android-chat"></i-icon>
+                        <i-icon type="ios-telephone"></i-icon> +86{{ studentInfo.sPhone }} <i-icon type="android-chat"></i-icon>
                         微信：{{ resume.wechatId }}</div>
                     </div>
 
@@ -114,7 +112,7 @@
                           </el-form-item>
                         </el-form>
                         <div slot="footer">
-                          <el-button @click="advantagedialog = false">取 消</el-button>
+                          <el-button @click="cancleadvantage">取 消</el-button>
                           <el-button type="primary" @click="submitadvantage">确 定</el-button>
                         </div>
                       </el-dialog>
@@ -148,8 +146,8 @@
                           </el-form-item>
                         </el-form>
                         <div slot="footer">
-                          <el-button @click="projectExperiencedialog = false">取 消</el-button>
-                          <el-button type="primary" @click="submitForm">确 定</el-button>
+                          <el-button @click="cancleprojectExp">取 消</el-button>
+                          <el-button type="primary" @click="submitprojectExp">确 定</el-button>
                         </div>
                       </el-dialog>
 
@@ -181,8 +179,8 @@
                           </el-form-item>
                         </el-form>
                         <div slot="footer">
-                          <el-button @click="internshipExperiencedialog = false">取 消</el-button>
-                          <el-button type="primary" @click="submitForm">确 定</el-button>
+                          <el-button @click="cancleinnternshipExpe">取 消</el-button>
+                          <el-button type="primary" @click="submitinnternshipExpe">确 定</el-button>
                         </div>
                       </el-dialog>
 
@@ -216,8 +214,8 @@
                           </el-form-item>
                         </el-form>
                         <div slot="footer">
-                          <el-button @click="certificatedialog = false">取 消</el-button>
-                          <el-button type="primary" @click="submitForm">确 定</el-button>
+                          <el-button @click="canclecertificate">取 消</el-button>
+                          <el-button type="primary" @click="submitcertificate">确 定</el-button>
                         </div>
                       </el-dialog>
 
@@ -249,8 +247,8 @@
                           </el-form-item>
                         </el-form>
                         <div slot="footer">
-                          <el-button @click="awardExperiencedialog = false">取 消</el-button>
-                          <el-button type="primary" @click="submitForm">确 定</el-button>
+                          <el-button @click="cancleaward">取 消</el-button>
+                          <el-button type="primary" @click="submitaward">确 定</el-button>
                         </div>
                       </el-dialog>
 
@@ -264,6 +262,7 @@
 
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -310,7 +309,45 @@ export default {
 
     };
   },
+
+  created(){
+
+    this.loadResume()
+    this.loadStudent()
+  },
   methods:{
+    loadStudent() {
+      this.$http({
+        url: this.$http.adornUrl('/student/StudentMessageForm'),
+        method: 'get',
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        this.studentInfo=data
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+    },
+    loadResume(){
+      this.$http({
+        url: this.$http.adornUrl('/student/StudentResume'),
+        method: 'get',
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        this.resume=data
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+
+    },
+
     editadvantage(){
       this.advantagedialog=true
     },
@@ -329,22 +366,163 @@ export default {
     },
 
     submitadvantage(){
+      this.$http({
+        url: this.$http.adornUrl('/student/edit'),
+        method: 'post',
+        data:this.$http.adornData(this.resume),
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        if (data&&data.status===200) {
+          this.$message.success(data.msg)
+          this.advantagedialog=false
+
+
+        }else{
+          this.$message.error(data.msg)
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
 
     },
-    submitproject(){
+
+
+    submitprojectExp(){
+      this.$http({
+        url: this.$http.adornUrl('/student/edit'),
+        method: 'post',
+        data:this.$http.adornData(this.resume),
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        if (data&&data.status===200) {
+          this.$message.success(data.msg)
+          this.projectExperiencedialog=false
+
+        }else{
+          this.$message.error(data.msg)
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
 
     },
-    submitinternship(){
+
+    submitinnternshipExpe(){
+      this.$http({
+        url: this.$http.adornUrl('/student/edit'),
+        method: 'post',
+        data:this.$http.adornData(this.resume),
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        if (data&&data.status===200) {
+          this.$message.success(data.msg)
+          this.internshipExperiencedialog=false
+
+        }else{
+          this.$message.error(data.msg)
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
 
     },
-    sumbitaward(){
+
+    submitcertificate(){
+      this.$http({
+        url: this.$http.adornUrl('/student/edit'),
+        method: 'post',
+        data:this.$http.adornData(this.resume),
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        if (data&&data.status===200) {
+          this.$message.success(data.msg)
+          this.certificatedialog=false
+
+        }else{
+          this.$message.error(data.msg)
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
 
     },
-    sumbitcertificate(){
 
+    submitaward(){
+      this.$http({
+        url: this.$http.adornUrl('/student/edit'),
+        method: 'post',
+        data:this.$http.adornData(this.resume),
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        if (data&&data.status===200) {
+          this.$message.success(data.msg)
+          this.awardExperiencedialog=false
+
+        }else{
+          this.$message.error(data.msg)
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+
+    },
+
+
+    cancleadvantage(){
+      this.advantagedialog=false
+      this.loadResume()
+    },
+    cancleprojectExp(){
+      this.projectExperiencedialog=false
+      this.loadResume()
+    },
+
+    cancleinnternshipExpe(){
+      this.internshipExperiencedialog=false
+      this.loadResume()
+    },
+    canclecertificate(){
+      this.certificatedialog=false
+      this.loadResume()
+    },
+    cancleaward(){
+      this.awardExperiencedialog=false
+      this.loadResume()
+    },
+
+    goWhere(name){
+      this.$router.push({name})
+    },
+
+    editMes(name){
+      // this.$router.push({
+      //   path: '/StudentMessageForm'
+      // })
+      this.$router.push({name})
+    },
+    ediRes(name){
+      this.$router.push({name})
     }
-
-
 
   }
 }
