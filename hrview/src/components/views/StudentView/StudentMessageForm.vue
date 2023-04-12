@@ -2,15 +2,9 @@
 <template>
   <div class="layout">
     <div class="layout-ceiling">
-      <div class="layout-ceiling-main">
-        <a href="#">注册登录</a> |
-        <a href="#">帮助中心</a> |
-        <a href="#">安全中心</a> |
-        <a href="#">服务大厅</a>
-      </div>
+      <h5 style="color: #fff;margin-left:520px">    携手创-学生端</h5>
     </div>
-    <div class="layout-header">
-      <div class="layout-logo">返回</div>
+    <div class="layout-header" @click="returnhome">
     </div>
     <div style="height: 1000px">
 
@@ -232,6 +226,11 @@ export default {
   },
 
   methods: {
+    returnhome(){
+      this.$router.push({
+        name:"StudentIndex",
+      })
+    },
     load() {
       // let parms={
       //   sno:'123123'

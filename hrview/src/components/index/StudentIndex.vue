@@ -4,24 +4,7 @@
   <div class="layout">
     <i-menu mode="horizontal" theme="dark" active-name="1"  on-select="ed">
       <div class="layout-logo"></div>
-      <div class="layout-nav" >
-        <i-menu-item name="1">
-          <i-icon type="ios-navigate"></i-icon>
-          导航一
-        </i-menu-item>
-        <i-menu-item name="2">
-          <i-icon type="ios-keypad"></i-icon>
-          导航二
-        </i-menu-item>
-        <i-menu-item name="3">
-          <i-icon type="ios-analytics"></i-icon>
-          导航三
-        </i-menu-item>
-        <i-menu-item name="4">
-          <i-icon type="ios-paper"></i-icon>
-          导航四
-        </i-menu-item>
-      </div>
+    <h5 style="color: #fff;margin-left:520px">    携手创-学生端</h5>
     </i-menu>
     <i-menu mode="horizontal" active-name="1" @on-select="editMes">
       <div class="layout-assistant">
@@ -111,9 +94,9 @@
 
 
 
-                    <el-empty v-if="active1 == undefined ||active1 == null || active1.length <= 0 " description="暂无信息" style="size: 10px"></el-empty>
+                    <el-empty v-if="message == undefined ||message == null || message.length <= 0 " description="暂无信息" style="size: 10px"></el-empty>
 
-                    <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                    <i-col   v-for="item in message" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
                       <i-col span="8">{{ item.title }}</i-col>
                       <i-col span="8">{{ item.content }}</i-col>
                       <i-col span="8">{{item.activeTime}}</i-col>
@@ -254,6 +237,7 @@ export default {
       company:[],
       contest1:[],
       active1:[],
+      message:[],
       active:{
         id:'',
         title:'',

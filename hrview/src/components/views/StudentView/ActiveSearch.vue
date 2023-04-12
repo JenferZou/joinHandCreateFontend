@@ -4,24 +4,7 @@
   <div class="layout">
     <i-menu mode="horizontal" theme="dark" active-name="1"  on-select="ed">
       <div class="layout-logo"></div>
-      <div class="layout-nav" >
-        <i-menu-item name="1">
-          <i-icon type="ios-navigate"></i-icon>
-          导航一
-        </i-menu-item>
-        <i-menu-item name="2">
-          <i-icon type="ios-keypad"></i-icon>
-          导航二
-        </i-menu-item>
-        <i-menu-item name="3">
-          <i-icon type="ios-analytics"></i-icon>
-          导航三
-        </i-menu-item>
-        <i-menu-item name="4">
-          <i-icon type="ios-paper"></i-icon>
-          导航四
-        </i-menu-item>
-      </div>
+      <h5 style="color: #fff;margin-left:520px">    携手创-学生端</h5>
     </i-menu>
     <i-menu mode="horizontal" active-name="1" @on-select="editMes">
       <div class="layout-assistant">
