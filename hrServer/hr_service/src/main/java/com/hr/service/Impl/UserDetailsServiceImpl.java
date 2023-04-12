@@ -35,13 +35,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         if(!ObjectUtils.isEmpty(manager)) {
             //获取角色权限
-            List<Role> list = adminMapper.getUserRolesByUserId(manager.getgNo());
+            List<Role> list = adminMapper.getUserRolesByUserId(manager.getNo());
             manager.setRoles(list);
             return manager;
         }
         if(!ObjectUtils.isEmpty(teacher)) {
             //获取角色权限
-            List<Role> list = adminMapper.getUserRolesByUserId(teacher.gettNo());
+            List<Role> list = adminMapper.getUserRolesByUserId(teacher.getNo());
             teacher.setRoles(list);
             return teacher;
         }

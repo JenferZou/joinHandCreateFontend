@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -42,5 +43,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<Project> getThreeProject() {
         return projectMapper.getThreeProject();
+    }
+
+    @Override
+    public int saveProject(Project project) {
+        project.setId(UUID.randomUUID().toString().substring(0,10));
+        return projectMapper.saveProject(project);
     }
 }

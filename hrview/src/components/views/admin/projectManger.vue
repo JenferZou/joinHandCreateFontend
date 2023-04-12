@@ -158,7 +158,7 @@ export default {
       }).then(({data}) => {
         if (data) {
           this.pageNum = data.totalPages
-          this.information = data.content
+          this.project = data.content
         }
       }).catch(() => {
         console.log('出错啦！！！！')

@@ -1,8 +1,11 @@
 package com.hr.admin.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hr.model.*;
 import com.hr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -177,6 +180,14 @@ public class AdminController {
     public PageResult searchProject(@RequestParam("title") String title,
                                     @RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         return projectService.searchProject(title, page, limit);
+    }
+    @PostMapping("addUser")
+    public RespBean saveUser(@RequestBody Map<String,String> map) {
+      int i= adminService.saveUser(map);
+        if (i > 0)
+            return RespBean.ok("添加成功");
+        else
+            return RespBean.error("添加失败");
     }
 
 }

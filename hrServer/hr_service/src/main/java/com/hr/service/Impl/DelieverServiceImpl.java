@@ -83,5 +83,15 @@ public class DelieverServiceImpl implements DelieverService {
 
     }
 
+    @Override
+    public PageResult getwaitDelieverbytno(String tno, Integer page, Integer limit) {
+        return null;
+    }
+
+    @Override
+    public PageResult getaccessDelieverbytno(String tno, Integer page, Integer limit) {
+        return null;
+    }
+
 
 }

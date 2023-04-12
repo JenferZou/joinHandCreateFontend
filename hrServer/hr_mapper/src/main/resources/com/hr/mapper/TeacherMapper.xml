@@ -5,7 +5,9 @@
 <mapper namespace="com.hr.mapper.TeacherMapper">
 
     <select id="getTeacherBySno" resultType="com.hr.model.Teacher">
-        select tName, tNo, tMajor, tPhone, tDepartment, password from teacher where tNo=#{userName};
+        select name, no, major, phone, department, password from teacher where no=#{userName};
     </select>
-
+<select id="getAll" resultType="com.hr.model.Teacher">
+    select name, no, major, phone, department, password from teacher
+</select>
 </mapper>

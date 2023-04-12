@@ -9,15 +9,15 @@ import java.util.List;
 
 public class Manager implements UserDetails {
 
-    private String gName;
+    private String name;
 
-    private String gMajor;
+    private String major;
 
-    private String gNo;
+    private String no;
     private String password; // 用户密码
-    private String gPhone;
+    private String phone;
 
-    private String gDepartment;
+    private String department;
     private int status;
     private String remark;
     private List<Role> roles; // 保存全部的角色
@@ -32,6 +32,46 @@ public class Manager implements UserDetails {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public int getStatus() {
@@ -50,68 +90,20 @@ public class Manager implements UserDetails {
         this.remark = remark;
     }
 
-    public Manager(String gName, String gMajor, String gNo, String gPhone, String gDepartment, int status, String remark) {
-        this.gName = gName;
-        this.gMajor = gMajor;
-        this.gNo = gNo;
-        this.gPhone = gPhone;
-        this.gDepartment = gDepartment;
-        this.status = status;
-        this.remark = remark;
-    }
 
     public Manager() {
     }
 
-    public String getgName() {
-        return gName;
-    }
-
-    public void setgName(String gName) {
-        this.gName = gName;
-    }
-
-    public String getgMajor() {
-        return gMajor;
-    }
-
-    public void setgMajor(String gMajor) {
-        this.gMajor = gMajor;
-    }
-
-    public String getgNo() {
-        return gNo;
-    }
-
-    public void setgNo(String gNo) {
-        this.gNo = gNo;
-    }
-
-    public String getgPhone() {
-        return gPhone;
-    }
-
-    public void setgPhone(String gPhone) {
-        this.gPhone = gPhone;
-    }
-
-    public String getgDepartment() {
-        return gDepartment;
-    }
-
-    public void setgDepartment(String gDepartment) {
-        this.gDepartment = gDepartment;
-    }
 
     @Override
     public String toString() {
         return "Manager{" +
-                "gName='" + gName + '\'' +
-                ", gMajor='" + gMajor + '\'' +
-                ", gNo='" + gNo + '\'' +
+                "gName='" + name + '\'' +
+                ", gMajor='" + major + '\'' +
+                ", gNo='" + no + '\'' +
                 ", password='" + password + '\'' +
-                ", gPhone='" + gPhone + '\'' +
-                ", gDepartment='" + gDepartment + '\'' +
+                ", gPhone='" + phone + '\'' +
+                ", gDepartment='" + department + '\'' +
                 ", status=" + status +
                 ", remark='" + remark + '\'' +
                 ", roles=" + roles +
@@ -136,7 +128,7 @@ public class Manager implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.gNo;
+        return this.no;
     }
 
     @Override

@@ -11,19 +11,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
+    private final String Default_PASSWORD = "{bcrypt}$2a$10$PAiZ1ue3KxUs/lvitZZlOux1LaGXSDBZ2AGRTw1AzbT9nsYtYe5K.";
 
     @Override
     public int saveBatch(List<Student> students) {
+        students.forEach(student -> {
+            student.setPassword(Default_PASSWORD);
+        });
         return studentMapper.saveBatch(students);
     }
 
     @Override
-    public PageResult queryStudent(Integer page,Integer limit) {
-        return PageUtil.getPageResult(getPageInfo(page,limit));
+    public PageResult queryStudent(Integer page, Integer limit) {
+        return PageUtil.getPageResult(getPageInfo(page, limit));
     }
 
     @Override
@@ -38,26 +43,27 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int addStudent(Student student) {
+        student.setPassword(Default_PASSWORD);
         return studentMapper.addStudent(student);
     }
 
     @Override
-    public PageResult searchStudentByName(String studentName,Integer page,Integer limit) {
-        PageHelper.startPage(page,limit);
-        List<Student> students=studentMapper.getAllStudentByName(studentName);
-        PageInfo<Student> pageInfo=new PageInfo<>(students);
+    public PageResult searchStudentByName(String studentName, Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        List<Student> students = studentMapper.getAllStudentByName(studentName);
+        PageInfo<Student> pageInfo = new PageInfo<>(students);
         return PageUtil.getPageResult(pageInfo);
     }
 
     @Override
-    public PageResult searchStudentByCondition(Student student,Integer page,Integer limit) {
-        PageHelper.startPage(page,limit);
-        List<Student> students=studentMapper.getStudentByCondition(student);
-        PageInfo<Student> pageInfo=new PageInfo<>(students);
+    public PageResult searchStudentByCondition(Student student, Integer page, Integer limit) {
+        PageHelper.startPage(page, limit);
+        List<Student> students = studentMapper.getStudentByCondition(student);
+        PageInfo<Student> pageInfo = new PageInfo<>(students);
         return PageUtil.getPageResult(pageInfo);
     }
 
-    public Student getStudentBySno(String sno){
+    public Student getStudentBySno(String sno) {
         return studentMapper.getStudentBySno(sno);
     }
 
@@ -68,17 +74,15 @@ public class StudentServiceImpl implements StudentService {
 
     /**
      * 调用分页插件完成分页
+     *
      * @param
      * @return
      */
-    private PageInfo<Student> getPageInfo(Integer page,Integer limit) {
+    private PageInfo<Student> getPageInfo(Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
         List<Student> students = studentMapper.getAllStudent();
         return new PageInfo<Student>(students);
     }
-
-
-
 
 
 }

@@ -11,21 +11,72 @@
             搜索
           </el-button>
         </i-col>
+        <i-row type="flex" justify="end">
+        <i-col :span="7">
+          <el-button size="small" type="primary" @click="add">
+            <i-icon type="plus-round" size="15"></i-icon>
+            添加</el-button>
+        </i-col>
+          <el-dialog title="添加" :visible.sync="dialogVisible" :closeOnClickModal="false">
+            <el-form :inline="true" :model="userData" ref="studentData" class="demo-form-inline" label-width="100px" size="small" >
+              <i-row>
+                <i-col :span="12">
+                  <el-form-item label="工号" label-width="auto" prop="sno">
+                    <el-input v-model.number="userData.gno" placeholder="工号" maxlength="12" style="width: 150px"></el-input>
+                  </el-form-item>
+                </i-col>
+                <i-col :span="12">
+                  <el-form-item label="姓名" label-width="auto" prop="sName">
+                    <el-input v-model="userData.name" placeholder="姓名" size="small" style="width: 130px"></el-input>
+                  </el-form-item>
+                </i-col>
+              </i-row>
+              <i-row>
+                <i-col :span="12">
+                  <el-form-item label="电话" label-width="auto" prop="className">
+                    <el-input style="width: 130px" v-model="userData.gPhone" placeholder="电话" size="small"></el-input>
+                  </el-form-item>
+                </i-col>
+                <i-col :span="12">
+                  <el-form-item label="角色" label-width="auto" >
+                    <el-select size="small" v-model="userData.role" placeholder="角色" style="width: 100px">
+                      <el-option label="老师" value="老师"></el-option>
+                      <el-option label="管理员" value="管理员"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </i-col>
+              </i-row>
+              <i-row type="flex" justify="end">
+                <i-col :span="3">
+                  <el-form-item>
+                    <el-button @click="cancel" size="small">取消</el-button>
+                  </el-form-item>
+                </i-col>
+                <i-col :span="3">
+                  <el-form-item>
+                    <el-button type="primary" @click="modify" size="small">保存</el-button>
+                  </el-form-item>
+                </i-col>
+
+              </i-row>
+            </el-form>
+          </el-dialog>
+        </i-row>
       </i-row>
   <i-row :gutter="48" class="card" justify="space-around" type="flex">
-    <i-col :span="6" v-for="item in user.slice(0,3)" :key="item.gNo" type="flex">
+    <i-col :span="6" v-for="item in user.slice(0,3)" :key="item.no" type="flex">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span>{{ item.gName }}</span>
-          <el-button style="float: right;padding: 0px 0;color:red;" type="text" @click="del(item.gNo)">删除</el-button>
+          <span>{{ item.name }}</span>
+          <el-button style="float: right;padding: 0px 0;color:red;" type="text" @click="del(item.no)">删除</el-button>
         </div>
         <div  class="text item">
-          用户名:{{item.gName}}
+          用户名:{{item.name}}
         </div>
         <div  class="text item">
           电话:
 
-          {{item.gPhone}}
+          {{item.phone}}
         </div>
         <div  class="text item">
           用户状态:
@@ -50,19 +101,19 @@
     </i-col>
   </i-row>
     <i-row :gutter="48" class="card" justify="space-around" type="flex">
-      <i-col :span="6" v-for="item in user.slice(3,6)" :key="item.gNo" type="flex">
+      <i-col :span="6" v-for="item in user.slice(3,6)" :key="item.no" type="flex">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>{{ item.gName }}</span>
-            <el-button style="float: right;padding: 0px 0;color:red;" type="text" @click="del(item.gNo)">删除</el-button>
+            <span>{{ item.name }}</span>
+            <el-button style="float: right;padding: 0px 0;color:red;" type="text" @click="del(item.no)">删除</el-button>
           </div>
           <div  class="text item">
-            用户名:{{item.gName}}
+            用户名:{{item.name}}
           </div>
           <div  class="text item">
             电话:
 
-            {{item.gPhone}}
+            {{item.phone}}
           </div>
           <div  class="text item">
             用户状态:
@@ -109,6 +160,7 @@ export default {
   name: "UserManagement",
   data(){
     return{
+      dialogVisible:false,
       multiDeleteVisible:false,
       currentPage: 1,
       title:'',
@@ -116,9 +168,43 @@ export default {
       pageNum: 1,
       user:'',
       id:'',
+      userData:{
+        gno:'',
+        name:'',
+        gPhone:'',
+        role:''
+      }
     }
   },
   methods:{
+    modify(){
+      this.$http({
+        url: this.$http.adornUrl('/admin/addUser'),
+        method: 'post',
+        data: this.$http.adornData(this.userData),
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        if (data && data.status === 200) {
+          this.$message.success(data.msg)
+        } else {
+          this.$message.error(data.msg)
+        }
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+      this.dialogVisible=false
+      this.userData=''
+    },
+    cancel(){
+      this.dialogVisible=false
+    },
+    add(){
+      this.dialogVisible=true
+    },
     del(id){
       this.multiDeleteVisible=true
       this.id=id

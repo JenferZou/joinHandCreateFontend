@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hr.mapper.AdminMapper">
     <select id="getAdminInformation" resultType="com.hr.model.Manager">
-        select gName, gNo, gMajor, gPhone, gDepartment, status, remark from manager
+        select name, no, major, phone, department, status, remark, password from manager
     </select>
     <delete id="deleteAdmin">
-        delete from manager where gNo=#{id}
+        delete from manager where no=#{id}
     </delete>
     <select id="getUserByUserName" resultType="com.hr.model.Manager">
-        select gName, gNo, gMajor, gPhone, gDepartment, status, remark, password from manager where gNo=#{userName};
+        select name, no, major, phone, department, status, remark, password from manager where no=#{userName};
     </select>
     <select id="getUserRolesByUserId" resultType="com.hr.model.Role">
         select
@@ -23,4 +23,12 @@
         where
             aur.mid = #{no}
     </select>
+    <insert id="saveManger">
+        insert into manager(name, no, major, phone, department, status, remark, password) values
+            (#{name},#{no},#{major},#{phone},#{department},#{status},#{remark},#{password})
+    </insert>
+    <insert id="saveTeacher">
+        insert into teacher(name, no, major, phone, department, password) values
+            (#{name},#{no},#{major},#{phone},#{department},#{password})
+    </insert>
 </mapper>

@@ -17,5 +17,9 @@ where name=#{title}
         select id,  name, mentor, startTime, content, expectedCompetition, needMajor,tno from project order by startTime desc limit 0,4
 
     </select>
+    <insert id="saveProject">
+        insert into project(name, mentor, startTime, content, needMajor, id, expectedCompetition, tno)
+        values (#{name},#{mentor},#{startTime},#{content},#{needMajor},#{id},#{expectedCompetition},#{tno});
+    </insert>
 
 </mapper>

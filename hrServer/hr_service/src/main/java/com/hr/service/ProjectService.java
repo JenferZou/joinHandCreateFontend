@@ -10,4 +10,5 @@ public interface ProjectService {
     public int deleteOneById(Project project);
    public PageResult searchProject(String title,Integer page,Integer limit);
    public List<Project> getThreeProject();
+   public int saveProject(Project project);
 }

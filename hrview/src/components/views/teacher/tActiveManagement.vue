@@ -92,26 +92,26 @@
 
         >
             <div class="el-dialog-div">
-                <el-form :model="active" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                <el-form :model="project" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                     <el-form-item label="项目名称" prop="name">
-                        <el-input type="text" v-model="active.name" autocomplete="off"></el-input>
+                        <el-input type="text" v-model="project.name" autocomplete="off"></el-input>
                     </el-form-item>
                   <el-form-item label="指导老师" prop="mentor">
-                    <el-input type="text" v-model="active.mentor" autocomplete="off"></el-input>
+                    <el-input type="text" v-model="project.mentor" autocomplete="off"></el-input>
                   </el-form-item>
                     <el-form-item label="开始时间" prop="startTime">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="active.startTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
+                        <el-date-picker type="date" placeholder="选择日期" v-model="project.startTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
                     </el-form-item>
                     <el-form-item label="项目需要的专业" prop="needMajor">
-                        <el-input type="text" v-model="active.needMajor" autocomplete="off"></el-input>
+                        <el-input type="text" v-model="project.needMajor" autocomplete="off"></el-input>
                     </el-form-item>
                   <el-form-item label="预计参加的比赛" prop="expectedCompetition">
-                    <el-input type="text" v-model="active.expectedCompetition" autocomplete="off"></el-input>
+                    <el-input type="text" v-model="project.expectedCompetition" autocomplete="off"></el-input>
                   </el-form-item>
                     <el-form-item class="item">
                         <quill-editor class="editor"
                                       ref="myTextEditor"
-                                      v-model="active.content"
+                                      v-model="project.content"
                                       :options="editorOption"
                                       @blur="onEditorBlur($event)"
                                       @focus="onEditorFocus($event)"
@@ -163,7 +163,7 @@ export default {
             activeData:[],
             title:'',
             deleteData:'',
-            active:{
+          project:{
                 name:'',
                 mentor:'',
                 startTime:'',
@@ -218,19 +218,19 @@ export default {
         },
         cancle(){
             this.dialogVisible = false
-            this.active=this.reset(this.active)
+            this.project=this.reset(this.project)
         },
-        reset(active){
-            Object.keys(active).forEach(key=>{
-                active[key]=''
+        reset(project){
+            Object.keys(project).forEach(key=>{
+              project[key]=''
             })
-            return active
+            return project
         },
         add(){
             this.$http({
-                url: this.$http.adornUrl('/teacher/saveActive'),
+                url: this.$http.adornUrl('/teacher/saveProject'),
                 method: 'post',
-                data:this.$http.adornData(this.active),
+                data:this.$http.adornData(this.project),
                 headers: {
                     'UserToken':window.sessionStorage.getItem('Token'),
                     'Content-Type': 'application/json',
@@ -249,13 +249,36 @@ export default {
         sure(){
             this.dialogVisible = false
             this.add();
-            this.active=this.reset(this.active)
+            this.project=this.reset(this.project)
         },
-        change(){
-
+        change(page){
+          this.currentPage=page;
+          if(this.title!=='')
+            this.search()
+          else
+            this.getActive()
         },
         search(){
-
+          let params = {
+            page: this.currentPage,
+            limit: this.pageSize,
+            title:this.title
+          }
+          this.$http({
+            url: this.$http.adornUrl('/teacher/searchProject'),
+            method: 'get',
+            params: this.$http.adornParams(params),
+            headers: {
+              'UserToken':window.sessionStorage.getItem('Token'),
+            }
+          }).then(({data}) => {
+            if (data) {
+              this.pageNum = data.totalPages
+              this.activeData = data.content
+            }
+          }).catch(() => {
+            console.log('出错啦！！！！')
+          })
         },
         display(){
             this.dialogVisible=true
@@ -278,25 +301,25 @@ export default {
             console.log(editor);
         },
         getActive(){
-            let params = {
-                page: this.currentPage,
-                limit: this.pageSize
+          let params = {
+            page: this.currentPage,
+            limit: this.pageSize
+          }
+          this.$http({
+            url: this.$http.adornUrl('/teacher/project'),
+            method: 'get',
+            params: this.$http.adornParams(params),
+            headers: {
+              'UserToken':window.sessionStorage.getItem('Token'),
             }
-            this.$http({
-                url: this.$http.adornUrl('/teacher/getActive'),
-                method: 'get',
-                params: this.$http.adornParams(params),
-                headers:{
-                    'UserToken':window.sessionStorage.getItem('Token'),
-                }
-            }).then(({data}) => {
-                if (data) {
-                    this.pageNum = data.totalPages
-                    this.activeData = data.content
-                }
-            }).catch(() => {
-                console.log('出错啦！！！！')
-            })
+          }).then(({data}) => {
+            if (data) {
+              this.pageNum = data.totalPages
+              this.activeData = data.content
+            }
+          }).catch(() => {
+            console.log('出错啦！！！！')
+          })
         }
     },
     mounted() {

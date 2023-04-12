@@ -9,15 +9,15 @@ import java.util.List;
 
 public class Teacher implements UserDetails {
 
-    private String tName;
+    private String name;
 
-    private String tNo;
+    private String no;
 
-    private String tMajor;
+    private String major;
 
-    private String tPhone;
+    private String phone;
 
-    private String tDepartment;
+    private String department;
 
     private List<Role> roles; // 保存全部的角色
     private String password;
@@ -34,66 +34,58 @@ public class Teacher implements UserDetails {
         this.roles = roles;
     }
 
-    public Teacher(String tName, String tNo, String tMajor, String tPhone, String tDepartment) {
-        this.tName = tName;
-        this.tNo = tNo;
-        this.tMajor = tMajor;
-        this.tPhone = tPhone;
-        this.tDepartment = tDepartment;
-    }
 
     public Teacher() {
     }
 
-    public String gettName() {
-        return tName;
+    public String getName() {
+        return name;
     }
 
-    public void settName(String tName) {
-        this.tName = tName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String gettNo() {
-        return tNo;
+    public String getNo() {
+        return no;
     }
 
-    public void settNo(String tNo) {
-        this.tNo = tNo;
+    public void setNo(String no) {
+        this.no = no;
     }
 
-    public String gettMajor() {
-        return tMajor;
+    public String getMajor() {
+        return major;
     }
 
-    public void settMajor(String tMajor) {
-        this.tMajor = tMajor;
+    public void setMajor(String major) {
+        this.major = major;
     }
 
-    public String gettPhone() {
-        return tPhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void settPhone(String tPhone) {
-        this.tPhone = tPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String gettDepartment() {
-        return tDepartment;
+    public String getDepartment() {
+        return department;
     }
 
-    public void settDepartment(String tDepartment) {
-        this.tDepartment = tDepartment;
+    public void setDepartment(String department) {
+        this.department = department;
     }
-
 
     @Override
     public String toString() {
         return "Teacher{" +
-                "tName='" + tName + '\'' +
-                ", tNo='" + tNo + '\'' +
-                ", tMajor='" + tMajor + '\'' +
-                ", tPhone='" + tPhone + '\'' +
-                ", tDepartment='" + tDepartment + '\'' +
+                "tName='" + name + '\'' +
+                ", tNo='" + no + '\'' +
+                ", tMajor='" + major + '\'' +
+                ", tPhone='" + phone + '\'' +
+                ", tDepartment='" + department + '\'' +
                 ", roles=" + roles +
                 ", password='" + password + '\'' +
                 ", authorities=" + getAuthorities() +
@@ -117,7 +109,7 @@ public class Teacher implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.tNo;
+        return this.no;
     }
 
     @Override
