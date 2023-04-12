@@ -2,9 +2,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource #配置德鲁伊
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hrm
+    url: jdbc:mysql://localhost:3306/students
     username: root
-    password: xwf17825377805
+    password: zjf13760351788
     #url: jdbc:mysql://120.78.205.174:3306/hrm
     #username: root
     #password: Xwf17825377805@

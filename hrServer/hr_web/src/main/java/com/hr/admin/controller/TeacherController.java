@@ -1,13 +1,18 @@
 package com.hr.admin.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONB;
 import com.hr.model.*;
 import com.hr.service.*;
 import com.hr.utils.JWTUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -25,6 +30,9 @@ public class TeacherController {
     private ActiveService activeService;
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private ResumeService resumeService;
 
     @Autowired
     private DelieverService delieverService;
@@ -188,19 +196,55 @@ public class TeacherController {
         return projectService.searchProject(title, page, limit);
     }
 
-
     @GetMapping("studentDeliever")
-    public PageResult getStudentDeliever(HttpServletRequest request,@RequestBody Deliever deliever, @RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+    public PageResult getwaitStudentDeliever(HttpServletRequest request, @RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         String token = request.getHeader("UserToken");
         String tno = jwtUtil.getMemberIdByJwtToken(token);
         return delieverService.getwaitDelieverbytno(tno,page,limit);
     }
 
+
+
     @GetMapping("accessDeliever")
-    public PageResult getaccessStudentDeliever(HttpServletRequest request,@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+    public PageResult getaccessStudentDeliever(HttpServletRequest request, @RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         String token = request.getHeader("UserToken");
         String tno = jwtUtil.getMemberIdByJwtToken(token);
         return delieverService.getaccessDelieverbytno(tno,page,limit);
+    }
+
+    @PostMapping("refuseDeliever")
+    public RespBean refuseDeliever(@RequestBody Deliever deliever){
+        int i = delieverService.refuseDeliever(deliever);
+        if (i > 0)
+            return RespBean.ok("修改成功");
+        else
+            return RespBean.error("修改失败");
+
+    }
+
+
+    @PostMapping("agreeDeliever")
+    public RespBean agreeDeliever(@RequestBody Deliever deliever){
+        int i = delieverService.agreeDeliever(deliever);
+        if (i > 0)
+            return RespBean.ok("修改成功");
+        else
+            return RespBean.error("修改失败");
+
+
+    }
+
+
+    @PostMapping("lookStudentResume")
+    public Map<String, Object> LookStudentResume(@RequestBody Deliever deliever){
+        HashMap<String, Object> map = new HashMap<>();
+        Student studentBySno = studentService.getStudentBySno(deliever.getSno());
+        Resume resumeByid = resumeService.getResumeByid(studentBySno.getResumeId());
+        map.put("studentInfo",studentBySno);
+        map.put("resumeInfo",resumeByid);
+
+        return map;
+
     }
 
 }

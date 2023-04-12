@@ -83,5 +83,31 @@ public class DelieverServiceImpl implements DelieverService {
 
     }
 
+    @Override
+    public PageResult getwaitDelieverbytno(String tno, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        List<Deliever> delievers = delieverMapper.getwaitDelieverbytno(tno);
+        PageInfo<Deliever> pageInfo=new PageInfo<>(delievers);
+        return PageUtil.getPageResult(pageInfo);
+    }
+
+    @Override
+    public PageResult getaccessDelieverbytno(String tno, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        List<Deliever> delievers = delieverMapper.getaccessDelieverbytno(tno);
+        PageInfo<Deliever> pageInfo=new PageInfo<>(delievers);
+        return PageUtil.getPageResult(pageInfo);
+    }
+
+    @Override
+    public int agreeDeliever(Deliever deliever) {
+        return delieverMapper.agreeDeliever(deliever);
+    }
+
+    @Override
+    public int refuseDeliever(Deliever deliever) {
+        return delieverMapper.refuseDeliever(deliever);
+    }
+
 
 }

@@ -21,8 +21,8 @@
                 ref="multipleTable"
                 :data="project"
                 tooltip-effect="dark"
-                style="width: 100%"
-                @selection-change="handleSelectionChange">
+                style="width: 100%">
+
             <el-table-column
                     type="selection"
                     width="55">
@@ -59,9 +59,9 @@
 
           <el-table-column
               label="学生简历"
-              width="120">
+              width="100">
             <template v-slot="scope">
-              <el-button type="text" size="small" @click="queryStudentResume(scope.row)">查看</el-button>
+              <el-button type="text" size="small"  style="margin: 20px" @click="queryStudentResume(scope.row)">查看</el-button>
             </template>
           </el-table-column>
 
@@ -69,11 +69,12 @@
             <el-table-column
                     fixed="right"
                     label="操作"
-                    width="100">
+                    width="120">
                 <template v-slot="scope">
-                    <el-button type="text" size="small" @click="agreeForm(scope.row)">同意加入申请</el-button>
-                    <el-button type="text" size="small" @click="refuseStudent(scope.row)">拒绝加入申请</el-button>
+                    <el-button type="text" size="small" style="margin: 5px" @click="agreeForm(scope.row)">同意加入申请</el-button>
+                    <el-button type="text" size="small" style="color:red; margin: 5px" @click="refuseForm(scope.row)">拒绝加入申请</el-button>
                 </template>
+
             </el-table-column>
 
 
@@ -129,7 +130,10 @@ export default {
             },
             idParams:[],
             dcontest:'',
-          delievers:''
+          delievers:'',
+          delievermap:[],
+          studentInfo:'',
+          resumeInfo:'',
         }
     },
     methods: {
@@ -159,110 +163,79 @@ export default {
 
 
       refuseStudent(){
-
+        this.$http({
+          url: this.$http.adornUrl('/teacher/refuseDeliever'),
+          method: 'post',
+          data:this.$http.adornData(this.delievers),
+          headers: {
+            'UserToken':window.sessionStorage.getItem('Token'),
+            'Content-Type': 'application/json',
+            'charset': 'utf-8'
+          }
+        }).then(({data}) => {
+          if (data&&data.status===200) {
+            this.$message.success(data.msg)
+          }else{
+            this.$message.error(data.msg)
+          }
+        }).catch(() => {
+          console.log('出错啦！！！！')
+        })
+        this.refuseVisible=false
+        this.getAllInformation()
       },
       agreestudent(){
+        this.$http({
+          url: this.$http.adornUrl('/teacher/agreeDeliever'),
+          method: 'post',
+          data:this.$http.adornData(this.delievers),
+          headers: {
+            'UserToken':window.sessionStorage.getItem('Token'),
+            'Content-Type': 'application/json',
+            'charset': 'utf-8'
+          }
+        }).then(({data}) => {
+          if (data&&data.status===200) {
+            this.$message.success(data.msg)
+          }else{
+            this.$message.error(data.msg)
+          }
+        }).catch(() => {
+          console.log('出错啦！！！！')
+        })
+        this.agreeVisible1=false
+        this.getAllInformation()
+      },
 
+
+      queryStudentResume(row){
+        this.$http({
+          url: this.$http.adornUrl('/teacher/lookStudentResume'),
+          method: 'post',
+          data:this.$http.adornData(row),
+          headers: {
+            'UserToken':window.sessionStorage.getItem('Token'),
+            'Content-Type': 'application/json',
+            'charset': 'utf-8'
+          }
+        }).then(({data}) => {
+          console.log(data.studentInfo)
+          console.log(data.resumeInfo)
+
+          this.$router.push({
+            name:'StudentDelieverResume',
+            params:{
+              studentInfo:data.studentInfo,
+              resumeInfo:data.resumeInfo
+            }
+          })
+        }).catch(() => {
+          console.log('出错啦！！！！')
+        })
       },
 
 
 
-        deleteContest(contest) {
-            this.multiDeleteVisible1=true
-            this.dcontest=contest
-        },
-        reset(data){
-            Object.keys(data).forEach(key=>(data[key]=''))
-            return data
-        },
-
-        search() {
-            let params = {
-                page: this.currentPage,
-                limit: this.pageSize,
-                title:this.title
-            }
-            this.$http({
-                url: this.$http.adornUrl('/teacher/searchProject'),
-                method: 'get',
-                params: this.$http.adornParams(params),
-                headers: {
-                    'UserToken':window.sessionStorage.getItem('Token'),
-                }
-            }).then(({data}) => {
-                if (data) {
-                    this.pageNum = data.totalPages
-                    this.information = data.content
-                }
-            }).catch(() => {
-                console.log('出错啦！！！！')
-            })
-        },
-        popDelete(){
-            this.multiDeleteVisible=true
-        },
-        handleSelectionChange(val) {
-            // console.log(val);
-            this.multipleSelection = val;
-            this.multipleSelectionFlag = this.multipleSelection.length !== 0;
-        },
-        deleteOneProject(project,projectData){
-            for(let i=0; i<projectData.length; i++){
-                if(project.id===projectData[i].id){
-                    projectData.splice(i,1)
-                }
-            }
-            return projectData;
-        },
-        multiDelete1(){
-            this.$http({
-                url: this.$http.adornUrl('/teacher/deleteProject'),
-                method: 'post',
-                data:this.$http.adornData(this.dcontest),
-                headers: {
-                    'UserToken':window.sessionStorage.getItem('Token'),
-                    'Content-Type': 'application/json',
-                    'charset': 'utf-8'
-                }
-            }).then(({data}) => {
-                if (data&&data.status===200) {
-                    this.$message.success(data.msg)
-                    this.project=this.deleteOneProject(this.dcontest,this.project)
-                }else{
-                    this.$message.error(data.msg)
-                }
-            }).catch(() => {
-                console.log('出错啦！！！！')
-            })
-            this.multiDeleteVisible1=false
-        },
-        multiDelete() {
-            this.multipleSelection.forEach((contest)=>{
-                this.idParams.push(contest.id)
-            })
-            this.$http({
-                url: this.$http.adornUrl('/teacher/deleteProjectBatch'),
-                method: 'post',
-                data:this.idParams,//this.$http.adornData(this.idParams),
-                headers: {
-                    'UserToken':window.sessionStorage.getItem('Token'),
-                    'Content-Type': 'application/json',
-                    'charset': 'utf-8'
-                }
-            }).then(({data}) => {
-                if (data&&data.status===200) {
-                    this.$message.success(data.msg)
-                    this.multiDeleteVisible = false
-                    this.multipleSelection.forEach((contest)=>{
-                        this.information=this.deleteOneProject(contest,this.information)
-                    })
-                }else{
-                    this.$message.error(data.msg)
-                }
-            }).catch(() => {
-                console.log('出错啦！！！！')
-            })
-        },
         getAllInformation() {
             let params = {
                 page: this.currentPage,

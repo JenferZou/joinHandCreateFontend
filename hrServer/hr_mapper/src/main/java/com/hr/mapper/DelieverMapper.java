@@ -33,4 +33,8 @@ public interface DelieverMapper {
     public List<Deliever> getwaitDelieverbytno(String tno);
 
     public List<Deliever> getaccessDelieverbytno(String tno);
+
+    public int agreeDeliever(Deliever deliever);
+
+    public int refuseDeliever(Deliever deliever);
 }

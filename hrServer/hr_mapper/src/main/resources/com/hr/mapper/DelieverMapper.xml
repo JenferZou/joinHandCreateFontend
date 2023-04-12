@@ -9,6 +9,24 @@
 (#{id},#{sno},#{projectName},#{sName},#{sMajor},#{pid},#{tno},#{content},#{mark},#{mentor})
     </insert>
 
+    <update id="agreeDeliever" parameterType="com.hr.model.Deliever">
+update delieverresume <set >
+        <if test="mark != null" >
+            mark = 1
+        </if>
+</set> where id =#{id}
+    </update>
+
+
+    <update id="refuseDeliever" parameterType="com.hr.model.Deliever">
+        update delieverresume
+        <set >
+            <if test="mark != null" >
+                mark = -1
+            </if>
+        </set> where id =#{id}
+    </update>
+
     <select id="queryAllDeliever" resultType="com.hr.model.Deliever">
 select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where tno=#{tno}
     </select>

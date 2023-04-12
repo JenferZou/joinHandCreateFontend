@@ -37,4 +37,9 @@ public interface DelieverService {
 
 
 
+
+    public int agreeDeliever(Deliever deliever);
+
+    public int refuseDeliever(Deliever deliever);
+
 }
