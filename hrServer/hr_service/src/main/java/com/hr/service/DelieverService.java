@@ -36,7 +36,7 @@ public interface DelieverService {
     public  PageResult getaccessDelieverbytno(String tno,Integer page,Integer limit);
 
 
-
+    public PageResult getaDelieverbyname(String name,Integer page,Integer limit);
 
     public int agreeDeliever(Deliever deliever);
 

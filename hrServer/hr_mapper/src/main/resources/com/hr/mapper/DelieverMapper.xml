@@ -78,5 +78,10 @@ select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from deliever
         select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where tno = #{tno} and mark = 1
     </select>
 
+    <select id="getaDelieverbyname" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where sName=#{name} and mark = 0
+
+    </select>
+
 
 </mapper>

@@ -37,4 +37,7 @@ public interface DelieverMapper {
     public int agreeDeliever(Deliever deliever);
 
     public int refuseDeliever(Deliever deliever);
+
+    public List<Deliever> getaDelieverbyname(String name);
+
 }

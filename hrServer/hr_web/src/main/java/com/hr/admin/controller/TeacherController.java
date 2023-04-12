@@ -21,6 +21,9 @@ import java.util.UUID;
 public class TeacherController {
 
     @Autowired
+    private StudentService studentService;
+
+    @Autowired
     private ProjectService projectService;
 
     @Autowired
@@ -112,6 +115,14 @@ public class TeacherController {
 
         return map;
 
+    }
+
+
+
+    @GetMapping("searchDeliever")
+    public PageResult searchDeliever(@RequestParam("name") String name,
+                                    @RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
+        return delieverService.getaDelieverbyname(name,page,limit);
     }
 
 }

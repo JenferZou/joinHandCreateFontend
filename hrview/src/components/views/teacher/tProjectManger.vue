@@ -4,7 +4,7 @@
             <i-col :span="12">
                 <i-row>
                     <i-col :span="16">
-                        <el-input @keyup.enter.native="search" size="small" v-model="title" placeholder="请输入项目名称..." clearable prefix-icon="el-icon-search">
+                        <el-input @keyup.enter.native="search" size="small" v-model="name" placeholder="请输入学生姓名" clearable prefix-icon="el-icon-search">
                         </el-input>
                     </i-col>
                     <i-col :span="3">
@@ -115,11 +115,9 @@ export default {
     data() {
         return {
             agreeVisible1:false,
-            multipleSelectionFlag: false,
           refuseVisible: false,
-            multipleSelection: [],
             project: [],
-            title: '',
+            name: '',
             currentPage: 1,
             pageSize: 8,
             pageNum: 1,
@@ -131,7 +129,6 @@ export default {
             idParams:[],
             dcontest:'',
           delievers:'',
-          delievermap:[],
           studentInfo:'',
           resumeInfo:'',
         }
@@ -219,8 +216,6 @@ export default {
             'charset': 'utf-8'
           }
         }).then(({data}) => {
-          console.log(data.studentInfo)
-          console.log(data.resumeInfo)
 
           this.$router.push({
             name:'StudentDelieverResume',
@@ -234,7 +229,31 @@ export default {
         })
       },
 
+      search() {
+        let params = {
+          page: this.currentPage,
+          limit: this.pageSize,
+          name:this.name
+        }
+        this.$http({
+          url: this.$http.adornUrl('/teacher/searchDeliever'),
+          method: 'get',
+          params: this.$http.adornParams(params),
+          headers: {
+            'UserToken': window.sessionStorage.getItem('Token'),
+            'Content-Type': 'application/json',
+            'charset': 'utf-8'
+          }
+        }).then(({data}) => {
+          if (data) {
+            this.pageNum = data.totalPages
+            this.project = data.content
 
+          }
+        }).catch(() => {
+          console.log('出错啦！！！！')
+        })
+      },
 
         getAllInformation() {
             let params = {

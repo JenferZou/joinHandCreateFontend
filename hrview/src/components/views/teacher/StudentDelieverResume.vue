@@ -172,8 +172,6 @@ export default {
     init(){
       this.resume = this.$route.params.resumeInfo
       this.studentInfo = this.$route.params.studentInfo
-      console.log(this.resume)
-      console.log(this.studentInfo)
 
     },
     loadStudent() {

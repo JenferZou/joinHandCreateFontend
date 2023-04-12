@@ -100,6 +100,14 @@ public class DelieverServiceImpl implements DelieverService {
     }
 
     @Override
+    public PageResult getaDelieverbyname(String name, Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        List<Deliever> delievers = delieverMapper.getaDelieverbyname(name);
+        PageInfo<Deliever> pageInfo=new PageInfo<>(delievers);
+        return PageUtil.getPageResult(pageInfo);
+    }
+
+    @Override
     public int agreeDeliever(Deliever deliever) {
         return delieverMapper.agreeDeliever(deliever);
     }
