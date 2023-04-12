@@ -22,15 +22,15 @@
                             <i-icon type="ios-keypad"></i-icon>
                             我的项目
                         </template>
-                        <i-menu-item name="active">项目发布</i-menu-item>
-                        <i-menu-item name="project">项目管理</i-menu-item>
+                        <i-menu-item name="tactive">项目发布</i-menu-item>
+                        <i-menu-item name="tproject">项目管理</i-menu-item>
                     </i-submenu>
                     <i-submenu name="2">
                         <template slot="title">
                             <i-icon type="ios-navigate"></i-icon>
                             申请列表
                         </template>
-                        <i-menu-item name="index" >基本资料</i-menu-item>
+                        <i-menu-item name="tindex" >基本资料</i-menu-item>
                     </i-submenu>
                 </i-menu>
             </i-col>

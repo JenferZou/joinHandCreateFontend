@@ -94,6 +94,14 @@ public class Teacher implements UserDetails {
                 ", tMajor='" + tMajor + '\'' +
                 ", tPhone='" + tPhone + '\'' +
                 ", tDepartment='" + tDepartment + '\'' +
+                ", roles=" + roles +
+                ", password='" + password + '\'' +
+                ", authorities=" + getAuthorities() +
+                ", username='" + getUsername() + '\'' +
+                ", accountNonExpired=" + isAccountNonExpired() +
+                ", accountNonLocked=" + isAccountNonLocked() +
+                ", credentialsNonExpired=" + isCredentialsNonExpired() +
+                ", enabled=" + isEnabled() +
                 '}';
     }
 

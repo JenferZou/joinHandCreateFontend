@@ -1,27 +1,19 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
-  lintOnSave:false,
   devServer:{
     open:true,
-    host:'localhost'
-  }
+    //host:'120.78.205.174',
+    host:'localhost',
+    port:'80'
+  },
+
+ // publicPath: './',
+  outputDir: "dist", // 输出文件目录
+  lintOnSave: false, // eslint 是否在保存时检查
+  assetsDir: 'static', // 配置js、css静态资源二级目录的位置
 })
 
-module.exports = {
-  devServer: {
-    //host: 'localhost',
-    //port: '8080',
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8081',
-        changeOrigin: true,
-        pathRewrite: {  // 重写路径
-          '^/api': ''  // 把/api变为空字符
-        }
-      }
-    }
-  }
-}
+
 
 
