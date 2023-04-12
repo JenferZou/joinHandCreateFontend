@@ -29,4 +29,12 @@ public interface DelieverService {
 
     public  PageResult getAllDeliever(Integer page,Integer limit);
 
+
+    public  PageResult getwaitDelieverbytno(String tno,Integer page,Integer limit);
+
+
+    public  PageResult getaccessDelieverbytno(String tno,Integer page,Integer limit);
+
+
+
 }

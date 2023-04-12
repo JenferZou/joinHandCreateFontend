@@ -65,7 +65,7 @@ public class test {
     @Test
     public void test() throws ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         System.out.println(properties);
-        //System.out.println(passwordEncoder.encode("@Xwf123"));
+        System.out.println(passwordEncoder.encode("@Zz123456"));
         //System.out.println(UUID.randomUUID().toString().substring(0,10));
         //System.out.println(new Timestamp((new Date().getTime())));
         //System.out.println(studentMapper.queryStudent(1,8).getContent());

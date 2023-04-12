@@ -28,48 +28,74 @@
                     width="55">
             </el-table-column>
             <el-table-column
-                    prop="name"
+                    prop="projectName"
                     label="项目名称"
                     width="120">
             </el-table-column>
             <el-table-column
-                    prop="startTime"
-                    label="开始时间"
+                    prop="sName"
+                    label="学生姓名"
                     width="120">
             </el-table-column>
             <el-table-column
-                    prop="content"
-                    label="内容"
-                    show-overflow-tooltip>
+                    prop="sno"
+                    label="学生学号"
+                    width="120">
             </el-table-column>
+
+          <el-table-column
+              prop="sMajor"
+              label="学生专业"
+              width="120">
+          </el-table-column>
+
+
+
+          <el-table-column
+              prop="content"
+              label="内容"
+              show-overflow-tooltip>
+          </el-table-column>
+
+          <el-table-column
+              label="学生简历"
+              width="120">
+            <template v-slot="scope">
+              <el-button type="text" size="small" @click="queryStudentResume(scope.row)">查看</el-button>
+            </template>
+          </el-table-column>
+
+
             <el-table-column
                     fixed="right"
                     label="操作"
                     width="100">
                 <template v-slot="scope">
-                    <el-button type="text" size="small" @click="editForm(scope.row)">编辑</el-button>
-                    <el-button @click="deleteContest(scope.row)" type="text" size="small" style="color:red;">删除</el-button>
+                    <el-button type="text" size="small" @click="agreeForm(scope.row)">同意加入申请</el-button>
+                    <el-button type="text" size="small" @click="refuseStudent(scope.row)">拒绝加入申请</el-button>
                 </template>
             </el-table-column>
+
+
+
         </el-table>
         <i-row >
-            <el-button type="danger" v-if="multipleSelectionFlag" @click="popDelete" size="small">
-                批量删除
-            </el-button>
-            <el-dialog :visible.sync="multiDeleteVisible" title="提示" width="30%">
-                <span>确定要删除吗</span>
-                <span slot="footer">
-          <el-button type="primary" @click="multiDelete" size="small">确 定</el-button>
-          <el-button @click="multiDeleteVisible = false" size="small">取 消</el-button>
+            <el-dialog :visible.sync="refuseVisible" title="提示" width="30%">
+                <span>确定要拒绝该学生的项目加入申请吗</span>
+              <span slot="footer">
+          <el-button type="primary" @click="refuseStudent" size="small">确 定</el-button>
+          <el-button @click="refuseVisible = false" size="small">取 消</el-button>
         </span>
             </el-dialog>
-            <el-dialog :visible.sync="multiDeleteVisible1" title="提示" width="30%">
-                <span>确定要删除吗</span>
+
+            <el-dialog :visible.sync="agreeVisible1" title="提示" width="30%">
+                <span>确定要同意该学生的项目加入申请吗</span>
                 <span slot="footer">
-          <el-button type="primary" @click="multiDelete1" size="small">确 定</el-button>
-          <el-button @click="multiDeleteVisible1 = false" size="small">取 消</el-button>
+          <el-button type="primary" @click="agreestudent" size="small">确 定</el-button>
+          <el-button @click="agreeVisible1 = false" size="small">取 消</el-button>
         </span>
             </el-dialog>
+
             <el-pagination
                     class="page"
                     @current-change="change"
@@ -78,21 +104,18 @@
                     :page-count="pageNum">
             </el-pagination>
         </i-row>
-        <InformationEdit ref="informationedit"></InformationEdit>
     </div>
 </template>
 
 <script>
-import InformationEdit from "@/components/views/admin/InformationEdit";
 
 export default {
     name: "projectManger",
-    components: {InformationEdit},
     data() {
         return {
-            multiDeleteVisible1:false,
+            agreeVisible1:false,
             multipleSelectionFlag: false,
-            multiDeleteVisible: false,
+          refuseVisible: false,
             multipleSelection: [],
             project: [],
             title: '',
@@ -106,6 +129,7 @@ export default {
             },
             idParams:[],
             dcontest:'',
+          delievers:''
         }
     },
     methods: {
@@ -116,12 +140,33 @@ export default {
             else
                 this.getAllInformation()
         },
-        editForm(data) {
+        refuseForm(data) {
             this.$nextTick(() => {
                 // 弹框打开时初始化表单
-                this.$refs.informationedit.init(data)
+              this.delievers=data
+              this.refuseVisible=true
+
             })
         },
+      agreeForm(data){
+        this.$nextTick(() => {
+          // 弹框打开时初始化表单
+          this.delievers=data
+          this.agreeVisible1=true
+
+        })
+      },
+
+
+      refuseStudent(){
+
+      },
+      agreestudent(){
+
+      },
+
+
+
         deleteContest(contest) {
             this.multiDeleteVisible1=true
             this.dcontest=contest

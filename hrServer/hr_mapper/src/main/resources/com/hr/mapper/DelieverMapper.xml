@@ -6,51 +6,58 @@
 
     <insert id="addDelievet">
         insert into delieverresume (id, sno, projectName, sName, sMajor, pid, tno, content, mark,mentor) values
-(#{id},#{sno},#{projectName},#{sName},#{sMajor},#{pid},#{tno},#{content},#{mark},#{mentor});
+(#{id},#{sno},#{projectName},#{sName},#{sMajor},#{pid},#{tno},#{content},#{mark},#{mentor})
     </insert>
 
     <select id="queryAllDeliever" resultType="com.hr.model.Deliever">
-select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where tno=#{tno};
+select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where tno=#{tno}
     </select>
     <select id="queryaccessDeliever" resultType="com.hr.model.Deliever">
-        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and mark = 1;
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and mark = 1
 
     </select>
 
     <select id="querynoaccessDeliever" resultType="com.hr.model.Deliever">
-        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and mark = -1;
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and mark = -1
 
     </select>
 
     <select id="querywaitDeliever" resultType="com.hr.model.Deliever">
-        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and mark = 0;
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and mark = 0
 
     </select>
     <select id="queryOneStudentAllDeliever" resultType="com.hr.model.Deliever">
-        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} ;
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno}
 
     </select>
 
     <select id="querySameaccessDeliever" resultType="com.hr.model.Deliever">
-        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and pid=#{pid} and mark = 1;
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and pid=#{pid} and mark = 1
 
     </select>
 
     <select id="querySamenoaccessDeliever" resultType="com.hr.model.Deliever">
-        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and pid=#{pid} and mark = -1;
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and pid=#{pid} and mark = -1
 
     </select>
 
     <select id="querySamewaitDeliever" resultType="com.hr.model.Deliever">
-        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and pid=#{pid} and mark = 0;
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where  sno = #{sno} and pid=#{pid} and mark = 0
 
     </select>
     <select id="searchDelieverByPname" resultType="com.hr.model.Deliever">
-        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where projectName=#{title};
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where projectName=#{title}
     </select>
 
     <select id="getAllDeliever" resultType="com.hr.model.Deliever">
         select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume
+    </select>
+    <select id="getwaitDelieverbytno" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where tno = #{tno} and mark = 0
+    </select>
+
+    <select id="getaccessDelieverbytno" resultType="com.hr.model.Deliever">
+        select id,sno,projectName,sName,sMajor,pid,tno,content,mark,mentor from delieverresume where tno = #{tno} and mark = 1
     </select>
 
 
