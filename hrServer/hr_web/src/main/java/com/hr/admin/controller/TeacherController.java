@@ -2,9 +2,11 @@ package com.hr.admin.controller;
 
 import com.hr.model.*;
 import com.hr.service.*;
+import com.hr.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +25,13 @@ public class TeacherController {
     private ActiveService activeService;
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private DelieverService delieverService;
+
+
+    @Autowired
+    private JWTUtil jwtUtil;
 
     @GetMapping("listStudent")
     public PageResult listStudent(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
@@ -178,4 +187,20 @@ public class TeacherController {
                                     @RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         return projectService.searchProject(title, page, limit);
     }
+
+
+    @GetMapping("studentDeliever")
+    public PageResult getStudentDeliever(HttpServletRequest request,@RequestBody Deliever deliever, @RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+        String token = request.getHeader("UserToken");
+        String tno = jwtUtil.getMemberIdByJwtToken(token);
+        return delieverService.getwaitDelieverbytno(tno,page,limit);
+    }
+
+    @GetMapping("accessDeliever")
+    public PageResult getaccessStudentDeliever(HttpServletRequest request,@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+        String token = request.getHeader("UserToken");
+        String tno = jwtUtil.getMemberIdByJwtToken(token);
+        return delieverService.getaccessDelieverbytno(tno,page,limit);
+    }
+
 }

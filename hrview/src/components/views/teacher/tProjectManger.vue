@@ -175,13 +175,7 @@ export default {
             Object.keys(data).forEach(key=>(data[key]=''))
             return data
         },
-        addContest() {
-            this.$nextTick(() => {
-                // 弹框打开时初始化表单
-                this.$refs.informationedit.init(this.contest)
-                this.contest=this.reset(this.contest)
-            })
-        },
+
         search() {
             let params = {
                 page: this.currentPage,
@@ -275,7 +269,7 @@ export default {
                 limit: this.pageSize
             }
             this.$http({
-                url: this.$http.adornUrl('/teacher/project'),
+                url: this.$http.adornUrl('/teacher/studentDeliever'),
                 method: 'get',
                 params: this.$http.adornParams(params),
                 headers: {
