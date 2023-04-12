@@ -30,4 +30,7 @@ public interface DelieverMapper {
 
     public List<Deliever> getAllDeliever();
 
+    public List<Deliever> getwaitDelieverbytno(String tno);
+
+    public List<Deliever> getaccessDelieverbytno(String tno);
 }

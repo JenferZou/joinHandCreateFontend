@@ -1,5 +1,10 @@
 package com.hr.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class Project {
 
     private String expectedCompetition;
@@ -10,7 +15,9 @@ public class Project {
 
     private String mentor;
 
-    private String startTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")
+    private Date startTime;
 
     private String content;
 
@@ -21,7 +28,7 @@ public class Project {
     public Project() {
     }
 
-    public Project(String expectedCompetition, String id, String name, String mentor, String startTime, String content, String tno, String needMajor) {
+    public Project(String expectedCompetition, String id, String name, String mentor, Date startTime, String content, String tno, String needMajor) {
         this.expectedCompetition = expectedCompetition;
         this.id = id;
         this.name = name;
@@ -64,11 +71,11 @@ public class Project {
         this.mentor = mentor;
     }
 
-    public String getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 

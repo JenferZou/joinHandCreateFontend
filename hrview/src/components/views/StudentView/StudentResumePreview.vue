@@ -28,8 +28,7 @@
                         {{ studentInfo.sDepartment }}<span style="margin: 0 14px;color: #e6e6e6">|</span>{{studentInfo.sMajor }}
                         <span style="margin: 0 14px;color: #e6e6e6">|</span> {{studentInfo.className}}</div>
                       <div  class="contact-mes">
-                        <i-icon type="ios-telephone"></i-icon> +86{{ studentInfo.sPhone }} <i-icon type="android-chat"></i-icon>
-                        微信：{{ resume.wechatId }}</div>
+                        <i-icon type="ios-telephone"></i-icon> +86{{ studentInfo.sPhone }} </div>
                     </div>
                     <div  class="edit-mes" style="color: #02B28B;display: flex;margin-left: auto;font-size: 12px; cursor: pointer">
                     </div>

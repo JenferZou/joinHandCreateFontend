@@ -145,7 +145,7 @@
 import { toolbarOptions} from "@/components/utils";
 
 export default {
-    name: "ActiveManagement",
+    name: "tActiveManagement",
     data() {
         return {
             editorOption: {

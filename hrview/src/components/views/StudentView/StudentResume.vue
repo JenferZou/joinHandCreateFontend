@@ -67,7 +67,7 @@
               <div class="resumewrapp">
                 <div class="page-title">
                   <h5>我的在线简历</h5>
-                  <button class="preview">预览&下载</button>
+                  <button class="preview" @click="preview">预览</button>
                 </div>
 
                 <!--                简历内容-->
@@ -87,12 +87,16 @@
                       {{ studentInfo.sDepartment }}<span style="margin: 0 14px;color: #e6e6e6">|</span>{{studentInfo.sMajor }}
                       <span style="margin: 0 14px;color: #e6e6e6">|</span> {{studentInfo.className}}</div>
                       <div  class="contact-mes">
-                        <i-icon type="ios-telephone"></i-icon> +86{{ studentInfo.sPhone }} <i-icon type="android-chat"></i-icon>
-                        微信：{{ resume.wechatId }}</div>
+                        <i-icon type="ios-telephone"></i-icon> +86{{ studentInfo.sPhone }}
+
+                      </div>
+
+
                     </div>
 
-
                   </li>
+
+
 
                   <li class="advantage">
                     <div  class="project-title">
@@ -522,6 +526,11 @@ export default {
     },
     ediRes(name){
       this.$router.push({name})
+    },
+    preview(){
+      this.$router.push({
+        name: 'StudentResumePreview'
+      })
     }
 
   }

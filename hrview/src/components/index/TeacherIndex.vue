@@ -58,7 +58,7 @@
 <script>
 import MyAvatar from "@/components/views/teacher/MyAvatar";
 export default {
-    name: "TeacherIndex",
+    name: "teacherIndex",
     components: {MyAvatar},
     data() {
         return{
