@@ -309,7 +309,7 @@ export default {
     exportExcel(){
       this.$axios({
         method: 'get',
-        url: 'http://localhost:8081/excel/exportBankCheckInfo',
+        url: this.$http.adornUrl('/excel/exportBankCheckInfo')/*'http://localhost:8081/excel/exportBankCheckInfo'*/,
         params:'',
         responseType:'blob',
         headers: {

@@ -107,21 +107,18 @@
                     <el-form-item label="项目名称" prop="title">
                         <el-input type="text" v-model="active.title" autocomplete="off"></el-input>
                     </el-form-item>
+                  <el-form-item label="指导老师" prop="title">
+                    <el-input type="text" v-model="active.title" autocomplete="off"></el-input>
+                  </el-form-item>
                     <el-form-item label="开始时间" prop="activeTime">
                         <el-date-picker type="date" placeholder="选择日期" v-model="active.activeTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
                     </el-form-item>
-                    <el-form-item label="结束时间" prop="activeDuration">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="active.activeTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
-                    </el-form-item>
-                    <el-form-item label="项目类型" prop="type">
+                    <el-form-item label="项目需要的专业" prop="type">
                         <el-input type="text" v-model="active.type" autocomplete="off"></el-input>
                     </el-form-item>
-                    <el-form-item label="可获积分" prop="points">
-                        <el-input type="text" v-model="active.points" autocomplete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="招募要求" prop="remark">
-                        <el-input type="text" v-model="active.remark" autocomplete="off"></el-input>
-                    </el-form-item>
+                  <el-form-item label="预计参加的比赛" prop="type">
+                    <el-input type="text" v-model="active.type" autocomplete="off"></el-input>
+                  </el-form-item>
                     <el-form-item class="item">
                         <quill-editor class="editor"
                                       ref="myTextEditor"
@@ -134,12 +131,6 @@
                         </quill-editor>
                     </el-form-item>
                 </el-form>
-                <!--  <span slot="footer" class="dialog-footer">-->
-
-                <!--    <el-button @click="cancle">取 消</el-button>&nbsp;&nbsp;&nbsp;&nbsp;-->
-                <!--    <el-button type="primary" @click="sure" >确 定</el-button>-->
-                <!--  </span>-->
-
                 <a-card class="UpSet1">
                     <div style="text-align: center;">
                         <el-button @click="cancle" >取 消</el-button>
@@ -148,8 +139,6 @@
                     </div>
 
                 </a-card>
-
-
 
 
             </div>
@@ -176,7 +165,7 @@ export default {
                     toolbar: toolbarOptions
                 },
                 theme: 'snow',
-                placeholder: '请输入正文'
+                placeholder: '项目内容'
                 // Some Quill optiosn...
             },
             multiDeleteVisible:false,

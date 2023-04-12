@@ -22,12 +22,6 @@
         <artifactId>lombok</artifactId>
         <version>1.18.24</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-security</artifactId>
-        <version>2.7.5</version>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
     <dependency>
         <groupId>org.apache.poi</groupId>
@@ -73,24 +67,12 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
-
     <build>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-
-<!--&lt;!&ndash;                <executions>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <execution>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <goals>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <goal>repackage</goal>&lt;!&ndash;可以把依赖的包都打包到生成的Jar包中 &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                        </goals>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </execution>&ndash;&gt;-->
-<!--&lt;!&ndash;                </executions>&ndash;&gt;-->
-<!--            </plugin>-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.5</version>
                 <configuration>
                     <mainClass>com.hr.Application</mainClass>
                     <excludes>
@@ -100,9 +82,7 @@
                         </exclude>
                     </excludes>
                     <classifier>exec</classifier>
-
                 </configuration>
-
                 <executions>
                     <execution>
                         <goals>
@@ -112,7 +92,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 </project>

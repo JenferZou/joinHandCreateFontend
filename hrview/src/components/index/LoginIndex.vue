@@ -70,7 +70,7 @@ export default{
                         }else if(item.title==='教师'){
                           sessionStorage.setItem("role",item.title)
                           this.$router.push({
-                            name:'teacher'
+                            name:'teacherIndex'
                           })
                         }
                       })

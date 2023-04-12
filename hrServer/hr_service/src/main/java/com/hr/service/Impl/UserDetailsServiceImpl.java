@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Manager manager = adminMapper.getUserByUserName(username);
         Student student=studentMapper.getStudentBySno(username);
         Teacher teacher=teacherMapper.getTeacherBySno(username);
-        if (ObjectUtils.isEmpty(manager)&&ObjectUtils.isEmpty(student)) {
+        if (ObjectUtils.isEmpty(manager)&&ObjectUtils.isEmpty(student)&&ObjectUtils.isEmpty(teacher)) {
             //抛异常
             throw  new UsernameNotFoundException("根据用户名找不到该用户的信息！");
         }
