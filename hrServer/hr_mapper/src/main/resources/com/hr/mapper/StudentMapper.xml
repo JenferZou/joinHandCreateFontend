@@ -157,7 +157,7 @@
                 mentorPhone = #{mentorPhone},
         </if>
         </set>
-        where sno = #{sno} and sName=#{sName}
+        where id=#{id}
     </update>
 
 

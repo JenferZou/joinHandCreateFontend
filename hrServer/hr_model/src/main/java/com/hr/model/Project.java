@@ -102,4 +102,18 @@ public class Project {
     public void setNeedMajor(String needMajor) {
         this.needMajor = needMajor;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "expectedCompetition='" + expectedCompetition + '\'' +
+                ", id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", mentor='" + mentor + '\'' +
+                ", startTime=" + startTime +
+                ", content='" + content + '\'' +
+                ", tno='" + tno + '\'' +
+                ", needMajor='" + needMajor + '\'' +
+                '}';
+    }
 }
