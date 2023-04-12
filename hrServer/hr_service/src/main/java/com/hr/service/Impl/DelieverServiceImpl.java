@@ -118,4 +118,11 @@ public class DelieverServiceImpl implements DelieverService {
     }
 
 
+    @Override
+    public List<Deliever> getaccessDelieverbytnoandpid(String tno,String pid) {
+
+        return delieverMapper.getaccessDelieverbytnoandpid(tno,pid);
+    }
+
+
 }

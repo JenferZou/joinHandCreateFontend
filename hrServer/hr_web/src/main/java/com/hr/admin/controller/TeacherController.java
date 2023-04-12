@@ -125,4 +125,20 @@ public class TeacherController {
         return delieverService.getaDelieverbyname(name,page,limit);
     }
 
+
+    @GetMapping("getMypublicPro")
+    public PageResult getMypublicPro(HttpServletRequest request, @RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+        String token = request.getHeader("UserToken");
+        String tno = jwtUtil.getMemberIdByJwtToken(token);
+        return projectService.getProjectbytno(tno,page,limit);
+    }
+
+    @GetMapping("searchAccessStudent")
+    public List<Deliever> searchAccessStudent(Project project){
+        System.out.println(delieverService.getaccessDelieverbytnoandpid(project.getTno(),project.getId()));
+        return delieverService.getaccessDelieverbytnoandpid(project.getTno(),project.getId());
+    }
+
+
+
 }

@@ -311,7 +311,6 @@ export default {
           'charset': 'utf-8'
         }
       }).then(({data}) => {
-        console.log(data)
         this.contest1=data
 
       }).catch(() => {

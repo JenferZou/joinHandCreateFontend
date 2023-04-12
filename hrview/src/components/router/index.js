@@ -28,6 +28,8 @@ import tUserManagement from "@/components/views/teacher/tUserManagement"
 import tInformationManagement from "@/components/views/teacher/tInformationManagement";
 import tProjectManager from "@/components/views/teacher/tProjectManger"
 import StudentDelieverResume from "@/components/views/teacher/StudentDelieverResume"
+import myPublishProject from "@/components/views/teacher/myPublishProject"
+
 Vue.use(Router)
 
 let router = new Router({
@@ -161,6 +163,11 @@ let router = new Router({
                     path: '/teacher/project',
                     name: 'tproject',
                     component: tProjectManager,
+                },
+                {
+                    path: '/teacher/myPublishProject',
+                    name: 'myPublishProject',
+                    component: myPublishProject,
                 },
 
 

@@ -50,4 +50,11 @@ public class ProjectServiceImpl implements ProjectService {
         project.setId(UUID.randomUUID().toString().substring(0,10));
         return projectMapper.saveProject(project);
     }
+
+    @Override
+    public PageResult getProjectbytno(String tno,Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        List<Project> projects=projectMapper.getProjectbytno(tno);
+        PageInfo<Project> pageInfo=new PageInfo<>(projects);
+        return PageUtil.getPageResult(pageInfo);    }
 }

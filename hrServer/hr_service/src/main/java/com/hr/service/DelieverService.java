@@ -42,4 +42,6 @@ public interface DelieverService {
 
     public int refuseDeliever(Deliever deliever);
 
+    public List<Deliever> getaccessDelieverbytnoandpid(String tno,String pid);
+
 }

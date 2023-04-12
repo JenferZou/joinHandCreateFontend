@@ -22,4 +22,10 @@ where name=#{title}
         values (#{name},#{mentor},#{startTime},#{content},#{needMajor},#{id},#{expectedCompetition},#{tno});
     </insert>
 
+    <select id="getProjectbytno" resultType="com.hr.model.Project">
+        select id,  name, mentor, startTime, content, expectedCompetition, needMajor,tno from project where tno = #{tno}
+    </select>
+
+
+
 </mapper>

@@ -40,4 +40,7 @@ public interface DelieverMapper {
 
     public List<Deliever> getaDelieverbyname(String name);
 
+
+    public List<Deliever> getaccessDelieverbytnoandpid(@Param("tno") String tno,@Param("pid") String pid);
+
 }

@@ -11,4 +11,5 @@ public interface ProjectService {
    public PageResult searchProject(String title,Integer page,Integer limit);
    public List<Project> getThreeProject();
    public int saveProject(Project project);
+    public PageResult getProjectbytno(String tno,Integer page,Integer limit);
 }

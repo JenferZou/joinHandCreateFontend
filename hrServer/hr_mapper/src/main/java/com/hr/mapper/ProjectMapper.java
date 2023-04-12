@@ -11,4 +11,5 @@ public interface ProjectMapper {
     public List<Project> queryProjectByTitle(String title);
     public List<Project> getThreeProject();
     public int saveProject(Project project);
+    public List<Project> getProjectbytno(String tno);
 }
