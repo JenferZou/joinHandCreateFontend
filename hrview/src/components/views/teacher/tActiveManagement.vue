@@ -37,48 +37,37 @@
                     width="50">
             </el-table-column>
             <el-table-column
-                    property="title"
+                    property="name"
                     label="项目名称"
                     width="120">
             </el-table-column>
+          <el-table-column
+              property="mentor"
+              label="指导老师"
+              width="120">
+          </el-table-column>
             <el-table-column
-                    property="activeTime"
+                    property="startTime"
                     label="开始时间"
                     width="120">
             </el-table-column>
             <el-table-column
-                    property="activeDuration"
-                    label="结束时间"
+                    property="needMajor"
+                    label="项目需要的专业"
                     width="120">
             </el-table-column>
-            <el-table-column
-                    property="type"
-                    label="项目类型"
-                    width="120">
-            </el-table-column>
-            <el-table-column
-                    property="points"
-                    label="可获积分"
-                    width="120">
-            </el-table-column>
+          <el-table-column
+              property="expectedCompetition"
+              label="预计参加的比赛"
+              width="120">
+          </el-table-column>
             <el-table-column
                     prop="content"
-                    label="招募要求"
+                    label="内容"
                     show-overflow-tooltip>
                 <!--        <template v-slot="scope">
                           <div v-html='scope.row.content'></div>
                         </template>-->
-            </el-table-column>
-            <el-table-column
-                    property="remark"
-                    label="备注"
-                    width="120">
-            </el-table-column>
-
-            <el-table-column
-                    fixed="right"
-                    label="申请人数"
-                    width="100">
             </el-table-column>
             <el-table-column
                     fixed="right"
@@ -104,20 +93,20 @@
         >
             <div class="el-dialog-div">
                 <el-form :model="active" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                    <el-form-item label="项目名称" prop="title">
-                        <el-input type="text" v-model="active.title" autocomplete="off"></el-input>
+                    <el-form-item label="项目名称" prop="name">
+                        <el-input type="text" v-model="active.name" autocomplete="off"></el-input>
                     </el-form-item>
-                  <el-form-item label="指导老师" prop="title">
-                    <el-input type="text" v-model="active.title" autocomplete="off"></el-input>
+                  <el-form-item label="指导老师" prop="mentor">
+                    <el-input type="text" v-model="active.mentor" autocomplete="off"></el-input>
                   </el-form-item>
-                    <el-form-item label="开始时间" prop="activeTime">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="active.activeTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
+                    <el-form-item label="开始时间" prop="startTime">
+                        <el-date-picker type="date" placeholder="选择日期" v-model="active.startTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
                     </el-form-item>
-                    <el-form-item label="项目需要的专业" prop="type">
-                        <el-input type="text" v-model="active.type" autocomplete="off"></el-input>
+                    <el-form-item label="项目需要的专业" prop="needMajor">
+                        <el-input type="text" v-model="active.needMajor" autocomplete="off"></el-input>
                     </el-form-item>
-                  <el-form-item label="预计参加的比赛" prop="type">
-                    <el-input type="text" v-model="active.type" autocomplete="off"></el-input>
+                  <el-form-item label="预计参加的比赛" prop="expectedCompetition">
+                    <el-input type="text" v-model="active.expectedCompetition" autocomplete="off"></el-input>
                   </el-form-item>
                     <el-form-item class="item">
                         <quill-editor class="editor"
@@ -131,14 +120,13 @@
                         </quill-editor>
                     </el-form-item>
                 </el-form>
-                <a-card class="UpSet1">
+                <el-card class="UpSet1">
                     <div style="text-align: center;">
                         <el-button @click="cancle" >取 消</el-button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <el-button type="primary">确 定</el-button>
+                        <el-button type="primary" @click="sure">确 定</el-button>
                     </div>
-
-                </a-card>
+                </el-card>
 
 
             </div>
@@ -176,12 +164,12 @@ export default {
             title:'',
             deleteData:'',
             active:{
-                title:'',
-                type:'',
-                activeTime:'',
-                activeDuration:'',
+                name:'',
+                mentor:'',
+                startTime:'',
+                needMajor:'',
                 content:'',
-                points:'',
+                expectedCompetition:'',
                 remark:'',
             },
             rules: {
