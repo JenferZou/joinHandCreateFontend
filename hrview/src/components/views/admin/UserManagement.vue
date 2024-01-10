@@ -57,7 +57,6 @@
                     <el-button type="primary" @click="modify" size="small">保存</el-button>
                   </el-form-item>
                 </i-col>
-
               </i-row>
             </el-form>
           </el-dialog>
