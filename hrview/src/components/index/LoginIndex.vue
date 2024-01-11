@@ -9,7 +9,7 @@
       <el-form label-width="80px"
                :model="form"
                ref="form"
-               :rules="rules">
+               >
         <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username"></el-input>
         </el-form-item>

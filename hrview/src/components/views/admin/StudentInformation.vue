@@ -130,9 +130,9 @@
         width="150">
     </el-table-column>
     <el-table-column
-        prop="sName"
+        prop="sname"
         label="姓名"
-        width="120">
+        width="150">
     </el-table-column>
     <el-table-column
         prop="gender"
@@ -142,57 +142,22 @@
     <el-table-column
         prop="className"
         label="班级"
-        width="120">
+        width="150">
     </el-table-column>
     <el-table-column
-        prop="sMajor"
+        prop="smajor"
         label="专业"
-        width="120">
+        width="150">
     </el-table-column>
     <el-table-column
-        prop="sDepartment"
+        prop="sdepartment"
         label="所属学院"
-        width="120">
+        width="150">
     </el-table-column>
     <el-table-column
-        prop="blood"
-        label="血型"
-        width="50">
-    </el-table-column>
-    <el-table-column
-        prop="star"
-        label="星座"
-        width="120">
-    </el-table-column>
-    <el-table-column
-        prop="mentor"
-        label="指导老师"
-        width="120">
-    </el-table-column>
-    <el-table-column
-        prop="sPhone"
+        prop="sphone"
         label="电话"
-        width="120">
-    </el-table-column>
-    <el-table-column
-        prop="relatives"
-        label="联系人"
-        width="120">
-    </el-table-column>
-    <el-table-column
-        prop="rPhone"
-        label="联系人电话"
-        width="120">
-    </el-table-column>
-    <el-table-column
-        prop="score"
-        label="积分"
-        width="120">
-    </el-table-column>
-    <el-table-column
-        prop="isGraduate"
-        label="状态(在校/毕业)"
-        width="120">
+        width="150">
     </el-table-column>
     <el-table-column
         fixed="right"
@@ -247,13 +212,6 @@ export default {
         sDepartment:'',
         sMajor:'',
         gender:'',
-        mentor:'',
-        relatives:'',
-        rPhone:'',
-        score:'',
-        star:'',
-        blood:'',
-        isGraduate:''
       },
       show:false,
       searchIcon:false,
@@ -401,13 +359,13 @@ export default {
         url: this.$http.adornUrl('/admin/listStudent'),
         method: 'get',
         params:this.$http.adornParams(params),
-        headers: {
-          'UserToken':window.sessionStorage.getItem('Token'),
-        }
       }).then(({data}) => {
-        if (data) {
+          console.log(data)
+        if (data&&data.errorCode==="200") {
           this.pageNum=data.totalPages
-          this.studentData = data.content
+          this.studentData = data.data.students
+        }else{
+            this.$message.error(data.message)
         }
       }).catch(() => {
         console.log('出错啦！！！！')
@@ -449,7 +407,7 @@ export default {
         }).then(({data}) => {
           if (data) {
             this.pageNum = data.totalPages
-            this.studentData = data.content
+            this.studentData = data.data.students
           }
         }).catch((error) => {
           console.log('出错啦！！！！')

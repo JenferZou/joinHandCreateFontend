@@ -23,20 +23,19 @@
       <i-col span="4" class="layout-menu-left">
         <i-menu @on-select="handleSelect" :active-name="sidebarItem"  width="auto">
 <!--          <div class="layout-logo-left"><h1>menu</h1></div>-->
-          <i-submenu name="1">
+<!--          <i-submenu name="1">
             <template slot="title">
               <i-icon type="ios-navigate"></i-icon>
               学生资料
             </template>
             <i-menu-item name="index" >基本资料</i-menu-item>
-          </i-submenu>
+          </i-submenu>-->
           <i-submenu name="2">
             <template slot="title">
               <i-icon type="ios-keypad"></i-icon>
               信息管理
             </template>
-            <i-menu-item name="contest">考证信息管理</i-menu-item>
-            <i-menu-item name="active">活动信息发布</i-menu-item>
+            <i-menu-item name="index">学生信息</i-menu-item>
             <i-menu-item name="project">项目管理</i-menu-item>
           </i-submenu>
           <i-submenu name="3">
@@ -94,17 +93,17 @@ export default {
     },
     handleSelect(path) {
       if(path==='index') {
-        this.item.firstTitle='学生资料'
-        this.item.title = '基本资料'
+        this.item.firstTitle='信息管理'
+        this.item.title = '学生信息'
       }
-      else if(path==='contest') {
+/*      else if(path==='contest') {
         this.item.firstTitle='信息管理'
         this.item.title = '考证信息管理'
       }
       else if(path==='active') {
         this.item.firstTitle='信息管理'
         this.item.title = '活动信息发布'
-      }
+      }*/
       else if(path==='project') {
         this.item.firstTitle='信息管理'
         this.item.title = '项目管理'

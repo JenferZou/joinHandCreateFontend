@@ -4,11 +4,17 @@ import merge from 'lodash/merge' // 合并对象工具
 const http = axios.create({
     timeout: 1000 * 30,
     withCredentials: true, // 当前请求为跨域类型时是否在请求中协带cookie
-
-    /* headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    } */
 })
+http.interceptors.request.use(
+    function (config) {
+            config.headers['Authorization'] = 'Bearer '+window.sessionStorage.getItem('Token')/* 定义全局token */
+        return config
+    },
+    function (error) {
+        return Promise.reject(error)
+    }
+)
+
 /*axios.interceptors.request.use((config) => {
     // config 是 axios 配置对象
     // 获取token
@@ -29,7 +35,6 @@ const http = axios.create({
  */
 http.adornUrl = (actionName) => {
   return '/api'+actionName
-    //return 'http://120.78.205.174:8081'+actionName
 }
 
 /**
