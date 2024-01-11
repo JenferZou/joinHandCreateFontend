@@ -65,61 +65,110 @@
                     </i-row>
                   </i-col>
                 </i-row>
-                <el-table
-                    border
-                    ref="multipleTable"
-                    :data="project"
-                    tooltip-effect="dark"
-                    style="width: 100%"
-                    @selection-change="handleSelectionChange">
-                  <el-table-column
-                      width="55">
-                  </el-table-column>
-                  <el-table-column
-                      prop="name"
-                      label="项目名称"
-                      width="120">
-                  </el-table-column>
-                  <el-table-column
-                      prop="mentor"
-                      label="指导老师"
-                      width="120">
-                  </el-table-column>
 
-                  <el-table-column
-                      prop="startTime"
-                      label="开始时间"
-                      width="120">
-                  </el-table-column>
 
-                  <el-table-column
-                      prop="expectedCompetition"
-                      label="作品预期要参加的比赛"
-                      show-overflow-tooltip
-                  >
-                  </el-table-column>
+<!--                <el-table-->
+<!--                    border-->
+<!--                    ref="multipleTable"-->
+<!--                    :data="project"-->
+<!--                    tooltip-effect="dark"-->
+<!--                    style="width: 100%"-->
+<!--                    @selection-change="handleSelectionChange">-->
+<!--                  <el-table-column-->
+<!--                      width="55">-->
+<!--                  </el-table-column>-->
+<!--                  <el-table-column-->
+<!--                      prop="name"-->
+<!--                      label="项目名称"-->
+<!--                      width="120">-->
+<!--                  </el-table-column>-->
+<!--                  <el-table-column-->
+<!--                      prop="mentor"-->
+<!--                      label="指导老师"-->
+<!--                      width="120">-->
+<!--                  </el-table-column>-->
 
-                  <el-table-column
-                      prop="needMajor"
-                      label="学生专业需求"
-                      show-overflow-tooltip
-                  >
-                  </el-table-column>
+<!--                  <el-table-column-->
+<!--                      prop="startTime"-->
+<!--                      label="开始时间"-->
+<!--                      width="120">-->
+<!--                  </el-table-column>-->
 
-                  <el-table-column
-                      prop="content"
-                      label="内容"
-                      show-overflow-tooltip>
-                  </el-table-column>
-                  <el-table-column
-                      fixed="right"
-                      label="操作"
-                      width="100">
-                    <template v-slot="scope">
-                      <el-button type="text" size="small" @click="delieverResume(scope.row)">投递简历</el-button>
-                    </template>
-                  </el-table-column>
-                </el-table>
+<!--                  <el-table-column-->
+<!--                      prop="expectedCompetition"-->
+<!--                      label="作品预期要参加的比赛"-->
+<!--                      show-overflow-tooltip-->
+<!--                  >-->
+<!--                  </el-table-column>-->
+
+<!--                  <el-table-column-->
+<!--                      prop="needMajor"-->
+<!--                      label="学生专业需求"-->
+<!--                      show-overflow-tooltip-->
+<!--                  >-->
+<!--                  </el-table-column>-->
+
+<!--                  <el-table-column-->
+<!--                      prop="content"-->
+<!--                      label="内容"-->
+<!--                      show-overflow-tooltip>-->
+<!--                  </el-table-column>-->
+<!--                  <el-table-column-->
+<!--                      fixed="right"-->
+<!--                      label="操作"-->
+<!--                      width="100">-->
+<!--                    <template v-slot="scope">-->
+<!--                      <el-button type="text" size="small" @click="delieverResume(scope.row)">投递简历</el-button>-->
+<!--                    </template>-->
+<!--                  </el-table-column>-->
+<!--                </el-table>-->
+                <div class="card" >
+                  <div style="display: flex;">
+                    <!--                  文字部分-->
+                    <div style="flex: 1">
+                      <div style="font-size: 25px;font-weight: bolder">水果助农计划</div>
+                      <div style="margin-top: 10px;font-weight: bold;font-size: 17px">计算机设计大赛</div>
+                      <div style="font-size:10px;margin-top: 10px">
+                        在古老的森林中，阳光透过茂密的树叶洒落在地面上，给人一种宁静而祥和的感觉。空气中弥漫着泥土的芬芳，鸟儿在枝头欢快地歌唱，仿佛在庆祝自然的美妙。
+                        这里是一个与世隔绝的角落，没有城市的喧嚣，没有繁忙的车辆，只有大自然的声音和生命的存在。站在这片森林中，你可以感受到时间的缓慢流动，仿佛世界的喧嚣与纷扰都远离了这里。
+                        身处其中，你会发现每一个细微的变化。风吹过树梢，树叶会轻轻摇曳，发出沙沙的声音。小溪在山间流淌，水流清澈见底，草木在水中倒影出美丽的景色。微风轻拂脸颊，带来一丝凉意，让人心旷神怡。
+                        在这个宁静的环境中，你可以与自然融为一体。闭上眼睛，倾听大自然的声音，感受生命的跳动。这里没有压力，没有烦恼，只有内心的宁静与平静。
+                        走出森林，回到城市的喧嚣中，你会发现内心得到了片刻的放松和治愈。在忙碌的生活中，我们常常忽略了内心的需求，而大自然正是我们寻找平衡与安宁的最好去处。
+                        不论是在森林中散步，还是在花海中漫步，大自然都能给我们带来宁静与喜悦。让我们拋开烦恼与压力，回归自然，重新找回内心的平静与美好。
+                      </div>
+                      <div style="margin-top: 10px;color: gray">项目导师:梁老师</div>
+                      <div style="color: gray">需要专业:计算机相关专业，销售相关知识</div>
+                    </div>
+                    <!--                    按钮部分-->
+                    <div style="width: 130px;display:flex;padding-left: 40px;align-items: flex-end;">
+                      <el-button type="primary" plain size="small">投递简历</el-button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card" >
+                  <div style="display: flex;">
+                    <!--                  文字部分-->
+                    <div style="flex: 1">
+                      <div style="font-size: 25px;font-weight: bolder">水果助农计划</div>
+                      <div style="margin-top: 10px;font-weight: bold;font-size: 17px">计算机设计大赛</div>
+                      <div style="font-size:10px;margin-top: 10px">
+                        在古老的森林中，阳光透过茂密的树叶洒落在地面上，给人一种宁静而祥和的感觉。空气中弥漫着泥土的芬芳，鸟儿在枝头欢快地歌唱，仿佛在庆祝自然的美妙。
+                        这里是一个与世隔绝的角落，没有城市的喧嚣，没有繁忙的车辆，只有大自然的声音和生命的存在。站在这片森林中，你可以感受到时间的缓慢流动，仿佛世界的喧嚣与纷扰都远离了这里。
+                        身处其中，你会发现每一个细微的变化。风吹过树梢，树叶会轻轻摇曳，发出沙沙的声音。小溪在山间流淌，水流清澈见底，草木在水中倒影出美丽的景色。微风轻拂脸颊，带来一丝凉意，让人心旷神怡。
+                        在这个宁静的环境中，你可以与自然融为一体。闭上眼睛，倾听大自然的声音，感受生命的跳动。这里没有压力，没有烦恼，只有内心的宁静与平静。
+                        走出森林，回到城市的喧嚣中，你会发现内心得到了片刻的放松和治愈。在忙碌的生活中，我们常常忽略了内心的需求，而大自然正是我们寻找平衡与安宁的最好去处。
+                        不论是在森林中散步，还是在花海中漫步，大自然都能给我们带来宁静与喜悦。让我们拋开烦恼与压力，回归自然，重新找回内心的平静与美好。
+                      </div>
+                      <div style="margin-top: 10px;color: gray">项目导师:梁老师</div>
+                      <div style="color: gray">需要专业:计算机相关专业，销售相关知识</div>
+                    </div>
+                    <!--                    按钮部分-->
+                    <div style="width: 130px;display:flex;padding-left: 40px;align-items: flex-end;">
+                      <el-button type="primary" plain size="small">投递简历</el-button>
+                    </div>
+                  </div>
+                </div>
 
                 <i-row >
 
@@ -135,9 +184,8 @@
 
 
 
-
-
-            </div></div>
+            </div>
+          </div>
         </i-col>
       </i-row>
     </div>
@@ -338,6 +386,13 @@ export default {
   color: #9ea7b4;
 }
 
+.card {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
 
 
 </style>
