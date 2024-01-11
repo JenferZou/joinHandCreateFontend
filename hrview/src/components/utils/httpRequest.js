@@ -4,24 +4,27 @@ import merge from 'lodash/merge' // 合并对象工具
 const http = axios.create({
     timeout: 1000 * 30,
     withCredentials: true, // 当前请求为跨域类型时是否在请求中协带cookie
-
-    /* headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    } */
 })
-/*axios.interceptors.request.use((config) => {
-    // config 是 axios 配置对象
-    // 获取token
-    let token = window.sessionStorage.getItem('Token');
-    console.log(token)
-    // 添加token
-    //Bearer为token类型，根据自己的类型更改
-    token && (config.headers.Authorization = 'Bearer ' + JSON.parse(token));
-    return config;
-}, (error) => {
-    // 请求出错
+
+http.interceptors.request.use(
+    function (config) {
+        config.headers['Authorization'] = 'Bearer '+window.sessionStorage.getItem('Token')/* 定义全局token */
+        return config
+    },
+    function (error) {
+        return Promise.reject(error)
+    }
+)
+
+// 响应拦截器
+http.interceptors.response.use(function (response){
+    return response;
+},function (error) {
+    // 服务器出错，做数据判断
+    console.log("错误信息:",error);
+    error.response.data.message = error.response.data.message || '请求失败';
     return Promise.reject(error);
-});*/
+})
 
 /**
  * 请求地址处理
@@ -29,7 +32,6 @@ const http = axios.create({
  */
 http.adornUrl = (actionName) => {
   return '/api'+actionName
-    //return 'http://120.78.205.174:8081'+actionName
 }
 
 /**
@@ -42,7 +44,7 @@ http.adornParams = (params = {}, openDefaultParams = false) => {
     const defaluts = {
         't': new Date().getTime()
     }
-    /* console.log(params) */
+
     return openDefaultParams ? merge(defaluts, params) : params
 }
 /**
@@ -60,4 +62,5 @@ http.adornData = (data = {}, openDefaultdata = true, contentType = 'json') => {
     return contentType === 'json' ? JSON.stringify(data) : qs.stringify(data)
 }
 
-export default http
+
+export default http;

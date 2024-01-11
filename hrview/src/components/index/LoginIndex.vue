@@ -3,18 +3,15 @@
 
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>人力资源管理系统</span>
+        <span>携手创项目平台</span>
         <el-button style="float: right; padding: 3px 0" type="text"></el-button>
       </div>
-      <el-form label-width="80px"
-               :model="form"
-               ref="form"
-               :rules="rules">
+      <el-form label-width="80px" :model="form" :rules="rules" ref="form">
         <el-form-item label="用户名" prop="username">
-          <el-input v-model="form.username"></el-input>
+          <el-input v-model="form.username"  placeholder="请输入用户名" clearable></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="form.password" show-password></el-input>
+          <el-input type="password" v-model="form.password" placeholder="请输入用户名" show-password clearable></el-input>
         </el-form-item>
         <el-button type="primary" @click="login('form')">登录</el-button>
       </el-form>
@@ -24,7 +21,6 @@
 
 <script>
 import{nameRule, passwordRule}from '../utils/vaildate.js'
-import qs from "qs";
 export default{
     data(){
         return{
@@ -37,7 +33,6 @@ export default{
                 password:[{validator: passwordRule, trigger:'blur'}]
         }
         };
-
     },
     methods:{
         login(form){
@@ -51,7 +46,6 @@ export default{
                       'UserToken':window.sessionStorage.getItem('Token'),
                     }
                   }).then(({data}) => {
-                      console.log(data)
                     if (data&&data.errorCode==="200") {
                       /* console.log(data)*/
                       sessionStorage.setItem("Token",data.data.token)
@@ -72,29 +66,10 @@ export default{
                                 name:'teacherIndex'
                             })
                         }
-/*                      data.obj.Role.forEach((item)=>{
-                        if(item.title==='管理员'){
-                          sessionStorage.setItem("role",item.title)
-                          this.$router.push({
-                            name:'adminIndex'
-                          })
-                        }else if(item.title==='用户'){
-                          sessionStorage.setItem("role",item.title)
-                          this.$router.push({
-                            name:'StudentIndex'
-                          })
-                        }else if(item.title==='教师'){
-                          sessionStorage.setItem("role",item.title)
-                          this.$router.push({
-                            name:'teacherIndex'
-                          })
-                        }
-                      })*/
                     }else{
-                      this.$message.error(data.msg)
+                      console.log(data);
+                      this.$message.error(data.message);
                     }
-                  }).catch((res) => {
-                    this.$message.error(res.response.data.message)
                   })
                 }else{
                     console.error(this.form)
