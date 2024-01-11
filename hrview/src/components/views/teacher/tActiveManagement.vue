@@ -232,15 +232,14 @@ export default {
                 method: 'post',
                 data:this.$http.adornData(this.project),
                 headers: {
-                    'UserToken':window.sessionStorage.getItem('Token'),
                     'Content-Type': 'application/json',
                     'charset': 'utf-8'
                 }
             }).then(({data}) => {
-                if (data&&data.status===200) {
-                    this.$message.success(data.msg)
+                if (data&&data.errorCode==200) {
+                    this.$message.success(data.data)
                 }else{
-                    this.$message.error(data.msg)
+                    this.$message.error(data.data)
                 }
             }).catch(() => {
                 console.log('出错啦！！！！')
