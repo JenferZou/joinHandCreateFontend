@@ -47,16 +47,33 @@ export default{
                   this.$http({
                     url: this.$http.adornUrl('/login'),
                     method: 'post',
-                    data: qs.stringify(this.form),
+                    data: this.form,//qs.stringify(this.form),
                     headers:{
                       'UserToken':window.sessionStorage.getItem('Token'),
                     }
                   }).then(({data}) => {
-                    if (data&&data.status===200) {
+                      console.log(data)
+                    if (data&&data.errorCode==="200") {
                       /* console.log(data)*/
-                      sessionStorage.setItem("Token",data.obj.token)
-                      this.$message.success(data.msg)
-                      data.obj.Role.forEach((item)=>{
+                      sessionStorage.setItem("Token",data.data.token)
+                      this.$message.success("登录成功")
+                        if(data.data.title==='管理员'){
+                            sessionStorage.setItem("role",data.data.title)
+                            this.$router.push({
+                                name:'adminIndex'
+                            })
+                        }else if(data.data.title==='学生'){
+                            sessionStorage.setItem("role",data.data.title)
+                            this.$router.push({
+                                name:'StudentIndex'
+                            })
+                        }else if(data.data.title==='教师'){
+                            sessionStorage.setItem("role",data.data.title)
+                            this.$router.push({
+                                name:'teacherIndex'
+                            })
+                        }
+/*                      data.obj.Role.forEach((item)=>{
                         if(item.title==='管理员'){
                           sessionStorage.setItem("role",item.title)
                           this.$router.push({
@@ -73,14 +90,13 @@ export default{
                             name:'teacherIndex'
                           })
                         }
-                      })
+                      })*/
                     }else{
                       this.$message.error(data.msg)
                     }
                   }).catch((res) => {
                     this.$message.error(res.response.data.message)
                   })
-
                 }else{
                     console.error(this.form)
                 }
