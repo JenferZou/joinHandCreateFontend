@@ -43,7 +43,6 @@ export default{
         login(form){
             this.$refs[form].validate((valid) => {
                 if(valid){
-                  //登录请求采用form-data 或 x-www-form-urlencoded 形式传入参数才行，以下采用form-data
                   this.$http({
                     url: this.$http.adornUrl('/login'),
                     method: 'post',
