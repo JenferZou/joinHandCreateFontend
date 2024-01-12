@@ -50,7 +50,7 @@ export default {
               'UserToken': window.sessionStorage.getItem('Token'),
             }
           }).then(({data}) => {
-            if (data && data.errorCode === "200") {
+            if (data && data.errorCode == "200") {
               /* console.log(data)*/
               sessionStorage.setItem("Token", data.data.token)
               this.$message.success("登录成功")
@@ -74,6 +74,9 @@ export default {
               console.log(data);
               this.$message.error(data.message);
             }
+          }).catch(err => {
+            console.log(err);
+            this.$message.error("请求失败了");
           })
         } else {
           console.error(this.form)
