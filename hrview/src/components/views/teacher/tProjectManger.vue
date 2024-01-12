@@ -186,7 +186,6 @@ export default {
         this.getAllInformation();
       })
     },
-
     // TODO 查询学生简历
     queryStudentResume(row) {
       console.log(row);
@@ -195,7 +194,7 @@ export default {
         method: 'post',
         data: this.$http.adornData(row),
       }).then(({data}) => {
-
+        console.log(data);
         this.$router.push({
           name: 'StudentDelieverResume',
           params: {
