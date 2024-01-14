@@ -1,17 +1,20 @@
 <template>
     <div class="layout">
-        <div class="layout-header">
+        <div class="layout-header" >
+          <label >
             <i-row>
-                <i-col span="23">
-                    <h1>项目管理——教师端</h1>
-                </i-col>
-                <i-col span="1">
-                    <div style="padding-top: 10px;">
-                        <MyAvatar/>
+              <i-col span="23">
+                <h1 style="margin-left: 10px">项目管理——教师端</h1>
+              </i-col>
+              <i-col span="1">
+                <div style="padding-top: 10px;">
+                  <MyAvatar/>
 
-                    </div>
-                </i-col>
+                </div>
+              </i-col>
             </i-row>
+          </label>
+
         </div>
         <i-row type="flex">
             <i-col span="4" class="layout-menu-left">

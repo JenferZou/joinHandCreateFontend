@@ -128,6 +128,9 @@ let router = new Router({
             component: ForbidIndex,
         },
 
+
+
+
         {
             path: '/teacher',
             name: 'teacherIndex',
