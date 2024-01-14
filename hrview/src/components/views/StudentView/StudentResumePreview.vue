@@ -152,13 +152,6 @@ export default {
         certificate: ''
       },
       studentInfo: {
-        // sName: '张三',
-        // gender: '男',
-        // sno: '123123',
-        // sMajor: '软件工程',
-        // sPhone: '11011100',
-        // sDepartment: '计算机与智能教育学院',
-        // className: '软件2班'
       },
 
     };

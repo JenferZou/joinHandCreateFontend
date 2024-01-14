@@ -178,37 +178,29 @@ export default {
         certificate: ''
       },
       studentInfo: {
-        sName: '张三',
-        gender: '男',
-        sno: '123123',
-        sMajor: '软件工程',
-        sPhone: '11011100',
-        sDepartment: '计算机与智能教育学院',
-        className: '软件2班'
+        sName: '',
+        gender: '',
+        sno: '',
+        sMajor: '',
+        sPhone: '',
+        sDepartment: '',
+        className: ''
       },
 
     };
   },
   created() {
-    this.init()
-
+    // this.init()
   },
   methods: {
-
     init() {
       this.resume = this.$route.params.resumeInfo
       this.studentInfo = this.$route.params.studentInfo
-
     },
     loadStudent() {
       this.$http({
         url: this.$http.adornUrl('/student/StudentMessageForm'),
         method: 'get',
-        headers: {
-          'UserToken': window.sessionStorage.getItem('Token'),
-          'Content-Type': 'application/json',
-          'charset': 'utf-8'
-        }
       }).then(({data}) => {
         this.studentInfo = data
       }).catch(() => {
@@ -219,11 +211,6 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/student/StudentResume'),
         method: 'get',
-        headers: {
-          'UserToken': window.sessionStorage.getItem('Token'),
-          'Content-Type': 'application/json',
-          'charset': 'utf-8'
-        }
       }).then(({data}) => {
         this.resume = data
       }).catch(() => {
