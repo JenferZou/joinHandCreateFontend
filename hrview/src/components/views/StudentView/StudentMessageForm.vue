@@ -20,7 +20,7 @@
                 <i-col :span="12">
                   <el-form :model="info" label-position="left" label-width="100px" readonly>
                     <el-form-item label="姓名">
-                      <span>{{ info.sName }}</span>
+                      <span>{{ info.sname }}</span>
                     </el-form-item>
                     <el-form-item label="性别">
                       <span>{{ info.gender }}</span>
@@ -29,24 +29,24 @@
                       <span>{{ info.sno }}</span>
                     </el-form-item>
                     <el-form-item label="联系电话">
-                      <span>{{ info.sPhone }}</span>
+                      <span>{{ info.sphone }}</span>
                     </el-form-item>
                   </el-form>
                 </i-col>
                 <i-col :span="12">
                   <el-form :model="info" label-position="left" label-width="100px" readonly>
                     <el-form-item label="专业">
-                      <span>{{ info.sMajor }}</span>
+                      <span>{{ info.smajor }}</span>
                     </el-form-item>
-                    <el-form-item label="亲属联系人">
-                      <span>{{ info.relatives }}</span>
+                    <el-form-item label="所属学院">
+                      <span>{{ info.sdepartment }}</span>
                     </el-form-item>
-                    <el-form-item label="亲属电话">
-                      <span>{{ info.rPhone }}</span>
+                    <el-form-item label="所属班级">
+                      <span>{{ info.className }}</span>
                     </el-form-item>
-                    <el-form-item label="指导老师">
-                      <span>{{ info.mentor }}</span>
-                    </el-form-item>
+<!--                    <el-form-item label="指导老师">-->
+<!--                      <span>{{ info.mentor }}</span>-->
+<!--                    </el-form-item>-->
                   </el-form>
                 </i-col>
 
@@ -54,92 +54,92 @@
               </i-row>
 
 
-              <i-row>
-                <i-col :span="12">
-                  <el-form :model="info" label-position="left" label-width="100px" readonly>
-                    <el-form-item label="导师电话">
-                      <span>{{ info.mentorPhone }}</span>
-                    </el-form-item>
-                    <el-form-item label="星座">
-                      <span>{{ info.star }}</span>
-                    </el-form-item>
-                  </el-form>
-                </i-col>
+<!--              <i-row>-->
+<!--                <i-col :span="12">-->
+<!--                  <el-form :model="info" label-position="left" label-width="100px" readonly>-->
+<!--                    <el-form-item label="导师电话">-->
+<!--                      <span>{{ info.mentorPhone }}</span>-->
+<!--                    </el-form-item>-->
+<!--                    <el-form-item label="星座">-->
+<!--                      <span>{{ info.star }}</span>-->
+<!--                    </el-form-item>-->
+<!--                  </el-form>-->
+<!--                </i-col>-->
 
-                <i-col :span="12">
-                  <el-form :model="info" label-position="left" label-width="100px" readonly>
-                    <el-form-item label="血型">
-                      <span>{{ info.blood }}</span>
-                    </el-form-item>
+<!--                <i-col :span="12">-->
+<!--                  <el-form :model="info" label-position="left" label-width="100px" readonly>-->
+<!--                    <el-form-item label="血型">-->
+<!--                      <span>{{ info.blood }}</span>-->
+<!--                    </el-form-item>-->
 
-                  </el-form>
-                </i-col>
+<!--                  </el-form>-->
+<!--                </i-col>-->
 
-                <i-col :span="12">
-                  <el-form :model="info" label-position="left" label-width="100px" readonly>
-                    <el-form-item label="积分">
-                      <span>{{ info.score }}</span>
-                    </el-form-item>
+<!--                <i-col :span="12">-->
+<!--                  <el-form :model="info" label-position="left" label-width="100px" readonly>-->
+<!--                    <el-form-item label="积分">-->
+<!--                      <span>{{ info.score }}</span>-->
+<!--                    </el-form-item>-->
 
-                  </el-form>
-                </i-col>
-              </i-row>
+<!--                  </el-form>-->
+<!--                </i-col>-->
+<!--              </i-row>-->
             </div>
 
           </el-card>
 
           <el-dialog :visible.sync="editDialogVisible" title="编辑个人信息" :before-close="beforeClose">
             <el-form :model="info" label-position="left" label-width="100px" :rules="rules" ref="infoForm">
-              <el-form-item label="姓名" prop="sName">
-                <el-input v-model="info.sName" :disabled="true"></el-input>
+              <el-form-item label="姓名" prop="sname">
+                <el-input v-model="info.sname"></el-input>
               </el-form-item>
               <el-form-item label="性别" prop="gender">
                 <el-radio-group v-model="info.gender">
-                  <el-radio label="男" :disabled="true">男</el-radio>
-                  <el-radio label="女" :disabled="true">女</el-radio>
+                  <el-radio label="男" >男</el-radio>
+                  <el-radio label="女" >女</el-radio>
                 </el-radio-group>
               </el-form-item>
               <el-form-item label="学号" prop="sno">
                 <el-input v-model="info.sno" :disabled="true"></el-input>
               </el-form-item>
-              <el-form-item label="联系电话" prop="sPhone">
-                <el-input v-model="info.sPhone"></el-input>
+              <el-form-item label="联系电话" prop="sphone">
+                <el-input v-model="info.sphone"></el-input>
               </el-form-item>
-              <el-form-item label="亲属联系人" prop="relatives">
-                <el-input v-model="info.relatives"></el-input>
+              <el-form-item label="所属学院" prop="sdepartment">
+                <el-input v-model="info.sdepartment" ></el-input>
               </el-form-item>
-              <el-form-item label="亲属电话" prop="rPhone">
-                <el-input v-model="info.rPhone"></el-input>
+<!--              <el-form-item label="亲属电话" prop="rPhone">-->
+<!--                <el-input v-model="info.rPhone"></el-input>-->
+<!--              </el-form-item>-->
+              <el-form-item label="专业" prop="smajor">
+                <el-input v-model="info.smajor" ></el-input>
               </el-form-item>
-              <el-form-item label="专业" prop="sMajor">
-                <el-input v-model="info.sMajor" :disabled="true"></el-input>
+              <el-form-item label="所属班级" prop="className">
+                <el-input v-model="info.className"></el-input>
               </el-form-item>
-              <el-form-item label="指导教师" prop="mentor">
-                <el-input v-model="info.mentor"></el-input>
-              </el-form-item>
-              <el-form-item label="导师电话" prop="mentorPhone">
-                <el-input v-model="info.mentorPhone"></el-input>
-              </el-form-item>
-              <el-form-item label="星座" prop="star">
-                <el-select v-model="info.star" placeholder="请选择星座">
-                  <el-option
-                      v-for="star in stars"
-                      :key="star"
-                      :label="star"
-                      :value="star">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="血型" prop="blood">
-                <el-select v-model="info.blood" placeholder="请选择血型">
-                  <el-option
-                      v-for="blood in bloods"
-                      :key="blood"
-                      :label="blood"
-                      :value="blood">
-                  </el-option>
-                </el-select>
-              </el-form-item>
+<!--              <el-form-item label="导师电话" prop="mentorPhone">-->
+<!--                <el-input v-model="info.mentorPhone"></el-input>-->
+<!--              </el-form-item>-->
+<!--              <el-form-item label="星座" prop="star">-->
+<!--                <el-select v-model="info.star" placeholder="请选择星座">-->
+<!--                  <el-option-->
+<!--                      v-for="star in stars"-->
+<!--                      :key="star"-->
+<!--                      :label="star"-->
+<!--                      :value="star">-->
+<!--                  </el-option>-->
+<!--                </el-select>-->
+<!--              </el-form-item>-->
+<!--              <el-form-item label="血型" prop="blood">-->
+<!--                <el-select v-model="info.blood" placeholder="请选择血型">-->
+<!--                  <el-option-->
+<!--                      v-for="blood in bloods"-->
+<!--                      :key="blood"-->
+<!--                      :label="blood"-->
+<!--                      :value="blood">-->
+<!--                  </el-option>-->
+<!--                </el-select>-->
+<!--              </el-form-item>-->
 
 
             </el-form>
@@ -166,56 +166,45 @@ export default {
   data() {
     return {
       info: {
-        sName: '',
-        gender: '',
-        sno: '123123',
-        sMajor: '',
-        sPhone: '',
-        relatives: '',
-        rPhone: '',
-        mentor: '',
-        mentorPhone: '',
-        blood: '',
-        star: '',
-        score: 10
+        // sName: '',
+        // gender: '',
+        // sno: '123123',
+        // sMajor: '',
+        // sPhone: '',
+        // relatives: '',
+        // rPhone: '',
+        // mentor: '',
+        // mentorPhone: '',
+        // blood: '',
+        // star: '',
+        // score: 10,
       },
-      stars: [
-        '白羊座',
-        '金牛座',
-        '双子座',
-        '巨蟹座',
-        '狮子座',
-        '处女座',
-        '天秤座',
-        '天蝎座',
-        '射手座',
-        '摩羯座',
-        '水瓶座',
-        '双鱼座',
-      ],
-      bloods: ['A', 'B', 'AB', 'O']
-      ,
+      // stars: [
+      //   '白羊座',
+      //   '金牛座',
+      //   '双子座',
+      //   '巨蟹座',
+      //   '狮子座',
+      //   '处女座',
+      //   '天秤座',
+      //   '天蝎座',
+      //   '射手座',
+      //   '摩羯座',
+      //   '水瓶座',
+      //   '双鱼座',
+      // ],
+      // bloods: ['A', 'B', 'AB', 'O']
+      // ,
       rules: {
-        sName: [{required: true, message: '请输入姓名', trigger: 'blur'}],
+        sname: [{required: true, message: '请输入姓名', trigger: 'blur'}],
         gender: [{required: true, message: '请选择性别', trigger: 'change'}],
         sno: [{required: true, message: '请输入学号', trigger: 'blur'}],
-        sPhone: [
+        sphone: [
           {required: true, message: '请输入联系电话', trigger: 'blur'},
-          {pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur'},
         ],
-        sMajor: [{request: true, message: '请输入专业', trigger: 'blur'}],
-        relatives: [{required: true, message: '请输入亲属姓名', trigger: 'blur'}],
-        rPhone: [
-          {required: true, message: '请输入亲属联系电话', trigger: 'blur'},
-          {pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur'},
-        ],
-        mentor: [{required: true, message: '请输入指导教师', trigger: 'blur'}],
-        mentorPhone: [
-          {required: true, message: '请输入指导教师联系电话', trigger: 'blur'},
-          {pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号码', trigger: 'blur'},
-        ],
-        star: [{required: true, message: '请输入星座', trigger: 'change'}],
-        blood: [{required: true, message: '请输入血型', trigger: 'change'}]
+        smajor: [{request: true, message: '请输入专业', trigger: 'blur'}],
+        sdepartment: [{required: true, message: '请输入学院名称', trigger: 'blur'}],
+        className: [{required: true, message: '请输入班级', trigger: 'change'}],
       },
       editDialogVisible: false,
 
@@ -231,20 +220,36 @@ export default {
         name:"StudentIndex",
       })
     },
+    // load() {
+    //   // let parms={
+    //   //   sno:'123123'
+    //   // }
+    //   this.$http({
+    //     url: this.$http.adornUrl('/student/StudentMessageForm'),
+    //     method: 'get',
+    //     params:this.$http.adornParams(this.info),
+    //     headers: {
+    //       'UserToken':window.sessionStorage.getItem('Token'),
+    //     }
+    //   }).then(({data}) => {
+    //       console.log(data)
+    //       this.info=data
+    //   }).catch(() => {
+    //     console.log('出错啦！！！！')
+    //   })
+    // },
     load() {
-      // let parms={
-      //   sno:'123123'
-      // }
       this.$http({
-        url: this.$http.adornUrl('/student/StudentMessageForm'),
+        url: this.$http.adornUrl('/student/selectById'),
         method: 'get',
-        params:this.$http.adornParams(this.info),
         headers: {
           'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
         }
       }).then(({data}) => {
-          console.log(data)
-          this.info=data
+        console.log(data)
+        this.info = data.data
       }).catch(() => {
         console.log('出错啦！！！！')
       })
@@ -276,7 +281,7 @@ export default {
         if (valid) {
           this.$http({
             url: this.$http.adornUrl('/student/editMessage'),
-            method: 'post',
+            method: 'put',
             data:this.$http.adornData(this.info),
             headers: {
               'UserToken':window.sessionStorage.getItem('Token'),
@@ -286,10 +291,9 @@ export default {
           }).then(({data}) => {
             if (data&&data.status===200) {
               this.$message.success(data.msg)
-              this.awardExperiencedialog=false
+              // this.awardExperiencedialog=false
+              this.load()
 
-            }else{
-              this.$message.error(data.msg)
             }
           }).catch(() => {
             console.log('出错啦！！！！')

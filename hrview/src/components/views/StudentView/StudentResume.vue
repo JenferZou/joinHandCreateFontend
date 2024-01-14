@@ -356,7 +356,7 @@ export default {
     submitadvantage(){
       this.$http({
         url: this.$http.adornUrl('/student/edit'),
-        method: 'post',
+        method: 'put',
         data:this.$http.adornData(this.resume),
         headers: {
           'UserToken':window.sessionStorage.getItem('Token'),
@@ -365,12 +365,8 @@ export default {
         }
       }).then(({data}) => {
         if (data&&data.status===200) {
-          this.$message.success(data.msg)
           this.advantagedialog=false
-
-
-        }else{
-          this.$message.error(data.msg)
+          this.$message.success(data.msg)
         }
       }).catch(() => {
         console.log('出错啦！！！！')
@@ -382,7 +378,7 @@ export default {
     submitprojectExp(){
       this.$http({
         url: this.$http.adornUrl('/student/edit'),
-        method: 'post',
+        method: 'put',
         data:this.$http.adornData(this.resume),
         headers: {
           'UserToken':window.sessionStorage.getItem('Token'),
@@ -393,9 +389,6 @@ export default {
         if (data&&data.status===200) {
           this.$message.success(data.msg)
           this.projectExperiencedialog=false
-
-        }else{
-          this.$message.error(data.msg)
         }
       }).catch(() => {
         console.log('出错啦！！！！')
@@ -406,7 +399,7 @@ export default {
     submitinnternshipExpe(){
       this.$http({
         url: this.$http.adornUrl('/student/edit'),
-        method: 'post',
+        method: 'put',
         data:this.$http.adornData(this.resume),
         headers: {
           'UserToken':window.sessionStorage.getItem('Token'),
@@ -417,9 +410,6 @@ export default {
         if (data&&data.status===200) {
           this.$message.success(data.msg)
           this.internshipExperiencedialog=false
-
-        }else{
-          this.$message.error(data.msg)
         }
       }).catch(() => {
         console.log('出错啦！！！！')
@@ -430,7 +420,7 @@ export default {
     submitcertificate(){
       this.$http({
         url: this.$http.adornUrl('/student/edit'),
-        method: 'post',
+        method: 'put',
         data:this.$http.adornData(this.resume),
         headers: {
           'UserToken':window.sessionStorage.getItem('Token'),
@@ -441,9 +431,6 @@ export default {
         if (data&&data.status===200) {
           this.$message.success(data.msg)
           this.certificatedialog=false
-
-        }else{
-          this.$message.error(data.msg)
         }
       }).catch(() => {
         console.log('出错啦！！！！')
@@ -454,7 +441,7 @@ export default {
     submitaward(){
       this.$http({
         url: this.$http.adornUrl('/student/edit'),
-        method: 'post',
+        method: 'put',
         data:this.$http.adornData(this.resume),
         headers: {
           'UserToken':window.sessionStorage.getItem('Token'),
@@ -465,9 +452,6 @@ export default {
         if (data&&data.status===200) {
           this.$message.success(data.msg)
           this.awardExperiencedialog=false
-
-        }else{
-          this.$message.error(data.msg)
         }
       }).catch(() => {
         console.log('出错啦！！！！')

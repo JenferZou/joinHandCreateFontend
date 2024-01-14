@@ -17,7 +17,7 @@
                     <img data-v-b8fe8cbc="" src="https://zcplan.oss-cn-shenzhen.aliyuncs.com/man.png" alt="" class="avatar">
                     <div class="baseMes">
                       <h5  class="name" style="font-size: 20px;color: #2a303c">
-                        {{ studentInfo.sName }}
+                        {{ studentInfo.sname }}
                         <span class="student"
                               style="color: #dcb93c;
                               border: 1px solid #fed305;
@@ -25,10 +25,10 @@
                              background: linear-gradient(90deg, #fcfff0, #fcfec4);margin-left: 10px">学生</span>
                       </h5>
                       <div  class="personal-mes">{{ studentInfo.gender }}<span style="margin: 0 14px;color: #e6e6e6">|</span>
-                        {{ studentInfo.sDepartment }}<span style="margin: 0 14px;color: #e6e6e6">|</span>{{studentInfo.sMajor }}
+                        {{ studentInfo.sdepartment }}<span style="margin: 0 14px;color: #e6e6e6">|</span>{{studentInfo.smajor }}
                         <span style="margin: 0 14px;color: #e6e6e6">|</span> {{studentInfo.className}}</div>
                       <div  class="contact-mes">
-                        <i-icon type="ios-telephone"></i-icon> +86{{ studentInfo.sPhone }} </div>
+                        <i-icon type="ios-telephone"></i-icon> +86{{ studentInfo.sphone }} </div>
                     </div>
                     <div  class="edit-mes" style="color: #02B28B;display: flex;margin-left: auto;font-size: 12px; cursor: pointer">
                     </div>
@@ -152,13 +152,13 @@ export default {
         certificate: ''
       },
       studentInfo: {
-        sName: '张三',
-        gender: '男',
-        sno: '123123',
-        sMajor: '软件工程',
-        sPhone: '11011100',
-        sDepartment: '计算机与智能教育学院',
-        className: '软件2班'
+        // sName: '张三',
+        // gender: '男',
+        // sno: '123123',
+        // sMajor: '软件工程',
+        // sPhone: '11011100',
+        // sDepartment: '计算机与智能教育学院',
+        // className: '软件2班'
       },
 
     };
@@ -171,30 +171,31 @@ export default {
   methods: {
     loadStudent() {
       this.$http({
-        url: this.$http.adornUrl('/student/StudentMessageForm'),
+        url: this.$http.adornUrl('/student/selectById'),
         method: 'get',
         headers: {
-          'UserToken': window.sessionStorage.getItem('Token'),
+          'UserToken':window.sessionStorage.getItem('Token'),
           'Content-Type': 'application/json',
           'charset': 'utf-8'
         }
       }).then(({data}) => {
-        this.studentInfo = data
+        console.log(data)
+        this.studentInfo = data.data
       }).catch(() => {
         console.log('出错啦！！！！')
       })
     },
-    loadResume() {
+    loadResume(){
       this.$http({
         url: this.$http.adornUrl('/student/StudentResume'),
         method: 'get',
         headers: {
-          'UserToken': window.sessionStorage.getItem('Token'),
+          'UserToken':window.sessionStorage.getItem('Token'),
           'Content-Type': 'application/json',
           'charset': 'utf-8'
         }
       }).then(({data}) => {
-        this.resume = data
+        this.resume=data.data
       }).catch(() => {
         console.log('出错啦！！！！')
       })
