@@ -14,7 +14,7 @@
                     clearable></el-input>
         </el-form-item>
         <el-form-item style="margin-left:75px">
-          <el-button type="primary" @click="login('form')" style="width:100px">登录</el-button>
+          <el-button type="primary" @click="login()" style="width:100px">登录</el-button>
           <el-button style="width:100px" @click="reset">重置</el-button>
         </el-form-item>
       </el-form>
@@ -39,13 +39,13 @@ export default {
     };
   },
   methods: {
-    login(form) {
-      this.$refs[form].validate((valid) => {
+    login() {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           this.$http({
             url: this.$http.adornUrl('/login'),
             method: 'post',
-            data: this.form,//qs.stringify(this.form),
+            data: this.form,
             headers: {
               'UserToken': window.sessionStorage.getItem('Token'),
             }
@@ -83,10 +83,23 @@ export default {
         }
       })
     },
-    reset(){
+    reset() {
       this.form.username = '';
       this.form.password = '';
+    },
+    onKeyUp(e) {
+      if (e.key == 'Enter') {
+        this.login();
+      }
     }
+  },
+  mounted() {
+    console.log("设置监听");
+    document.addEventListener('keyup', this.onKeyUp);
+  },
+  beforeDestroy(){
+    console.log("被销毁");
+    document.removeEventListener("keyup",this.onKeyUp);
   }
 }
 </script>
