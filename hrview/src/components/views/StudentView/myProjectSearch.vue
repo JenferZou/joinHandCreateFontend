@@ -166,9 +166,9 @@ export default {
       multipleSelection: [],
       project: [],
       title: '',
-      currentPage: 1,
-      pageSize: 8,
-      pageNum: 1,
+        currentPage: 1,
+        pageSize: 10,
+        pageNum: 10,
       contest:{
         name:'',
         startTime:'',
@@ -196,20 +196,20 @@ export default {
     search() {
       let params = {
         page: this.currentPage,
-        limit: this.pageSize,
+        pageSize: this.pageSize,
         title:this.title
       }
       this.$http({
         url: this.$http.adornUrl('/student/searchDeliever'),
         method: 'get',
         params: this.$http.adornParams(params),
-        headers: {
-          'UserToken':window.sessionStorage.getItem('Token'),
-        }
+
       }).then(({data}) => {
         if (data) {
-          this.pageNum = data.totalPages
-          this.project = data.content
+            this.pageNum = data.pages
+            this.currentPage = data.current
+            this.project = data.data
+            this.pageSize = data.size
 
         }
       }).catch(() => {
@@ -233,20 +233,19 @@ export default {
 
     getAllInformation() {
       let params = {
-        page: this.currentPage,
-        limit: this.pageSize
+        pageNo: this.currentPage,
+        pageSize: this.pageSize
       }
       this.$http({
-        url: this.$http.adornUrl('/student/Deliever'),
+        url: this.$http.adornUrl('/delieverResume/getdelieverResumeBysno'),
         method: 'get',
         params: this.$http.adornParams(params),
-        headers: {
-          'UserToken':window.sessionStorage.getItem('Token'),
-        }
       }).then(({data}) => {
         if (data) {
-          this.pageNum = data.totalPages
-          this.project = data.content
+            this.pageNum = data.pages
+            this.currentPage = data.current
+            this.project = data.data
+            this.pageSize = data.size
         }
       }).catch(() => {
         console.log('出错啦！！！！')
