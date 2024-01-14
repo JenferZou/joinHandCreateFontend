@@ -71,7 +71,7 @@
                   <div style="display: flex;">
                     <!--                  文字部分-->
                     <div style="flex: 1">
-                      <div style="font-size: 25px;font-weight: bolder">{{item.name}}水果助农计划</div>
+                      <div style="font-size: 25px;font-weight: bolder">{{item.name}}</div>
                       <div style="font-size:14px;margin-top: 10px" v-html="item.content">
                       </div>
 
@@ -159,9 +159,13 @@ export default {
         url: this.$http.adornUrl('/delieverResume/addDelieverResume'),
         method: 'post',
         data:this.$http.adornData(params),
+          headers: {
+              'Content-Type': 'application/json',
+              'charset': 'utf-8'
+          }
       }).then(({data}) => {
         if (data.errorCode==200) {
-          this.$message.success(data.message)
+          this.$message.success(data.data)
         }else{
           this.$message.error(data.message)
         }
@@ -177,18 +181,20 @@ export default {
 
     search() {
       let params = {
-        page: this.currentPage,
-        limit: this.pageSize,
-        title:this.title
+        pageNo: this.currentPage,
+        pageSize: this.pageSize,
+        name:this.title
       }
       this.$http({
-        url: this.$http.adornUrl('/project/getProject'),
+        url: this.$http.adornUrl('/project/getProjectByNameLike'),
         method: 'get',
         params: this.$http.adornParams(params),
       }).then(({data}) => {
         if (data) {
-          this.pageNum = data.totalPages
-          this.project = data.content
+            this.pageNum = data.pages
+            this.currentPage = data.current
+            this.project = data.data
+            this.pageSize = data.size
         }
       }).catch(() => {
         console.log('出错啦！！！！')

@@ -95,7 +95,7 @@
                   </el-table-column>
 
                   <el-table-column
-                      prop="sName"
+                      prop="sname"
                       label="学生姓名"
                       width="120">
                   </el-table-column>
@@ -195,12 +195,12 @@ export default {
 
     search() {
       let params = {
-        page: this.currentPage,
+        pageNo: this.currentPage,
         pageSize: this.pageSize,
-        title:this.title
+        name:this.title
       }
       this.$http({
-        url: this.$http.adornUrl('/student/searchDeliever'),
+        url: this.$http.adornUrl('/delieverResume/getdelieverResumeBysnoAndName'),
         method: 'get',
         params: this.$http.adornParams(params),
 
