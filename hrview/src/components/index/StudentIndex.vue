@@ -63,7 +63,7 @@
                           <img data-v-b8fe8cbc="" src="https://zcplan.oss-cn-shenzhen.aliyuncs.com/man.png" alt="" class="avatar" style="height: 80px">
                           <div class="baseMes">
                             <h5  class="name" style="font-size: 20px;color: #2a303c">
-                              {{ studentInfo.sName }}
+                              {{ studentInfo.sname }}
                               <span class="student"
                                     style="color: #dcb93c;
                               border: 1px solid #fed305;
@@ -71,10 +71,10 @@
                              background: linear-gradient(90deg, #fcfff0, #fcfec4);margin-left: 10px">学生</span>
                             </h5>
                             <div  class="personal-mes"> {{ studentInfo.gender }}<span style="margin: 0 14px;color: #e6e6e6">|</span>
-                              {{ studentInfo.sDepartment }}<span style="margin: 0 14px;color: #e6e6e6">|</span> {{ studentInfo.sMajor }}
+                              {{ studentInfo.sdepartment }}<span style="margin: 0 14px;color: #e6e6e6">|</span> {{ studentInfo.smajor }}
                               <span style="margin: 0 14px;color: #e6e6e6">|</span> {{ studentInfo.className }}</div>
                             <div  class="contact-mes">
-                              <i-icon type="ios-telephone"></i-icon>+86{{ studentInfo.sPhone }}</div>
+                              <i-icon type="ios-telephone"></i-icon>+86 {{ studentInfo.sphone }}</div>
                           </div>
                         </li>
                       </i-col>
@@ -145,65 +145,65 @@
               </i-row>
 
 
-              <i-row  class="footcontent" :gutter="16" >
+<!--              <i-row  class="footcontent" :gutter="16" >-->
 
-                <i-col span="12">
-                  <div class="mes" style="background-color: #fff;min-height: 295px">
-                    <i-col style="height: 45px">
-                      <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread">
+<!--                <i-col span="12">-->
+<!--                  <div class="mes" style="background-color: #fff;min-height: 295px">-->
+<!--                    <i-col style="height: 45px">-->
+<!--                      <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread">-->
 
-                      </i-icon>    最新考试报名信息</i-col>
+<!--                      </i-icon>    最新考试报名信息</i-col>-->
 
-                    </i-col>
-
-
-                    <i-col style="height: 50px;background-color: #fff;text-align: center; border-bottom: 1px dashed #c0c0c0">
-                      <i-col span="8" >考试类别</i-col>
-                      <i-col span="8">报名时间</i-col>
-                      <i-col span="8">截止时间</i-col>
-                    </i-col>
+<!--                    </i-col>-->
 
 
-                    <el-empty  v-if="contest1 == undefined ||contest1 == null || contest1.length <= 0" description="暂无信息" style="size: 10px"></el-empty>
+<!--                    <i-col style="height: 50px;background-color: #fff;text-align: center; border-bottom: 1px dashed #c0c0c0">-->
+<!--                      <i-col span="8" >考试类别</i-col>-->
+<!--                      <i-col span="8">报名时间</i-col>-->
+<!--                      <i-col span="8">截止时间</i-col>-->
+<!--                    </i-col>-->
 
 
-                    <i-col   v-for="item in contest1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                      <i-col span="8">{{ item.title }}</i-col>
-                      <i-col span="8">{{ item.startTime }}</i-col>
-                      <i-col span="8">{{item.endTime}}</i-col>
-
-                    </i-col>
+<!--                    <el-empty  v-if="contest1 == undefined ||contest1 == null || contest1.length <= 0" description="暂无信息" style="size: 10px"></el-empty>-->
 
 
+<!--                    <i-col   v-for="item in contest1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">-->
+<!--                      <i-col span="8">{{ item.title }}</i-col>-->
+<!--                      <i-col span="8">{{ item.startTime }}</i-col>-->
+<!--                      <i-col span="8">{{item.endTime}}</i-col>-->
 
-                  </div>
-                </i-col>
-
-
-                <i-col span="12">
-                  <div class="mes" style="background-color: #fff;min-height: 295px">
-                    <i-col style="height: 45px">
-                      <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon>    最新实践活动信息</i-col>
-                    </i-col>
-                    <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0">
-                      <i-col span="8">活动名称</i-col>
-                      <i-col span="8">活动报名时间</i-col>
-                      <i-col span="8">活动时长</i-col>
-                    </i-col>
+<!--                    </i-col>-->
 
 
-                    <el-empty v-if="active1 == undefined ||active1 == null || active1.length <= 0 " description="暂无信息" ></el-empty>
 
-                    <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                      <i-col span="8">{{ item.title }}</i-col>
-                      <i-col span="8">{{ item.activeTime }}</i-col>
-                      <i-col span="8">{{item.activeDuration}}</i-col>
+<!--                  </div>-->
+<!--                </i-col>-->
 
-                    </i-col>
-                  </div>
-                </i-col>
 
-              </i-row>
+<!--                <i-col span="12">-->
+<!--                  <div class="mes" style="background-color: #fff;min-height: 295px">-->
+<!--                    <i-col style="height: 45px">-->
+<!--                      <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon>    最新实践活动信息</i-col>-->
+<!--                    </i-col>-->
+<!--                    <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0">-->
+<!--                      <i-col span="8">活动名称</i-col>-->
+<!--                      <i-col span="8">活动报名时间</i-col>-->
+<!--                      <i-col span="8">活动时长</i-col>-->
+<!--                    </i-col>-->
+
+
+<!--                    <el-empty v-if="active1 == undefined ||active1 == null || active1.length <= 0 " description="暂无信息" ></el-empty>-->
+
+<!--                    <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">-->
+<!--                      <i-col span="8">{{ item.title }}</i-col>-->
+<!--                      <i-col span="8">{{ item.activeTime }}</i-col>-->
+<!--                      <i-col span="8">{{item.activeDuration}}</i-col>-->
+
+<!--                    </i-col>-->
+<!--                  </div>-->
+<!--                </i-col>-->
+
+<!--              </i-row>-->
 
 
 
@@ -249,13 +249,13 @@ export default {
         remark:''
       },
       studentInfo:{
-        sName: '张三',
-        gender: '男',
-        sno: '123123',
-        sMajor: '软件工程',
-        sPhone: '11011100',
-        sDepartment:'计算机与智能教育学院',
-        className:'软件2班'
+        // sName: '张三',
+        // gender: '男',
+        // sno: '123123',
+        // sMajor: '软件工程',
+        // sPhone: '11011100',
+        // sDepartment:'计算机与智能教育学院',
+        // className:'软件2班'
       },
     }
   },
@@ -266,6 +266,22 @@ export default {
     this.loadProject()
   },
   methods: {
+    loadStudent() {
+      this.$http({
+        url: this.$http.adornUrl('/student/selectById'),
+        method: 'get',
+        headers: {
+          'UserToken':window.sessionStorage.getItem('Token'),
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
+      }).then(({data}) => {
+        console.log(data)
+        this.studentInfo = data.data
+      }).catch(() => {
+        console.log('出错啦！！！！')
+      })
+    },
     loadProject() {
       this.$http({
         url: this.$http.adornUrl('/student/project'),
@@ -319,21 +335,21 @@ export default {
         console.log('出错啦！！！！')
       })
     },
-    loadStudent() {
-      this.$http({
-        url: this.$http.adornUrl('/student/StudentMessageForm'),
-        method: 'get',
-        headers: {
-          'UserToken':window.sessionStorage.getItem('Token'),
-          'Content-Type': 'application/json',
-          'charset': 'utf-8'
-        }
-      }).then(({data}) => {
-          this.studentInfo=data
-      }).catch(() => {
-        console.log('出错啦！！！！')
-      })
-    },
+    // loadStudent() {
+    //   this.$http({
+    //     url: this.$http.adornUrl('/student/StudentMessageForm'),
+    //     method: 'get',
+    //     headers: {
+    //       'UserToken':window.sessionStorage.getItem('Token'),
+    //       'Content-Type': 'application/json',
+    //       'charset': 'utf-8'
+    //     }
+    //   }).then(({data}) => {
+    //       this.studentInfo=data
+    //   }).catch(() => {
+    //     console.log('出错啦！！！！')
+    //   })
+    // },
 
     goWhere(name){
       this.$router.push({name})
