@@ -2,9 +2,10 @@
 <template>
   <div class="layout">
     <div class="layout-ceiling">
-      <h5 style="color: #fff;margin-left:520px">    携手创-学生端</h5>
+      <h5 style="color: #fff;margin-left:50px;font-weight: bolder;font-size: 20px">    携手创-学生端</h5>
     </div>
-    <div class="layout-header" @click="returnhome">
+    <div class="layout-header">
+      <el-button type="primary" @click="returnhome" style="margin-top: 10px;margin-left: 20px">返回</el-button>
     </div>
     <div style="height: 1000px">
 

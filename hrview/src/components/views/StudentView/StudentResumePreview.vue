@@ -10,6 +10,7 @@
               <div class="resumewrapp">
                 <div class="page-title">
                   <h5>简历预览</h5>
+                  <el-button type="primary" size="small" @click="returnhome" style="margin-top: 10px;margin-bottom: 20px">返回</el-button>
                 </div>
                 <!--                简历内容-->
                 <div class="resumecontent">
@@ -162,6 +163,11 @@ export default {
     this.loadStudent()
   },
   methods: {
+  returnhome(){
+  this.$router.push({
+    name:"StudentIndex",
+  })
+},
     loadStudent() {
       this.$http({
         url: this.$http.adornUrl('/student/selectById'),
