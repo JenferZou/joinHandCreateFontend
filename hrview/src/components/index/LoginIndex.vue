@@ -59,7 +59,7 @@ export default {
               if (data.data.title === '管理员') {
                 sessionStorage.setItem("role", data.data.title)
                 this.$router.push({
-                  name: 'adminIndex'
+                  name: 'index'
                 })
               } else if (data.data.title === '学生') {
                 sessionStorage.setItem("role", data.data.title)
@@ -69,7 +69,7 @@ export default {
               } else if (data.data.title === '教师') {
                 sessionStorage.setItem("role", data.data.title)
                 this.$router.push({
-                  name: 'teacherIndex'
+                  name: 'tactive'
                 })
               }
             } else {
