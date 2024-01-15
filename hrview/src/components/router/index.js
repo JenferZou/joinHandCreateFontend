@@ -6,6 +6,7 @@ import StudentIndex from "@/components/index/StudentIndex";
 import StudentMessageForm from "@/components/views/StudentView/StudentMessageForm"
 import InformationManagement from "@/components/views/admin/InformationManagement";
 
+import TeacherMessageForm from "@/components/views/teacher/TeacherMessageForm.vue";
 import StudentResume from "@/components/views/StudentView/StudentResume"
 import UserManagement from "@/components/views/admin/UserManagement";
 import ActiveManagement from "@/components/views/admin/ActiveManagement";
@@ -156,6 +157,14 @@ let router = new Router({
                     path: '/teacher/index',
                     name: 'tindex',
                     component: tStudentInformation,
+                    meta: {
+                        title: 'teacher'
+                    }
+                },
+                {
+                    path: '/teacher/info',
+                    name: 'tinfo',
+                    component: TeacherMessageForm,
                     meta: {
                         title: 'teacher'
                     }
