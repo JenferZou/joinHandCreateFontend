@@ -34,6 +34,15 @@
                         </template>
                         <i-menu-item name="tproject" >简历审批</i-menu-item>
                     </i-submenu>
+
+                    <i-submenu name="3">
+                      <template slot="title">
+                        <i-icon type="ios-navigate"></i-icon>
+                        个人信息
+                      </template>
+                      <i-menu-item name="tinfo" >修改个人信息</i-menu-item>
+                    </i-submenu>
+
                 </i-menu>
             </i-col>
             <i-col span="20">
@@ -57,7 +66,7 @@
 </template>
 
 <script>
-import MyAvatar from "@/components/views/admin/MyAvatar";
+import MyAvatar from "@/components/views/admin/MyAvatar.vue";
 export default {
     name: "teacherIndex",
     components: {MyAvatar},
