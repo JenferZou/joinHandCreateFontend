@@ -3,7 +3,7 @@
     <div class="layout-header">
       <i-row>
         <i-col span="23">
-      <h1>后台管理</h1>
+          <h1 style="margin-left: 25px;">后台管理</h1>
         </i-col>
         <i-col span="1">
           <div style="padding-top: 10px;">
@@ -80,14 +80,6 @@ export default {
         this.item.firstTitle='信息管理'
         this.item.title = '学生信息'
       }
-/*      else if(path==='contest') {
-        this.item.firstTitle='信息管理'
-        this.item.title = '考证信息管理'
-      }
-      else if(path==='active') {
-        this.item.firstTitle='信息管理'
-        this.item.title = '活动信息发布'
-      }*/
       else if(path==='teacher') {
         this.item.firstTitle='信息管理'
         this.item.title = '老师信息'

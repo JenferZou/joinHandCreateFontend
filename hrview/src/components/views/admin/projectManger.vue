@@ -234,7 +234,7 @@ export default {
                 method: 'get',
                 params: this.$http.adornParams(params),
             }).then(({data}) => {
-                console.log(data)
+                // console.log(data)
                 if (data&&data.errorCode==="200") {
                     this.pageNum = data.data.page
                     this.project = data.data.projects

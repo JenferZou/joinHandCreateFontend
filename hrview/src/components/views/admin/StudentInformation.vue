@@ -597,7 +597,7 @@ export default {
                     'charset': 'utf-8'
                 }
             }).then(({data}) => {
-                console.log(data)
+                //console.log(data)
                 if (data && data.errorCode === "200") {
                     this.pageNum = data.data.page
                     this.studentData = data.data.students

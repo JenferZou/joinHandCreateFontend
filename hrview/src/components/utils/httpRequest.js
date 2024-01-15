@@ -9,7 +9,7 @@ const http = axios.create({
 http.interceptors.request.use(
     function (config) {
         config.headers['Authorization'] = 'Bearer '+window.sessionStorage.getItem('Token')/* 定义全局token */
-        console.log('请求头:',config.headers['Authorization']);
+        // console.log('请求头:',config.headers['Authorization']);
         return config
     },
     function (error) {
