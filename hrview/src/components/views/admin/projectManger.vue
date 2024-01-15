@@ -115,7 +115,7 @@ export default {
             keyword: '',
             title: '',
             currentPage: 1,
-            pageSize: 6,
+            pageSize: 4,
             pageNum: 1,
             contest: {
                 name: '',

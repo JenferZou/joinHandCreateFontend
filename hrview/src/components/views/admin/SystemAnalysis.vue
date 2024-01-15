@@ -161,12 +161,12 @@ export default {
 #dau {
     margin: 0 auto;
     width: 550px;
-    height: 500px;
+    height: 400px;
 }
 
 #proportion {
     margin: 0 auto;
     width: 550px;
-    height: 500px;
+    height: 400px;
 }
 </style>

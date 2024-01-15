@@ -42,7 +42,7 @@
           </i-breadcrumb>
         </div>
 
-        <div class="layout-content" style="min-height: 780px">
+        <div class="layout-content" style="min-height: 550px">
           <router-view></router-view>
         </div>
         <div class="layout-copy">
@@ -129,7 +129,7 @@ export default {
 }
 .layout-menu-left{
   background-color: white;
-  height: 820px;
+  height: 600px;
 }
 .layout-header h1{
   padding-top: 10px;

@@ -2,7 +2,7 @@
     <div>
         <div class="layout-search">
             <i-row>
-                <i-col :span="19">
+                <i-col :span="14">
                     <i-row>
                         <i-col :span="5">
                             <el-input @keyup.enter.native="search" size="small" v-model="highSearchData.keyword"
@@ -33,38 +33,36 @@
                         </i-col>
                     </i-row>
                 </i-col>
-                <i-col :span="4">
+                <i-col :span="10">
                     <i-row type="flex" justify="end">
-                        <!--  <i-col :span="5">
-                           <el-dialog :visible.sync="upload" title="上传" width="30%">
-                                  <el-upload
-                                          ref="upload"
-                                          :auto-upload="false"
-                                          :file-list="fileList"
-                                          class="upload-demo"
-                                          action="string"
-                                          :limit="1"
-                                          :http-request="upLoadHandle"
-                                  >
-                                      <el-button size="small" type="primary">点击上传</el-button>
-                                  </el-upload>
-                                  <span slot="footer">
+                        <i-col :span="5">
+                            <el-dialog :visible.sync="upload" title="上传" width="30%">
+                                <el-upload
+                                        ref="upload"
+                                        :auto-upload="false"
+                                        :file-list="fileList"
+                                        class="upload-demo"
+                                        action="string"
+                                        :limit="1"
+                                        :http-request="upLoadHandle">
+                                    <el-button size="small" type="primary">点击上传</el-button>
+                                </el-upload>
+                                <span slot="footer">
             <el-button type="primary" @click="inExcel" size="small">确 定</el-button>
             <el-button @click="cancelUp" size="small">取 消</el-button>
           </span>
-                              </el-dialog>-->
-                        <!--                            <el-button type="success" size="small" @click="popdig">
-                                                        <i-icon size="15" type="arrow-down-a"></i-icon>
-                                                        导入数据
-                                                    </el-button>
-                                                </i-col>
-                                                <i-col :span="5">
-                                                    <el-button type="success" size="small" @click="exportExcel">
-                                                        <i-icon size="15" type="arrow-up-a"></i-icon>
-                                                        导出数据
-                                                    </el-button>
-                                                </i-col>-->
-
+                            </el-dialog>
+                            <el-button type="success" size="small" @click="popdig">
+                                <i-icon size="15" type="arrow-down-a"></i-icon>
+                                导入数据
+                            </el-button>
+                        </i-col>
+                        <i-col :span="5">
+                            <el-button type="success" size="small" @click="exportExcel">
+                                <i-icon size="15" type="arrow-up-a"></i-icon>
+                                导出数据
+                            </el-button>
+                        </i-col>
                         <i-col :span="5">
                             <el-button size="small" type="primary" @click="addStudent">
                                 <i-icon type="plus-round" size="15"></i-icon>
@@ -157,7 +155,8 @@
                                     <div class="resumewrapp">
                                         <div class="page-title">
                                             <h5>简历预览</h5>
-                                            <el-button type="text" v-if="resume.resumeId!==''" @click="save">保存</el-button>
+                                            <el-button type="text" v-if="resume.resumeId!==''" @click="save">保存
+                                            </el-button>
                                         </div>
                                         <!--  简历内容-->
                                         <div class="resumecontent">
@@ -179,7 +178,7 @@
                                                         {{ studentInfo.sdepartment }}<span
                                                                 style="margin: 0 14px;color: #e6e6e6">|
                                                         </span>
-                                                        {{studentInfo.smajor }}
+                                                        {{ studentInfo.smajor }}
                                                         <span style="margin: 0 14px;color: #e6e6e6">|</span>
                                                         {{ studentInfo.className }}
                                                     </div>
@@ -192,7 +191,7 @@
                                                      style="color: #02B28B;display: flex;margin-left: auto;font-size: 12px; cursor: pointer">
                                                 </div>
                                             </li>
-                                            <li class="advantage" >
+                                            <li class="advantage">
                                                 <div class="project-title">
                                                     <div class="left">
                                                         <i-icon type="email" style="color: #02B28B;"></i-icon>
@@ -356,6 +355,7 @@
 
 <script>
 import EditForm from "@/components/views/admin/EditForm";
+import { Loading } from 'element-ui';
 import {deleteOneStudent} from "@/components/utils";
 
 export default {
@@ -393,7 +393,7 @@ export default {
             upload: false,
             multiDeleteVisible: false,
             pageNum: 1,
-            pageSize: 9,
+            pageSize: 6,
             currentPage: 1,
             studentData: [],
             studentData1: {
@@ -450,34 +450,42 @@ export default {
         upLoadHandle(fileObject) {
             let fd = new FormData();
             fd.append("file", fileObject.file);
+           let loading = Loading.service({
+               text: '正在导入中...',
+               spinner: 'el-icon-loading',
+               background: 'rgba(0, 0, 0, 0.7)',
+               fullscreen: true
+           })
             this.$http({
-                url: this.$http.adornUrl('/excel/leadExcel'),
+                url: this.$http.adornUrl('/admin/excel/leadExcel'),
                 method: 'post',
                 data: this.$http.adornParams(fd),
                 headers: {
-                    'UserToken': window.sessionStorage.getItem('Token'),
+                    'Authorization': 'Bearer '+window.sessionStorage.getItem('Token'),
                 }
             }).then(({data}) => {
-                if (data && data.status === 200) {
-                    this.$message.success(data.msg)
+                if (data && data.errorCode === "200") {
+                    this.$message.success(data.message)
+                    this.upload = false
                 } else {
-                    this.$message.error(data.msg)
+                    this.$message.error(data.message)
                 }
             }).catch((error) => {
                 console.log(error)
-                console.log('出错啦！！！！')
+            }).finally(() => {
+                loading.close();
             })
             this.fileList = []
-            this.upload = false
+
         },
         exportExcel() {
             this.$axios({
                 method: 'get',
-                url: this.$http.adornUrl('/excel/exportBankCheckInfo')/*'http://localhost:8081/excel/exportBankCheckInfo'*/,
+                url: this.$http.adornUrl('/admin/excel/exportBankCheckInfo')/*'http://localhost:8081/excel/exportBankCheckInfo'*/,
                 params: '',
                 responseType: 'blob',
                 headers: {
-                    'UserToken': window.sessionStorage.getItem('Token'),
+                    'Authorization': 'Bearer '+window.sessionStorage.getItem('Token'),
                 }
             }).then(res => {
                 const link = document.createElement('a')
@@ -680,7 +688,7 @@ export default {
                 }
             )
         },
-        save(){
+        save() {
             this.$http({
                 url: this.$http.adornUrl('/admin/resume/update'),
                 method: 'post',
@@ -838,6 +846,7 @@ li {
     height: 17px;
     background: #02B28B;
 }
+
 .advantage-con {
     width: 100%;
     padding: 12px 16px;
