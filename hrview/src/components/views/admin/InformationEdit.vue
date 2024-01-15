@@ -59,7 +59,7 @@ export default {
         // Some Quill optiosn...
       },
       dialogTableVisible:false,
-      contest:'',
+      contest:{},
     }
   },
   methods:{
@@ -109,7 +109,19 @@ export default {
     },
     init(data){
       this.dialogTableVisible = true
-      this.contest=data
+        this.$http({
+            url: this.$http.adornUrl('/admin/project/get/'+data.id),
+            method: 'get',
+        }).then(({data}) => {
+            console.log(data)
+            if (data && data.errorCode === "200") {
+               this.contest=data.data
+            } else {
+                this.$message.error(data.message)
+            }
+        }).catch(() => {
+            console.log('出错啦！！！！')
+        })
     }
   }
 }

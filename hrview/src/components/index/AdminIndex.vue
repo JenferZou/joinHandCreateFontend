@@ -3,7 +3,7 @@
     <div class="layout-header">
       <i-row>
         <i-col span="23">
-          <h1 style="margin-left: 25px;">后台管理</h1>
+      <h1>后台管理</h1>
         </i-col>
         <i-col span="1">
           <div style="padding-top: 10px;">
@@ -23,6 +23,7 @@
             <i-menu-item name="index">学生信息</i-menu-item>
             <i-menu-item name="project">项目管理</i-menu-item>
               <i-menu-item name="teacher">老师信息</i-menu-item>
+              <i-menu-item name="analysis">数据分析</i-menu-item>
           </i-submenu>
           <i-submenu name="3">
             <template slot="title">
@@ -87,6 +88,10 @@ export default {
       else if(path==='project') {
         this.item.firstTitle='信息管理'
         this.item.title = '项目管理'
+      }
+      else if(path==='analysis') {
+          this.item.firstTitle='信息管理'
+          this.item.title = '数据分析'
       }
       else if(path==='userManagement') {
         this.item.firstTitle=' 系统管理'

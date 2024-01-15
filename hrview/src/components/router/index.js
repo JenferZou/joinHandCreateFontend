@@ -31,6 +31,7 @@ import StudentDelieverResume from "@/components/views/teacher/StudentDelieverRes
 import myPublishProject from "@/components/views/teacher/myPublishProject"
 import TeacherManager from "@/components/views/admin/TeacherManager.vue";
 import StudentNotify from "@/components/views/StudentView/StudentNotify.vue";
+import SystemAnalysis from "@/components/views/admin/SystemAnalysis.vue";
 
 Vue.use(Router)
 
@@ -63,9 +64,9 @@ let router = new Router({
                     }
                 },
                 {
-                    path: '/admin/contest',
-                    name: 'contest',
-                    component: InformationManagement,
+                    path: '/admin/analysis',
+                    name: 'analysis',
+                    component: SystemAnalysis,
                     meta: {
                         title: 'admin'
                     }

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import * as echarts from 'echarts'//在import的后面，echarts的前面加一个 * as
 import router from './components/router'
 import 'iview/dist/styles/iview.css'
 import 'element-ui/lib/theme-chalk/index.css';
@@ -95,6 +96,8 @@ Vue.component('el-tag',Tag)
 Vue.use(VueQuillEditor)
 Vue.use(Loading.directive);
 Vue.prototype.$http = httpRequest // Ajax 请求方法
+//vue全局注入echarts
+Vue.prototype.$echarts = echarts;
 Vue.prototype.$message = Message
 Vue.prototype.$axios = axios//未封装的axios请求
 new Vue({
