@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div class="layout" style="min-width: 1300px">
     <div class="layout-header">
       <i-row>
         <i-col span="23">
@@ -37,6 +37,7 @@
             </template>
             <i-menu-item name="index">学生信息</i-menu-item>
             <i-menu-item name="project">项目管理</i-menu-item>
+              <i-menu-item name="teacher">老师信息</i-menu-item>
           </i-submenu>
           <i-submenu name="3">
             <template slot="title">
@@ -57,7 +58,7 @@
           </i-breadcrumb>
         </div>
 
-        <div class="layout-content">
+        <div class="layout-content" style="min-height: 780px">
           <router-view></router-view>
         </div>
         <div class="layout-copy">
@@ -104,6 +105,10 @@ export default {
         this.item.firstTitle='信息管理'
         this.item.title = '活动信息发布'
       }*/
+      else if(path==='teacher') {
+        this.item.firstTitle='信息管理'
+        this.item.title = '老师信息'
+      }
       else if(path==='project') {
         this.item.firstTitle='信息管理'
         this.item.title = '项目管理'

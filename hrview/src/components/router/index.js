@@ -29,6 +29,7 @@ import tInformationManagement from "@/components/views/teacher/tInformationManag
 import tProjectManager from "@/components/views/teacher/tProjectManger"
 import StudentDelieverResume from "@/components/views/teacher/StudentDelieverResume"
 import myPublishProject from "@/components/views/teacher/myPublishProject"
+import TeacherManager from "@/components/views/admin/TeacherManager.vue";
 
 Vue.use(Router)
 
@@ -48,6 +49,14 @@ let router = new Router({
                     path: '/admin/index',
                     name: 'index',
                     component: StudentInformation,
+                    meta: {
+                        title: 'admin'
+                    }
+                },
+                {
+                    path: '/admin/teacher',
+                    name: 'teacher',
+                    component: TeacherManager,
                     meta: {
                         title: 'admin'
                     }

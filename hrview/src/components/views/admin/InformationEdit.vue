@@ -2,20 +2,26 @@
   <el-dialog title="发布" :visible.sync="dialogTableVisible" @close="close" width="80%">
     <div class="el-dialog-div">
     <el-form ref="form" :model="contest" label-width="auto">
+        <el-form-item label="id" style="display: none">
+            <el-input v-model="contest.id"></el-input>
+        </el-form-item>
       <el-form-item label="标题">
-        <el-input v-model="contest.title"></el-input>
+        <el-input v-model="contest.name"></el-input>
       </el-form-item>
+        <el-form-item label="指导老师">
+            <el-input v-model="contest.mentor"></el-input>
+        </el-form-item>
+        <el-form-item label="所需专业">
+            <el-input v-model="contest.needMajor"></el-input>
+        </el-form-item>
       <el-form-item label="时间">
         <i-col :span="11">
           <el-date-picker type="date" placeholder="选择日期" v-model="contest.startTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
         </i-col>
-        <i-col class="line" :span="2">-</i-col>
+        <i-col class="line" :span="2"></i-col>
         <i-col :span="11">
-          <el-date-picker type="date" placeholder="选择日期" v-model="contest.endTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
+<!--          <el-date-picker type="date" placeholder="选择日期" v-model="contest.endTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>-->
         </i-col>
-      </el-form-item>
-      <el-form-item label="备注">
-        <el-input type="textarea" v-model="contest.remark"></el-input>
       </el-form-item>
       <el-form-item class="item">
         <quill-editor class="editor"
@@ -29,7 +35,7 @@
         </quill-editor>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">立即发布</el-button>
+        <el-button type="primary" @click="onSubmit">确认</el-button>
         <el-button @click="cancel">取消</el-button>
       </el-form-item>
     </el-form>
@@ -76,19 +82,19 @@ export default {
     },
     onSubmit() {
       this.$http({
-        url: this.$http.adornUrl('/admin/publish'),
+        url: this.$http.adornUrl('/admin/project/modify'),
         method: 'post',
         data: this.$http.adornData(this.contest),
         headers: {
-          'UserToken':window.sessionStorage.getItem('Token'),
           'Content-Type': 'application/json',
           'charset': 'utf-8'
         }
       }).then(({data}) => {
-        if (data && data.status === 200) {
-          this.$message.success(data.msg)
+          console.log(data)
+        if (data && data.errorCode === "200") {
+          this.$message.success(data.message)
         } else {
-          this.$message.error(data.msg)
+          this.$message.error(data.message)
         }
       }).catch(() => {
         console.log('出错啦！！！！')

@@ -2,7 +2,7 @@
   <el-dropdown  size="small" @command="handleCommand">
     <el-avatar  icon="el-icon-user-solid"></el-avatar>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item>个人主页</el-dropdown-item>
+<!--      <el-dropdown-item>个人主页</el-dropdown-item>-->
       <el-dropdown-item command="logout">退出登录</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
@@ -15,15 +15,17 @@ export default {
   methods:{
     handleCommand(command){
       if(command==='logout') {
-        this.$http({
+          sessionStorage.removeItem("Token")
+          sessionStorage.removeItem("role")
+          this.$router.push({
+              path: '/'
+          })
+/*        this.$http({
           url: this.$http.adornUrl('/logout'),
           method: 'post',
-          headers: {
-            'UserToken': window.sessionStorage.getItem('Token'),
-          }
         }).then(({data}) => {
           if (data && data.status === 200) {
-            /* console.log(data)*/
+            /!* console.log(data)*!/
             sessionStorage.removeItem("Token")
             sessionStorage.removeItem("role")
             this.$message.success(data.msg)
@@ -35,7 +37,7 @@ export default {
           }
         }).catch((res) => {
           this.$message.error(res.response.data.message)
-        })
+        })*/
       }
     },
   }

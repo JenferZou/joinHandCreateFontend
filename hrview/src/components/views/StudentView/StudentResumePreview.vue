@@ -1,6 +1,5 @@
 <template>
   <div class="layout">
-
     <div class="layout-content">
       <i-row>
         <i-col span="19">
@@ -34,7 +33,6 @@
                     <div  class="edit-mes" style="color: #02B28B;display: flex;margin-left: auto;font-size: 12px; cursor: pointer">
                     </div>
                   </li>
-
                   <li class="advantage" v-if="resume.personalAdvantage">
                     <div  class="project-title">
                       <div  class="left">
@@ -49,10 +47,6 @@
                     </p> <div class="fixed-edit"><div class="edit-show-action-wrap">
                       </div></div></div>
                   </li>
-
-
-
-
                   <li>
                     <div  class="project-title">
                       <div  class="left">
@@ -67,9 +61,6 @@
                     </p> <div class="fixed-edit"><div class="edit-show-action-wrap">
                       </div></div></div>
                   </li>
-
-
-
                   <li>
                     <div  class="project-title">
                       <div  class="left">
@@ -84,11 +75,6 @@
                     </p> <div class="fixed-edit"><div class="edit-show-action-wrap">
                       </div></div></div>
                   </li>
-
-
-
-
-
                   <li>
                     <div  class="project-title">
                       <div  class="left">
@@ -103,8 +89,6 @@
                     </p> <div class="fixed-edit"><div class="edit-show-action-wrap">
                       </div></div></div>
                   </li>
-
-
                   <li>
                     <div  class="project-title">
                       <div  class="left">
@@ -119,13 +103,10 @@
                     </p> <div class="fixed-edit"><div class="edit-show-action-wrap">
                       </div></div></div>
                   </li>
-
-
                 </div>
               </div>
             </div>
           </div>
-
         </i-col>
       </i-row>
     </div>
