@@ -34,14 +34,6 @@
               <i-menu-item name="projectSearch">项目大厅</i-menu-item>
               <i-menu-item name="myProjectSearch">项目申请</i-menu-item>
             </i-submenu>
-<!--            <i-submenu name="3">-->
-<!--              <template slot="title">-->
-<!--                <i-icon type="ios-analytics"></i-icon>-->
-<!--                考证与实践活动信息-->
-<!--              </template>-->
-<!--              <i-menu-item name="CertificateSearch">考证俱乐部</i-menu-item>-->
-<!--              <i-menu-item name="ActiveSearch">实践活动查询</i-menu-item>-->
-<!--            </i-submenu>-->
           </i-menu>
         </i-col>
         <i-col span="19">
@@ -52,74 +44,44 @@
 
 
               <div>
-                <i-row class="search">
-                  <i-col :span="12">
-                    <i-row>
-                      <i-col :span="16">
-                        <el-input @keyup.enter.native="search" size="small" v-model="title" placeholder="请输入标题" clearable prefix-icon="el-icon-search">
-                        </el-input>
-                      </i-col>
-                      <i-col :span="3">
-                        <el-button type="primary" size="small" @click="search">
-                          <i-icon type="search" size="small"></i-icon>
-                          搜索
-                        </el-button>
-                      </i-col>
-                    </i-row>
-                  </i-col>
-                </i-row>
-                <div style="background-color: #fff;padding: 10px;">
-                  <el-tag type="warning" style="margin-right: 55px;margin-left: 240px">简历审核中</el-tag>
-                  <el-tag type="success" style="margin-right: 55px">简历通过</el-tag>
-                  <el-tag type="danger">简历未通过</el-tag>
-                </div>
                 <el-table
                     border
                     ref="multipleTable"
-                    :data="project"
+                    :data="notify"
                     tooltip-effect="dark"
                     style="width: 100%"
                     :cell-style="tableRowClassName">
                   <el-table-column
-                      width="55">
+                      prop="mid"
+                      label="序号"
+                      width="80">
                   </el-table-column>
                   <el-table-column
-                      prop="projectName"
+                      prop=""
                       label="项目名称"
-                      width="120">
+                      width="180">
                   </el-table-column>
                   <el-table-column
-                      prop="mentor"
+                      prop=""
                       label="指导老师"
-                      width="120">
+                      width="180">
                   </el-table-column>
-
                   <el-table-column
                       prop="sname"
                       label="学生姓名"
-                      width="120">
+                      width="180">
                   </el-table-column>
-
-                  <el-table-column
-                      prop="sno"
-                      label="学生学号"
-                      width="120">
-                  </el-table-column>
-
-
-
                   <el-table-column
                       prop="content"
                       label="内容"
                       show-overflow-tooltip>
                   </el-table-column>
-
-                  <el-table-column
-                      prop="mark"
-                      label="状态"
-                      width="120"
-                      :formatter="switchnum">
-                  </el-table-column>
+<!--                  <el-table-column-->
+<!--                      prop="mark"-->
+<!--                      label="状态"-->
+<!--                      width="120"-->
+<!--                      :formatter="switchnum">-->
+<!--                  </el-table-column>-->
                 </el-table>
 
                 <i-row >
@@ -157,25 +119,20 @@
 <script>
 
 export default {
-  name: "projectSearch",
+  name: "StudentNotify",
   data() {
     return {
-      multiDeleteVisible1:false,
-      multipleSelectionFlag: false,
-      multiDeleteVisible: false,
-      multipleSelection: [],
-      project: [],
-      title: '',
-        currentPage: 1,
-        pageSize: 10,
-        pageNum: 10,
-      contest:{
-        name:'',
-        startTime:'',
-        content:'',
-      },
-      idParams:[],
-      dcontest:'',
+      notify: [],
+      currentPage: 1,
+      pageSize: 10,
+      pageNum: 10,
+      // contest:{
+      //   name:'',
+      //   startTime:'',
+      //   content:'',
+      // },
+      // idParams:[],
+      // dcontest:'',
     }
   },
   methods: {
@@ -186,50 +143,6 @@ export default {
       else
         this.getAllInformation()
     },
-
-
-    reset(data){
-      Object.keys(data).forEach(key=>(data[key]=''))
-      return data
-    },
-
-    search() {
-      let params = {
-        pageNo: this.currentPage,
-        pageSize: this.pageSize,
-        name:this.title
-      }
-      this.$http({
-        url: this.$http.adornUrl('/delieverResume/getdelieverResumeBysnoAndName'),
-        method: 'get',
-        params: this.$http.adornParams(params),
-
-      }).then(({data}) => {
-        if (data) {
-            this.pageNum = data.pages
-            this.currentPage = data.current
-            this.project = data.data
-            this.pageSize = data.size
-
-        }
-      }).catch(() => {
-        console.log('出错啦！！！！')
-      })
-    },
-
-
-
-
-    switchnum(row){
-      if(row.mark=== 0){
-        return '审核中'
-      }else if(row.mark === 1){
-        return '简历通过'
-      }else if(row.mark === -1) {
-        return  '简历未通过'
-      }
-    },
-
 
     getAllInformation() {
       let params = {
@@ -242,10 +155,10 @@ export default {
         params: this.$http.adornParams(params),
       }).then(({data}) => {
         if (data) {
-            this.pageNum = data.pages
-            this.currentPage = data.current
-            this.project = data.data
-            this.pageSize = data.size
+          this.pageNum = data.pages
+          this.currentPage = data.current
+          this.project = data.data
+          this.pageSize = data.size
         }
       }).catch(() => {
         console.log('出错啦！！！！')
@@ -312,7 +225,7 @@ export default {
 }
 
 .el-table .failure-row{
-background: #f56c6c;
+  background: #f56c6c;
 }
 
 .layout{

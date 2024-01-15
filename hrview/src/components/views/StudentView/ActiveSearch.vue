@@ -11,7 +11,7 @@
         <i-menu-item name="StudentIndex">主页</i-menu-item>
         <i-menu-item name="StudentMessage">个人信息</i-menu-item>
         <i-menu-item name="StudentResumePreview">个人简历</i-menu-item>
-        <i-menu-item name="5">消息通知</i-menu-item>
+        <i-menu-item name="notify">消息通知</i-menu-item>
       </div>
     </i-menu>
     <div class="layout-content">
