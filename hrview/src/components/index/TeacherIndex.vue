@@ -19,7 +19,6 @@
         <i-row type="flex">
             <i-col span="4" class="layout-menu-left">
                 <i-menu @on-select="handleSelect" :active-name="sidebarItem"  width="auto">
-                    <!--          <div class="layout-logo-left"><h1>menu</h1></div>-->
                     <i-submenu name="1">
                         <template slot="title">
                             <i-icon type="ios-keypad"></i-icon>
@@ -41,7 +40,6 @@
                 <!--        <div class="layout-header"><h1>信息管理系统</h1></div>-->
                 <div class="layout-breadcrumb">
                     <i-breadcrumb>
-                        <i-breadcrumb-item href="/">首页</i-breadcrumb-item>
                         <i-breadcrumb-item href="#" v-show="item.firstTitle!==''">{{ item.firstTitle}}</i-breadcrumb-item>
                         <i-breadcrumb-item href="#" v-show="item.title!==''">{{ item.title }}</i-breadcrumb-item>
                     </i-breadcrumb>
@@ -59,7 +57,7 @@
 </template>
 
 <script>
-import MyAvatar from "@/components/views/teacher/MyAvatar";
+import MyAvatar from "@/components/views/admin/MyAvatar";
 export default {
     name: "teacherIndex",
     components: {MyAvatar},

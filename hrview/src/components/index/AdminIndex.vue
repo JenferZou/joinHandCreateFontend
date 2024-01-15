@@ -8,13 +8,6 @@
         <i-col span="1">
           <div style="padding-top: 10px;">
             <MyAvatar/>
-<!--            <el-dropdown  size="small">
-        <el-avatar  icon="el-icon-user-solid"></el-avatar>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>个人主页</el-dropdown-item>
-                <el-dropdown-item>退出登录</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>-->
           </div>
         </i-col>
       </i-row>
@@ -22,14 +15,6 @@
     <i-row type="flex">
       <i-col span="4" class="layout-menu-left">
         <i-menu @on-select="handleSelect" :active-name="sidebarItem"  width="auto">
-<!--          <div class="layout-logo-left"><h1>menu</h1></div>-->
-<!--          <i-submenu name="1">
-            <template slot="title">
-              <i-icon type="ios-navigate"></i-icon>
-              学生资料
-            </template>
-            <i-menu-item name="index" >基本资料</i-menu-item>
-          </i-submenu>-->
           <i-submenu name="2">
             <template slot="title">
               <i-icon type="ios-keypad"></i-icon>
@@ -49,10 +34,8 @@
         </i-menu>
       </i-col>
       <i-col span="20">
-<!--        <div class="layout-header"><h1>信息管理系统</h1></div>-->
         <div class="layout-breadcrumb">
           <i-breadcrumb>
-            <i-breadcrumb-item href="/">首页</i-breadcrumb-item>
             <i-breadcrumb-item href="#" v-show="item.firstTitle!==''">{{ item.firstTitle}}</i-breadcrumb-item>
             <i-breadcrumb-item href="#" v-show="item.title!==''">{{ item.title }}</i-breadcrumb-item>
           </i-breadcrumb>
