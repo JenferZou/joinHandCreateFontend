@@ -94,7 +94,7 @@
                     <i-col   v-for="item in message" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
                       <i-col span="8">{{ item.mentor }}</i-col>
                         <i-col span="8">{{item.createTime}}</i-col>
-                        <i-col span="8">{{ item.content }}</i-col>
+                        <i-col span="8" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{ item.content }}</i-col>
 
                     </i-col>
                     </i-col>

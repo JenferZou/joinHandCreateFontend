@@ -75,7 +75,8 @@
                   <el-table-column
                       prop="content"
                       label="消息内容"
-                      show-overflow-tooltip>
+                      show-overflow-tooltip
+                   style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
                   </el-table-column>
 <!--                  <el-table-column-->
 <!--                      prop="mark"-->
