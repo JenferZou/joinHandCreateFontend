@@ -3,7 +3,7 @@
     <div class="layout-header">
       <i-row>
         <i-col span="23">
-      <h1>后台管理</h1>
+      <h1 style="margin-left: 10px">后台管理</h1>
         </i-col>
         <i-col span="1">
           <div style="padding-top: 10px;">

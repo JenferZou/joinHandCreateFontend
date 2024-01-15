@@ -18,8 +18,31 @@
 
                 </i-row>
             </i-col>
-            <i-col :offset="9" :span="3">
-                <i-col :span="5">
+            <i-col :span="12">
+              <i-col :offset="8" :span="2">
+                <el-upload
+                    class="upload-demo"
+                    action=""
+                    accept=".xlsx,.xls"
+                    :http-request="uploadTeacherExcel"
+                    :show-file-list="false"
+                    :limit="1"
+                    :multiple="false"
+                    :before-upload="beforeUpload"
+                >
+                  <el-button size="small" type="primary">
+                    <i-icon type="ios-cloud-upload-outline" size="15"></i-icon>
+                    点击上传
+                  </el-button>
+                </el-upload>
+              </i-col>
+              <i-col :offset="2" :span="2">
+                <el-button size="small" type="success" @click="downloadTeacherExcel" v-loading.fullscreen.lock="downloadTeacherExcelLoading">
+                  <i-icon type="ios-cloud-download-outline" size="15"></i-icon>
+                  导出老师到excel
+                </el-button>
+              </i-col>
+                <i-col :offset="5" :span="3">
                     <el-button size="small" type="primary" @click="dialogVisible=true">
                         <i-icon type="plus-round" size="15"></i-icon>
                         添加老师
@@ -132,6 +155,7 @@ export default {
     name: "TeacherManager",
     data() {
         return {
+          downloadTeacherExcelLoading:false,
             dialogVisible: false,
             editData: {},
             multiDeleteVisible1: false,
@@ -298,6 +322,66 @@ export default {
                 console.log('出错啦！！！！')
             })
         },
+      downloadTeacherExcel(){
+        this.downloadTeacherExcelLoading = true;
+        this.$http({
+          url: this.$http.adornUrl('/teacher/excel/download'),
+          method: 'get',
+        }).then(({data}) => {
+          if (data && data.errorCode === "200") {
+            this.downloadTeacherExcelLoading = false;
+            this.$message.success("成功导出数据到桌面")
+          } else {
+            this.downloadTeacherExcelLoading = false;
+            this.$message.error(data.message)
+          }
+
+        }).catch(() => {
+          console.log('出错啦！！！！')
+        })
+      },
+      uploadTeacherExcel(file){
+        let formData = new FormData();
+        formData.append('file', file.file);//传文件
+        this.$http({
+          url: this.$http.adornUrl('/teacher/excel/upload'),
+          method: 'post',
+          data: formData
+        }).then(({data}) => {
+          if (data && data.errorCode === "200") {
+            this.downloadTeacherExcelLoading = false;
+            this.$message.success("成功导入数据")
+            this.getAllInformation()
+          } else {
+            this.downloadTeacherExcelLoading = false;
+            this.$message.error(data.message)
+          }
+        }).catch(() => {
+          console.log('出错啦！！！！')
+        })
+        return false  //屏蔽了action的默认上传
+      },
+      beforeUpload(file){
+        //找到文件名中最后一个点的位置。
+        // 获取从上一步找到的点位置开始到字符串末尾的子字符串
+        const fileSuffix = file.name.substring(file.name.lastIndexOf(".") + 1);
+
+        const whiteList = ["xls", "xlsx"];
+
+        if (whiteList.indexOf(fileSuffix) === -1) {
+          this.$message.error('上传文件只能是xls、xlsx格式');
+          return false;
+        }
+
+        const isLt = file.size / 1024 / 1024 < 5;
+
+        if (!isLt) {
+          this.$message.error('上传文件大小不能超过5MB');
+          return false;
+        }
+
+      },
+
         cancel(){
             this.dialogVisible=false
             this.editData={}

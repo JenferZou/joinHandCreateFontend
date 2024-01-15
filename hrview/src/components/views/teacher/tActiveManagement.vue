@@ -379,7 +379,7 @@ export default {
     },
     change(page) {
       this.page = page
-      //如果搜索框不为空，走搜索的分页
+      //如果搜索框不为空，走搜索的分页, 去除开头前后的空格
       if(this.searchExpectedCompetition.trim() !== '' || this.searchName.trim() !==''||this.searchDate.trim() !== ''||this.searchNeedMajor !== ''){
         this.search(false)
       }else {
@@ -431,6 +431,7 @@ export default {
       this.searchDate = ''
       this.searchNeedMajor = ''
       this.searchExpectedCompetition = ''
+      this.getProject()
     },
     display() {
       this.dialogVisible = true
