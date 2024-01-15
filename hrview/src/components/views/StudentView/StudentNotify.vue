@@ -48,22 +48,22 @@
                 <el-table
                     border
                     ref="multipleTable"
-                    :data="notify"
+                    :data="project"
                     tooltip-effect="dark"
                     style="width: 100%"
-                    :cell-style="tableRowClassName">
+                    >
                   <el-table-column
                       prop="mid"
                       label="序号"
                       width="80">
                   </el-table-column>
                   <el-table-column
-                      prop=""
+                      prop="name"
                       label="项目名称"
                       width="180">
                   </el-table-column>
                   <el-table-column
-                      prop=""
+                      prop="mentor"
                       label="指导老师"
                       width="180">
                   </el-table-column>
@@ -74,7 +74,7 @@
                   </el-table-column>
                   <el-table-column
                       prop="content"
-                      label="内容"
+                      label="消息内容"
                       show-overflow-tooltip>
                   </el-table-column>
 <!--                  <el-table-column-->
@@ -127,6 +127,7 @@ export default {
       currentPage: 1,
       pageSize: 10,
       pageNum: 10,
+        project: [],
       // contest:{
       //   name:'',
       //   startTime:'',
@@ -154,7 +155,7 @@ export default {
         pageSize: this.pageSize
       }
       this.$http({
-        url: this.$http.adornUrl('/delieverResume/getdelieverResumeBysno'),
+        url: this.$http.adornUrl('/message/getMessageBySno'),
         method: 'get',
         params: this.$http.adornParams(params),
       }).then(({data}) => {
@@ -167,25 +168,6 @@ export default {
       }).catch(() => {
         console.log('出错啦！！！！')
       })
-    },
-
-    tableRowClassName({row}){
-      if(row.mark==1){
-        return {
-          background:'#f0f9eb'
-        }
-      }
-      else if(row.mark==0){
-        return {
-          background: '#fdf6ec'
-        }
-      }
-      else{
-        return {
-          background: '#fef0f0'
-        }
-      }
-
     },
 
 

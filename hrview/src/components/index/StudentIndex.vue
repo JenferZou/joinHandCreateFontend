@@ -83,12 +83,18 @@
                       <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon> 消息通知</i-col>
                     </i-col>
 
+                        <i-col style="height: 50px; font-weight:bold;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                            <i-col span="8">消息发送人</i-col>
+                            <i-col span="8">接收时间</i-col>
+                            <i-col span="8">消息内容</i-col>
+                        </i-col>
+
                     <el-empty v-if="message == undefined ||message == null || message.length <= 0 " description="暂无信息" style="size: 10px"></el-empty>
 
                     <i-col   v-for="item in message" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
-                      <i-col span="8">{{ item.title }}</i-col>
-                      <i-col span="8">{{ item.content }}</i-col>
-                      <i-col span="8">{{item.activeTime}}</i-col>
+                      <i-col span="8">{{ item.mentor }}</i-col>
+                        <i-col span="8">{{item.createTime}}</i-col>
+                        <i-col span="8">{{ item.content }}</i-col>
 
                     </i-col>
                     </i-col>
@@ -111,7 +117,7 @@
                       </i-icon>   最新项目发布通知</i-col>
                     </i-col>
 
-                    <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
+                    <i-col style="height: 50px; font-weight:bold;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">
                       <i-col span="6">项目名称</i-col>
                       <i-col span="6">专业需求</i-col>
                       <i-col span="6">项目指导老师</i-col>
@@ -158,9 +164,11 @@ export default {
       },
       project:[],
       company:[],
-      contest1:[],
-      active1:[],
       message:[],
+        currentPage: 1,
+        pageSize: 5,
+        pageNum: 10,
+      active1:[],
       active:{
         id:'',
         title:'',
@@ -176,11 +184,13 @@ export default {
     }
   },
   created(){
-    this.loadContest()
+    this.loadMessage()
     this.loadStudent()
+      this.getAllInformation()
   },
   methods: {
     logout(){
+        localStorage.clear()
       this.$router.push('/')
     },
     loadStudent() {
@@ -199,19 +209,46 @@ export default {
         console.log('出错啦！！！！')
       })
     },
-    loadContest() {
+      getAllInformation() {
+          let params = {
+              pageNo: this.currentPage,
+              pageSize: this.pageSize
+          }
+          this.$http({
+              url: this.$http.adornUrl('/project/getProject'),
+              method: 'get',
+              params: this.$http.adornParams(params),
+          }).then(({data}) => {
+              if (data) {
+                  this.pageNum = data.pages
+                  this.currentPage = data.current
+                  this.project = data.data
+                  this.pageSize = data.size
+
+              }
+          }).catch(() => {
+              console.log('出错啦！！！！')
+          })
+      },
+      loadMessage() {
+        let params = {
+            pageNo: this.currentPage,
+            pageSize: this.pageSize
+        }
       this.$http({
-        url: this.$http.adornUrl('/student/contest'),
+        url: this.$http.adornUrl('/message/getMessageBySno'),
         method: 'get',
-        params:this.$http.adornParams(),
+        params:this.$http.adornParams(params),
         headers: {
           'UserToken':window.sessionStorage.getItem('Token'),
           'Content-Type': 'application/json',
           'charset': 'utf-8'
         }
       }).then(({data}) => {
-        this.contest1=data
-
+        this.message=data.data
+          this.pageNum = data.pages
+          this.currentPage = data.current
+          this.pageSize = data.size
       }).catch(() => {
         console.log('出错啦！！！！')
       })
