@@ -11,6 +11,7 @@
           <i-menu-item name="StudentMessage">个人信息</i-menu-item>
           <i-menu-item name="StudentResumePreview">个人简历</i-menu-item>
           <i-menu-item name="notify">消息通知</i-menu-item>
+          <div style="padding-left: 900px"><el-button size="small" @click="logout()">退出登录</el-button></div>
         </div>
       </i-menu>
       <div class="layout-content">
@@ -168,6 +169,9 @@ export default {
 
 
   methods: {
+    logout(){
+      this.$router.push('/')
+    },
     change(page) {
       this.currentPage=page;
       if(this.title!=='')
