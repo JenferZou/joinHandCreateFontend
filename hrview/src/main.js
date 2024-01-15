@@ -9,7 +9,6 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import httpRequest from "@/components/utils/httpRequest";
-
 import {
   Container,
   Aside,
@@ -42,6 +41,7 @@ import {
     Collapse,
   CollapseItem,
     Tag,
+  Loading
 
 } from "element-ui";
 import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb,Layout,Content,Sider} from 'iview'
@@ -93,7 +93,7 @@ Vue.component('el-tag',Tag)
 
 
 Vue.use(VueQuillEditor)
-
+Vue.use(Loading.directive);
 Vue.prototype.$http = httpRequest // Ajax 请求方法
 Vue.prototype.$message = Message
 Vue.prototype.$axios = axios//未封装的axios请求
