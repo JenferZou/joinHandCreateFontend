@@ -10,14 +10,7 @@
           <span style="margin-left: 10px;font-size: 14px">
             开始时间:
           </span>
-          <el-date-picker
-              v-model="searchDate"
-              type="date"
-              placeholder="选择日期"
-              value-format="yyyy-MM-dd HH:mm:ss"
-              format="yyyy-MM-dd"
-              style="margin-left: 10px;;width: 12%"
-          >
+          <el-date-picker v-model="searchDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd HH:mm:ss" format="yyyy-MM-dd" style="margin-left: 10px;;width: 12%">
           </el-date-picker>
           <span style="margin-left: 10px;font-size: 14px">
             所需专业:
@@ -33,12 +26,8 @@
         </div>
       </el-header>
       <el-main>
-        <el-table
-            ref="singleTable"
-            :data="projectData"
-            highlight-current-row
-            style="width: 100%"
-       >
+        <!--添加加载 -->
+        <el-table ref="singleTable" v-loading="isLoading" :data="projectData" highlight-current-row style="width: 100%">
           <el-table-column
               type="index"
               label="序号">
@@ -103,11 +92,7 @@
       </el-footer>
     </el-container>
 
-    <el-dialog
-        title="确认删除"
-        :visible.sync="multiDeleteVisible"
-        width="30%"
-        >
+    <el-dialog title="确认删除" :visible.sync="multiDeleteVisible" width="30%">
       <span>确认删除该项目?</span>
       <span slot="footer" class="dialog-footer">
     <el-button @click="multiDeleteVisible = false">取 消</el-button>
@@ -140,14 +125,7 @@
             <el-input type="text" v-model="project.expectedCompetition" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item class="item">
-            <quill-editor class="editor"
-                          ref="myTextEditor"
-                          v-model="project.content"
-                          :options="editorOption"
-                          @blur="onEditorBlur($event)"
-                          @focus="onEditorFocus($event)"
-                          @ready="onEditorReady($event)"
-                          @change="onEditorChange($event)">
+            <quill-editor class="editor" ref="myTextEditor" v-model="project.content" :options="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)" @change="onEditorChange($event)">
             </quill-editor>
           </el-form-item>
           <el-form-item>
@@ -158,12 +136,7 @@
       </div>
     </el-dialog>
 
-    <el-dialog
-        title="修改项目"
-        :visible.sync="updateDialogVisible"
-        width="80%"
-        @close='closeDialog'
-    >
+    <el-dialog title="修改项目" :visible.sync="updateDialogVisible" width="80%" @close='closeDialog'>
       <div class="el-dialog-div">
         <el-form :model="project" :rules="rules" ref="ruleForm" label-width="100px" class="demo-project">
           <el-form-item label="项目名称" prop="name">
@@ -211,6 +184,7 @@ export default {
   name: "tProjectManagement",
   data() {
     return {
+      isLoading:false,
       editorOption: {
         modules: {
           toolbar: toolbarOptions
@@ -483,6 +457,7 @@ export default {
         page: this.currentPage,
         pageSize: this.pageSize
       }
+      this.isLoading = true;
       this.$http({
         url: this.$http.adornUrl('/project'),
         method: 'post',
@@ -496,6 +471,8 @@ export default {
         }
       }).catch(() => {
         console.log('出错啦！！！！')
+      }).finally(()=>{
+        this.isLoading = false;
       })
     }
   },

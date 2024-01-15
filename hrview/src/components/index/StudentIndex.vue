@@ -1,10 +1,9 @@
-
-
 <template>
   <div class="layout">
     <i-menu mode="horizontal" theme="dark" active-name="1"  on-select="ed">
-<!--      <div class="layout-logo"></div>-->
-    <h5 style="color: #fff;margin-left:50px;font-weight: bolder;font-size: 20px">    携手创-学生端</h5>
+        <h5 style="color: #fff;margin-left:50px;font-weight: bolder;font-size: 20px">
+          携手创-学生端
+        </h5>
     </i-menu>
     <i-menu mode="horizontal" active-name="1" @on-select="editMes">
       <div class="layout-assistant">
@@ -36,14 +35,6 @@
               <i-menu-item name="projectSearch">项目大厅</i-menu-item>
               <i-menu-item name="myProjectSearch">项目申请</i-menu-item>
             </i-submenu>
-<!--            <i-submenu name="3">-->
-<!--              <template slot="title">-->
-<!--                <i-icon type="ios-analytics"></i-icon>-->
-<!--                考证与实践活动信息-->
-<!--              </template>-->
-<!--              <i-menu-item name="CertificateSearch">考证俱乐部</i-menu-item>-->
-<!--              <i-menu-item name="ActiveSearch">实践活动查询</i-menu-item>-->
-<!--            </i-submenu>-->
           </i-menu>
         </i-col>
         <i-col span="19">
@@ -81,7 +72,6 @@
                       </i-col>
                     </i-col>
 
-
                   </div>
                 </i-col>
 
@@ -92,8 +82,6 @@
                     <i-col style="height: 45px">
                       <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon> 消息通知</i-col>
                     </i-col>
-
-
 
                     <el-empty v-if="message == undefined ||message == null || message.length <= 0 " description="暂无信息" style="size: 10px"></el-empty>
 
@@ -145,72 +133,6 @@
                 </i-col>
               </i-row>
 
-
-<!--              <i-row  class="footcontent" :gutter="16" >-->
-
-<!--                <i-col span="12">-->
-<!--                  <div class="mes" style="background-color: #fff;min-height: 295px">-->
-<!--                    <i-col style="height: 45px">-->
-<!--                      <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread">-->
-
-<!--                      </i-icon>    最新考试报名信息</i-col>-->
-
-<!--                    </i-col>-->
-
-
-<!--                    <i-col style="height: 50px;background-color: #fff;text-align: center; border-bottom: 1px dashed #c0c0c0">-->
-<!--                      <i-col span="8" >考试类别</i-col>-->
-<!--                      <i-col span="8">报名时间</i-col>-->
-<!--                      <i-col span="8">截止时间</i-col>-->
-<!--                    </i-col>-->
-
-
-<!--                    <el-empty  v-if="contest1 == undefined ||contest1 == null || contest1.length <= 0" description="暂无信息" style="size: 10px"></el-empty>-->
-
-
-<!--                    <i-col   v-for="item in contest1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">-->
-<!--                      <i-col span="8">{{ item.title }}</i-col>-->
-<!--                      <i-col span="8">{{ item.startTime }}</i-col>-->
-<!--                      <i-col span="8">{{item.endTime}}</i-col>-->
-
-<!--                    </i-col>-->
-
-
-
-<!--                  </div>-->
-<!--                </i-col>-->
-
-
-<!--                <i-col span="12">-->
-<!--                  <div class="mes" style="background-color: #fff;min-height: 295px">-->
-<!--                    <i-col style="height: 45px">-->
-<!--                      <i-col span="24" class="headmainmes" style="height: 45px;font-size: 14px"><i-icon type="email-unread"></i-icon>    最新实践活动信息</i-col>-->
-<!--                    </i-col>-->
-<!--                    <i-col style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0">-->
-<!--                      <i-col span="8">活动名称</i-col>-->
-<!--                      <i-col span="8">活动报名时间</i-col>-->
-<!--                      <i-col span="8">活动时长</i-col>-->
-<!--                    </i-col>-->
-
-
-<!--                    <el-empty v-if="active1 == undefined ||active1 == null || active1.length <= 0 " description="暂无信息" ></el-empty>-->
-
-<!--                    <i-col   v-for="item in active1" :key="item.id" style="height: 50px;background-color: #fff;text-align: center;border-bottom: 1px dashed #c0c0c0;">-->
-<!--                      <i-col span="8">{{ item.title }}</i-col>-->
-<!--                      <i-col span="8">{{ item.activeTime }}</i-col>-->
-<!--                      <i-col span="8">{{item.activeDuration}}</i-col>-->
-
-<!--                    </i-col>-->
-<!--                  </div>-->
-<!--                </i-col>-->
-
-<!--              </i-row>-->
-
-
-
-
-
-
             </div></div>
         </i-col>
       </i-row>
@@ -220,8 +142,8 @@
     </div>
   </div>
 </template>
-<script>
 
+<script>
 
 export default {
   data(){
@@ -250,21 +172,12 @@ export default {
         remark:''
       },
       studentInfo:{
-        // sName: '张三',
-        // gender: '男',
-        // sno: '123123',
-        // sMajor: '软件工程',
-        // sPhone: '11011100',
-        // sDepartment:'计算机与智能教育学院',
-        // className:'软件2班'
       },
     }
   },
   created(){
     this.loadContest()
-    this.loadActive()
     this.loadStudent()
-    this.loadProject()
   },
   methods: {
     logout(){
@@ -286,24 +199,6 @@ export default {
         console.log('出错啦！！！！')
       })
     },
-    loadProject() {
-      this.$http({
-        url: this.$http.adornUrl('/student/project'),
-        method: 'get',
-        params:this.$http.adornParams(),
-        headers: {
-          'UserToken':window.sessionStorage.getItem('Token'),
-          'Content-Type': 'application/json',
-          'charset': 'utf-8'
-        }
-      }).then(({data}) => {
-        console.log(data)
-        this.project=data
-
-      }).catch(() => {
-        console.log('出错啦！！！！')
-      })
-    },
     loadContest() {
       this.$http({
         url: this.$http.adornUrl('/student/contest'),
@@ -321,48 +216,12 @@ export default {
         console.log('出错啦！！！！')
       })
     },
-    loadActive() {
-
-      this.$http({
-        url: this.$http.adornUrl('/student/active'),
-        method: 'get',
-        params:this.$http.adornParams(),
-        headers: {
-          'UserToken':window.sessionStorage.getItem('Token'),
-          'Content-Type': 'application/json',
-          'charset': 'utf-8'
-        }
-      }).then(({data}) => {
-        console.log(data)
-        this.active1=data
-      }).catch(() => {
-        console.log('出错啦！！！！')
-      })
-    },
-    // loadStudent() {
-    //   this.$http({
-    //     url: this.$http.adornUrl('/student/StudentMessageForm'),
-    //     method: 'get',
-    //     headers: {
-    //       'UserToken':window.sessionStorage.getItem('Token'),
-    //       'Content-Type': 'application/json',
-    //       'charset': 'utf-8'
-    //     }
-    //   }).then(({data}) => {
-    //       this.studentInfo=data
-    //   }).catch(() => {
-    //     console.log('出错啦！！！！')
-    //   })
-    // },
 
     goWhere(name){
       this.$router.push({name})
     },
 
     editMes(name){
-      // this.$router.push({
-      //   path: '/StudentMessageForm'
-      // })
       this.$router.push({name})
     },
     ediRes(name){

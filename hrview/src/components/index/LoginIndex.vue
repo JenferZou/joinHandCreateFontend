@@ -14,7 +14,7 @@
                     clearable></el-input>
         </el-form-item>
         <el-form-item style="margin-left:75px">
-          <el-button type="primary" @click="login()" style="width:100px">登录</el-button>
+          <el-button type="primary" @click="login()" style="width:100px" :loading="isLoading">登录</el-button>
           <el-button style="width:100px" @click="reset">重置</el-button>
         </el-form-item>
       </el-form>
@@ -35,13 +35,15 @@ export default {
       rules: {
         username: [{validator: nameRule, trigger: 'blur'}],
         password: [{validator: passwordRule, trigger: 'blur'}]
-      }
+      },
+      isLoading: false,
     };
   },
   methods: {
     login() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
+          this.isLoading = true;
           this.$http({
             url: this.$http.adornUrl('/login'),
             method: 'post',
@@ -57,7 +59,7 @@ export default {
               if (data.data.title === '管理员') {
                 sessionStorage.setItem("role", data.data.title)
                 this.$router.push({
-                  name: 'adminIndex'
+                  name: 'index'
                 })
               } else if (data.data.title === '学生') {
                 sessionStorage.setItem("role", data.data.title)
@@ -67,7 +69,7 @@ export default {
               } else if (data.data.title === '教师') {
                 sessionStorage.setItem("role", data.data.title)
                 this.$router.push({
-                  name: 'teacherIndex'
+                  name: 'tactive'
                 })
               }
             } else {
@@ -77,9 +79,9 @@ export default {
           }).catch(err => {
             console.log(err);
             this.$message.error("请求失败了");
+          }).finally(()=>{
+            this.isLoading = false;
           })
-        } else {
-          console.error(this.form)
         }
       })
     },
