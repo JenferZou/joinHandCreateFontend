@@ -14,6 +14,7 @@
           <el-card class="info-card">
             <div slot="header" class="info-header">
               <span class="info-title">个人信息表</span>
+              <el-button type="success" icon="el-icon-edit" @click="modify" style="margin-left:370px">修改密码</el-button>
               <el-button type="primary" icon="el-icon-edit" @click="editInfo">编辑</el-button>
             </div>
             <div class="info-content">
@@ -55,39 +56,32 @@
               </i-row>
 
 
-<!--              <i-row>-->
-<!--                <i-col :span="12">-->
-<!--                  <el-form :model="info" label-position="left" label-width="100px" readonly>-->
-<!--                    <el-form-item label="导师电话">-->
-<!--                      <span>{{ info.mentorPhone }}</span>-->
-<!--                    </el-form-item>-->
-<!--                    <el-form-item label="星座">-->
-<!--                      <span>{{ info.star }}</span>-->
-<!--                    </el-form-item>-->
-<!--                  </el-form>-->
-<!--                </i-col>-->
-
-<!--                <i-col :span="12">-->
-<!--                  <el-form :model="info" label-position="left" label-width="100px" readonly>-->
-<!--                    <el-form-item label="血型">-->
-<!--                      <span>{{ info.blood }}</span>-->
-<!--                    </el-form-item>-->
-
-<!--                  </el-form>-->
-<!--                </i-col>-->
-
-<!--                <i-col :span="12">-->
-<!--                  <el-form :model="info" label-position="left" label-width="100px" readonly>-->
-<!--                    <el-form-item label="积分">-->
-<!--                      <span>{{ info.score }}</span>-->
-<!--                    </el-form-item>-->
-
-<!--                  </el-form>-->
-<!--                </i-col>-->
-<!--              </i-row>-->
             </div>
 
           </el-card>
+
+
+          <el-dialog
+              title="提示"
+              :visible.sync="pwdVisible"
+              width="30%"
+              :before-close="beforeClose">
+            <el-form :model="pwd" :rules="rules1" ref="formRef">
+              <el-form-item prop="oldpassword">
+                <el-input prefix-icon="el-icon-lock" placeholder="请输入原密码" show-password  v-model="pwd.oldpassword"></el-input>
+              </el-form-item>
+              <el-form-item prop="password">
+                <el-input prefix-icon="el-icon-lock" placeholder="请输入新密码" show-password  v-model="pwd.password"></el-input>
+              </el-form-item>
+              <el-form-item prop="confirmPass">
+                <el-input prefix-icon="el-icon-lock" placeholder="请确认新密码" show-password  v-model="pwd.confirmPass"></el-input>
+              </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+              <el-button @click="cancle1">取消</el-button>
+              <el-button type="primary" @click="savepwd">保存</el-button>
+            </div>
+          </el-dialog>
 
           <el-dialog :visible.sync="editDialogVisible" title="编辑个人信息" :before-close="beforeClose">
             <el-form :model="info" label-position="left" label-width="100px" :rules="rules" ref="infoForm">
@@ -109,39 +103,12 @@
               <el-form-item label="所属学院" prop="sdepartment">
                 <el-input v-model="info.sdepartment" ></el-input>
               </el-form-item>
-<!--              <el-form-item label="亲属电话" prop="rPhone">-->
-<!--                <el-input v-model="info.rPhone"></el-input>-->
-<!--              </el-form-item>-->
               <el-form-item label="专业" prop="smajor">
                 <el-input v-model="info.smajor" ></el-input>
               </el-form-item>
               <el-form-item label="所属班级" prop="className">
                 <el-input v-model="info.className"></el-input>
               </el-form-item>
-<!--              <el-form-item label="导师电话" prop="mentorPhone">-->
-<!--                <el-input v-model="info.mentorPhone"></el-input>-->
-<!--              </el-form-item>-->
-<!--              <el-form-item label="星座" prop="star">-->
-<!--                <el-select v-model="info.star" placeholder="请选择星座">-->
-<!--                  <el-option-->
-<!--                      v-for="star in stars"-->
-<!--                      :key="star"-->
-<!--                      :label="star"-->
-<!--                      :value="star">-->
-<!--                  </el-option>-->
-<!--                </el-select>-->
-<!--              </el-form-item>-->
-<!--              <el-form-item label="血型" prop="blood">-->
-<!--                <el-select v-model="info.blood" placeholder="请选择血型">-->
-<!--                  <el-option-->
-<!--                      v-for="blood in bloods"-->
-<!--                      :key="blood"-->
-<!--                      :label="blood"-->
-<!--                      :value="blood">-->
-<!--                  </el-option>-->
-<!--                </el-select>-->
-<!--              </el-form-item>-->
-
 
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -149,6 +116,9 @@
               <el-button type="primary" @click="saveInfo">保存</el-button>
             </div>
           </el-dialog>
+
+
+
         </div>
           </div>
 
@@ -165,37 +135,18 @@
 export default {
   sName: 'StudentMessageForm',
   data() {
+    const validatePassword = (rule, confirmPass, callback) => {
+      if (confirmPass === '') {
+        callback(new Error('请确认密码'))
+      } else if (confirmPass !== this.pwd.password) {
+        callback(new Error('两次输入的密码不一致'))
+      } else {
+        callback()
+      }
+    }
     return {
       info: {
-        // sName: '',
-        // gender: '',
-        // sno: '123123',
-        // sMajor: '',
-        // sPhone: '',
-        // relatives: '',
-        // rPhone: '',
-        // mentor: '',
-        // mentorPhone: '',
-        // blood: '',
-        // star: '',
-        // score: 10,
       },
-      // stars: [
-      //   '白羊座',
-      //   '金牛座',
-      //   '双子座',
-      //   '巨蟹座',
-      //   '狮子座',
-      //   '处女座',
-      //   '天秤座',
-      //   '天蝎座',
-      //   '射手座',
-      //   '摩羯座',
-      //   '水瓶座',
-      //   '双鱼座',
-      // ],
-      // bloods: ['A', 'B', 'AB', 'O']
-      // ,
       rules: {
         sname: [{required: true, message: '请输入姓名', trigger: 'blur'}],
         gender: [{required: true, message: '请选择性别', trigger: 'change'}],
@@ -207,8 +158,20 @@ export default {
         sdepartment: [{required: true, message: '请输入学院名称', trigger: 'blur'}],
         className: [{required: true, message: '请输入班级', trigger: 'change'}],
       },
+      rules1: {
+        oldpassword: [
+          { required: true, message: '请输入原密码', trigger: 'blur' },
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+        ],
+        confirmPass: [
+          { validator: validatePassword, trigger: 'blur' }
+        ]
+      },
       editDialogVisible: false,
-
+      pwdVisible: false,
+      pwd:{},
     }
   },
   created() {
@@ -216,6 +179,9 @@ export default {
   },
 
   methods: {
+    modify(){
+      this.pwdVisible = true;
+    },
     returnhome(){
       this.$router.push({
         name:"StudentIndex",
@@ -261,6 +227,11 @@ export default {
       this.load()
 
     },
+    cancle1(){
+      this.pwdVisible = false
+      this.load()
+
+    },
 
     editInfo() {
       this.editDialogVisible = true
@@ -290,23 +261,55 @@ export default {
               'charset': 'utf-8'
             }
           }).then(({data}) => {
-            if (data&&data.status===200) {
-              this.$message.success(data.msg)
+            if (data.errorCode=="200") {
+              // this.$message.success(data.msg)
               // this.awardExperiencedialog=false
+              this.$message.success('个人信息已保存')
               this.load()
 
+            }else {
+              this.$message.error('修改失败')
             }
           }).catch(() => {
             console.log('出错啦！！！！')
           })
 
           this.editDialogVisible = false
-          this.$message.success('个人信息已保存')
         } else {
           this.$message.error('表单验证不通过，请检查输入项')
         }
       })
     },
+    savepwd(){
+      this.$refs.infoForm.validate(valid => {
+        if (valid) {
+          this.$http({
+            url: this.$http.adornUrl('/student/'),
+            method: 'put',
+            data:this.$http.adornData(this.pwd),
+            headers: {
+              'UserToken':window.sessionStorage.getItem('Token'),
+              'Content-Type': 'application/json',
+              'charset': 'utf-8'
+            }
+          }).then(({data}) => {
+            if (data.errorCode=="200") {
+              // this.$message.success(data.message)
+              this.load()
+              this.$message.success('修改密码成功')
+            }else {
+              this.$message.success('修改失败')
+            }
+          }).catch(() => {
+            console.log('出错啦！！！！')
+          })
+
+          this.pwdVisible = false
+        } else {
+          this.$message.error('表单验证不通过，请检查输入项')
+        }
+      })
+    }
 
 
 
