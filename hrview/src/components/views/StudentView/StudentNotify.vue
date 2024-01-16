@@ -62,6 +62,11 @@
                       label="项目名称"
                       width="180">
                   </el-table-column>
+                    <el-table-column
+                            prop="createTime"
+                            label="消息接收时间"
+                            width="180">
+                    </el-table-column>
                   <el-table-column
                       prop="mentor"
                       label="指导老师"

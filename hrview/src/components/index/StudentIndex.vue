@@ -186,7 +186,7 @@ export default {
   created(){
     this.loadMessage()
     this.loadStudent()
-      this.getAllInformation()
+    this.getAllInformation()
   },
   methods: {
     logout(){

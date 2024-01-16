@@ -74,7 +74,8 @@
                   <el-tag type="success" style="margin-right: 55px">简历通过</el-tag>
                   <el-tag type="danger">简历未通过</el-tag>
                 </div>
-                <el-table
+
+                  <el-table
                     border
                     ref="multipleTable"
                     :data="project"
@@ -123,7 +124,9 @@
                   </el-table-column>
                 </el-table>
 
+
                 <i-row >
+
 
                   <el-pagination
                       class="page"

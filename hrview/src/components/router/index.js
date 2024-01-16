@@ -99,51 +99,81 @@ let router = new Router({
             path: '/student',
             name: 'StudentIndex',
             component: StudentIndex,
+            meta: {
+                title: '学生主页框架'
+            }
         },
         {
             path: '/student/StudentMessageForm',
             name: 'StudentMessageForm',
-            component: StudentMessageForm
+            component: StudentMessageForm,
+            meta: {
+                title: '学生个人信息'
+            }
         },
         {
             path: '/student/StudentResume',
             name: 'StudentResume',
-            component: StudentResume
+            component: StudentResume,
+            meta: {
+                title: '学生个人简历编辑'
+            }
         },
         {
             path: '/student/myProjectSearch',
             name: 'myProjectSearch',
-            component: myProjectSearch
+            component: myProjectSearch,
+            meta: {
+                title: '学生项目申请结果'
+            }
         },
         {
             path: '/student/ActiveSearch',
             name: 'ActiveSearch',
-            component: ActiveSearch
+            component: ActiveSearch,
+            meta: {
+                title: '学生实践活动'
+            }
         },
         {
             path: '/student/CertificateSearch',
             name: 'CertificateSearch',
-            component: CertificateSearch
+            component: CertificateSearch,
+            meta: {
+                title: '考证信息'
+            }
         },
         {
             path: '/student/StudentResumePreview',
             name: 'StudentResumePreview',
-            component: StudentResumePreview
+            component: StudentResumePreview,
+            meta: {
+                title: '建立预览'
+            }
         },
         {
             path: '/student/StudentMessage',
             name: 'StudentMessage',
-            component: StudentMessage
+            component: StudentMessage,
+            meta: {
+                title: '学生个人信息预览'
+            }
         },
         {
             path: '/student/projectSearch',
             name: 'projectSearch',
-            component: projectSearch
+            component: projectSearch,
+            meta: {
+                title: '项目大厅'
+            }
         },
         {
             path: '/student/notify',
             name: 'notify',
-            component: StudentNotify
+            component: StudentNotify,
+            meta: {
+                title: '消息通知'
+            }
         },
         {
             path: '/adsac',
