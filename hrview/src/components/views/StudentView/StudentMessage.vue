@@ -265,7 +265,7 @@ export default {
     editInfo() {
       this.editDialogVisible = true
     },
-    beforeClose(done) {
+    beforeCloseInfo(done) {
       this.$refs.infoForm.validate(valid => {
         if (valid) {
           done()

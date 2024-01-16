@@ -67,11 +67,11 @@
               width="30%"
               :before-close="beforeClose">
             <el-form :model="pwd" :rules="rules1" ref="formRef">
-              <el-form-item prop="oldpassword">
-                <el-input prefix-icon="el-icon-lock" placeholder="请输入原密码" show-password  v-model="pwd.oldpassword"></el-input>
+              <el-form-item prop="oldPassword">
+                <el-input prefix-icon="el-icon-lock" placeholder="请输入原密码" show-password  v-model="pwd.oldPassword"></el-input>
               </el-form-item>
-              <el-form-item prop="password">
-                <el-input prefix-icon="el-icon-lock" placeholder="请输入新密码" show-password  v-model="pwd.password"></el-input>
+              <el-form-item prop="newPassword">
+                <el-input prefix-icon="el-icon-lock" placeholder="请输入新密码" show-password  v-model="pwd.newPassword"></el-input>
               </el-form-item>
               <el-form-item prop="confirmPass">
                 <el-input prefix-icon="el-icon-lock" placeholder="请确认新密码" show-password  v-model="pwd.confirmPass"></el-input>
@@ -83,7 +83,7 @@
             </div>
           </el-dialog>
 
-          <el-dialog :visible.sync="editDialogVisible" title="编辑个人信息" :before-close="beforeClose">
+          <el-dialog :visible.sync="editDialogVisible" title="编辑个人信息" :before-close="beforeCloseInfo">
             <el-form :model="info" label-position="left" label-width="100px" :rules="rules" ref="infoForm">
               <el-form-item label="姓名" prop="sname">
                 <el-input v-model="info.sname"></el-input>
@@ -138,7 +138,7 @@ export default {
     const validatePassword = (rule, confirmPass, callback) => {
       if (confirmPass === '') {
         callback(new Error('请确认密码'))
-      } else if (confirmPass !== this.pwd.password) {
+      } else if (confirmPass !== this.pwd.newPassword) {
         callback(new Error('两次输入的密码不一致'))
       } else {
         callback()
@@ -236,18 +236,24 @@ export default {
     editInfo() {
       this.editDialogVisible = true
     },
-    beforeClose(done) {
-      this.$refs.infoForm.validate(valid => {
-        if (valid) {
-          done()
-        } else {
-          this.editDialogVisible = false
-          this.load()
+    beforeCloseInfo(done) {
+          this.$refs.infoForm.validate(valid => {
+              if (valid) {
+                  done()
+              } else {
+                  this.editDialogVisible = false
+                  this.load()
+                  // this.$message.error('表单验证不通过，请检查输入项')
+              }
+          })
+      },
 
-          // this.$message.error('表单验证不通过，请检查输入项')
-        }
-      })
-    },
+      beforeClose() {
+              this.pwdVisible = false;
+              this.$refs['formRef'].clearValidate();
+              this.pwd = {oldPassword:'', newPassword:'', confirmPassword:''};
+              this.load();
+      },
     saveInfo() {
       this.$refs.infoForm.validate(valid => {
         if (valid) {
@@ -281,12 +287,16 @@ export default {
       })
     },
     savepwd(){
-      this.$refs.infoForm.validate(valid => {
+      this.$refs.formRef.validate(valid => {
+          let params ={
+              oldPassword:this.pwd.oldPassword,
+              newPassword:this.pwd.newPassword,
+          }
         if (valid) {
           this.$http({
-            url: this.$http.adornUrl('/student/'),
-            method: 'put',
-            data:this.$http.adornData(this.pwd),
+            url: this.$http.adornUrl('/student/editpass'),
+            method: 'post',
+            data:this.$http.adornData(params),
             headers: {
               'UserToken':window.sessionStorage.getItem('Token'),
               'Content-Type': 'application/json',
@@ -297,8 +307,9 @@ export default {
               // this.$message.success(data.message)
               this.load()
               this.$message.success('修改密码成功')
+                this.$refs.formRef.resetFields();
             }else {
-              this.$message.success('修改失败')
+              this.$message.error('修改失败')
             }
           }).catch(() => {
             console.log('出错啦！！！！')

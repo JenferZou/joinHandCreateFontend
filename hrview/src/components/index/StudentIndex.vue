@@ -166,7 +166,7 @@ export default {
       company:[],
       message:[],
         currentPage: 1,
-        pageSize: 5,
+        pageSize: 4,
         pageNum: 10,
       active1:[],
       active:{
