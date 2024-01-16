@@ -162,7 +162,7 @@
 >
       <el-button  type="primary">
         <i-icon type="ios-cloud-upload-outline" size="15"></i-icon>
-        确认导入
+        开始导入
       </el-button>
     </el-upload>
         </span>
