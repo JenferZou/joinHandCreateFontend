@@ -312,6 +312,7 @@ export default {
     },
     cancle() {
       this.dialogVisible = false
+      this.updateDialogVisible = false //修改的可见性
       this.project = this.reset(this.project)
     },
     reset(project) {

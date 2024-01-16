@@ -7,7 +7,7 @@
           <span style="margin-right: 5px;font-size: 14px">
             项目名称:
           </span>
-          <el-input placeholder="输入项目名称" v-model="searchName" style="width: 10%" />
+          <el-input placeholder="输入项目名称" v-model="searchName" style="width: 10%"/>
           <span style="margin-left: 10px;font-size: 14px">
             开始时间:
           </span>
@@ -23,13 +23,15 @@
           <span style="margin-left: 10px;font-size: 14px">
             所需专业:
           </span>
-          <el-input  placeholder="输入所需专业" v-model="searchNeedMajor" style="width: 10%" />
+          <el-input placeholder="输入所需专业" v-model="searchNeedMajor" style="width: 10%"/>
           <span style="margin-left: 10px;font-size: 14px">
             对标比赛:
           </span>
-          <el-input placeholder="输入对标比赛" v-model="searchExpectedCompetition" style="width: 10%" />
-          <el-button  type="primary"  size="medium" icon="el-icon-search"  @click="search(true)" style="margin-left: 10px">查询</el-button>
-          <el-button  size="medium" icon="el-icon-delete" @click="resetSearch" >重置</el-button>
+          <el-input placeholder="输入对标比赛" v-model="searchExpectedCompetition" style="width: 10%"/>
+          <el-button type="primary" size="medium" icon="el-icon-search" @click="search(true)" style="margin-left: 10px">
+            查询
+          </el-button>
+          <el-button size="medium" icon="el-icon-delete" @click="resetSearch">重置</el-button>
           <el-button type="primary" icon="el-icon-plus" @click="display" style="float: right">发布项目</el-button>
         </div>
       </el-header>
@@ -81,10 +83,10 @@
           </el-table-column>
           <el-table-column
               fixed="right"
-              label="项目组成员"
+              label="项目成员"
               width="100">
             <template v-slot="scope">
-              <el-button type="primary" size="small" @click="searchStudent(scope.row)">查看</el-button>
+              <el-button type="primary" size="small" @click="searchStudent(scope.row)">操作</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -103,64 +105,7 @@
       </el-footer>
     </el-container>
 
-<!--    <el-table
-        border
-        ref="multipleTable"
-        :data="project"
-        tooltip-effect="dark"
-        style="width: 100%"
-        @selection-change="handleSelectionChange">
-      <el-table-column
-          width="55">
-      </el-table-column>
-      <el-table-column
-          prop="name"
-          label="项目名称"
-          width="120">
-      </el-table-column>
-      <el-table-column
-          prop="mentor"
-          label="指导老师"
-          width="120">
-      </el-table-column>
-
-      <el-table-column
-          prop="startTime"
-          label="开始时间"
-          width="120">
-      </el-table-column>
-
-      <el-table-column
-          prop="expectedCompetition"
-          label="作品预期要参加的比赛"
-          show-overflow-tooltip
-      >
-      </el-table-column>
-
-      <el-table-column
-          prop="needMajor"
-          label="学生专业需求"
-          show-overflow-tooltip
-      >
-      </el-table-column>
-
-      <el-table-column
-          prop="content"
-          label="内容"
-          show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column
-          fixed="right"
-
-          label="项目组成员"
-          width="100">
-        <template v-slot="scope">
-          <el-button type="text" size="small" @click="searchStudent(scope.row)">查看</el-button>
-        </template>
-      </el-table-column>
-    </el-table>-->
-
-    <el-dialog title="students.projectName" :visible.sync="menmberVisible" style="size: 100px">
+    <el-dialog title="查看项目成员" :visible.sync="menmberVisible" style="size: 100px">
       <el-table :data="students" style="width: 100%"
                 max-height="550">
         <el-table-column fixed property="projectName" label="项目名称"></el-table-column>
@@ -172,7 +117,7 @@
             width="100"
         >
           <template v-slot="scope">
-            <el-button type="primary" size="small" @click="emailStudent(scope.row)">发送通知</el-button>
+            <el-button type="primary" size="small" @click="emailStudent(scope.row)">踢出学生</el-button>
           </template>
         </el-table-column>
 
@@ -260,19 +205,19 @@ export default {
     change(page) {
       this.page = page
       //如果搜索框不为空，走搜索的分页, 去除开头前后的空格
-      if(this.searchExpectedCompetition.trim() !== '' || this.searchName.trim() !==''||this.searchDate.trim() !== ''||this.searchNeedMajor !== ''){
+      if (this.searchExpectedCompetition.trim() !== '' || this.searchName.trim() !== '' || this.searchDate.trim() !== '' || this.searchNeedMajor !== '') {
         this.search(false)
-      }else {
+      } else {
         this.getProject()
       }
 
     },
-    handleSizeChange(pageSize){
+    handleSizeChange(pageSize) {
       this.pageSize = pageSize
       //如果搜索框不为空，走搜索的分页
-      if(this.searchExpectedCompetition.trim() !== '' || this.searchName.trim() !==''||this.searchDate.trim() !== ''||this.searchNeedMajor !== ''){
+      if (this.searchExpectedCompetition.trim() !== '' || this.searchName.trim() !== '' || this.searchDate.trim() !== '' || this.searchNeedMajor !== '') {
         this.search(false)
-      }else {
+      } else {
         this.getProject()
 
       }
@@ -284,7 +229,7 @@ export default {
 
     //条件查询
     search(flag) {
-      if(flag == true) {
+      if (flag == true) {
         this.currentPage = 1//重置当前页面为1
       }
       let params = {
@@ -330,10 +275,10 @@ export default {
         method: 'get',
         params: this.$http.adornParams(params),
       }).then(({data}) => {
-        if(data.data != '') {
+        if (data.data != '') {
           this.students = data.data
           this.menmberVisible = true
-        }else
+        } else
           this.$message.error("暂无成员加入")
       }).catch(() => {
         console.log('出错啦！！！！')
@@ -341,7 +286,57 @@ export default {
     },
 
 
-    emailStudent() {
+    emailStudent(data) {
+
+      let params = {
+        sno: data.id,
+        tno: data.tno,
+        pid: data.pid,
+        mentor: data.mentor,
+        projectName: data.projectName
+      }
+
+      this.$confirm('此操作踢出并通知该学生, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        //确认按钮后事件
+        //发送删除请求
+        this.$http({
+          url: this.$http.adornUrl('/delieverResume/deleteDelieverResumeById'),
+          method: 'get',
+          params: {
+            id: data.id
+          }
+        }).then(({data}) => {
+          //操作成功的通知
+          if (data.errorCode == 200) {
+            this.$message({
+              type: 'success',
+              message: '该学生被踢出!'
+            });
+          }
+          //成功踢出后继续发送通知
+          //发送通知请求
+          this.$http({
+            url: this.$http.adornUrl('/message/saveMessageBySno'),
+            method: 'post',
+            data: this.$http.adornParams(params),
+          }).then(({data}) => {
+            //操作成功的通知
+            if (data.errorCode == 200) {
+              this.$message({
+                type: 'success',
+                message: '通知发送成功!'
+              });
+            } else
+              this.$message.error("错误")
+          })//发送通知请求
+
+        })//发送删除请求
+
+      })//确认按钮后事件
 
     },
     handleSelectionChange(val) {

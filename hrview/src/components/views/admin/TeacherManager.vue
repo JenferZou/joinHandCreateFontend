@@ -146,7 +146,7 @@
       <span>请确认上传的excel表头正确，以下为示例表头</span>
       <br>
       <br>
-      <span>姓名 | 专业| 电话 | 所属部门</span>
+      <span>姓名 | 专业 | 电话 | 所属部门</span>
       <span slot="footer" class="dialog-footer">
     <el-button @click="uploadDialogVisible = false">取 消</el-button>
         <br>

@@ -42,7 +42,8 @@ Container,
     Collapse,
   CollapseItem,
     Tag,
-  Loading
+  Loading,
+  MessageBox
 
 } from "element-ui";
 import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb,Layout,Content,Sider} from 'iview'
@@ -99,6 +100,7 @@ Vue.prototype.$http = httpRequest // Ajax 请求方法
 //vue全局注入echarts
 Vue.prototype.$echarts = echarts;
 Vue.prototype.$message = Message
+Vue.prototype.$confirm  = MessageBox.confirm
 Vue.prototype.$axios = axios//未封装的axios请求
 new Vue({
   router,
