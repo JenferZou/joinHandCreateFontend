@@ -7,7 +7,7 @@
     <div class="layout-header">
       <el-button type="primary" @click="returnhome" style="margin-top: 10px;margin-left: 20px">返回</el-button>
     </div>
-    <div style="height: 1000px">
+    <div style="height: 585px">
 
         <div class="page-container">
         <div class="info-table">

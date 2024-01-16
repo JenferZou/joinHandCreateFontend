@@ -4,7 +4,10 @@
           <label >
             <i-row>
               <i-col span="23">
-                <h1 style="margin-left: 10px">项目管理——教师端</h1>
+                <!-- 文字水平居中 -->
+                <h5 style="color: #fff;margin-left:50px;font-weight: bolder;font-size: 20px;line-height: 60px;">
+                  携手创-教师端
+                </h5>
               </i-col>
               <i-col span="1">
                 <div style="padding-top: 10px;">
@@ -46,7 +49,6 @@
                 </i-menu>
             </i-col>
             <i-col span="20">
-                <!--        <div class="layout-header"><h1>信息管理系统</h1></div>-->
                 <div class="layout-breadcrumb">
                     <i-breadcrumb>
                         <i-breadcrumb-item href="#" v-show="item.firstTitle!==''">{{ item.firstTitle}}</i-breadcrumb-item>

@@ -257,8 +257,8 @@
         </i-col>
       </i-row>
     </div>
-    <div class="layout-copy">
-      2011-2016 &copy; TalkingData
+    <div class="layout-copy" style="text-align: center;background-color: white">
+      2024 &copy; AtXBaiYa
     </div>
   </div>
 </template>

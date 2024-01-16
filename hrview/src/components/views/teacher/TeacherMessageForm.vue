@@ -1,92 +1,86 @@
 <template>
   <div class="layout">
-    <div style="height: 1000px">
+    <div style="height: 585px">
+      <div class="info-table">
+        <el-card class="info-card">
+          <div slot="header" class="info-header">
+            <span class="info-title">教师信息表</span>
+            <el-button type="success" icon="el-icon-edit" @click="modify" style="margin-left:370px">修改密码</el-button>
+            <el-button type="primary" icon="el-icon-edit" @click="editInfo">编辑</el-button>
+          </div>
+          <div class="info-content">
+            <i-row>
+              <i-col :span="12">
+                <el-form :model="info" label-position="left" label-width="100px" readonly>
+                  <el-form-item label="教师号">
+                    <span>{{ info.no }}</span>
+                  </el-form-item>
+                  <el-form-item label="学院信息">
+                    <span>{{ info.department }}</span>
+                  </el-form-item>
+                  <el-form-item label="联系电话">
+                    <span>{{ info.phone }}</span>
+                  </el-form-item>
+                </el-form>
+              </i-col>
 
-      <div class="page-container">
-        <div class="info-table">
-          <el-card class="info-card">
-            <div slot="header" class="info-header">
-              <span class="info-title">教师信息表</span>
-              <el-button type="success" icon="el-icon-edit" @click="modify" style="margin-left:370px">修改密码</el-button>
-              <el-button type="primary" icon="el-icon-edit" @click="editInfo">编辑</el-button>
-            </div>
-            <div class="info-content">
-              <i-row>
-                <i-col :span="12">
-                  <el-form :model="info" label-position="left" label-width="100px" readonly>
-                    <el-form-item label="教师号">
-                      <span>{{ info.no }}</span>
-                    </el-form-item>
-                    <el-form-item label="学院信息">
-                      <span>{{ info.department }}</span>
-                    </el-form-item>
-                    <el-form-item label="联系电话">
-                      <span>{{ info.phone }}</span>
-                    </el-form-item>
-                  </el-form>
-                </i-col>
+              <i-col :span="12">
+                <el-form :model="info" label-position="left" label-width="100px" readonly>
+                  <el-form-item label="姓名">
+                    <span>{{ info.name }}</span>
+                  </el-form-item>
+                  <el-form-item label="所属专业">
+                    <span>{{ info.major }}</span>
+                  </el-form-item>
+                </el-form>
+              </i-col>
+            </i-row>
+          </div>
+        </el-card>
 
-                <i-col :span="12">
-                  <el-form :model="info" label-position="left" label-width="100px" readonly>
-                    <el-form-item label="姓名">
-                      <span>{{ info.name }}</span>
-                    </el-form-item>
-                    <el-form-item label="所属专业">
-                      <span>{{ info.major }}</span>
-                    </el-form-item>
-                  </el-form>
-                </i-col>
-              </i-row>
-            </div>
-          </el-card>
+        <el-dialog title="提示" :visible.sync="pwdVisible" width="35%" :before-close="beforeClose">
+          <el-form :model="pwd" :rules="rulesPwd" label-width="100px" width="30%" ref="updatePwdForm">
+            <el-form-item label="原密码:" prop="oldpassword">
+              <el-input prefix-icon="el-icon-lock" placeholder="请输入原密码" show-password clearable  v-model="pwd.oldpassword"></el-input>
+            </el-form-item>
+            <el-form-item label="新密码:" prop="password">
+              <el-input prefix-icon="el-icon-lock" placeholder="请输入新密码" show-password clearable  v-model="pwd.password"></el-input>
+            </el-form-item>
+            <el-form-item label="确认新密码:" prop="confirmPass">
+              <el-input prefix-icon="el-icon-lock" placeholder="请确认新密码" show-password clearable  v-model="pwd.confirmPass"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="cancleUpdate">取消</el-button>
+            <el-button type="primary" @click="savepwd">保存</el-button>
+          </div>
+        </el-dialog>
 
-          <el-dialog title="提示" :visible.sync="pwdVisible" width="35%" :before-close="beforeClose">
-            <el-form :model="pwd" :rules="rulesPwd" label-width="100px" width="30%" ref="updatePwdForm">
-              <el-form-item label="原密码:" prop="oldpassword">
-                <el-input prefix-icon="el-icon-lock" placeholder="请输入原密码" show-password clearable  v-model="pwd.oldpassword"></el-input>
-              </el-form-item>
-              <el-form-item label="新密码:" prop="password">
-                <el-input prefix-icon="el-icon-lock" placeholder="请输入新密码" show-password clearable  v-model="pwd.password"></el-input>
-              </el-form-item>
-              <el-form-item label="确认新密码:" prop="confirmPass">
-                <el-input prefix-icon="el-icon-lock" placeholder="请确认新密码" show-password clearable  v-model="pwd.confirmPass"></el-input>
-              </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-              <el-button @click="cancleUpdate">取消</el-button>
-              <el-button type="primary" @click="savepwd">保存</el-button>
-            </div>
-          </el-dialog>
+        <el-dialog :visible.sync="editDialogVisible" title="编辑个人信息" :before-close="beforeClose">
+          <el-form :model="info" label-position="left" label-width="100px" :rules="rules" ref="infoForm">
+            <el-form-item label="姓名" prop="name">
+              <el-input v-model="info.name"></el-input>
+            </el-form-item>
+            <el-form-item label="学号" prop="no">
+              <el-input v-model="info.no" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="联系电话" prop="phone">
+              <el-input v-model="info.phone"></el-input>
+            </el-form-item>
+            <el-form-item label="学院信息" prop="department">
+              <el-input v-model="info.department" ></el-input>
+            </el-form-item>
+            <el-form-item label="所属专业" prop="major">
+              <el-input v-model="info.major" ></el-input>
+            </el-form-item>
+          </el-form>
 
-          <el-dialog :visible.sync="editDialogVisible" title="编辑个人信息" :before-close="beforeClose">
-            <el-form :model="info" label-position="left" label-width="100px" :rules="rules" ref="infoForm">
-              <el-form-item label="姓名" prop="name">
-                <el-input v-model="info.name"></el-input>
-              </el-form-item>
-              <el-form-item label="学号" prop="no">
-                <el-input v-model="info.no" :disabled="true"></el-input>
-              </el-form-item>
-              <el-form-item label="联系电话" prop="phone">
-                <el-input v-model="info.phone"></el-input>
-              </el-form-item>
-              <el-form-item label="学院信息" prop="department">
-                <el-input v-model="info.department" ></el-input>
-              </el-form-item>
-              <el-form-item label="所属专业" prop="major">
-                <el-input v-model="info.major" ></el-input>
-              </el-form-item>
-            </el-form>
-
-            <div slot="footer" class="dialog-footer">
-              <el-button @click="cancle">取消</el-button>
-              <el-button type="primary" @click="saveInfo">保存</el-button>
-            </div>
-          </el-dialog>
-        </div>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="cancle">取消</el-button>
+            <el-button type="primary" @click="saveInfo">保存</el-button>
+          </div>
+        </el-dialog>
       </div>
-
-    </div>
-    <div class="layout-copy">
     </div>
   </div>
 </template>
@@ -271,8 +265,6 @@ export default {
   color: #9ba7b5;
 }
 
-
-
 .info-table {
   margin: 20px auto;
   max-width: 800px;
@@ -301,5 +293,9 @@ export default {
 
 .dialog-footer {
   text-align: center;
+}
+
+element.style {
+  height: auto;
 }
 </style>
