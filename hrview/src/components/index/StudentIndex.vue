@@ -246,6 +246,12 @@ export default {
         }
       }).then(({data}) => {
         this.message=data.data
+          this.message.forEach(item => {
+              // 检查pid是否为0
+              if (item.tno == 0) {
+                  // 设置mentor为管理员
+                  this.$set(item, 'mentor', '管理员');
+              }});
           this.pageNum = data.pages
           this.currentPage = data.current
           this.pageSize = data.size
