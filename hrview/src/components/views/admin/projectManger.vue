@@ -1,10 +1,11 @@
 <template>
-    <div >
+    <div>
         <i-row class="search">
             <i-col :span="12">
                 <i-row>
                     <i-col :span="16">
-                        <el-input @keyup.enter.native="search" size="small" v-model="keyword" placeholder="请输入标题关键字"
+                        <el-input @keyup.enter.native="search" size="small" v-model="keyword"
+                                  placeholder="请输入标题关键字"
                                   clearable prefix-icon="el-icon-search">
                         </el-input>
                     </i-col>
@@ -34,9 +35,9 @@
                     width="120">
             </el-table-column>
             <el-table-column
-                prop="tname"
-                label="发布人"
-                width="120">
+                    prop="tname"
+                    label="发布人"
+                    width="120">
             </el-table-column>
             <el-table-column
                     prop="project.startTime"
@@ -158,8 +159,8 @@ export default {
             })
         },
         search() {
-            this.currentPage=1
-          this.getAllInformation()
+            this.currentPage = 1
+            this.getAllInformation()
         },
         popDelete() {
             this.multiDeleteVisible = true
@@ -178,8 +179,8 @@ export default {
             return projectData;
         },
         limitText(row) {
-          // 使用字符串切片方法对 description 属性值进行处理
-          return row.project.content.length > this.textLimit ? `${row.project.content.slice(0, this.textLimit)}...` : row.project.content;
+            // 使用字符串切片方法对 description 属性值进行处理
+            return row.project.content.length > this.textLimit ? `${row.project.content.slice(0, this.textLimit)}...` : row.project.content;
         },
         multiDelete1() {
             this.$http({
@@ -204,9 +205,9 @@ export default {
             this.multiDeleteVisible1 = false
         },
         multiDelete() {
-           console.log(this.multipleSelection)
+            console.log(this.multipleSelection)
             this.multipleSelection.forEach((contest) => {
-                this.idParams.push(contest.id)
+                this.idParams.push(contest.project.id)
             })
             this.$http({
                 url: this.$http.adornUrl('/admin/project/multidelete'),
@@ -220,9 +221,7 @@ export default {
                 if (data && data.errorCode === "200") {
                     this.$message.success(data.message)
                     this.multiDeleteVisible = false
-                    this.multipleSelection.forEach((contest) => {
-                        this.information = this.deleteOneProject(contest, this.information)
-                    })
+                    this.getAllInformation()
                 } else {
                     this.$message.error(data.message)
                 }
@@ -242,7 +241,7 @@ export default {
                 params: this.$http.adornParams(params),
             }).then(({data}) => {
                 // console.log(data)
-                if (data&&data.errorCode==="200") {
+                if (data && data.errorCode === "200") {
                     this.pageNum = data.data.page
                     this.project = data.data.projects
                 }
