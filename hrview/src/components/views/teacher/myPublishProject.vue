@@ -74,7 +74,7 @@
           <el-table-column
               prop="content"
               label="内容"
-              show-overflow-tooltip>
+              :formatter="limitText">
             <!--        <template v-slot="scope">
                       <div v-html='scope.row.content'></div>
                     </template>-->
@@ -229,6 +229,7 @@ export default {
       students: [],
       idParams: [],
       dcontest: '',
+      textLimit: 28, // 设置显示的字数限制为10个字符
     }
   },
   methods: {
@@ -252,6 +253,10 @@ export default {
         console.log('出错啦！！！！')
       })
     },//分页
+    limitText(row) {
+      // 使用字符串切片方法对 description 属性值进行处理
+      return row.content.length > this.textLimit ? `${row.content.slice(0, this.textLimit)}...` : row.content;
+    },
     change(page) {
       this.page = page
       //如果搜索框不为空，走搜索的分页, 去除开头前后的空格

@@ -27,7 +27,7 @@
       <el-table-column prop="sname" label="学生姓名" width="120"></el-table-column>
       <el-table-column prop="sno" label="学生学号" width="120"></el-table-column>
       <el-table-column prop="smajor" label="学生专业" width="120"></el-table-column>
-      <el-table-column prop="content" label="内容" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="content" label="内容" :formatter="limitText"></el-table-column>
 
       <el-table-column label="学生简历" width="100">
         <template v-slot="scope">
@@ -196,6 +196,7 @@ export default {
     return {
       agreeVisible1: false,
       refuseVisible: false,
+      textLimit: 28, // 设置显示的字数限制为10个字符
       project: [],
       searchName: '',
       // 当前页
@@ -247,6 +248,10 @@ export default {
         this.delievers = data
         this.refuseVisible = true
       })
+    },
+    limitText(row) {
+      // 使用字符串切片方法对 description 属性值进行处理
+      return row.content.length > this.textLimit ? `${row.content.slice(0, this.textLimit)}...` : row.content;
     },
     // 同意表单
     agreeForm(data) {

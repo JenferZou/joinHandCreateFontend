@@ -112,7 +112,7 @@
                   <el-table-column
                       prop="content"
                       label="内容"
-                      show-overflow-tooltip>
+                      :formatter="limitText">
                   </el-table-column>
 
                   <el-table-column
@@ -136,7 +136,6 @@
 
                 </i-row>
               </div>
-
 
 
 
@@ -177,6 +176,7 @@ export default {
       },
       idParams:[],
       dcontest:'',
+      textLimit: 32, // 设置显示的字数限制为10个字符
     }
   },
   methods: {
@@ -190,7 +190,10 @@ export default {
       else
         this.getAllInformation()
     },
-
+    limitText(row) {
+      // 使用字符串切片方法对 description 属性值进行处理
+      return row.content.length > this.textLimit ? `${row.content.slice(0, this.textLimit)}...` : row.content;
+    },
 
     reset(data){
       Object.keys(data).forEach(key=>(data[key]=''))

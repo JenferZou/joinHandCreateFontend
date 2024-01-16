@@ -62,7 +62,7 @@
           <el-table-column
               prop="content"
               label="内容"
-              show-overflow-tooltip>
+              :formatter="limitText">
             <!--        <template v-slot="scope">
                       <div v-html='scope.row.content'></div>
                     </template>-->
@@ -237,7 +237,8 @@ export default {
           {required: true, message: '请输入项目内容', trigger: 'blur'}
         ]
       },
-      dialogVisible: false //新增弹出框的可见性
+      dialogVisible: false, //新增弹出框的可见性
+      textLimit: 26, // 设置显示的字数限制为10个字符
     };
   },
   methods: {
@@ -452,6 +453,10 @@ export default {
     onEditorChange(editor) {
       this.content = editor.html;
       console.log(editor);
+    },
+    limitText(row) {
+      // 使用字符串切片方法对 description 属性值进行处理
+      return row.content.length > this.textLimit ? `${row.content.slice(0, this.textLimit)}...` : row.content;
     },
     getProject() {
       let params = {
