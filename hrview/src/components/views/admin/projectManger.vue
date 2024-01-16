@@ -56,8 +56,9 @@
             <el-table-column
                     prop="project.content"
                     label="内容"
-                    show-overflow-tooltip>
+                    :formatter="limitText">
             </el-table-column>
+
             <el-table-column
                     fixed="right"
                     label="操作"
@@ -111,6 +112,7 @@ export default {
             multipleSelectionFlag: false,
             multiDeleteVisible: false,
             multipleSelection: [],
+            textLimit: 32, // 设置显示的字数限制为10个字符
             project: [],
             keyword: '',
             title: '',
@@ -174,6 +176,10 @@ export default {
                 }
             }
             return projectData;
+        },
+        limitText(row) {
+          // 使用字符串切片方法对 description 属性值进行处理
+          return row.project.content.length > this.textLimit ? `${row.project.content.slice(0, this.textLimit)}...` : row.project.content;
         },
         multiDelete1() {
             this.$http({

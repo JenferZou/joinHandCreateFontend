@@ -4,7 +4,7 @@ import AdminIndex from "@/components/index/AdminIndex";
 import StudentInformation from "@/components/views/admin/StudentInformation";
 import StudentIndex from "@/components/index/StudentIndex";
 import StudentMessageForm from "@/components/views/StudentView/StudentMessageForm"
-import InformationManagement from "@/components/views/admin/InformationManagement";
+
 
 import TeacherMessageForm from "@/components/views/teacher/TeacherMessageForm.vue";
 import StudentResume from "@/components/views/StudentView/StudentResume"
@@ -166,7 +166,7 @@ let router = new Router({
                     name: 'tinfo',
                     component: TeacherMessageForm,
                     meta: {
-                        title: 'teacher'
+                        title: '教师信息'
                     }
                 },
                 {
@@ -185,16 +185,25 @@ let router = new Router({
                 {
                     path: '/teacher/active',
                     name: 'tactive',
+                    meta: {
+                        title: '项目发布'
+                    },
                     component: tActiveManagement,
                 },
                 {
                     path: '/teacher/project',
                     name: 'tproject',
+                    meta: {
+                        title: '简历审批'
+                    },
                     component: tProjectManager,
                 },
                 {
                     path: '/teacher/myPublishProject',
                     name: 'myPublishProject',
+                    meta: {
+                        title: '项目管理'
+                    },
                     component: myPublishProject,
                 },
 
@@ -275,7 +284,7 @@ router.beforeEach((to, from, next) => {
                 next({
                     path: '/adsac'
                 })
-            } else if (role === '用户' && to.path.substring(i, j) !== 'student') {
+            } else if (role === '学生' && to.path.substring(i, j) !== 'student') {
                 next({
                     path: '/adsac'
                 })
@@ -289,3 +298,8 @@ router.beforeEach((to, from, next) => {
         }
     }
 });
+
+router.afterEach((to)=>{
+    let title = (to.meta.title ? to.meta.title : '');
+    document.title = title;
+})
