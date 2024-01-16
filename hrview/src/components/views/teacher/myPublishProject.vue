@@ -105,7 +105,7 @@
       </el-footer>
     </el-container>
 
-    <el-dialog title="查看项目成员" :visible.sync="menmberVisible" style="size: 100px">
+    <el-dialog title="查看项目成员" :visible.sync="memberVisible" style="size: 100px">
       <el-table :data="students" style="width: 100%"
                 max-height="550">
         <el-table-column fixed property="projectName" label="项目名称"></el-table-column>
@@ -155,7 +155,7 @@ export default {
       multiDeleteVisible1: false,
       multipleSelectionFlag: false,
       multiDeleteVisible: false,
-      menmberVisible: false,
+      memberVisible: false,
       multipleSelection: [],
 
       searchName: '',
@@ -267,19 +267,23 @@ export default {
     searchStudent(data) {
       let params = {
         pid: data.id,
-        pageSize: -1,//不分页
-        pageNo: 1,
+        mark:1
+/*        pageSize: -1,//不分页
+        pageNo: 1,*/
       }
       this.$http({
-        url: this.$http.adornUrl('/delieverResume/getdelieverResumeByPid'),
+        url: this.$http.adornUrl('/delieverResume/getdelieverResumeByPidAndMark'),
         method: 'get',
         params: this.$http.adornParams(params),
       }).then(({data}) => {
         if (data.data != '') {
           this.students = data.data
-          this.menmberVisible = true
-        } else
+          this.memberVisible = true
+        } else {
+          this.memberVisible = false
           this.$message.error("暂无成员加入")
+
+        }
       }).catch(() => {
         console.log('出错啦！！！！')
       })
@@ -287,6 +291,10 @@ export default {
 
 
     emailStudent(data) {
+
+      let tempData = {
+        id:data.pid
+      }
 
       let params = {
         sno: data.id,
@@ -302,42 +310,50 @@ export default {
         type: 'warning'
       }).then(() => {
         //确认按钮后事件
-        //发送删除请求
-        this.$http({
-          url: this.$http.adornUrl('/delieverResume/deleteDelieverResumeById'),
-          method: 'get',
-          params: {
-            id: data.id
-          }
-        }).then(({data}) => {
-          //操作成功的通知
-          if (data.errorCode == 200) {
-            this.$message({
-              type: 'success',
-              message: '该学生被踢出!'
-            });
-          }
+        this.kickOutStudent(data,tempData,params)
+
+      })
+
+    },
+    kickOutStudent(data,tempData,params){
+      //发送踢人请求，实际更新mark为 -2
+      this.$http({
+        url: this.$http.adornUrl('/delieverResume/updateMarkById'),
+        method: 'post',
+        data: {
+          id: data.id,
+          mark: -2
+        }
+      }).then(({data}) => {
+        //操作成功的通知
+        if (data.errorCode == 200) {
+          this.$message({
+            type: 'success',
+            message: '该学生被踢出!'
+          });
           //成功踢出后继续发送通知
-          //发送通知请求
-          this.$http({
-            url: this.$http.adornUrl('/message/saveMessageBySno'),
-            method: 'post',
-            data: this.$http.adornParams(params),
-          }).then(({data}) => {
-            //操作成功的通知
-            if (data.errorCode == 200) {
-              this.$message({
-                type: 'success',
-                message: '通知发送成功!'
-              });
-            } else
-              this.$message.error("错误")
-          })//发送通知请求
+          this.sendMessage(params)
+        }
+        this.searchStudent(tempData)
 
-        })//发送删除请求
-
-      })//确认按钮后事件
-
+      })//发送删除请求
+    },
+    sendMessage(data){
+      //发送通知请求
+      this.$http({
+        url: this.$http.adornUrl('/message/saveMessageBySno'),
+        method: 'post',
+        data: this.$http.adornParams(data),
+      }).then(({data}) => {
+        //操作成功的通知
+        if (data.errorCode == 200) {
+          this.$message({
+            type: 'success',
+            message: '通知发送成功!'
+          });
+        } else
+          this.$message.error("错误")
+      })//发送通知请求
     },
     handleSelectionChange(val) {
       // console.log(val);

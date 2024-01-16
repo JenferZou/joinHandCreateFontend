@@ -252,10 +252,13 @@ export default {
     },
     //确认删除后事件
     multiDelete() {
+
       this.$http({
-        url: this.$http.adornUrl('/project/' + this.deleteData.id),
-        method: 'delete',
-        data: this.$http.adornData(this.deleteData),
+        url: this.$http.adornUrl('/teacher/deleteProject'),
+        method: 'get',
+        params: {
+          id:this.deleteData.id
+        }
       }).then(({data}) => {
         if (data && data.errorCode == 200) {
           this.$message.success("操作成功")
