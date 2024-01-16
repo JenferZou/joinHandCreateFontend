@@ -105,6 +105,7 @@ export default {
                         }).then(({data}) => {
                             if (data && data.errorCode === "200") {
                                 this.$message.success(data.message)
+                                this.$parent.getStudent()
                             } else {
                                 this.$message.error(data.message)
                             }
@@ -124,6 +125,7 @@ export default {
                             console.log(data)
                             if (data && data.errorCode === "200") {
                                 this.$message.success(data.message)
+                                this.$parent.getStudent()
                             } else {
                                 this.$message.error(data.message)
                             }
