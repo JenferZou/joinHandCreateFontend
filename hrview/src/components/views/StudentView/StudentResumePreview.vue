@@ -1,9 +1,9 @@
 <template>
 
   <div class="layout">
-    <div class="layout-header">
-      <el-button type="primary" @click="returnhome" style="margin-top: 10px;margin-left: 20px" size="small">返回</el-button>
-    </div>
+<!--    <div class="layout-header">-->
+<!--      <el-button type="primary" @click="returnhome" style="margin-top: 10px;margin-left: 20px" size="small">返回</el-button>-->
+<!--    </div>-->
     <div class="layout-content">
       <i-row>
         <i-col span="19">
@@ -14,6 +14,7 @@
               <div class="resumewrapp">
                 <div class="page-title">
                   <h5>简历预览</h5>
+                  <el-button type="primary" @click="returnhome" style="margin-bottom: 2px;margin-left: 150px" size="small">返回</el-button>
                 </div>
                 <!--                简历内容-->
                 <div class="resumecontent">

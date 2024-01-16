@@ -16,7 +16,7 @@
     <div class="layout-content">
       <i-row>
         <i-col span="5">
-          <i-menu active-name="1-2" width="auto" :open-names="['1']" @on-select="goWhere">
+          <i-menu active-name="1-2" width="auto" :open-names="['1','2']" @on-select="goWhere">
             <i-submenu name="1">
               <template slot="title">
                 <i-icon type="ios-navigate"></i-icon>
