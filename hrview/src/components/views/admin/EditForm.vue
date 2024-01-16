@@ -36,7 +36,8 @@
             <el-form-item>
                 <el-button @click="cancel" size="small">取消</el-button>
                 <el-button type="primary" @click="modify('studentData')" size="small">
-                    {{ title === '添加员工' ? '保存' : '修改' }}
+                    保存
+<!--                    {{ title === '添加员工' ? '保存' : '修改' }}-->
                 </el-button>
             </el-form-item>
         </el-form>

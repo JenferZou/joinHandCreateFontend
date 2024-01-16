@@ -13,12 +13,12 @@
                 </el-button>
             </i-col>
             <i-row type="flex" justify="end">
-<!--                <i-col :span="7">
-                    <el-button size="small" type="primary" @click="add">
-                        <i-icon type="plus-round" size="15"></i-icon>
-                        添加
-                    </el-button>
-                </i-col>-->
+                <!--                <i-col :span="7">
+                                    <el-button size="small" type="primary" @click="add">
+                                        <i-icon type="plus-round" size="15"></i-icon>
+                                        添加
+                                    </el-button>
+                                </i-col>-->
                 <el-dialog title="添加" :visible.sync="dialogVisible" :closeOnClickModal="false">
                     <el-form :inline="true" :model="userData" ref="studentData" class="demo-form-inline"
                              label-width="100px" size="small">
@@ -48,11 +48,11 @@
                                     <el-input style="width: 130px" v-model="userData.role"
                                               placeholder="管理员"
                                               size="small" readonly></el-input>
-<!--                                    <el-select size="small" v-model="userData.role" placeholder="角色"
-                                               style="width: 100px">
-                                        <el-option label="老师" value="老师"></el-option>
-                                        <el-option label="管理员" value="管理员"></el-option>
-                                    </el-select>-->
+                                    <!--                                    <el-select size="small" v-model="userData.role" placeholder="角色"
+                                                                                   style="width: 100px">
+                                                                            <el-option label="老师" value="老师"></el-option>
+                                                                            <el-option label="管理员" value="管理员"></el-option>
+                                                                        </el-select>-->
                                 </el-form-item>
                             </i-col>
                         </i-row>
@@ -74,42 +74,45 @@
         </i-row>
         <i-row :gutter="48" class="card" justify="space-around" type="flex">
             <i-col :span="6" v-for="item in manager.slice(0,3)" :key="item.no" type="flex">
-              <el-card class="box-card">
-                <div slot="header" class="clearfix">
-                  <span>{{ item.name }}</span>
-                  <el-button style="float: right;padding: 0px 0;color:red;" type="text" @click="del(item.no)">删除</el-button>
-                </div>
-                <div  class="text item">
-                  用户名:{{item.name}}
-                </div>
-                <div  class="text item">
-                  电话:
-                  {{item.phone}}
-                </div>
-<!--                <div  class="text item">
-                  用户状态:
-                  禁用
-                  <el-switch @change="changeStatus"
-                      v-model="item.status"
-                      active-color="#13ce66"
-                      inactive-color="#ff4949"
-                      :active-value="1"
-                      :inactive-value="0">
-                  </el-switch>
-                  启用
-                </div>-->
-                  <div v-if="item.no.toString().at(0)==='3'" class="text item">
-                      用户角色:管理员
-                  </div>
-                  <div v-if="item.no.toString().at(0)==='2'" class="text item">
-                      用户角色:老师
-                  </div>
-                  <div v-if="item.no.toString().at(0)==='1'" class="text item">
-                      用户角色:学生
-                  </div>
-              </el-card>
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>{{ item.name }}</span>
+                        <el-button style="float: right;padding: 0px 0;color:red;" type="text" @click="del(item.no)">
+                            删除
+                        </el-button>
+                    </div>
+                    <div class="text item">
+                        用户名:{{ item.name }}
+                    </div>
+                    <div class="text item">
+                        电话:
+                        {{ item.phone }}
+                    </div>
+                    <div class="text item">
+                        用户状态:
+                        禁用
+                        <el-switch
+                                @change="changeStatus(item)"
+                                v-model="item.status"
+                                active-color="#13ce66"
+                                inactive-color="#ff4949"
+                                :active-value="0"
+                                :inactive-value="1">
+                        </el-switch>
+                        启用
+                    </div>
+                    <div v-if="item.no.toString().at(0)==='3'" class="text item">
+                        用户角色:管理员
+                    </div>
+                    <div v-if="item.no.toString().at(0)==='2'" class="text item">
+                        用户角色:老师
+                    </div>
+                    <div v-if="item.no.toString().at(0)==='1'" class="text item">
+                        用户角色:学生
+                    </div>
+                </el-card>
             </i-col>
-          </i-row>
+        </i-row>
 
         <i-row :gutter="48" class="card" justify="space-around" type="flex" v-if="manager.length>3">
             <i-col :span="6" v-for="item in manager.slice(3,6)" :key="item.no" type="flex">
@@ -127,21 +130,22 @@
                         电话:
                         {{ item.phone }}
                     </div>
-<!--                    <div class="text item">
+                    <div class="text item">
                         用户状态:
                         禁用
                         <el-switch
+                                @change="changeStatus(item)"
                                 v-model="item.status"
                                 active-color="#13ce66"
                                 inactive-color="#ff4949"
-                                :active-value="1"
-                                :inactive-value="0">
+                                :active-value="0"
+                                :inactive-value="1">
                         </el-switch>
                         启用
-                    </div>-->
-                  <div v-if="item.no.toString().at(0)==='3'" class="text item">
-                     用户角色:管理员
-                   </div>
+                    </div>
+                    <div v-if="item.no.toString().at(0)==='3'" class="text item">
+                        用户角色:管理员
+                    </div>
                     <div v-if="item.no.toString().at(0)==='2'" class="text item">
                         用户角色:老师
                     </div>
@@ -178,7 +182,7 @@ export default {
             multiDeleteVisible: false,
             currentPage: 1,
             pageSize: 6,
-            keyword:'',
+            keyword: '',
             pageNum: 1,
             manager: [],
             id: '',
@@ -246,15 +250,33 @@ export default {
                 console.log('出错啦！！！！')
             })
         },
-        changeStatus() {
-            console.log(this.user)
+        changeStatus(item) {
+            this.$http({
+                url: this.$http.adornUrl('/admin/manager/update'),
+                method: 'post',
+                data: item,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'charset': 'utf-8'
+                }
+            }).then(({data}) => {
+                console.log(data)
+                if (data && data.errorCode === "200") {
+                    this.$message.success(data.message)
+                    this.getAllUser()
+                } else {
+                    this.$message.error(data.message)
+                }
+            }).catch(() => {
+                console.log('出错啦！！！！')
+            })
         },
         change(page) {
             this.currentPage = page
             this.getAllUser()
         },
         search() {
-            this.currentPage=1
+            this.currentPage = 1
             this.getAllUser()
         },
         getAllUser() {
