@@ -52,24 +52,20 @@
                     tooltip-effect="dark"
                     style="width: 100%"
                     >
-                  <el-table-column
-                      prop="mid"
-                      label="序号"
-                      width="80">
-                  </el-table-column>
-                  <el-table-column
-                      prop="name"
-                      label="项目名称"
-                      width="180">
-                  </el-table-column>
                     <el-table-column
                             prop="createTime"
                             label="消息接收时间"
                             width="180">
                     </el-table-column>
                   <el-table-column
+                      prop="name"
+                      label="项目名称"
+                      width="180">
+                  </el-table-column>
+
+                  <el-table-column
                       prop="mentor"
-                      label="指导老师"
+                      label="消息发送者"
                       width="180">
                   </el-table-column>
                   <el-table-column
@@ -169,6 +165,12 @@ export default {
           this.pageNum = data.pages
           this.currentPage = data.current
           this.project = data.data
+            this.project.forEach(item => {
+                // 检查pid是否为0
+                if (item.tno == 0) {
+                    // 设置mentor为管理员
+                    this.$set(item, 'mentor', '管理员');
+                }});
           this.pageSize = data.size
         }
       }).catch(() => {

@@ -72,7 +72,9 @@
                 <div style="background-color: #fff;padding: 10px;">
                   <el-tag type="warning" style="margin-right: 55px;margin-left: 240px">简历审核中</el-tag>
                   <el-tag type="success" style="margin-right: 55px">简历通过</el-tag>
-                  <el-tag type="danger">简历未通过</el-tag>
+                  <el-tag type="danger" style="margin-right: 55px">简历未通过</el-tag>
+                    <el-tag type="info" style="margin-right: 55px">项目组已解散</el-tag>
+                    <el-tag>您已被请出项目组</el-tag>
                 </div>
 
                   <el-table
@@ -237,6 +239,10 @@ export default {
         return '简历通过'
       }else if(row.mark === -1) {
         return  '简历未通过'
+      }else if(row.mark === -2) {
+          return  '您已被请出项目组'
+      }else if(row.mark === -100) {
+          return  '项目组已解散'
       }
     },
 
@@ -272,6 +278,14 @@ export default {
         return {
           background: '#fdf6ec'
         }
+      }else if(row.mark===-100){
+          return {
+              background: '#f4f4f5'
+          }
+      }else if(row.mark===-2){
+          return {
+              background: '#d9ecff'
+          }
       }
       else{
         return {
