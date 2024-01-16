@@ -139,9 +139,8 @@ export default {
     };
   },
   created() {
-
+      this.loadStudent()
     this.loadResume()
-    this.loadStudent()
   },
   methods: {
   returnhome(){
@@ -159,7 +158,6 @@ export default {
           'charset': 'utf-8'
         }
       }).then(({data}) => {
-        console.log(data)
         this.studentInfo = data.data
       }).catch(() => {
         console.log('出错啦！！！！')
@@ -175,6 +173,9 @@ export default {
           'charset': 'utf-8'
         }
       }).then(({data}) => {
+          if(!data.data){
+              return;
+          }
         this.resume=data.data
       }).catch(() => {
         console.log('出错啦！！！！')

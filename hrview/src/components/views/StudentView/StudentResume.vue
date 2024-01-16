@@ -105,8 +105,8 @@
                         </div>
                       </el-dialog>
                     </div>
-                    <div  class="advantage-con" v-if="resume.personalAdvantage"><p  class="edit-show-content" style="max-width: 718px;">
-                      {{ resume.personalAdvantage }}
+                    <div  class="advantage-con" v-if="resume?.personalAdvantage"><p  class="edit-show-content" style="max-width: 718px;">
+                      {{ resume?.personalAdvantage }}
                     </p>
                     </div>
                   </li>
@@ -273,20 +273,20 @@ export default {
         resumeId:'',
         wechatId:'',
         politicsStatus:'',
-        personalAdvantage:'...',
+        personalAdvantage:'',
         internshipExperience:'',
         projectExperience:'',
         awardExperience:'',
         certificate:''
       },
       studentInfo:{
-        // sName: '张三',
-        // gender: '男',
-        // sno: '123123',
-        // sMajor: '软件工程',
-        // sPhone: '11011100',
-        // sDepartment:'计算机与智能教育学院',
-        // className:'软件2班'
+        sname: '',
+        gender: '',
+        sno: '',
+        smajor: '',
+        sphone: '',
+        sdepartment:'',
+        className:''
       },
 
       advantagedialog:false,
@@ -299,9 +299,9 @@ export default {
   },
 
   created(){
+      this.loadStudent()
+      this.loadResume()
 
-    this.loadResume()
-    this.loadStudent()
   },
   methods:{
     logout(){
@@ -333,6 +333,9 @@ export default {
           'charset': 'utf-8'
         }
       }).then(({data}) => {
+          if(!data.data){
+              return;
+          }
         this.resume=data.data
       }).catch(() => {
         console.log('出错啦！！！！')
