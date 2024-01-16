@@ -160,132 +160,6 @@
           </div>
       </i-row>
 
-      <!--  <div class="layout">-->
-      <!--    <div class="layout-ceiling">-->
-      <!--      <h5 style="color: #fff;margin-left:50px;font-weight: bolder;font-size: 20px">    携手创-学生端</h5>-->
-      <!--    </div>-->
-      <!--    <div class="layout-header">-->
-      <!--      <el-button type="primary" @click="returnhome" style="margin-top: 10px;margin-left: 20px" size="small">返回</el-button>-->
-      <!--    </div>-->
-      <!--    <div style="height: 585px">-->
-
-      <!--        <div class="page-container">-->
-      <!--        <div class="info-table">-->
-      <!--          <el-card class="info-card">-->
-      <!--            <div slot="header" class="info-header">-->
-      <!--              <span class="info-title">个人信息表</span>-->
-      <!--              <el-button type="success" icon="el-icon-edit" @click="modify" style="margin-left:370px">修改密码</el-button>-->
-      <!--              <el-button type="primary" icon="el-icon-edit" @click="editInfo">编辑</el-button>-->
-      <!--            </div>-->
-      <!--            <div class="info-content">-->
-      <!--              <i-row>-->
-      <!--                <i-col :span="12">-->
-      <!--                  <el-form :model="info" label-position="left" label-width="100px" readonly>-->
-      <!--                    <el-form-item label="姓名">-->
-      <!--                      <span>{{ info.sname }}</span>-->
-      <!--                    </el-form-item>-->
-      <!--                    <el-form-item label="性别">-->
-      <!--                      <span>{{ info.gender }}</span>-->
-      <!--                    </el-form-item>-->
-      <!--                    <el-form-item label="学号">-->
-      <!--                      <span>{{ info.sno }}</span>-->
-      <!--                    </el-form-item>-->
-      <!--                    <el-form-item label="联系电话">-->
-      <!--                      <span>{{ info.sphone }}</span>-->
-      <!--                    </el-form-item>-->
-      <!--                  </el-form>-->
-      <!--                </i-col>-->
-      <!--                <i-col :span="12">-->
-      <!--                  <el-form :model="info" label-position="left" label-width="100px" readonly>-->
-      <!--                    <el-form-item label="专业">-->
-      <!--                      <span>{{ info.smajor }}</span>-->
-      <!--                    </el-form-item>-->
-      <!--                    <el-form-item label="所属学院">-->
-      <!--                      <span>{{ info.sdepartment }}</span>-->
-      <!--                    </el-form-item>-->
-      <!--                    <el-form-item label="所属班级">-->
-      <!--                      <span>{{ info.className }}</span>-->
-      <!--                    </el-form-item>-->
-      <!--&lt;!&ndash;                    <el-form-item label="指导老师">&ndash;&gt;-->
-      <!--&lt;!&ndash;                      <span>{{ info.mentor }}</span>&ndash;&gt;-->
-      <!--&lt;!&ndash;                    </el-form-item>&ndash;&gt;-->
-      <!--                  </el-form>-->
-      <!--                </i-col>-->
-
-
-      <!--              </i-row>-->
-
-
-      <!--            </div>-->
-
-      <!--          </el-card>-->
-
-
-      <!--          <el-dialog-->
-      <!--              title="提示"-->
-      <!--              :visible.sync="pwdVisible"-->
-      <!--              width="30%"-->
-      <!--              :before-close="beforeClose">-->
-      <!--            <el-form :model="pwd" :rules="rules1" ref="formRef">-->
-      <!--              <el-form-item prop="oldPassword">-->
-      <!--                <el-input prefix-icon="el-icon-lock" placeholder="请输入原密码" show-password  v-model="pwd.oldPassword"></el-input>-->
-      <!--              </el-form-item>-->
-      <!--              <el-form-item prop="newPassword">-->
-      <!--                <el-input prefix-icon="el-icon-lock" placeholder="请输入新密码" show-password  v-model="pwd.newPassword"></el-input>-->
-      <!--              </el-form-item>-->
-      <!--              <el-form-item prop="confirmPass">-->
-      <!--                <el-input prefix-icon="el-icon-lock" placeholder="请确认新密码" show-password  v-model="pwd.confirmPass"></el-input>-->
-      <!--              </el-form-item>-->
-      <!--            </el-form>-->
-      <!--            <div slot="footer" class="dialog-footer">-->
-      <!--              <el-button @click="cancle1">取消</el-button>-->
-      <!--              <el-button type="primary" @click="savepwd">保存</el-button>-->
-      <!--            </div>-->
-      <!--          </el-dialog>-->
-
-      <!--          <el-dialog :visible.sync="editDialogVisible" title="编辑个人信息" :before-close="beforeCloseInfo">-->
-      <!--            <el-form :model="info" label-position="left" label-width="100px" :rules="rules" ref="infoForm">-->
-      <!--              <el-form-item label="姓名" prop="sname">-->
-      <!--                <el-input v-model="info.sname"></el-input>-->
-      <!--              </el-form-item>-->
-      <!--              <el-form-item label="性别" prop="gender">-->
-      <!--                <el-radio-group v-model="info.gender">-->
-      <!--                  <el-radio label="男" >男</el-radio>-->
-      <!--                  <el-radio label="女" >女</el-radio>-->
-      <!--                </el-radio-group>-->
-      <!--              </el-form-item>-->
-      <!--              <el-form-item label="学号" prop="sno">-->
-      <!--                <el-input v-model="info.sno" :disabled="true"></el-input>-->
-      <!--              </el-form-item>-->
-      <!--              <el-form-item label="联系电话" prop="sphone">-->
-      <!--                <el-input v-model="info.sphone"></el-input>-->
-      <!--              </el-form-item>-->
-      <!--              <el-form-item label="所属学院" prop="sdepartment">-->
-      <!--                <el-input v-model="info.sdepartment" ></el-input>-->
-      <!--              </el-form-item>-->
-      <!--              <el-form-item label="专业" prop="smajor">-->
-      <!--                <el-input v-model="info.smajor" ></el-input>-->
-      <!--              </el-form-item>-->
-      <!--              <el-form-item label="所属班级" prop="className">-->
-      <!--                <el-input v-model="info.className"></el-input>-->
-      <!--              </el-form-item>-->
-
-      <!--            </el-form>-->
-      <!--            <div slot="footer" class="dialog-footer">-->
-      <!--              <el-button @click="cancle">取消</el-button>-->
-      <!--              <el-button type="primary" @click="saveInfo">保存</el-button>-->
-      <!--            </div>-->
-      <!--          </el-dialog>-->
-
-
-
-      <!--        </div>-->
-      <!--          </div>-->
-
-      <!--    </div>-->
-      <!--    <div class="layout-copy">-->
-      <!--    </div>-->
-      <!--  </div>-->
     </div>
     <div class="layout-copy" style="text-align: center;background-color: white">
       2024 &copy; AtXBaiYa
@@ -345,6 +219,9 @@ export default {
   },
 
   methods: {
+    logout(){
+      this.$router.push('/')
+    },
     modify(){
       this.pwdVisible = true;
     },
@@ -490,7 +367,12 @@ export default {
     goWhere(name){
       this.$router.push({name})
     },
-
+    editMes(name){
+      // this.$router.push({
+      //   path: '/StudentMessageForm'
+      // })
+      this.$router.push({name})
+    },
 
 
   }
