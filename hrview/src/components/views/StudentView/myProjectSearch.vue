@@ -85,9 +85,6 @@
                     style="width: 100%"
                     :cell-style="tableRowClassName">
                   <el-table-column
-                      width="55">
-                  </el-table-column>
-                  <el-table-column
                       prop="projectName"
                       label="项目名称"
                       width="120">
