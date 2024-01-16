@@ -93,6 +93,7 @@ export default {
           console.log(data)
         if (data && data.errorCode === "200") {
           this.$message.success(data.message)
+            this.$parent.getAllInformation()
         } else {
           this.$message.error(data.message)
         }
@@ -113,7 +114,6 @@ export default {
             url: this.$http.adornUrl('/admin/project/get/'+data.id),
             method: 'get',
         }).then(({data}) => {
-            console.log(data)
             if (data && data.errorCode === "200") {
                this.contest=data.data
             } else {

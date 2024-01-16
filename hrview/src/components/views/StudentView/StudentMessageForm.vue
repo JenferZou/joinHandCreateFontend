@@ -5,7 +5,7 @@
       <h5 style="color: #fff;margin-left:50px;font-weight: bolder;font-size: 20px">    携手创-学生端</h5>
     </div>
     <div class="layout-header">
-      <el-button type="primary" @click="returnhome" style="margin-top: 10px;margin-left: 20px">返回</el-button>
+      <el-button type="primary" @click="returnhome" style="margin-top: 10px;margin-left: 20px" size="small">返回</el-button>
     </div>
     <div style="height: 585px">
 
