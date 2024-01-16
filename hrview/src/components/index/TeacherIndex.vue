@@ -57,8 +57,8 @@
                 <div class="layout-content">
                     <router-view></router-view>
                 </div>
-                <div class="layout-copy">
-                    2011-2016 &copy; TalkingData
+                <div class="layout-copy" style="text-align: center;background-color: white">
+                    2024 &copy; AtXBaiYa
                 </div>
             </i-col>
         </i-row>
@@ -120,7 +120,7 @@ export default {
     padding: 10px 15px 0;
 }
 .layout-content{
-    min-height: 620px;
+    min-height: 600px;
     margin: 15px;
     overflow: hidden;
     background: #fff;
@@ -133,7 +133,7 @@ export default {
 }
 .layout-menu-left{
     background-color: white;
-    height: 820px;
+    height: auto;
 }
 .layout-header h1{
     padding-top: 10px;

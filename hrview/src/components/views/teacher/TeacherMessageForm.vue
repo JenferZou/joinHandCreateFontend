@@ -7,6 +7,7 @@
           <el-card class="info-card">
             <div slot="header" class="info-header">
               <span class="info-title">教师信息表</span>
+              <el-button type="success" icon="el-icon-edit" @click="modify" style="margin-left:370px">修改密码</el-button>
               <el-button type="primary" icon="el-icon-edit" @click="editInfo">编辑</el-button>
             </div>
             <div class="info-content">
@@ -19,8 +20,8 @@
                     <el-form-item label="学院信息">
                       <span>{{ info.department }}</span>
                     </el-form-item>
-                    <el-form-item label="密码">
-                      <span>******</span>
+                    <el-form-item label="联系电话">
+                      <span>{{ info.phone }}</span>
                     </el-form-item>
                   </el-form>
                 </i-col>
@@ -33,14 +34,29 @@
                     <el-form-item label="所属专业">
                       <span>{{ info.major }}</span>
                     </el-form-item>
-                    <el-form-item label="联系电话">
-                      <span>{{ info.phone }}</span>
-                    </el-form-item>
                   </el-form>
                 </i-col>
               </i-row>
             </div>
           </el-card>
+
+          <el-dialog title="提示" :visible.sync="pwdVisible" width="35%" :before-close="beforeClose">
+            <el-form :model="pwd" :rules="rulesPwd" label-width="100px" width="30%" ref="updatePwdForm">
+              <el-form-item label="原密码:" prop="oldpassword">
+                <el-input prefix-icon="el-icon-lock" placeholder="请输入原密码" show-password clearable  v-model="pwd.oldpassword"></el-input>
+              </el-form-item>
+              <el-form-item label="新密码:" prop="password">
+                <el-input prefix-icon="el-icon-lock" placeholder="请输入新密码" show-password clearable  v-model="pwd.password"></el-input>
+              </el-form-item>
+              <el-form-item label="确认新密码:" prop="confirmPass">
+                <el-input prefix-icon="el-icon-lock" placeholder="请确认新密码" show-password clearable  v-model="pwd.confirmPass"></el-input>
+              </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+              <el-button @click="cancleUpdate">取消</el-button>
+              <el-button type="primary" @click="savepwd">保存</el-button>
+            </div>
+          </el-dialog>
 
           <el-dialog :visible.sync="editDialogVisible" title="编辑个人信息" :before-close="beforeClose">
             <el-form :model="info" label-position="left" label-width="100px" :rules="rules" ref="infoForm">
@@ -79,6 +95,15 @@
 export default {
   name: "TeacherMessageForm",
   data() {
+    const validatePassword = (rule, confirmPass, callback) => {
+      if (confirmPass === '') {
+        callback(new Error('请确认密码'))
+      } else if (confirmPass !== this.pwd.password) {
+        callback(new Error('两次输入的密码不一致'))
+      } else {
+        callback()
+      }
+    }
     return {
       info: {},
       rules: {
@@ -88,13 +113,33 @@ export default {
         phone: [{required: true, message: '请输入联系电话', trigger: 'blur'},],
         department: [{required: true, message: '请输入学院名称', trigger: 'blur'}],
       },
+      rulesPwd: {
+        oldpassword: [
+          { required: true, message: '请输入原密码', trigger: 'blur' },
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+        ],
+        confirmPass: [
+          { required:true,validator: validatePassword, trigger: 'blur' }
+        ]
+      },
       editDialogVisible: false,
+      pwdVisible: false,
+      pwd:{
+        oldpassword:'',
+        password:'',
+        confirmPass:''
+      },
     }
   },
   created() {
     this.load()
   },
   methods: {
+    modify(){
+      this.pwdVisible = true;
+    },
     load() {
       this.$http({
         url: this.$http.adornUrl('/teacher/selectByInfo'),
@@ -111,18 +156,47 @@ export default {
       this.editDialogVisible = false
       this.load()
     },
+    cancleUpdate(){
+      this.pwdVisible = false;
+      this.$refs['updatePwdForm'].clearValidate();
+      this.pwd = {oldpassword:'', password:'', confirmPass:''};
+      this.load()
+    },
+    // TODO 修改密码
+    savepwd(){
+      this.$refs['updatePwdForm'].validate(valid => {
+          if(valid){
+            this.$http({
+              url: this.$http.adornUrl('/teacher/updatePassword'),
+              method: 'post',
+              data:{
+                oldPassword:this.pwd.oldpassword,
+                newPassword:this.pwd.password,
+              },
+            }).then((res) => {
+              if (res.data.success == true) {
+                this.pwdVisible = false;
+                this.$refs['updatePwdForm'].clearValidate();
+                this.pwd = {oldpassword:'', password:'', confirmPass:''};
+                this.load();
+                this.$message.success(res.data.data)
+              }else {
+                this.$message.error(res.data.message)
+              }
+            }).catch(() => {
+              console.log('请求出错')
+            })
+          }
+      })
+    },
     editInfo() {
       this.editDialogVisible = true
     },
-    beforeClose(done) {
-      this.$refs.infoForm.validate(valid => {
-        if (valid) {
-          done()
-        } else {
-          this.editDialogVisible = false
-          this.load()
-        }
-      })
+    beforeClose() {
+      this.pwdVisible = false;
+      this.$refs['updatePwdForm'].clearValidate();
+      this.pwd = {oldpassword:'', password:'', confirmPass:''};
+      this.load();
     },
     saveInfo() {
       this.$refs.infoForm.validate(valid => {
