@@ -347,7 +347,7 @@ export default {
     downloadTeacherExcel() {
       this.downloadTeacherExcelLoading = true;
       this.$http({
-        url: this.$http.adornUrl('/teacher/excel/download'),
+        url: this.$http.adornUrl('/admin/excel/download'),
         method: 'get',
       }).then(({data}) => {
         if (data && data.errorCode === "200") {
@@ -366,7 +366,7 @@ export default {
       let formData = new FormData();
       formData.append('file', file.file);//传文件
       this.$http({
-        url: this.$http.adornUrl('/teacher/excel/upload'),
+        url: this.$http.adornUrl('/admin/excel/upload'),
         method: 'post',
         data: formData
       }).then(({data}) => {
