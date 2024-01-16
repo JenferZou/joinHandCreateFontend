@@ -1,15 +1,19 @@
 <template>
+
   <div class="layout">
+    <div class="layout-header">
+      <el-button type="primary" @click="returnhome" style="margin-top: 10px;margin-left: 20px" size="small">返回</el-button>
+    </div>
     <div class="layout-content">
       <i-row>
         <i-col span="19">
           <div class="layout-content-main">
+
             <div class="in-layout-content">
               <!--简历头部-->
               <div class="resumewrapp">
                 <div class="page-title">
                   <h5>简历预览</h5>
-                  <el-button type="primary" size="small" @click="returnhome" style="margin-top: 10px;margin-bottom: 20px">返回</el-button>
                 </div>
                 <!--                简历内容-->
                 <div class="resumecontent">
@@ -146,7 +150,7 @@ export default {
   methods: {
   returnhome(){
   this.$router.push({
-    name:"StudentIndex",
+    name:"StudentResume",
   })
 },
     loadStudent() {
