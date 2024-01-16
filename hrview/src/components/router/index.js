@@ -53,7 +53,7 @@ let router = new Router({
                     name: 'index',
                     component: StudentInformation,
                     meta: {
-                        title: 'admin'
+                        title: '学生信息'
                     }
                 },
                 {
@@ -61,7 +61,7 @@ let router = new Router({
                     name: 'teacher',
                     component: TeacherManager,
                     meta: {
-                        title: 'admin'
+                        title: '老师信息'
                     }
                 },
                 {
@@ -69,13 +69,16 @@ let router = new Router({
                     name: 'analysis',
                     component: SystemAnalysis,
                     meta: {
-                        title: 'admin'
+                        title: '系统分析'
                     }
                 },
                 {
                     path: '/admin/userManagement',
                     name: 'userManagement',
                     component: UserManagement,
+                    meta: {
+                        title: '用户管理'
+                    }
                 },
                 {
                     path: '/admin/active',
@@ -86,6 +89,9 @@ let router = new Router({
                     path: '/admin/project',
                     name: 'project',
                     component: ProjectManger,
+                    meta: {
+                        title: '项目管理'
+                    }
                 }
             ]
         },
@@ -251,7 +257,7 @@ Router.prototype.push = function push(to) {
                 next({
                     path: '/adsac'
                 })
-            } else if (role === '用户' && to.path.substring(i, j) !== 'student') {
+            } else if (role === '学生' && to.path.substring(i, j) !== 'student') {
                 next({
                     path: '/adsac'
                 })
