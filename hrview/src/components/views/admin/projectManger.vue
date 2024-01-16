@@ -170,9 +170,9 @@ export default {
             this.multipleSelectionFlag = this.multipleSelection.length !== 0;
         },
         deleteOneProject(id, projectData) {
-            for (let i = 0; i < projectData.length; i++) {
-                if (id === projectData[i].id) {
-                    projectData.splice(i, 1)
+            for (let i = 0; i < projectData.project.length; i++) {
+                if (id === projectData.project[i].id) {
+                    projectData.project.splice(i, 1)
                 }
             }
             return projectData;
@@ -185,7 +185,7 @@ export default {
             this.$http({
                 url: this.$http.adornUrl('/admin/project/delete'),
                 method: 'post',
-                data: this.dcontest.id,
+                data: this.dcontest.project.id,
                 headers: {
                     'Content-Type': 'application/json',
                     'charset': 'utf-8'
@@ -193,7 +193,8 @@ export default {
             }).then(({data}) => {
                 if (data && data.errorCode === "200") {
                     this.$message.success(data.message)
-                    this.project = this.deleteOneProject(this.dcontest.id, this.project)
+                    this.getAllInformation()
+                    //this.project = this.deleteOneProject(this.dcontest.project.id, this.project)
                 } else {
                     this.$message.error(data.message)
                 }

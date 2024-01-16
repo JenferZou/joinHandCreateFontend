@@ -467,6 +467,7 @@ export default {
                 if (data && data.errorCode === "200") {
                     this.$message.success(data.message)
                     this.upload = false
+                    this.getStudent()
                 } else {
                     this.$message.error(data.message)
                 }
