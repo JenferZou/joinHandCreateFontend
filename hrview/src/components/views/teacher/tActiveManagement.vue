@@ -111,6 +111,7 @@
                 :visible.sync="dialogVisible"
                 width="80%"
                 @close='closeDialog'
+
         >
             <div class="el-dialog-div">
                 <el-form :model="project" :rules="rules" ref="ruleForm" label-width="100px" class="demo-project">
@@ -167,6 +168,7 @@
                         </el-upload>
 
                         <quill-editor class="editor" ref="myTextEditor"
+                                      style="min-width: 650px"
                                       v-model="project.content"
                                       :options="editorOption"
                                       @blur="onEditorBlur($event)"

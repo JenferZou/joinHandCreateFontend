@@ -51,7 +51,7 @@ export function deleteOneStudent(student,studentData) {
     // 清除文本格式-----['clean']
     ['clean'],
     // 链接、图片、视频-----['link', 'image', 'video']
-    ['image', 'video']
+    ['link','image']
 ]
 
 

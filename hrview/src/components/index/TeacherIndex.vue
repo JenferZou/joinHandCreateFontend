@@ -1,5 +1,5 @@
 <template>
-    <div class="layout">
+    <div class="layout" style="min-width:1500px">
         <div class="layout-header" >
           <label >
             <i-row>

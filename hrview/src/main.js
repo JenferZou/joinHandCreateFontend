@@ -46,10 +46,11 @@ Container,
   MessageBox
 
 } from "element-ui";
-import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb,Layout,Content,Sider} from 'iview'
+import { Row, Col,Menu,Submenu,Icon,MenuItem,BreadcrumbItem,Breadcrumb,Layout,Content,Sider,Ellipsis} from 'iview'
 import axios from "axios";
 Vue.config.productionTip = false
 
+Vue.component("i-ellipsis",Ellipsis)
 Vue.component("i-content",Content)
 Vue.component('i-layout',Layout)
 Vue.component('i-row',Row)

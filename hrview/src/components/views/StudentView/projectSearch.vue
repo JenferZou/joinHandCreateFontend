@@ -68,7 +68,7 @@
                 </i-row>
 
 
-                <div class="card" v-for="item in project" >
+                <div class="card" v-for="item in project" :key="item.id">
                   <div style="display: flex;">
                     <!--                  文字部分-->
                     <div style="flex: 1">
@@ -90,7 +90,6 @@
                     </div>
                   </div>
                 </div>
-
                 <i-row >
 
                   <el-pagination
@@ -106,9 +105,6 @@
                   </el-pagination>
                 </i-row>
               </div>
-
-
-
             </div>
           </div>
         </i-col>
@@ -118,10 +114,6 @@
       2024 &copy; AtXBaiYa
     </div>
   </div>
-
-
-
-
 </template>
 
 <script>
@@ -289,9 +281,6 @@ export default {
 .page {
   text-align: center;
 }
-
-
-
 
 .layout{
   border: 1px solid #d7dde4;
