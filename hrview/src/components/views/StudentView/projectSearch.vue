@@ -242,8 +242,15 @@ export default {
 
                 // 将处理后的content存回对象中
                 item.content = tempDiv.innerHTML;
+
+                // 移除 HTML 标签
+                const plainText = tempDiv.textContent || tempDiv.innerText;
+
+                // 截取一定的内容长度
+                item.content = plainText.substring(0, 150);
                 return item;
             });
+
         }
       }).catch(() => {
         console.log('出错啦！！！！')

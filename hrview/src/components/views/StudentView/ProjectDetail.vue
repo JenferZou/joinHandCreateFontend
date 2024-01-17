@@ -52,7 +52,7 @@
                       <div style="font-size:16px;margin-top: 10px;color:#777575;font-weight: bold">预期参加的比赛: {{project.expectedCompetition}}</div>
                       <div style="font-size:16px;margin-top: 10px;color:#777575;font-weight: bold">需要专业: {{project.needMajor}}</div>
                       <div style="font-size:16px;margin-top: 20px;color:#000000;font-weight: bold">项目详情</div>
-                      <div class="content" style="font-size:17px;margin-top: 5px" v-html="project.content"></div>
+                      <div style="font-size:17px;margin-top: 5px" v-html="project.content"></div>
 
 
                       <div style="margin-top: 20px;color: gray;font-size:17px;" >项目导师:{{project.mentor}}</div>
