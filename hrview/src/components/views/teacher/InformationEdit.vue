@@ -44,16 +44,36 @@ export default {
   name: "InformationEdit",
   data(){
     return{
-      editorOption: {
-        modules: {
-          toolbar: toolbarOptions
+        fileList: [],
+        qiniuForm: {
+            key: "",
+            token: "",
+            showUrl: "",
         },
+        uploadUrl:"http://upload-z2.qiniup.com",
+      editorOption: {
+          modules: {
+              toolbar:{
+                  container: toolbarOptions,
+                  handlers: {
+                      image: function (value) { //编辑器-上传图片
+                          if (value) {
+                              // 调用antd图片上传upload
+                              document.querySelector('.avatar-uploader input').click()
+                          } else {
+                              this.quill.format('image', false)
+                          }
+                      },
+                  }
+              },
+          },
         theme: 'snow',
         placeholder: '请输入正文'
         // Some Quill optiosn...
       },
       dialogTableVisible:false,
       contest:'',
+        upToken:'',
     }
   },
   methods:{
