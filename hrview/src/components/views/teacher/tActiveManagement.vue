@@ -408,10 +408,14 @@ export default {
 
             this.$http({
                 url: this.$http.adornUrl('/teacher/deleteProject'),
-                method: 'get',
-                params: {
-                    id: this.deleteData.id
-                }
+                method: 'post',
+                data:{
+                 id : this.deleteData.id
+                },
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                'charset': 'utf-8'
+              }
             }).then(({data}) => {
                 if (data && data.errorCode == 200) {
                     this.$message.success("操作成功")
