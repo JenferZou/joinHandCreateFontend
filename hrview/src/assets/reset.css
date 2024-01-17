@@ -48,6 +48,8 @@ table {
 }
 
 img{
-    width:40%;
+    /*width:40%;*/
+    max-width: 40%;
+    max-height: 50%;
 }
 
