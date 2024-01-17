@@ -35,14 +35,6 @@
               <i-menu-item name="projectSearch">项目大厅</i-menu-item>
               <i-menu-item name="myProjectSearch">项目申请</i-menu-item>
             </i-submenu>
-<!--            <i-submenu name="3">-->
-<!--              <template slot="title">-->
-<!--                <i-icon type="ios-analytics"></i-icon>-->
-<!--                考证与实践活动信息-->
-<!--              </template>-->
-<!--              <i-menu-item name="CertificateSearch">考证俱乐部</i-menu-item>-->
-<!--              <i-menu-item name="ActiveSearch">实践活动查询</i-menu-item>-->
-<!--            </i-submenu>-->
           </i-menu>
         </i-col>
         <i-col span="19">
@@ -50,41 +42,25 @@
             <div class="in-layout-content">
 
               <div>
-                <i-row class="search">
-                  <i-col :span="12">
-                    <i-row>
-                      <i-col :span="16">
-                        <el-input @keyup.enter.native="search" size="small" v-model="title" placeholder="请输入标题" clearable prefix-icon="el-icon-search">
-                        </el-input>
-                      </i-col>
-                      <i-col :span="3">
-                        <el-button type="primary" size="small" @click="search">
-                          <i-icon type="search" size="small"></i-icon>
-                          搜索
-                        </el-button>
-                      </i-col>
-                    </i-row>
-                  </i-col>
-                </i-row>
 
 
                 <div class="card" v-for="item in project" >
                   <div style="display: flex;">
                     <!--                  文字部分-->
                     <div style="flex: 1">
-                      <div style="font-size: 25px;font-weight: bolder">{{item.name}}</div>
-                      <div style="font-size:14px;margin-top: 10px;width:900px;text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" v-html="item.content">
-                      </div>
+                      <div style="font-size: 30px;font-weight: bolder">{{item.name}}</div>
+                      <div style="font-size:16px;margin-top: 10px;color:#777575;font-weight: bold">预期参加的比赛: {{item.expectedCompetition}}</div>
+                      <div style="font-size:16px;margin-top: 10px;color:#777575;font-weight: bold">需要专业: {{item.needMajor}}</div>
+                      <div style="font-size:16px;margin-top: 20px;color:#000000;font-weight: bold">项目详情</div>
+                      <div style="font-size:17px;margin-top: 5px" v-html="item.content"></div>
 
-                      <div style="margin-top: 10px;color: gray" >项目导师:{{item.mentor}}</div>
-                      <div style="color: gray">需要专业:{{item.needMajor}}</div>
-                      <div style="color: gray">预期参加的比赛:{{item.expectedCompetition}}</div>
+
+                      <div style="margin-top: 20px;color: gray;font-size:17px;" >项目导师:{{item.mentor}}</div>
+
+
                     </div>
                     <!--                    按钮部分-->
-                    <div style="width: 50px;display:flex;padding-left: 15px;align-items: flex-end;">
-                      <el-button plain size="small" @click="goDetail">查看详情</el-button>
-                    </div>
-                    <div style="width: 130px;display:flex;padding-left: 50px;align-items: flex-end;">
+                    <div style="width: 130px;display:flex;padding-left: 40px;align-items: flex-end;">
                       <el-button type="primary" plain size="small" @click="delieverResume(item.id)">投递简历</el-button>
                     </div>
                   </div>
@@ -99,7 +75,7 @@
                       layout="prev, pager, next"
                       :current-page="currentPage"
                       :page-count="pageNum"
-                       :page-size="pageSize"
+                      :page-size="pageSize"
                   >
 
                   </el-pagination>
@@ -158,17 +134,17 @@ export default {
         this.getAllInformation()
     },
     delieverResume(id) {
-        let params = {
-            id:id
-        }
+      let params = {
+        id:id
+      }
       this.$http({
         url: this.$http.adornUrl('/delieverResume/addDelieverResume'),
         method: 'post',
         data:this.$http.adornData(params),
-          headers: {
-              'Content-Type': 'application/json',
-              'charset': 'utf-8'
-          }
+        headers: {
+          'Content-Type': 'application/json',
+          'charset': 'utf-8'
+        }
       }).then(({data}) => {
         if (data.errorCode==200) {
           this.$message.success(data.data)
@@ -197,10 +173,10 @@ export default {
         params: this.$http.adornParams(params),
       }).then(({data}) => {
         if (data) {
-            this.pageNum = data.pages
-            this.currentPage = data.current
-            this.project = data.data
-            this.pageSize = data.size
+          this.pageNum = data.pages
+          this.currentPage = data.current
+          this.project = data.data
+          this.pageSize = data.size
         }
       }).catch(() => {
         console.log('出错啦！！！！')
@@ -226,9 +202,9 @@ export default {
       }).then(({data}) => {
         if (data) {
           this.pageNum = data.pages
-         this.currentPage = data.current
-            this.project = data.data
-            this.pageSize = data.size
+          this.currentPage = data.current
+          this.project = data.data
+          this.pageSize = data.size
 
         }
       }).catch(() => {
@@ -237,9 +213,6 @@ export default {
     },
     goWhere(name){
       this.$router.push({name})
-    },
-    goDetail(){
-      this.$router.push('/student/detail')
     },
 
     editMes(name){

@@ -33,6 +33,7 @@ import myPublishProject from "@/components/views/teacher/myPublishProject"
 import TeacherManager from "@/components/views/admin/TeacherManager.vue";
 import StudentNotify from "@/components/views/StudentView/StudentNotify.vue";
 import SystemAnalysis from "@/components/views/admin/SystemAnalysis.vue";
+import ProjectDetail from "@/components/views/StudentView/ProjectDetail.vue";
 
 Vue.use(Router)
 
@@ -173,6 +174,14 @@ let router = new Router({
             component: StudentNotify,
             meta: {
                 title: '消息通知'
+            }
+        },
+        {
+            path: '/student/detail',
+            name: 'detail',
+            component: ProjectDetail,
+            meta: {
+                title: '项目详情'
             }
         },
         {
