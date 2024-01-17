@@ -85,7 +85,7 @@
 <!--                      -->
 <!--                    </div>-->
                     <div style="width: 230px;display:flex;padding-left: 40px;align-items: flex-end;">
-                      <el-button plain size="small" @click="goDetail">查看详情</el-button>
+                      <el-button plain size="small" @click="goDetail(item.id)">查看详情</el-button>
                       <el-button type="primary" plain size="small" @click="delieverResume(item.id)">投递简历</el-button>
                     </div>
                   </div>
@@ -239,8 +239,8 @@ export default {
     goWhere(name){
       this.$router.push({name})
     },
-    goDetail(){
-      this.$router.push('/student/detail')
+    goDetail(id){
+      this.$router.push(`/student/detail/${id}`)
     },
 
     editMes(name){

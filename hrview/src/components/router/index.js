@@ -177,7 +177,7 @@ let router = new Router({
             }
         },
         {
-            path: '/student/detail',
+            path: '/student/detail/:id',
             name: 'detail',
             component: ProjectDetail,
             meta: {

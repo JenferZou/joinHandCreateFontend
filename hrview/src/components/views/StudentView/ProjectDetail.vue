@@ -44,18 +44,18 @@
               <div>
 
 
-                <div class="card" v-for="item in project" >
+                <div class="card" >
                   <div style="display: flex;">
                     <!--                  文字部分-->
                     <div style="flex: 1">
-                      <div style="font-size: 30px;font-weight: bolder">{{item.name}}</div>
-                      <div style="font-size:16px;margin-top: 10px;color:#777575;font-weight: bold">预期参加的比赛: {{item.expectedCompetition}}</div>
-                      <div style="font-size:16px;margin-top: 10px;color:#777575;font-weight: bold">需要专业: {{item.needMajor}}</div>
+                      <div style="font-size: 30px;font-weight: bolder">{{project.name}}</div>
+                      <div style="font-size:16px;margin-top: 10px;color:#777575;font-weight: bold">预期参加的比赛: {{project.expectedCompetition}}</div>
+                      <div style="font-size:16px;margin-top: 10px;color:#777575;font-weight: bold">需要专业: {{project.needMajor}}</div>
                       <div style="font-size:16px;margin-top: 20px;color:#000000;font-weight: bold">项目详情</div>
-                      <div style="font-size:17px;margin-top: 5px" v-html="item.content"></div>
+                      <div style="font-size:17px;margin-top: 5px" v-html="project.content"></div>
 
 
-                      <div style="margin-top: 20px;color: gray;font-size:17px;" >项目导师:{{item.mentor}}</div>
+                      <div style="margin-top: 20px;color: gray;font-size:17px;" >项目导师:{{project.mentor}}</div>
 
 
                     </div>
@@ -66,20 +66,7 @@
                   </div>
                 </div>
 
-                <i-row >
 
-                  <el-pagination
-                      class="page"
-                      @current-change="change"
-                      background
-                      layout="prev, pager, next"
-                      :current-page="currentPage"
-                      :page-count="pageNum"
-                      :page-size="pageSize"
-                  >
-
-                  </el-pagination>
-                </i-row>
               </div>
 
 
@@ -109,7 +96,7 @@ export default {
       multipleSelectionFlag: false,
       multiDeleteVisible: false,
       multipleSelection: [],
-      project: [],
+      project:{},
       title: '',
       currentPage: 1,
       pageSize: 5,
@@ -192,20 +179,15 @@ export default {
 
     getAllInformation() {
       let params = {
-        pageNo: this.currentPage,
-        pageSize: this.pageSize
+        id : this.$route.params.id
       }
       this.$http({
-        url: this.$http.adornUrl('/project/getProject'),
+        url: this.$http.adornUrl('/project/getProjectById'),
         method: 'get',
         params: this.$http.adornParams(params),
       }).then(({data}) => {
-        if (data) {
-          this.pageNum = data.pages
-          this.currentPage = data.current
+        if (data.errorCode==200) {
           this.project = data.data
-          this.pageSize = data.size
-
         }
       }).catch(() => {
         console.log('出错啦！！！！')
