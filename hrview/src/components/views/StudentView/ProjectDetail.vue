@@ -61,7 +61,7 @@
                     </div>
                     <!--                    按钮部分-->
                     <div style="width: 130px;display:flex;padding-left: 40px;align-items: flex-end;">
-                      <el-button type="primary" plain size="small" @click="delieverResume(item.id)">投递简历</el-button>
+                      <el-button type="primary" plain size="small" @click="delieverResume(project.id)">投递简历</el-button>
                     </div>
                   </div>
                 </div>
@@ -225,6 +225,9 @@ export default {
 
 
 
+img{
+    width:30%;
+}
 
 
 .layout{

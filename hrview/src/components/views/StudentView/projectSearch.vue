@@ -230,7 +230,20 @@ export default {
          this.currentPage = data.current
             this.project = data.data
             this.pageSize = data.size
+            // 处理每个项目的content字段
+            this.project = data.data.map(item => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = item.content;
 
+                const images = tempDiv.querySelectorAll('img');
+                images.forEach(img => {
+                    img.parentNode.removeChild(img);
+                });
+
+                // 将处理后的content存回对象中
+                item.content = tempDiv.innerHTML;
+                return item;
+            });
         }
       }).catch(() => {
         console.log('出错啦！！！！')
@@ -268,7 +281,6 @@ export default {
 .page {
   text-align: center;
 }
-
 
 
 
