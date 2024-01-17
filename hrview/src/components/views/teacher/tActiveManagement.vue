@@ -125,16 +125,36 @@
             <el-input type="text" v-model="project.expectedCompetition" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item class="item">
-            <quill-editor class="editor" ref="myTextEditor" v-model="project.content" :options="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)" @change="onEditorChange($event)">
+              <!-- 图片上传组件辅助，组件内添加v-show=“false”属性，把该组件隐藏起来。-->
+              <el-upload
+                      v-show="false"
+                      class="avatar-uploader"
+                      :action="uploadUrl"
+                      name="file"
+                      :accept="'image/*'"
+                      :data="qiniuForm"
+                      :show-file-list="false"
+
+                      :on-success="uploadSuccess"
+                      :before-upload="beforeUpload">
+              </el-upload>
+            <quill-editor class="editor" ref="myTextEditor"
+                          v-model="project.content"
+                          :options="editorOption"
+                          @blur="onEditorBlur($event)"
+                          @focus="onEditorFocus($event)"
+                          @ready="onEditorReady($event)"
+                          @change="onEditorChange($event)">
             </quill-editor>
           </el-form-item>
           <el-form-item>
             <el-button @click="cancle">取 消</el-button>
-            <el-button type="primary" @click="sure()">立即发布</el-button>
+            <el-button type="primary" @click="add()">保存</el-button>
           </el-form-item>
         </el-form>
       </div>
     </el-dialog>
+
 
     <el-dialog title="修改项目" :visible.sync="updateDialogVisible" width="80%" @close='closeDialog'>
       <div class="el-dialog-div">
@@ -179,20 +199,41 @@
 
 <script>
 import {toolbarOptions} from "@/components/utils";
+import {userHandler} from "@/components/utils/back";
 
 export default {
   name: "tProjectManagement",
   data() {
     return {
+        fileList: [],
+        qiniuForm: {
+            key: "",
+            token: "",
+            showUrl: "",
+        },
+        uploadUrl:"http://upload-z2.qiniup.com",
       isLoading:false,
       editorOption: {
-        modules: {
-          toolbar: toolbarOptions
-        },
+          modules: {
+              toolbar:{
+                  container: toolbarOptions,
+                  handlers: {
+                      image: function (value) { //编辑器-上传图片
+                          if (value) {
+                              // 调用antd图片上传upload
+                              document.querySelector('.avatar-uploader input').click()
+                          } else {
+                              this.quill.format('image', false)
+                          }
+                      },
+                  }
+              },
+          },
         theme: 'snow',
         placeholder: '项目内容'
         // Some Quill optiosn...
       },
+        tag:0,//0 为添加，1为修改
       multiDeleteVisible: false,//确认删除 弹出框d可见性
       updateDialogVisible: false,//update 弹出框得可见性
       currentPage: 1,//初始页
@@ -242,6 +283,45 @@ export default {
     };
   },
   methods: {
+      beforeUpload(file) {
+          console.log("上传前")
+          const isLt3M = file.size / 1024 / 1024 < 3;  // 判断文件大小是否小于3M
+          if (!isLt3M) {
+              this.$message.error('上传图片大小不能超过3M');
+              return false;
+          }
+          return true;
+      },
+      getUpLoadToken(){
+          userHandler.getUpToken().then((res)=>{
+              if (res && res.errorCode === "200") {
+                  this.qiniuForm.token = res.data.upToken
+                  this.qiniuForm.key = res.data.fileName
+                  this.qiniuForm.showUrl = res.data.url
+              }
+              console.log(this.qiniuForm)
+          }).catch((err)=>{
+              console.log(err)
+          })
+      },
+      uploadSuccess(res) {
+          // 获取富文本组件实例
+          let quill = this.$refs.myTextEditor.quill
+          // 如果上传成功
+          if (res) {
+              console.log(this.qiniuForm.showUrl)
+              // 获取光标所在位置
+              let length = quill.getSelection().index;
+              // 插入图片，res为服务器返回的图片链接地址
+              quill.insertEmbed(length, 'image', this.qiniuForm.showUrl)
+              // 调整光标到最后
+              quill.setSelection(length + 1)
+              this.getUpLoadToken()
+          } else {
+              // 提示信息，需引入Message
+              this.$message.error('图片插入失败！')
+          }
+      },
     deleteOne(project, projectData) {
       for (let i = 0; i < projectData.length; i++) {
         if (project.id === projectData[i].id) {
@@ -301,7 +381,8 @@ export default {
       }).then(({data}) => {
         if (data && data.errorCode == 200) {
           this.project = data.data
-          this.updateDialogVisible = true
+            this.tag=1
+          this.dialogVisible = true
         } else {
           this.$message.error(data.message)
         }
@@ -326,28 +407,45 @@ export default {
     },
     //立即发布后事件
     sure() {
-      this.dialogVisible = false
-      this.add()
       // this.project = this.reset(this.project)
     },
     //确认发布项目事件
     add() {
-      this.$http({
-        url: this.$http.adornUrl('/project/saveProject'),
-        method: 'post',
-        data: this.project,
-      }).then(({data}) => {
-        if (data && data.errorCode == 200) {
-          this.$message.success("操作成功")
-          this.project = ''
-          this.getProject()
-        } else {
-          this.$message.error(data.message)
-        }
-      }).catch(() => {
-        console.log('出错啦！！！！')
-      })
-
+          if(this.tag===0) {
+              this.$http({
+                  url: this.$http.adornUrl('/project/saveProject'),
+                  method: 'post',
+                  data: this.project,
+              }).then(({data}) => {
+                  if (data && data.errorCode == 200) {
+                      this.$message.success("操作成功")
+                      this.project = ''
+                      this.dialogVisible = false
+                      this.getProject()
+                  } else {
+                      this.$message.error(data.message)
+                  }
+              }).catch(() => {
+                  console.log('出错啦！！！！')
+              })
+          }else{
+              this.$http({
+                  url: this.$http.adornUrl('/project/update'),
+                  method: 'post',
+                  data: this.project,
+              }).then(({data}) => {
+                  if (data && data.errorCode == 200) {
+                      this.$message.success("操作成功")
+                      this.project = ''
+                      this.dialogVisible = false
+                      this.getProject()
+                  } else {
+                      this.$message.error(data.message)
+                  }
+              }).catch(() => {
+                  console.log('出错啦！！！！')
+              })
+          }
     },
     // 立即修改后事件
     update(){
@@ -439,6 +537,7 @@ export default {
       this.getProject()
     },
     display() {
+        this.tag=0
       this.dialogVisible = true
     },
     // 失去焦点
@@ -486,6 +585,9 @@ export default {
       })
     }
   },
+    mounted() {
+        this.getUpLoadToken()
+    },
   created() {
     this.getProject();
   }

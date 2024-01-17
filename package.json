@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "echarts": "^5.4.3",
-    "element-ui": "^2.15.14"
+    "element-ui": "^2.15.14",
+    "uuid": "^9.0.1"
   }
 }
