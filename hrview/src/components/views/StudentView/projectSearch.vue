@@ -81,10 +81,11 @@
                       <div style="color: gray">预期参加的比赛:{{item.expectedCompetition}}</div>
                     </div>
                     <!--                    按钮部分-->
-                    <div style="width: 50px;display:flex;padding-left: 15px;align-items: flex-end;">
+<!--                    <div style="width: 50px;display:flex;padding-left: 15px;align-items: flex-end;">-->
+<!--                      -->
+<!--                    </div>-->
+                    <div style="width: 230px;display:flex;padding-left: 40px;align-items: flex-end;">
                       <el-button plain size="small" @click="goDetail">查看详情</el-button>
-                    </div>
-                    <div style="width: 130px;display:flex;padding-left: 50px;align-items: flex-end;">
                       <el-button type="primary" plain size="small" @click="delieverResume(item.id)">投递简历</el-button>
                     </div>
                   </div>
