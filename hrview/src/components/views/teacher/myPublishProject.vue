@@ -32,7 +32,6 @@
             查询
           </el-button>
           <el-button size="medium" icon="el-icon-delete" @click="resetSearch">重置</el-button>
-          <el-button type="primary" icon="el-icon-plus" @click="display" style="float: right">发布项目</el-button>
         </div>
       </el-header>
       <el-main>
@@ -41,6 +40,7 @@
             :data="projectData"
             highlight-current-row
             style="width: 100%"
+            v-loading="loading"
         >
           <el-table-column
               type="index"
@@ -86,7 +86,7 @@
               label="项目成员"
               width="100">
             <template v-slot="scope">
-              <el-button type="primary" size="small" @click="searchStudent(scope.row)">操作</el-button>
+              <el-button type="primary" size="small" @click="searchStudent(scope.row)">管理</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -146,6 +146,9 @@ export default {
   name: "myPublishProject",
   data() {
     return {
+      loading: true,
+
+
       currentPage: 1,//初始页
       pageSize: 5,////    每页的数据
       total: 10,
@@ -193,6 +196,7 @@ export default {
         if (data) {
           this.projectData = data.data
           this.total = data.total
+          this.loading = false
         }
       }).catch(() => {
         console.log('出错啦！！！！')
@@ -399,6 +403,7 @@ export default {
   },
   created() {
     this.getProject();
+
   }
 }
 </script>
