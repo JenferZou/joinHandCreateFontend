@@ -75,7 +75,9 @@
             </i-row>
 
         </div>
-        <el-table class="StudentTable"
+        <el-table
+            v-loading="loading"
+            class="StudentTable"
                   :data="studentData"
                   tooltip-effect="dark"
                   border
@@ -363,6 +365,7 @@ export default {
     components: {EditForm},
     data() {
         return {
+            loading:true,
             //简历
             vis: false,
             editadvan: false,
@@ -563,6 +566,7 @@ export default {
                 if (data && data.errorCode === "200") {
                     this.pageNum = data.data.page
                     this.studentData = data.data.students
+                    this.loading=false
                 } else {
                     this.$message.error(data.message)
                 }

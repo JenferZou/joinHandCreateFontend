@@ -148,6 +148,7 @@ export default {
                 quill.insertEmbed(length, 'image', this.qiniuForm.showUrl)
                 // 调整光标到最后
                 quill.setSelection(length + 1)
+
             } else {
                 // 提示信息，需引入Message
                 this.$message.error('图片插入失败！')

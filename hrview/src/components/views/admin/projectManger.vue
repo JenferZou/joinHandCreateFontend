@@ -20,6 +20,7 @@
         </i-row>
         <el-table
                 border
+                v-loading="loading"
                 ref="multipleTable"
                 :data="project"
                 tooltip-effect="dark"
@@ -109,6 +110,7 @@ export default {
     components: {InformationEdit},
     data() {
         return {
+            loading:true,
             multiDeleteVisible1: false,
             multipleSelectionFlag: false,
             multiDeleteVisible: false,
@@ -244,6 +246,7 @@ export default {
                 if (data && data.errorCode === "200") {
                     this.pageNum = data.data.page
                     this.project = data.data.projects
+                    this.loading=false
                 }
             }).catch(() => {
                 console.log('出错啦！！！！')
