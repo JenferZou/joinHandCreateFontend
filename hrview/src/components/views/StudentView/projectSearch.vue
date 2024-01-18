@@ -194,6 +194,24 @@ export default {
             this.currentPage = data.current
             this.project = data.data
             this.pageSize = data.size
+            this.project = data.data.map(item => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = item.content;
+
+                const images = tempDiv.querySelectorAll('img');
+                images.forEach(img => {
+                    img.parentNode.removeChild(img);
+                });
+                // 将处理后的content存回对象中
+                item.content = tempDiv.innerHTML;
+
+                // 移除 HTML 标签
+                const plainText = tempDiv.textContent || tempDiv.innerText;
+
+                // 截取一定的内容长度
+                item.content = plainText.substring(0, 150);
+                return item;
+            });
         }
       }).catch(() => {
         console.log('出错啦！！！！')
