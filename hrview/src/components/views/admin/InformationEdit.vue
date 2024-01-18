@@ -72,6 +72,7 @@
 import {toolbarOptions} from "@/components/utils";
 import {userHandler} from "@/components/utils/back"
 
+
 export default {
     name: "InformationEdit",
     data() {

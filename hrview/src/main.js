@@ -96,6 +96,8 @@ Vue.component('el-tag',Tag)
 
 
 Vue.use(VueQuillEditor)
+
+
 Vue.use(Loading.directive);
 Vue.prototype.$http = httpRequest // Ajax 请求方法
 //vue全局注入echarts
