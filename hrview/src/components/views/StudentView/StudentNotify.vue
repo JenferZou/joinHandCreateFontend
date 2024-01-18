@@ -2,7 +2,6 @@
 
   <div class="layout">
     <i-menu mode="horizontal" theme="dark" active-name="1"  on-select="ed">
-      <!--      <div class="layout-logo"></div>-->
       <h5 style="color: #fff;margin-left:50px;font-weight: bolder;font-size: 20px">    携手创-学生端</h5>
     </i-menu>
     <i-menu mode="horizontal" active-name="1" @on-select="editMes">
@@ -79,12 +78,6 @@
                       show-overflow-tooltip
                    style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
                   </el-table-column>
-<!--                  <el-table-column-->
-<!--                      prop="mark"-->
-<!--                      label="状态"-->
-<!--                      width="120"-->
-<!--                      :formatter="switchnum">-->
-<!--                  </el-table-column>-->
                 </el-table>
 
                 <i-row >

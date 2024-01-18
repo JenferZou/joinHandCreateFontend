@@ -248,8 +248,6 @@ export default {
         url: this.$http.adornUrl('/project'),
         method: 'post',
         data: this.$http.adornParams(params),
-        // 使用get请求，时间无法在后端完成反序列化
-        // params: this.$http.adornParams(params)
       }).then(({data}) => {
         if (data) {
           this.total = data.total

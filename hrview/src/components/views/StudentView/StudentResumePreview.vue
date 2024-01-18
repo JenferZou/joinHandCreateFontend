@@ -1,9 +1,6 @@
 <template>
 
   <div class="layout">
-<!--    <div class="layout-header">-->
-<!--      <el-button type="primary" @click="returnhome" style="margin-top: 10px;margin-left: 20px" size="small">返回</el-button>-->
-<!--    </div>-->
     <div class="layout-content">
       <i-row>
         <i-col span="19">

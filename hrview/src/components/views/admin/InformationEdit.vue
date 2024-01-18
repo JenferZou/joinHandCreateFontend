@@ -24,17 +24,6 @@
                         <!--          <el-date-picker type="date" placeholder="选择日期" v-model="contest.endTime" style="width: 100%;" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>-->
                     </i-col>
                 </el-form-item>
-<!--                <el-form-item label="上传附件">
-                                    <el-upload
-                                            class="upload-demo"
-                                            action="https://jsonplaceholder.typicode.com/posts/"
-                                            :limit="1"
-                                            :auto-upload="false"
-                                            :file-list="fileList"
-                                            name="file">
-                                            <el-button size="small" >点击上传</el-button>
-                                        </el-upload>
-                </el-form-item>-->
                 <el-form-item class="item">
                     <!-- 图片上传组件辅助，组件内添加v-show=“false”属性，把该组件隐藏起来。-->
                     <el-upload

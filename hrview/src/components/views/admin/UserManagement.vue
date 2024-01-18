@@ -13,12 +13,6 @@
                 </el-button>
             </i-col>
             <i-row type="flex" justify="end">
-                <!--                <i-col :span="7">
-                                    <el-button size="small" type="primary" @click="add">
-                                        <i-icon type="plus-round" size="15"></i-icon>
-                                        添加
-                                    </el-button>
-                                </i-col>-->
                 <el-dialog title="添加" :visible.sync="dialogVisible" :closeOnClickModal="false">
                     <el-form :inline="true" :model="userData" ref="studentData" class="demo-form-inline"
                              label-width="100px" size="small">
@@ -48,11 +42,6 @@
                                     <el-input style="width: 130px" v-model="userData.role"
                                               placeholder="管理员"
                                               size="small" readonly></el-input>
-                                    <!--                                    <el-select size="small" v-model="userData.role" placeholder="角色"
-                                                                                   style="width: 100px">
-                                                                            <el-option label="老师" value="老师"></el-option>
-                                                                            <el-option label="管理员" value="管理员"></el-option>
-                                                                        </el-select>-->
                                 </el-form-item>
                             </i-col>
                         </i-row>

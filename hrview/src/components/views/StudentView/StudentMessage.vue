@@ -12,10 +12,6 @@
       <div class="page-container">
         <div class="info-table">
           <el-card class="info-card">
-<!--            <div slot="header" class="info-header">-->
-<!--              <span class="info-title">个人信息表</span>-->
-<!--              <el-button type="primary" icon="el-icon-edit" @click="editInfo">编辑</el-button>-->
-<!--            </div>-->
             <div class="info-content">
               <i-row>
                 <i-col :span="12">

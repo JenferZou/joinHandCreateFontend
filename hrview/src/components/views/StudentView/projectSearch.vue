@@ -35,14 +35,6 @@
               <i-menu-item name="projectSearch">项目大厅</i-menu-item>
               <i-menu-item name="myProjectSearch">项目申请</i-menu-item>
             </i-submenu>
-<!--            <i-submenu name="3">-->
-<!--              <template slot="title">-->
-<!--                <i-icon type="ios-analytics"></i-icon>-->
-<!--                考证与实践活动信息-->
-<!--              </template>-->
-<!--              <i-menu-item name="CertificateSearch">考证俱乐部</i-menu-item>-->
-<!--              <i-menu-item name="ActiveSearch">实践活动查询</i-menu-item>-->
-<!--            </i-submenu>-->
           </i-menu>
         </i-col>
         <i-col span="19">

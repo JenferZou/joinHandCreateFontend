@@ -3,7 +3,6 @@
 
   <div class="layout">
     <i-menu mode="horizontal" theme="dark" active-name="1"  on-select="ed">
-      <!--      <div class="layout-logo"></div>-->
       <h5 style="color: #fff;margin-left:50px;font-weight: bolder;font-size: 20px">    携手创-学生端</h5>
     </i-menu>
     <i-menu mode="horizontal" active-name="1" @on-select="editMes">
@@ -78,9 +77,6 @@
                             <el-form-item label="所属班级">
                               <span>{{ info.className }}</span>
                             </el-form-item>
-        <!--                    <el-form-item label="指导老师">-->
-        <!--                      <span>{{ info.mentor }}</span>-->
-        <!--                    </el-form-item>-->
                           </el-form>
                         </i-col>
 

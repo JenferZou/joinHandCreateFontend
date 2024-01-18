@@ -113,9 +113,6 @@
                       prop="content"
                       label="内容"
                       show-overflow-tooltip>
-                    <!--        <template v-slot="scope">
-                              <div v-html='scope.row.content'></div>
-                            </template>-->
                   </el-table-column>
 
                 </el-table>
