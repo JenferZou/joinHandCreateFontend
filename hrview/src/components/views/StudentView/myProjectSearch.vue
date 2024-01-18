@@ -196,7 +196,7 @@ export default {
 
     search() {
       let params = {
-        pageNo: this.currentPage,
+        pageNo: this.currentPage!==1 ?  1: this.currentPage,
         pageSize: this.pageSize,
         name:this.title
       }
